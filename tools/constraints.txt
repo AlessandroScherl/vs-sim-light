@@ -1,0 +1,8 @@
+# pip constraints for the vsbench venv (.venv) - use with every install:
+#   $VSBENCH_PY -m pip install --only-binary=:all: -c tools/constraints.txt <package>
+# U0 held numpy and mujoco fixed; the OpenCV pin is the parent's decision of 2026-10-22 (U-copy):
+# 4.11.0.86 is the Isaac flight interpreter's OpenCV, it has AKAZE (5.0 dropped it from the default
+# build) and it is the version vs-sim's classical parity fixture was made with.
+numpy==2.5.3
+mujoco==3.13.0
+opencv-python-headless==4.11.0.86

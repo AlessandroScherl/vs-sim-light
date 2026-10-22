@@ -12,7 +12,9 @@ license = { text = "MIT" }
 authors = [{ name = "Alessandro Scherl" }]
 dependencies = [
   "numpy>=1.26",
-  "opencv-python-headless>=4.10",   # projectPoints, warpPerspective, ORB, SIFT for the gates
+  # projectPoints, warpPerspective, ORB, SIFT for the gates; pinned (2026-10-22) to the Isaac
+  # flight interpreter's 4.11: AKAZE exists and the copied classical parity fixtures run
+  "opencv-python-headless==4.11.0.86",
   "Pillow>=10",                     # reading the poster, writing contact sheets
   "imageio-ffmpeg>=0.5",            # H.264 debug videos (OpenCV mp4v is the fallback)
 ]

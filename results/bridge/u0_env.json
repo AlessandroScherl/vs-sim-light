@@ -79,5 +79,13 @@
     "weights": "255 MB",
     "pip_cache": "+293 MB under ~/.cache/pip (downloaded wheels)",
     "total": "about 1.9 GB"
+  },
+  "opencv_pin": {
+    "date": "2026-10-22",
+    "decision": "parent decision during U-copy: pin opencv-python-headless==4.11.0.86 (the Isaac flight interpreter's version) so AKAZE exists and the classical parity fixtures run; numpy 2.5.3 and mujoco 3.13.0 kept",
+    "how": "pip install --only-binary=:all: --no-deps opencv-python-headless==4.11.0.86 (replaced 5.0.0.93); pins in tools/constraints.txt and pyproject.toml; pip check: no broken requirements; cv2 4.11.0 has AKAZE_create and SIFT_create",
+    "clone_fast_tier": "789 passed, 13 skipped, 0 failed (802) in 201 s - the 6 AKAZE failures and the 9 OpenCV-pinned fixture skips of the first record all pass; same 802 test ids; results/bridge/u0_clone_fast_tier.txt rewritten to this split",
+    "vsbench_own_tests": "pytest tests --backends mujoco-egl --ignore=tests/vs: 98 passed in 775 s (unchanged from 98 under OpenCV 5.0)",
+    "supersedes": "venv.unchanged.opencv-python-headless (5.0.0.93) and gates.vssim_fast_tier.result/failed/skipped above, which record the first, OpenCV-5.0 run"
   }
 }

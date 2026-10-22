@@ -219,7 +219,7 @@ source tools/cpu_env.sh                                   # no GPU, llvmpipe, 2 
 git clone ~/runpod_dev/vs-sim external/vs-sim             # a local clone only reads the source
 git -C external/vs-sim checkout "$(cat external/VSSIM_COMMIT)"
 $VSBENCH_PY -m pip install --only-binary=:all: --index-url https://download.pytorch.org/whl/cpu torch torchvision
-$VSBENCH_PY -m pip install --only-binary=:all: "transformers>=4.57" "PyYAML>=6" "scikit-learn>=1.0" usd-core "pytest>=8"
+$VSBENCH_PY -m pip install --only-binary=:all: -c tools/constraints.txt "transformers>=4.57" "PyYAML>=6" "scikit-learn>=1.0" usd-core "pytest>=8" opencv-python-headless
 # weights (~250 MB), copied once from the station's caches:
 #   ~/genvs_ws/vsbench_assets/weights/hf/hub/models--facebook--dinov3-vits16-pretrain-lvd1689m/   (HF_HOME)
 #   ~/genvs_ws/vsbench_assets/weights/torch/hub/{checkpoints/dinov2_vits14_pretrain.pth,
@@ -230,12 +230,15 @@ PYTHONPATH=external/vs-sim env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT \
 
 `~/genvs_ws/vsbench_assets/` (outside the repository) is the bridge's cache: `weights/` now,
 the converted objects later. Torch is the CPU build (`+cpu`); `torch.cuda.is_available()` is
-`False` by construction. Known drift: OpenCV 5.0 has no `AKAZE_create`, so vs-sim's AKAZE
-arms cannot be built in this venv, and its classical fixture (pinned to OpenCV 4.10 / 4.11)
-skips (with OpenCV 4.11, the flight interpreter's version, those tests pass); everything else
-in the fast tier passes. The two asset-root variables must be unset for that tier (three
-`test_assets.py` tests assert the defaults). The measured record is `results/bridge/u0_env.json`;
-the per-test split, which the copy must reproduce, is `results/bridge/u0_clone_fast_tier.txt`.
+`False` by construction. OpenCV is pinned to `opencv-python-headless==4.11.0.86`, the Isaac
+flight interpreter's version (`tools/constraints.txt`, `pyproject.toml`; parent decision
+2026-10-22): OpenCV 5.0 has no `AKAZE_create` and vs-sim's classical fixture is pinned to
+4.10 / 4.11, so under 5.0 six AKAZE tests failed and nine fixture tests skipped; under 4.11
+the clone's fast tier is 789 passed / 13 skipped of 802 (the 13 need the frozen genvs-sim or
+ART-VS checkouts, DINO v1 or LightGlue, none of which this venv has). The two asset-root
+variables must be unset for that tier (three `test_assets.py` tests assert the defaults).
+The measured record is `results/bridge/u0_env.json`; the per-test split, which the copy must
+reproduce, is `results/bridge/u0_clone_fast_tier.txt`.
 
 ## Layout
 

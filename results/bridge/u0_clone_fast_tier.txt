@@ -1,27 +1,31 @@
 # U0: the pristine vs-sim clone's fast tier in the vsbench venv - the split U-copy must match
 # date: 2026-10-22, station, nice 19, 2 threads (tools/cpu_env.sh sourced)
 # vs-sim commit: 7ac261d7384861b1d1ad0cd645c6e51b5046b650 (external/VSSIM_COMMIT); vssim NOT pip-installed
+# REVISION 2 (2026-10-22, U-copy, parent decision): OpenCV pinned to opencv-python-headless==4.11.0.86
+#   (the Isaac flight interpreter's version; tools/constraints.txt, pyproject.toml); numpy 2.5.3 and
+#   mujoco 3.13.0 unchanged. The first record (opencv 5.0.0.93: 774 passed / 6 failed / 22 skipped) is
+#   in git history (commit 7e0bd2f); under 4.11 its 6 AKAZE failures and its 9 OpenCV-pinned fixture
+#   skips all pass - the same 802 test ids, exactly those 15 outcomes changed.
 # command (repo root): PYTHONPATH=external/vs-sim env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT \
 #   nice -n 19 .venv/bin/python -m pytest external/vs-sim/tests/fast -q -rA -p no:cacheprovider --junitxml=...
 #   (VSSIM_ASSET_ROOT / VSSIM_YCB_ROOT unset: with them set, test_assets.py has 3 more failures,
 #    test_the_ycb_root_is_an_environment_setting, test_the_three_resolution_branches,
 #    test_relative_paths_resolve_against_the_asset_root_not_this_repo - they assert the defaults)
 # venv: python 3.12.3, torch 2.14.1+cpu, torchvision 0.29.1+cpu, transformers 5.20.2, numpy 2.5.3,
-#   opencv-python-headless 5.0.0.93, scikit-learn 1.9.1, PyYAML 6.0.3, pytest 9.1.1
-# result: 6 failed, 774 passed, 22 skipped, 4 warnings in 179.42s (0:02:59)
-# counts from the junit per-test records: FAILED 6, PASSED 774, SKIPPED 22, total 802
+#   opencv-python-headless 4.11.0.86, scikit-learn 1.9.1, PyYAML 6.0.3, pytest 9.1.1, mujoco 3.13.0
+# result: 789 passed, 13 skipped, 4 warnings in 201.23s (0:03:21)
+# counts from the junit per-test records: FAILED 0, PASSED 789, SKIPPED 13, total 802
 #
-# failures (all six: vssim/baselines/classical.py:348 RuntimeError, cv2.AKAZE_create is unavailable in
-#   OpenCV 5.0.0 - version drift, reported, not patched; with opencv-python-headless 4.11.0.86 the four
-#   affected files pass 112/112 with no skips):
-#   FAILED tests/fast/test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model
-#   FAILED tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]
-#   FAILED tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[akaze]
-#   FAILED tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[akaze]
-#   FAILED tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_akaze-ClassicalMatcher]
-#   FAILED tests/fast/test_protocol.py::test_every_arm_of_the_protocol_builds_and_derives_a_distinct_label
-# skips with reasons:
-#   SKIPPED [9] tests/fast/test_classical.py:105: cv2 5.0.0: the classical fixture is pinned to 4.10. / 4.11. (AKAZE's keypoint count moved in 4.12); the flight interpreter runs 4.11.0
+# now green under 4.11 (were FAILED under 5.0: cv2.AKAZE_create unavailable):
+#   tests/fast/test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model
+#   tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]
+#   tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[akaze]
+#   tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[akaze]
+#   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_akaze-ClassicalMatcher]
+#   tests/fast/test_protocol.py::test_every_arm_of_the_protocol_builds_and_derives_a_distinct_label
+# now green under 4.11 (were SKIPPED under 5.0: the classical fixture is pinned to 4.10 / 4.11):
+#   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[{none,homography,fundamental}-{sift,orb,akaze}]  (9)
+# skips with reasons (13, all outside this venv's reach - unchanged from the first record):
 #   SKIPPED [1] tests/fast/test_control.py:893: the frozen old repo is not at /home/alessandro/genvs_ws/vs_sim_light/external/genvs-sim
 #   SKIPPED [1] tests/fast/test_dinobot.py:314: DINO v1 ViT-S/8 is not in this machine's torch.hub cache (staged by hand)
 #   SKIPPED [3] tests/fast/test_features_dinov2.py:117: the frozen old repo is not checked out at /home/alessandro/genvs_ws/vs_sim_light/external/genvs-sim
@@ -62,7 +66,7 @@ PASSED   tests/fast/test_arms.py::test_artvs_is_the_tiled_matcher_with_the_publi
 PASSED   tests/fast/test_arms.py::test_cns_v1_is_an_arm_not_a_matcher
 PASSED   tests/fast/test_arms.py::test_every_arm_file_builds_and_states_its_device
 PASSED   tests/fast/test_arms.py::test_existing_arm_labels_are_unchanged
-FAILED   tests/fast/test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model
+PASSED   tests/fast/test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model
 PASSED   tests/fast/test_arms.py::test_the_depth_lookup_clamps_to_the_image_and_cleans_invalid_samples
 PASSED   tests/fast/test_arms.py::test_the_depth_lookup_truncates_and_never_rounds
 PASSED   tests/fast/test_arms.py::test_the_episode_block_holds_the_budget_not_the_stop_block
@@ -124,16 +128,16 @@ PASSED   tests/fast/test_classical.py::test_build_arm_refuses_to_weight_a_matche
 PASSED   tests/fast/test_classical.py::test_fail_open_is_visible_rather_than_silent
 PASSED   tests/fast/test_classical.py::test_match_before_reset_is_refused
 PASSED   tests/fast/test_classical.py::test_num_landmarks_has_no_default
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-akaze]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-orb]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-sift]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-akaze]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-orb]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-sift]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-akaze]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-orb]
-SKIPPED  tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-sift]
-FAILED   tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[akaze]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-akaze]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-orb]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[fundamental-sift]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-akaze]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-orb]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[homography-sift]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-akaze]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-orb]
+PASSED   tests/fast/test_classical.py::test_parity_with_the_old_classical_matcher[none-sift]
+PASSED   tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[akaze]
 PASSED   tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[orb]
 PASSED   tests/fast/test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[sift]
 PASSED   tests/fast/test_classical.py::test_scene_default_resolves_from_the_real_scene_specs
@@ -143,11 +147,11 @@ PASSED   tests/fast/test_classical.py::test_the_essential_model_keeps_the_consis
 PASSED   tests/fast/test_classical.py::test_the_essential_model_refuses_to_guess_intrinsics
 PASSED   tests/fast/test_classical.py::test_the_label_carries_the_ransac_column
 PASSED   tests/fast/test_classical.py::test_the_model_minimums_are_stated_once
-FAILED   tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]
+PASSED   tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]
 PASSED   tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[orb]
 PASSED   tests/fast/test_classical.py::test_the_pixel_lattice_round_trip_is_exact[sift]
 PASSED   tests/fast/test_classical.py::test_the_record_states_which_ransac_column_ran
-FAILED   tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[akaze]
+PASSED   tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[akaze]
 PASSED   tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[orb]
 PASSED   tests/fast/test_classical.py::test_the_registry_builds_every_classical_variant[sift]
 PASSED   tests/fast/test_classical.py::test_the_scene_spec_refuses_to_default_a_ransac_model
@@ -575,7 +579,7 @@ PASSED   tests/fast/test_match.py::test_the_registry_covers_the_config_enum
 PASSED   tests/fast/test_match.py::test_the_registry_passes_keep_pool_through
 PASSED   tests/fast/test_match.py::test_the_registry_refuses_a_config_without_a_landmark_count
 PASSED   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[artvs-TiledMatcher]
-FAILED   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_akaze-ClassicalMatcher]
+PASSED   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_akaze-ClassicalMatcher]
 PASSED   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_orb-ClassicalMatcher]
 PASSED   tests/fast/test_match.py::test_the_u3_variants_build_their_own_class[classical_sift-ClassicalMatcher]
 PASSED   tests/fast/test_objroi.py::test_a_shifted_object_gives_the_shift_as_displacement_coarse_and_tiled
@@ -675,7 +679,7 @@ PASSED   tests/fast/test_prealign.py::test_the_runner_re_poses_the_camera_before
 SKIPPED  tests/fast/test_prealign.py::test_unwarp_points_is_the_frozen_function
 PASSED   tests/fast/test_prealign.py::test_unwarp_points_is_the_frozen_function_stored
 PASSED   tests/fast/test_protocol.py::test_arm_configs_are_the_files_plus_their_deltas_never_hand_assembled
-FAILED   tests/fast/test_protocol.py::test_every_arm_of_the_protocol_builds_and_derives_a_distinct_label
+PASSED   tests/fast/test_protocol.py::test_every_arm_of_the_protocol_builds_and_derives_a_distinct_label
 PASSED   tests/fast/test_protocol.py::test_existing_protocol_cells_keep_their_labels
 PASSED   tests/fast/test_protocol.py::test_plan_prints_the_shape_without_a_backbone
 PASSED   tests/fast/test_protocol.py::test_select_starts_is_the_benchmarks_population
