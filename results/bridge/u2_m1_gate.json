@@ -1,0 +1,56 @@
+{
+  "milestone1": {
+    "sift_ransac": {
+      "final_rotation_deg": 0.10465656783851614,
+      "final_translation_mm": 0.17579629132024427,
+      "first_frame_n_matches": 24,
+      "gate": "landing: final < 5 mm and < start, predicate_a, >= 20 frame-1 matches",
+      "predicate_a": true,
+      "sec_per_step": 1.1561459159501828,
+      "start_translation_mm": 5.577243773131696,
+      "vsbench_commit": "409656dbcb99d9e28fc3ec1c1a732004e46ebd4c"
+    },
+    "vitvs_dinov3": {
+      "curve_source": "results/bridge/m1_telemetry/hollywood_vitvs_dinov3",
+      "curve_stats": {
+        "max_t_mm_steps_50_100": 5.695,
+        "median_t_mm_steps_75_100": 4.608,
+        "min_t_mm_steps_50_100": 3.725,
+        "n_steps": 100,
+        "t_mm_step_1": 5.577,
+        "t_mm_step_100": 3.725
+      },
+      "final_rotation_deg": 0.5182368656938232,
+      "final_translation_mm": 3.7775133320342325,
+      "first_frame_n_matches": 24,
+      "gate": "ran and was recorded (100 steps, >= 20 frame-1 matches, frozen schema, provenance); the curve statistics are reported, not thresholded",
+      "m1_film_vs_telemetry_max_abs_dev_mm": 0.005,
+      "predicate_a": true,
+      "sec_per_step": 0.8406656855298206,
+      "start_translation_mm": 5.577243773131696,
+      "telemetry_flight_final_translation_mm": 3.7775133320342325,
+      "vsbench_commit": "409656dbcb99d9e28fc3ec1c1a732004e46ebd4c"
+    }
+  },
+  "telemetry_truth_seam": {
+    "all_gt_columns_finite": true,
+    "err_patch_max": 0.0832,
+    "err_patch_median": 0.0008,
+    "final_translation_mm": 0.17579629132024427,
+    "gate": "every gt_* / err_patch value finite; gt_valid_share >= 0.99",
+    "gt_columns": [
+      "err_patch",
+      "gt_ok",
+      "gt_r",
+      "gt_u",
+      "gt_v",
+      "gt_v_px"
+    ],
+    "gt_right_share": 1.0,
+    "gt_valid_share": 1.0,
+    "n_point_steps": 2393,
+    "n_steps": 100
+  },
+  "unit": "U2 / Milestone 1 - the bench driver and the first flights (docs/PORT_PLAN.md 7)",
+  "written": "2026-10-23 01:03:43 +0200"
+}

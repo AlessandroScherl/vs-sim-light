@@ -36,6 +36,9 @@ from vsbench.world.camera import d435i_camera_model, d435i_intrinsics, describe
 
 #: Isaac's ``reortho_every`` default (``IsaacScene.__init__``).
 REORTHO_EVERY = 300
+#: Why one goal capture where ``configs/scenes.yaml`` says 8 (stated on every record).
+WARMUP_REASON = ("1 capture, not the protocol's 8: the 8 settle RTX render history; MuJoCo "
+                 "frames are deterministic (two draws of one pose are the same bytes)")
 
 
 def render_mode_from(gl: str, gl_renderer: str | None) -> str:
@@ -174,7 +177,13 @@ class MujocoScene:
     def goal_capture_record(self) -> dict:
         """What a record says about the goal frame (``IsaacScene``'s four fields) plus
         ``render_mode``, so every record flown on this world names its renderer."""
-        return {"goal_render_warmup": 1, "goal_capture_keep": "last",
+        from vsbench.vs.scenes import goal_capture_settings
+
+        protocol_warmup, _keep = goal_capture_settings()
+        return {"goal_render_warmup": 1,
+                "goal_render_warmup_protocol": int(protocol_warmup),
+                "goal_render_warmup_reason": WARMUP_REASON,
+                "goal_capture_keep": "last",
                 "goal_settle_series": self.goal_settle, "goal_frame_md5": self.goal_frame_md5,
                 "render_mode": self.render_mode}
 

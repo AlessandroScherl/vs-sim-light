@@ -3,8 +3,11 @@
 Set ``VSBENCH_SOFTWARE_GL=1`` and ``vsbench.render.make_renderer`` calls
 ``force_software_gl()`` before any GL library is imported. It restricts glvnd to the Mesa
 EGL vendor library, asks Mesa for the software rasteriser, and points MuJoCo's EGL
-backend at the ``EGL_MESA_device_software`` device. Everything is ``setdefault``, so
-values the user exported win.
+backend at the ``EGL_MESA_device_software`` device. Once software GL is requested these
+values are **forced** (an exported ``__EGL_VENDOR_LIBRARY_FILENAMES`` naming NVIDIA's vendor
+library, or a ``MUJOCO_EGL_DEVICE_ID`` naming a GPU device, would otherwise open a hardware
+context on the shared station); ``force_software_gl`` returns what it set and what it
+replaced.
 """
 
 from __future__ import annotations
@@ -53,9 +56,10 @@ def force_software_gl() -> dict[str, str]:
     applied = {}
 
     def setdef(k, v):
-        if k not in os.environ:
+        prev = os.environ.get(k)
+        if prev != v:
             os.environ[k] = v
-            applied[k] = v
+            applied[k] = v if prev is None else f"{v} (was {prev})"
 
     setdef("LIBGL_ALWAYS_SOFTWARE", "1")
     setdef("EGL_PLATFORM", "surfaceless")
