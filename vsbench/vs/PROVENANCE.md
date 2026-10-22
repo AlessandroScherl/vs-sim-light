@@ -83,7 +83,12 @@ always traceable to the exact published-baseline code that produced it.
   ViT-S/14 chain), ART-VS (36-tile latching switch), the 4-way pre-align, the classical
   SIFT / ORB / AKAZE arms ± RANSAC (OpenCV pinned to 4.11.0.86, the flight interpreter's), the
   bench (loop, records, scoring, stats, perturbation `noise`, films, debug log), the scenes,
-  the frozen starts, the camera.
+  the frozen starts, the camera. From U4 the three rooms too (`industrial1_drill`,
+  `cluttered2`, `cluttered3`): `vsbench.world.build` calls the copied Isaac-free
+  `isaac_scene.scatter_items`, `scenes.load_layout` / `check_layout`, `assets.load_library` /
+  `merge_ycb_library` and the placement rules; `MujocoScene` derives the goal with the copied
+  `scenes.scene_view_goal_pose` and checks it with `starts.check_goal_match`; the `objmask`
+  arms get their goal mask from the copied `labels.object_mask_from_depth`.
 - **Copied, not wired** (their dependencies are not in this venv; their tests skip or use
   stubs exactly as in vs-sim): CNS v1 (`$CNS_ROOT`, torch_geometric), DINOBot (DINO v1 ViT-S/8),
   LightGlue, RoMa, ViSP IBVS, ART-VS object mode (`objroi`: GroundingDINO / LangSAM /

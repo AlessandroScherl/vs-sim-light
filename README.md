@@ -260,12 +260,31 @@ $VSBENCH_PY -m pytest tests/vs -q                       # drift + empty-glob gua
 .venv/bin/ruff check --config tools/ruff_vssim_copy.toml vsbench/vs vsbench/tests vsbench/scripts
 ```
 
-## The MuJoCo world and the bench driver (port units U1, U2)
+## The MuJoCo world and the bench driver (port units U1, U2, U4)
 
 `vsbench.world.mujoco_scene.MujocoScene` is vs-sim's `Scene` contract on this renderer (the
-posters so far; the D435i camera with Isaac's half-pixel principal point, `PORT_PLAN` §4), and
-`python -m vsbench.world.fly` is vs-sim's `scripts/fly.py run` on it: the copied arms, loop,
-records and success rules, unchanged.
+three posters and the three rooms; the D435i camera with Isaac's half-pixel principal point,
+`PORT_PLAN` §4), and `python -m vsbench.world.fly` is vs-sim's `scripts/fly.py run` on it: the
+copied arms, loop, records and success rules, unchanged.
+
+The rooms (U4: `industrial1_drill`, `cluttered2`, `cluttered3`) are built from the converted
+object cache (`~/genvs_ws/vsbench_assets/objects`, U3/U7) by the frozen layouts: the ground is
+the room's texture once across 2.4 m at `z = 0`, each object `T(pos) R(quat)` with vertices
+pre-scaled by vs-sim's scale rule, the lights the posters' stand-in. The goal is re-derived from
+the objects' box (Isaac's `BBoxCache` rule) and checked against the frozen start file; on a
+miss the frozen goal wins and the residual is recorded (open decision D-4, `goal_rule`). A room
+holds up to ~3.6 GB of memory (cluttered2: nine 4096² textures, uploaded to both GL contexts)
+and takes ~10 s to build; its goal depth equals Isaac's own to micrometres, its picture does
+not (no PBR, no tone mapping; `results/bridge/u4_rooms_vs_isaac.png`). The protocol has no near
+start set for the rooms, so `fly` (protocol sets only) flies them from `capped30` / `wide100`;
+the near smoke uses `check_baselines`' near start through `tools/u4_rooms.py smoke`.
+
+```
+VSBENCH_WRITE_GATES=1 $VSBENCH_PY -m pytest tests/world/test_scene_rooms.py -q   # the U4 gates
+PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py measure    # cost, memory, previews (one process per room)
+PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py isaac      # side by side with Isaac's goal pictures
+PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --arms sift_ransac   # check_baselines' near start
+```
 
 ```
 source tools/cpu_env.sh
