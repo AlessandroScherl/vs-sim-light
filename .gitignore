@@ -34,4 +34,6 @@ vsbench/experiments/**
 # the bridge's flights (results/bridge): records, run sidecars and short films are committed;
 # telemetry and loose film frames are payload
 results/bridge/**/telemetry.jsonl.gz
+# ... except the M1 truth-seam gate's two small telemetry files (tests/world/test_fly_smoke.py reads them)
+!results/bridge/m1_telemetry/**/telemetry.jsonl.gz
 results/bridge/**/film/**/*.jpg

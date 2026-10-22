@@ -498,7 +498,7 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
 
 **U2 — The bench driver and the first flight** (`vsbench/world/fly.py`, `tests/world/test_fly_smoke.py`)
 - Inputs: U1; `vsbench.vs.bench.{config,arms,runner,run,scoring}`, `vsbench.vs.benchmark`,
-  `vsbench/vs/data/configs/arms/*.yaml`.
+  `vsbench/configs/arms/*.yaml`.
 - Do: §2.6. `torch.set_num_threads(2)` and `torch.set_num_interop_threads(2)` at start-up;
   refuse to run if `torch.cuda.is_available()` or the scene is not on llvmpipe (§7 station
   rules); only the protocol's start sets (as vs-sim's `fly.py`).
@@ -517,6 +517,13 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
     every `gt_*` / `err_patch` column finite on every step, valid share ≥ 0.99.
   Records under `results/bridge/m1/` and `results/bridge/m1_telemetry/`; numbers in
   `results/bridge/u2_m1_gate.json`.
+- Measured (2026-10-23): `sift_ransac` 5.577 → 0.176 mm / 0.105°; truth seam valid share
+  1.000 over 2393 point-steps, every `gt_*` finite, `err_patch` median 0.0008 / max 0.083
+  patch. ViT-VS 5.577 → 3.778 mm / 0.518° at the cap; **median 4.61 mm over steps 75–100,
+  max 5.70 mm over steps 50–100** (above its start: the error went back out before it came
+  in), 3.73 mm at step 100. The telemetry flight (vsbench `04521b1`) reproduced both M1
+  landings bit for bit (M1 flown at `409656d`); its curve matches the M1 film's every-second
+  step to 0.005 mm.
 - Cost: DINOv3-S/16 at 512 on 2 threads ≈ 0.4–0.8 s/step + render ≈ 0.3 s → **100 steps ≈ 2 min**.
 
 ### Milestone 2 — the rooms, the objects, ART-VS, parity, one loop
