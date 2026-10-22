@@ -1,0 +1,41 @@
+# install friction: pybullet-tiny with Python 3.12.3 on Linux 6.14.0-37-generic x86_64
+# 2026-09-18T00:44:25+02:00
+# system packages already present: 1 Mesa libs (see below)
+#   	libGL.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so.1
+#   	libGL.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so
+#   	libEGL_mesa.so.0 (libc6,x86-64) => /lib/x86_64-linux-gnu/libEGL_mesa.so.0
+$ python3 -m venv results/friction/venv_pybullet-tiny_py3.12
+$ results/friction/venv_pybullet-tiny_py3.12/bin/pip install --no-cache-dir -e .[pybullet]
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 114.7 MB/s eta 0:00:00
+Downloading opencv_python_headless-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl (61.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 MB 105.0 MB/s eta 0:00:00
+Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 116.5 MB/s eta 0:00:00
+Checking if build backend supports build_editable: started
+Checking if build backend supports build_editable: finished with status 'done'
+Building wheels for collected packages: vsbench, pybullet
+  Building editable for vsbench (pyproject.toml): started
+  Building editable for vsbench (pyproject.toml): finished with status 'done'
+  Created wheel for vsbench: filename=vsbench-0.1.0-0.editable-py3-none-any.whl size=5521 sha256=811beabf3caf6e842038d16830312a0421b657ca15fd0889e28ea991f9214e08
+  Stored in directory: /tmp/pip-ephem-wheel-cache-pra6fm4g/wheels/d2/09/41/0d64a632800f4cf7566259ee76e88052a8d4c174e79a6369ff
+  Building wheel for pybullet (pyproject.toml): started
+  Building wheel for pybullet (pyproject.toml): finished with status 'done'
+  Created wheel for pybullet: filename=pybullet-3.2.7-cp312-cp312-linux_x86_64.whl size=99086734 sha256=d76768fea7986e08eb15c62432b13e9f650c6e46bd9d1517409d226a4ce530d2
+  Stored in directory: /tmp/pip-ephem-wheel-cache-pra6fm4g/wheels/72/95/1d/b336e5ee612ae9a019bfff4dc0bedd100ee6f0570db205fdf8
+Successfully built vsbench pybullet
+Installing collected packages: pybullet, Pillow, numpy, opencv-python-headless, vsbench
+Successfully installed Pillow-12.3.0 numpy-2.5.3 opencv-python-headless-5.0.0.93 pybullet-3.2.7 vsbench-0.1.0
+# pip done in 65 s
+$ results/friction/venv_pybullet-tiny_py3.12/bin/python -m vsbench.smoke --backend pybullet-tiny --frames 20 --out results/friction/smoke_pybullet-tiny.png
+pybullet build time: Sep 18 2026 00:44:53
+backend pybullet-tiny (TinyRenderer (software)) built in 0.4 s
+640x480 rgb+depth: 133.8 ms/frame = 7.5 fps over 20 frames
+wrote results/friction/smoke_pybullet-tiny.png (rgb | depth)
+# smoke exit code 0; first image after 69 s from venv creation
+# numpy-enabled pybullet: 0

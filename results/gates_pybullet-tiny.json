@@ -1,0 +1,133 @@
+{
+ "kind": "gates",
+ "backend": "pybullet-tiny",
+ "system": {
+  "timestamp": "2026-09-18T00:31:32+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   4.9013671875,
+   3.86279296875,
+   3.9013671875
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "gates": [
+  {
+   "gate": "projection",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_projection[pybullet-tiny-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.464
+    },
+    {
+     "name": "test_projection[pybullet-tiny-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.223
+    }
+   ],
+   "measured": [
+    "pybullet-tiny (640, 480): mean 0.065 px, max 0.195 px over 260 markers"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "depth",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_depth[pybullet-tiny-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.584
+    },
+    {
+     "name": "test_depth[pybullet-tiny-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.205
+    }
+   ],
+   "measured": [
+    "pybullet-tiny (640, 480): median 0.001 mm, p99 0.007 mm over 6129087 px"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "homography",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_homography[pybullet-tiny-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.987
+    },
+    {
+     "name": "test_homography[pybullet-tiny-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.982
+    }
+   ],
+   "measured": [
+    "pybullet-tiny (640, 480): worst median displacement 0.000 px, fewest matches 2057"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "determinism",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_same_process[pybullet-tiny]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.723
+    },
+    {
+     "name": "test_fresh_processes[pybullet-tiny]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.58
+    }
+   ],
+   "measured": [],
+   "returncode": 0,
+   "tail": ""
+  }
+ ],
+ "available": true,
+ "reason": "",
+ "renderer": {
+  "variant": "pybullet-tiny",
+  "gl_renderer": "TinyRenderer (software)",
+  "pybullet": "3.2.7",
+  "numpy_enabled": true
+ },
+ "all_passed": true
+}

@@ -1,0 +1,133 @@
+{
+ "kind": "gates",
+ "backend": "mujoco-egl",
+ "label": "mujoco-egl-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:16:54+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   0.81689453125,
+   0.84326171875,
+   0.486328125
+  ],
+  "env": {}
+ },
+ "gates": [
+  {
+   "gate": "projection",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_projection[mujoco-egl-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.549
+    },
+    {
+     "name": "test_projection[mujoco-egl-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.308
+    }
+   ],
+   "measured": [
+    "mujoco-egl (640, 480): mean 0.038 px, max 0.122 px over 260 markers"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "depth",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_depth[mujoco-egl-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.448
+    },
+    {
+     "name": "test_depth[mujoco-egl-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.336
+    }
+   ],
+   "measured": [
+    "mujoco-egl (640, 480): median 0.000 mm, p99 0.014 mm over 6129087 px"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "homography",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_homography[mujoco-egl-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.952
+    },
+    {
+     "name": "test_homography[mujoco-egl-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.255
+    }
+   ],
+   "measured": [
+    "mujoco-egl (640, 480): worst median displacement 0.000 px, fewest matches 1958"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "determinism",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_same_process[mujoco-egl]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.299
+    },
+    {
+     "name": "test_fresh_processes[mujoco-egl]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.961
+    }
+   ],
+   "measured": [],
+   "returncode": 0,
+   "tail": ""
+  }
+ ],
+ "available": true,
+ "reason": "",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": null
+ },
+ "all_passed": true
+}

@@ -1,0 +1,130 @@
+{
+ "kind": "gates",
+ "backend": "open3d-gpu",
+ "label": "open3d-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:09:46+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   0.5673828125,
+   0.17236328125,
+   0.1025390625
+  ],
+  "env": {}
+ },
+ "gates": [
+  {
+   "gate": "projection",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_projection[open3d-gpu-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.389
+    },
+    {
+     "name": "test_projection[open3d-gpu-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.366
+    }
+   ],
+   "measured": [
+    "open3d-gpu (640, 480): mean 0.038 px, max 0.129 px over 260 markers"
+   ],
+   "returncode": -6,
+   "tail": ""
+  },
+  {
+   "gate": "depth",
+   "status": "failed",
+   "cases": [
+    {
+     "name": "test_depth[open3d-gpu-640x480]",
+     "status": "failed",
+     "detail": "AssertionError: plane should cover most of the image\nassert np.float64(0.007760416666666666) > 0.5\n +  where np.float64(0.007760416666666666) = <built-in method mean of numpy.ndarray object at 0x7c7ebf7c10b0>()\n +    where <built-in method mean of numpy.ndarray object at 0x7c7ebf7c10b0> = array([[False, False, False, ..., False, False, False],\\n       [False, False, False, ..., False, False, False",
+     "time_s": 0.687
+    },
+    {
+     "name": "test_depth[open3d-gpu-1440x1080]",
+     "status": "failed",
+     "detail": "AssertionError: plane should cover most of the image\nassert np.float64(0.2953780864197531) > 0.5\n +  where np.float64(0.2953780864197531) = <built-in method mean of numpy.ndarray object at 0x7c7ebf7c3390>()\n +    where <built-in method mean of numpy.ndarray object at 0x7c7ebf7c3390> = array([[False, False, False, ...,  True, False, False],\\n       [False, False, False, ..., False, False, False],\\n",
+     "time_s": 0.125
+    }
+   ],
+   "measured": [],
+   "returncode": -6,
+   "tail": "r most of the image\"\nE           AssertionError: plane should cover most of the image\nE           assert np.float64(0.2953780864197531) > 0.5\nE            +  where np.float64(0.2953780864197531) = <built-in method mean of numpy.ndarray object at 0x7c7ebf7c3390>()\nE            +    where <built-in method mean of numpy.ndarray object at 0x7c7ebf7c3390> = array([[False, False, False, ...,  True, False, False],\\n       [False, False, False, ..., False, False, False],\\n      ...e,  True, ...,  True,  True,  True],\\n       [ True,  True,  True, ...,  True,  True,  True]],\\n      shape=(1080, 1440)).mean\n\ntests/test_depth.py:23: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_depth.py::test_depth[open3d-gpu-640x480] - AssertionError: ...\nFAILED tests/test_depth.py::test_depth[open3d-gpu-1440x1080] - AssertionError...\n2 failed in 1.90s\nUsing 'soft' CircularBuffer (12288 KiB)\nFEngine (64 bits) created at 0x3b43c7f0 (threading is enabled)\nFEngine resolved backend: Vulkan\nVulkan device driver: NVIDIA 570.211.01\nSelected physical device 'NVIDIA GeForce RTX 4090' from 2 physical devices. (vendor 0x10de, device 0x2684, driver 0x8eb4c040, api 1.4)\nBackend feature level: 3\nFEngine feature level: 1\nterminate called after throwing an instance of 'utils::PreconditionPanic'\n  what():  Precondition\nin destroy:1416\nreason: destroying MaterialInstance \"defaultLit\" which is still in use by Renderable (entity=274, instance=4, index=0)\n"
+  },
+  {
+   "gate": "homography",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_homography[open3d-gpu-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.806
+    },
+    {
+     "name": "test_homography[open3d-gpu-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.358
+    }
+   ],
+   "measured": [
+    "open3d-gpu (640, 480): worst median displacement 0.000 px, fewest matches 1950"
+   ],
+   "returncode": -6,
+   "tail": ""
+  },
+  {
+   "gate": "determinism",
+   "status": "failed",
+   "cases": [
+    {
+     "name": "test_same_process[open3d-gpu]",
+     "status": "failed",
+     "detail": "AssertionError: depth, same pose twice in one process: 3009 pixels differ, max |diff| 0.933",
+     "time_s": 0.802
+    },
+    {
+     "name": "test_fresh_processes[open3d-gpu]",
+     "status": "failed",
+     "detail": "AssertionError: depth, two fresh processes: 1675 pixels differ, max |diff| 0.936",
+     "time_s": 2.263
+    }
+   ],
+   "measured": [],
+   "returncode": 1,
+   "tail": "sses'\n\n    def _same(a, b, what):\n        \"\"\"Assertion message with the number of differing pixels and the largest difference.\n    \n        With ``VSBENCH_DUMP_DIR`` set, both arrays are saved there for inspection.\n        \"\"\"\n        dump = os.environ.get(\"VSBENCH_DUMP_DIR\")\n        if dump:\n            os.makedirs(dump, exist_ok=True)\n            np.savez(os.path.join(dump, what.replace(\" \", \"_\").replace(\",\", \"\") + \".npz\"), a=a, b=b)\n        if np.array_equal(a, b):\n            return True\n        d = np.abs(np.asarray(a, dtype=np.float64) - np.asarray(b, dtype=np.float64))\n        n = int((d.reshape(d.shape[0], d.shape[1], -1).max(-1) > 0).sum())\n>       raise AssertionError(f\"{what}: {n} pixels differ, max |diff| {d.max():.3g}\")\nE       AssertionError: depth, two fresh processes: 1675 pixels differ, max |diff| 0.936\n\ntests/test_determinism.py:26: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_determinism.py::test_same_process[open3d-gpu] - AssertionEr...\nFAILED tests/test_determinism.py::test_fresh_processes[open3d-gpu] - Assertio...\n2 failed in 4.12s\nUsing 'soft' CircularBuffer (12288 KiB)\nFEngine (64 bits) created at 0x2cd71af0 (threading is enabled)\nFEngine resolved backend: Vulkan\nVulkan device driver: NVIDIA 570.211.01\nSelected physical device 'NVIDIA GeForce RTX 4090' from 2 physical devices. (vendor 0x10de, device 0x2684, driver 0x8eb4c040, api 1.4)\nBackend feature level: 3\nFEngine feature level: 1\n"
+  }
+ ],
+ "available": true,
+ "reason": "",
+ "renderer": {
+  "variant": "open3d-gpu",
+  "gl_renderer": "Filament (GPU)",
+  "open3d": "0.20.0",
+  "EGL_PLATFORM": null
+ },
+ "all_passed": false
+}

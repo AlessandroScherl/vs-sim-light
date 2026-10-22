@@ -1,0 +1,144 @@
++ cd /home/alessandro/genvs_ws/vs_sim_light
++ unset VSBENCH_SOFTWARE_GL MUJOCO_EGL_DEVICE_ID __EGL_VENDOR_LIBRARY_FILENAMES LIBGL_ALWAYS_SOFTWARE EGL_PLATFORM
++ PY=/home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python
++ OSMESA=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ F='pci id|dri2|CircularBuffer|feature level|GLFW'
++ echo '### STEP gates'
+### STEP gates
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/run_gates.py --backends mujoco-egl
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl       projection   passed   (640, 480): mean 0.038 px, max 0.122 px over 260 markers
+mujoco-egl       depth        passed   (640, 480): median 0.000 mm, p99 0.001 mm over 6129087 px
+mujoco-egl       homography   passed   (640, 480): worst median displacement 0.000 px, fewest matches 1986
+mujoco-egl       determinism  passed   
++ VSBENCH_SOFTWARE_GL=1
++ LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/run_gates.py --backends mujoco-osmesa
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-osmesa    projection   passed   (640, 480): mean 0.038 px, max 0.122 px over 260 markers
+mujoco-osmesa    depth        passed   (640, 480): median 0.000 mm, p99 0.001 mm over 6129087 px
+mujoco-osmesa    homography   passed   (640, 480): worst median displacement 0.000 px, fewest matches 1986
+mujoco-osmesa    determinism  passed   
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/run_gates.py --backends mujoco-egl --label mujoco-egl-gpu
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu   projection   passed   (640, 480): mean 0.038 px, max 0.122 px over 260 markers
+mujoco-egl-gpu   depth        passed   (640, 480): median 0.000 mm, p99 0.014 mm over 6129087 px
+mujoco-egl-gpu   homography   passed   (640, 480): worst median displacement 0.000 px, fewest matches 1958
+mujoco-egl-gpu   determinism  passed   
++ echo '### STEP cross variants'
+### STEP cross variants
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/cross_variant.py --a mujoco-egl --b mujoco-egl --label-a mujoco-egl-gpu --label-b mujoco-egl-llvmpipe --env-a VSBENCH_SOFTWARE_GL=0 --env-b VSBENCH_SOFTWARE_GL=1
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu vs mujoco-egl-llvmpipe poster: PSNR min 44.6 dB, max |diff| 65, depth max |diff| 1.24e+00 m (p99 where both hit 2.62e-06 m, hit masks disagree on 0.001 % of pixels), identical False
+mujoco-egl-gpu vs mujoco-egl-llvmpipe clutter: PSNR min 44.6 dB, max |diff| 35, depth max |diff| 2.62e+00 m (p99 where both hit 2.15e-05 m, hit masks disagree on 0.000 % of pixels), identical False
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/cross_variant.py --a mujoco-egl --b mujoco-osmesa --env-b LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl vs mujoco-osmesa poster: PSNR min 361.2 dB, max |diff| 0, depth max |diff| 0.00e+00 m (p99 where both hit 0.00e+00 m, hit masks disagree on 0.000 % of pixels), identical True
+mujoco-egl vs mujoco-osmesa clutter: PSNR min 361.2 dB, max |diff| 0, depth max |diff| 0.00e+00 m (p99 where both hit 0.00e+00 m, hit masks disagree on 0.000 % of pixels), identical True
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/cross_variant.py --a open3d-gpu --b open3d-cpu --env-a VSBENCH_SOFTWARE_GL=0 --env-b VSBENCH_SOFTWARE_GL=1
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+open3d-gpu vs open3d-cpu poster: PSNR min 40.6 dB, max |diff| 57, depth max |diff| 1.52e+00 m (p99 where both hit 1.44e+00 m, hit masks disagree on 80.383 % of pixels), identical False
+open3d-gpu vs open3d-cpu clutter: PSNR min 28.5 dB, max |diff| 246, depth max |diff| 7.58e+00 m (p99 where both hit 1.16e+00 m, hit masks disagree on 73.434 % of pixels), identical False
++ echo '### STEP speed'
+### STEP speed
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_speed.py --backend mujoco-egl --out results/speed_mujoco-egl.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl poster_lit 640x480: median 2.20 ms = 455.5 fps (build 0.2 s)
+mujoco-egl poster_lit 1440x1080: median 18.50 ms = 54.0 fps (build 0.3 s)
+mujoco-egl clutter 640x480: median 10.14 ms = 98.6 fps (build 0.3 s)
+mujoco-egl clutter 1440x1080: median 37.61 ms = 26.6 fps (build 0.3 s)
++ VSBENCH_SOFTWARE_GL=1
++ LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_speed.py --backend mujoco-osmesa --out results/speed_mujoco-osmesa.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-osmesa poster_lit 640x480: median 2.11 ms = 474.8 fps (build 0.2 s)
+mujoco-osmesa poster_lit 1440x1080: median 18.21 ms = 54.9 fps (build 0.3 s)
+mujoco-osmesa clutter 640x480: median 9.75 ms = 102.6 fps (build 0.3 s)
+mujoco-osmesa clutter 1440x1080: median 38.10 ms = 26.2 fps (build 0.3 s)
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_speed.py --backend mujoco-egl --samples 0 --label mujoco-egl-noaa --out results/speed_mujoco-egl-noaa.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-noaa poster_lit 640x480: median 1.14 ms = 874.9 fps (build 0.2 s)
+mujoco-egl-noaa poster_lit 1440x1080: median 12.26 ms = 81.6 fps (build 0.2 s)
+mujoco-egl-noaa clutter 640x480: median 2.63 ms = 380.8 fps (build 0.2 s)
+mujoco-egl-noaa clutter 1440x1080: median 14.74 ms = 67.9 fps (build 0.2 s)
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_speed.py --backend mujoco-egl --label mujoco-egl-gpu --out results/speed_mujoco-egl-gpu.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu poster_lit 640x480: median 0.91 ms = 1100.6 fps (build 0.2 s)
+mujoco-egl-gpu poster_lit 1440x1080: median 6.07 ms = 164.6 fps (build 0.2 s)
+mujoco-egl-gpu clutter 640x480: median 0.88 ms = 1140.2 fps (build 0.2 s)
+mujoco-egl-gpu clutter 1440x1080: median 5.62 ms = 178.1 fps (build 0.2 s)
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_speed.py --backend mujoco-egl --samples 0 --label mujoco-egl-gpu-noaa --out results/speed_mujoco-egl-gpu-noaa.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu-noaa poster_lit 640x480: median 0.84 ms = 1184.7 fps (build 0.2 s)
+mujoco-egl-gpu-noaa poster_lit 1440x1080: median 9.39 ms = 106.5 fps (build 0.2 s)
+mujoco-egl-gpu-noaa clutter 640x480: median 0.76 ms = 1321.1 fps (build 0.2 s)
+mujoco-egl-gpu-noaa clutter 1440x1080: median 8.80 ms = 113.7 fps (build 0.2 s)
++ echo '### STEP parallel'
+### STEP parallel
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_parallel.py --backend mujoco-egl --out results/parallel_mujoco-egl.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl x1: total 450.3 fps, per process 450.3 fps
+mujoco-egl x2: total 397.6 fps, per process 198.8 fps
+mujoco-egl x4: total 422.7 fps, per process 105.7 fps
+mujoco-egl x8: total 404.1 fps, per process 50.5 fps
++ VSBENCH_SOFTWARE_GL=1
++ LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_parallel.py --backend mujoco-osmesa --out results/parallel_mujoco-osmesa.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-osmesa x1: total 483.0 fps, per process 483.0 fps
+mujoco-osmesa x2: total 415.9 fps, per process 208.0 fps
+mujoco-osmesa x4: total 437.1 fps, per process 109.3 fps
+mujoco-osmesa x8: total 411.8 fps, per process 51.5 fps
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bench_parallel.py --backend mujoco-egl --label mujoco-egl-gpu --out results/parallel_mujoco-egl-gpu.json
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu x1: total 1084.7 fps, per process 1084.7 fps
+mujoco-egl-gpu x2: total 1223.1 fps, per process 611.6 fps
+mujoco-egl-gpu x4: total 1292.8 fps, per process 323.2 fps
+mujoco-egl-gpu x8: total 926.0 fps, per process 115.8 fps
++ echo '### STEP quality + lighting'
+### STEP quality + lighting
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/quality_sheet.py --backend mujoco-egl
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl slant70_1.5m: ORB 694/757 SIFT 98/122 PSNR 36.4 dB (poster 26.5 dB) gain 0.96
+mujoco-egl minify3x: ORB 2437/2498 SIFT 690/731 PSNR 35.8 dB (poster 32.4 dB) gain 0.99
++ VSBENCH_SOFTWARE_GL=1
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/lighting_check.py --backend mujoco-egl
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl move_light: yes  {"mean_abs_diff": 5.98, "left_right_ratio_before": 1.36, "left_right_ratio_after": 0.94}
+mujoco-egl change_intensity: yes  {"mean_lum_before": 173.47, "mean_lum_after": 90.3}
+mujoco-egl second_light: yes  {"mean_lum_one": 173.47, "mean_lum_two": 226.21}
++ VSBENCH_SOFTWARE_GL=1
++ LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/quality_sheet.py --backend mujoco-osmesa
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-osmesa slant70_1.5m: ORB 694/757 SIFT 98/122 PSNR 36.4 dB (poster 26.5 dB) gain 0.96
+mujoco-osmesa minify3x: ORB 2437/2498 SIFT 690/731 PSNR 35.8 dB (poster 32.4 dB) gain 0.99
++ VSBENCH_SOFTWARE_GL=1
++ LD_LIBRARY_PATH=/home/alessandro/genvs_ws/mm/osmesa24/lib
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/lighting_check.py --backend mujoco-osmesa
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-osmesa move_light: yes  {"mean_abs_diff": 5.98, "left_right_ratio_before": 1.36, "left_right_ratio_after": 0.94}
+mujoco-osmesa change_intensity: yes  {"mean_lum_before": 173.47, "mean_lum_after": 90.3}
+mujoco-osmesa second_light: yes  {"mean_lum_one": 173.47, "mean_lum_two": 226.21}
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/quality_sheet.py --backend mujoco-egl --label mujoco-egl-gpu
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
+mujoco-egl-gpu slant70_1.5m: ORB 679/737 SIFT 96/120 PSNR 36.2 dB (poster 26.3 dB) gain 0.97
+mujoco-egl-gpu minify3x: ORB 2426/2498 SIFT 679/718 PSNR 35.7 dB (poster 32.3 dB) gain 0.99
++ grep -Ev 'pci id|dri2|CircularBuffer|feature level|GLFW'
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/lighting_check.py --backend mujoco-egl --label mujoco-egl-gpu
+mujoco-egl-gpu move_light: yes  {"mean_abs_diff": 5.98, "left_right_ratio_before": 1.36, "left_right_ratio_after": 0.94}
+mujoco-egl-gpu change_intensity: yes  {"mean_lum_before": 173.45, "mean_lum_after": 90.29}
+mujoco-egl-gpu second_light: yes  {"mean_lum_one": 173.45, "mean_lum_two": 226.2}
++ echo '### STEP report'
+### STEP report
++ /home/alessandro/genvs_ws/vs_sim_light/.venv/bin/python tools/bakeoff_report.py
++ echo report written
+report written
++ echo '### FIX_CHAIN_DONE'
+### FIX_CHAIN_DONE

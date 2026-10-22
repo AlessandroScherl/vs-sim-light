@@ -1,0 +1,95 @@
+{
+ "kind": "quality",
+ "backend": "mujoco-osmesa",
+ "label": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:18:33+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   9.94775390625,
+   3.35400390625,
+   1.38916015625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_GL": "osmesa",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:/home/alessandro/genvs_ws/mm/osmesa24/lib"
+  }
+ },
+ "renderer": {
+  "variant": "mujoco-osmesa",
+  "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "osmesa",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "sheet": "quality_mujoco-osmesa.png",
+ "cases": [
+  {
+   "case": "slant70_1.5m",
+   "orb": {
+    "matches": 757,
+    "inliers": 694,
+    "median_disp_px": 0.0,
+    "keypoints_render": 918,
+    "keypoints_ref": 1673
+   },
+   "sift": {
+    "matches": 122,
+    "inliers": 98,
+    "median_disp_px": 0.4703269504383403,
+    "keypoints_render": 208,
+    "keypoints_ref": 244
+   },
+   "psnr_db": 36.422435726946226,
+   "psnr_poster_db": 26.476525670138365,
+   "brightness_fit": {
+    "gain": 0.9610432833602359,
+    "offset": 5.633967906439853
+   }
+  },
+  {
+   "case": "minify3x",
+   "orb": {
+    "matches": 2498,
+    "inliers": 2437,
+    "median_disp_px": 0.0,
+    "keypoints_render": 2943,
+    "keypoints_ref": 2962
+   },
+   "sift": {
+    "matches": 731,
+    "inliers": 690,
+    "median_disp_px": 0.11903023686907974,
+    "keypoints_render": 1097,
+    "keypoints_ref": 948
+   },
+   "psnr_db": 35.7761948183434,
+   "psnr_poster_db": 32.42780123192074,
+   "brightness_fit": {
+    "gain": 0.9872929372168125,
+    "offset": 1.9358464010476577
+   }
+  }
+ ]
+}

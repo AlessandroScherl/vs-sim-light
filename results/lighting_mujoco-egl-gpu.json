@@ -1,0 +1,60 @@
+{
+ "kind": "lighting",
+ "backend": "mujoco-egl",
+ "label": "mujoco-egl-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:18:36+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   9.23095703125,
+   3.314453125,
+   1.38671875
+  ],
+  "env": {
+   "MUJOCO_GL": "egl",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": null
+ },
+ "capabilities": {
+  "move_light": {
+   "yes": true,
+   "mean_abs_diff": 5.982314453125,
+   "left_right_ratio_before": 1.3643005579103111,
+   "left_right_ratio_after": 0.9445329931947937
+  },
+  "change_intensity": {
+   "yes": true,
+   "mean_lum_before": 173.44939127604167,
+   "mean_lum_after": 90.28937174479167
+  },
+  "second_light": {
+   "yes": true,
+   "mean_lum_one": 173.44939127604167,
+   "mean_lum_two": 226.19760091145832
+  }
+ },
+ "image": "lighting_mujoco-egl-gpu.png"
+}

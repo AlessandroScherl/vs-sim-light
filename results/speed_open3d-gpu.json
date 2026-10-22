@@ -1,0 +1,109 @@
+{
+ "kind": "speed",
+ "backend": "open3d-gpu",
+ "label": "open3d-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:11:44+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   1.1826171875,
+   0.54931640625,
+   0.25146484375
+  ],
+  "env": {}
+ },
+ "cases": [
+  {
+   "scene": "poster_lit",
+   "width": 640,
+   "height": 480,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.7271144851110876,
+   "median_ms": 27.963553555309772,
+   "mean_ms": 28.50159666966647,
+   "p90_ms": 32.44302226230502,
+   "fps": 35.76083411652515,
+   "renderer": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   }
+  },
+  {
+   "scene": "poster_lit",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.7438487070612609,
+   "median_ms": 62.953123124316335,
+   "mean_ms": 59.09766070311889,
+   "p90_ms": 63.84214777499437,
+   "fps": 15.88483541992437,
+   "renderer": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 640,
+   "height": 480,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.755907644983381,
+   "median_ms": 27.884252835065126,
+   "mean_ms": 27.965426400769502,
+   "p90_ms": 29.664498940110207,
+   "fps": 35.86253524220221,
+   "renderer": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.7514263209886849,
+   "median_ms": 63.783184392377734,
+   "mean_ms": 60.3720671357587,
+   "p90_ms": 65.71900206618011,
+   "fps": 15.678113432660517,
+   "renderer": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   }
+  }
+ ]
+}

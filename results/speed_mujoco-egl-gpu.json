@@ -1,0 +1,113 @@
+{
+ "kind": "speed",
+ "backend": "mujoco-egl",
+ "label": "mujoco-egl-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:18:08+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   4.0029296875,
+   1.85986328125,
+   0.8720703125
+  ],
+  "env": {}
+ },
+ "cases": [
+  {
+   "scene": "poster_lit",
+   "width": 640,
+   "height": 480,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.19595199916511774,
+   "median_ms": 0.9086220525205135,
+   "mean_ms": 0.9133703703992069,
+   "p90_ms": 0.9170148987323046,
+   "fps": 1100.5676091902067,
+   "renderer": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   }
+  },
+  {
+   "scene": "poster_lit",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.19408539310097694,
+   "median_ms": 6.074155913665891,
+   "mean_ms": 6.118040210567415,
+   "p90_ms": 6.209904095157981,
+   "fps": 164.6319281581426,
+   "renderer": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 640,
+   "height": 480,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.2115453789010644,
+   "median_ms": 0.8770325221121311,
+   "mean_ms": 0.8836332312785089,
+   "p90_ms": 0.8894919883459806,
+   "fps": 1140.2085724161402,
+   "renderer": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.2112759267911315,
+   "median_ms": 5.6153577752411366,
+   "mean_ms": 5.650038993917406,
+   "p90_ms": 5.736351804807782,
+   "fps": 178.08304297352765,
+   "renderer": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   }
+  }
+ ]
+}

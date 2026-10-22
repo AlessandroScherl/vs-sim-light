@@ -1,0 +1,133 @@
+{
+ "kind": "gates",
+ "backend": "open3d-cpu",
+ "system": {
+  "timestamp": "2026-09-18T00:50:05+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   2.71923828125,
+   4.61279296875,
+   5.38720703125
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "gates": [
+  {
+   "gate": "projection",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_projection[open3d-cpu-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 2.391
+    },
+    {
+     "name": "test_projection[open3d-cpu-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.634
+    }
+   ],
+   "measured": [
+    "open3d-cpu (640, 480): mean 0.038 px, max 0.129 px over 260 markers"
+   ],
+   "returncode": -6,
+   "tail": ""
+  },
+  {
+   "gate": "depth",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_depth[open3d-cpu-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.571
+    },
+    {
+     "name": "test_depth[open3d-cpu-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.683
+    }
+   ],
+   "measured": [
+    "open3d-cpu (640, 480): median 0.000 mm, p99 0.001 mm over 6129087 px"
+   ],
+   "returncode": -6,
+   "tail": ""
+  },
+  {
+   "gate": "homography",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_homography[open3d-cpu-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.952
+    },
+    {
+     "name": "test_homography[open3d-cpu-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.543
+    }
+   ],
+   "measured": [
+    "open3d-cpu (640, 480): worst median displacement 0.000 px, fewest matches 2024"
+   ],
+   "returncode": -6,
+   "tail": ""
+  },
+  {
+   "gate": "determinism",
+   "status": "failed",
+   "cases": [
+    {
+     "name": "test_same_process[open3d-cpu]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.73
+    },
+    {
+     "name": "test_fresh_processes[open3d-cpu]",
+     "status": "failed",
+     "detail": "AssertionError: rgb, in-process vs fresh process: 396 pixels differ, max |diff| 225",
+     "time_s": 2.224
+    }
+   ],
+   "measured": [],
+   "returncode": 1,
+   "tail": "rgb, in-process vs fresh process'\n\n    def _same(a, b, what):\n        \"\"\"Assertion message with the number of differing pixels and the largest difference.\n    \n        With ``VSBENCH_DUMP_DIR`` set, both arrays are saved there for inspection.\n        \"\"\"\n        dump = os.environ.get(\"VSBENCH_DUMP_DIR\")\n        if dump:\n            os.makedirs(dump, exist_ok=True)\n            np.savez(os.path.join(dump, what.replace(\" \", \"_\").replace(\",\", \"\") + \".npz\"), a=a, b=b)\n        if np.array_equal(a, b):\n            return True\n        d = np.abs(np.asarray(a, dtype=np.float64) - np.asarray(b, dtype=np.float64))\n        n = int((d.reshape(d.shape[0], d.shape[1], -1).max(-1) > 0).sum())\n>       raise AssertionError(f\"{what}: {n} pixels differ, max |diff| {d.max():.3g}\")\nE       AssertionError: rgb, in-process vs fresh process: 396 pixels differ, max |diff| 225\n\ntests/test_determinism.py:26: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_determinism.py::test_fresh_processes[open3d-cpu] - Assertio...\n1 failed, 1 passed in 3.85s\nUsing 'soft' CircularBuffer (12288 KiB)\nFEngine (64 bits) created at 0x3e45f940 (threading is enabled)\nFEngine resolved backend: Vulkan\nVulkan device driver: llvmpipe Mesa 25.2.8-0ubuntu0.24.04.2 (LLVM 20.1.2)\nSelected physical device 'llvmpipe (LLVM 20.1.2, 256 bits)' from 1 physical devices. (vendor 0x10005, device 0x0, driver 0x6402008, api 1.4)\nBackend feature level: 3\nFEngine feature level: 1\n"
+  }
+ ],
+ "available": true,
+ "reason": "",
+ "renderer": {
+  "variant": "open3d-cpu",
+  "gl_renderer": "Filament headless (Vulkan on llvmpipe per Open3D's log)",
+  "open3d": "0.20.0",
+  "EGL_PLATFORM": "surfaceless"
+ },
+ "all_passed": false
+}

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vsbench"
+version = "0.1.0"
+description = "VS-Bench: a free-flying camera on SE(3) rendered by MuJoCo (PyBullet and Open3D backends kept from the bake-off), with the gates that check it."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Alessandro Scherl" }]
+dependencies = [
+  "numpy>=1.26",
+  "opencv-python-headless>=4.10",   # projectPoints, warpPerspective, ORB, SIFT for the gates
+  "Pillow>=10",                     # reading the poster, writing contact sheets
+  "imageio-ffmpeg>=0.5",            # H.264 debug videos (OpenCV mp4v is the fallback)
+]
+
+[project.optional-dependencies]
+mujoco = ["mujoco>=3.3"]
+pybullet = ["pybullet>=3.2.6"]
+open3d = ["open3d>=0.19"]
+all = ["mujoco>=3.3", "pybullet>=3.2.6", "open3d>=0.19"]
+dev = ["pytest>=8", "ruff>=0.6", "psutil>=5", "scipy>=1.10"]   # scipy: expm/logm oracle in tests only
+
+[tool.setuptools.packages.find]
+include = ["vsbench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

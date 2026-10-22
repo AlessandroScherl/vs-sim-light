@@ -1,0 +1,65 @@
+{
+ "kind": "lighting",
+ "backend": "mujoco-osmesa",
+ "label": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:18:34+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   9.94775390625,
+   3.35400390625,
+   1.38916015625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_GL": "osmesa",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:/home/alessandro/genvs_ws/mm/osmesa24/lib"
+  }
+ },
+ "renderer": {
+  "variant": "mujoco-osmesa",
+  "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "osmesa",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "capabilities": {
+  "move_light": {
+   "yes": true,
+   "mean_abs_diff": 5.979329427083333,
+   "left_right_ratio_before": 1.3618784371743395,
+   "left_right_ratio_after": 0.944262405754959
+  },
+  "change_intensity": {
+   "yes": true,
+   "mean_lum_before": 173.47183268229168,
+   "mean_lum_after": 90.29939127604166
+  },
+  "second_light": {
+   "yes": true,
+   "mean_lum_one": 173.47183268229168,
+   "mean_lum_two": 226.20607747395835
+  }
+ },
+ "image": "lighting_mujoco-osmesa.png"
+}

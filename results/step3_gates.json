@@ -1,0 +1,593 @@
+{
+ "kind": "step3_gates",
+ "backend": "mujoco-egl",
+ "system": {
+  "timestamp": "2026-09-19T15:41:07+02:00",
+  "hostname": "lenovo",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-1335U",
+  "cores": 12,
+  "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.11.16",
+  "packages": {
+   "numpy": "2.4.6",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": null,
+   "open3d": null,
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": null,
+  "load_average": [
+   8.19140625,
+   6.572265625,
+   4.16943359375
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "cases": [
+  {
+   "file": "test_contract.py",
+   "name": "test_contract[mujoco-egl-oracle_pbvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.342
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_contract[mujoco-egl-orb_ibvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.053
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_contract[mujoco-egl-sift_ibvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.091
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_contract[mujoco-egl-true_point_ibvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.015
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_normalise_output",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.001
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_registry",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.0
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_depth_form_follows_wants_depth[none]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.01
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_depth_form_follows_wants_depth[scalar]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.013
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_depth_form_follows_wants_depth[dense]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.016
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_method_error_status[nan]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.009
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_method_error_status[shape]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.009
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_method_error_status[raise]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.009
+  },
+  {
+   "file": "test_contract.py",
+   "name": "test_converged_status_and_meta",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.153
+  },
+  {
+   "file": "test_leak.py",
+   "name": "test_import_graph_static",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.005
+  },
+  {
+   "file": "test_leak.py",
+   "name": "test_import_graph_transitive",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.103
+  },
+  {
+   "file": "test_leak.py",
+   "name": "test_spy_never_sees_the_truth[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.185
+  },
+  {
+   "file": "test_oracle.py",
+   "name": "test_oracle_decay[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 18.075
+  },
+  {
+   "file": "test_oracle.py",
+   "name": "test_oracle_convergence[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 100.614
+  },
+  {
+   "file": "test_oracle.py",
+   "name": "test_oracle_needs_truth",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.0
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_oracle_passes_zero_and_hold[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.466
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_oracle_passes_restoring_direction[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 9.006
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_run_checks_and_report[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 9.287
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-vx]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 12.868
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-vy]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 14.014
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-vz]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 14.099
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-wx]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 14.173
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-wy]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 14.382
+  },
+  {
+   "file": "test_checks.py",
+   "name": "test_negative_control[mujoco-egl-wz]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 17.27
+  },
+  {
+   "file": "test_true_point_ibvs.py",
+   "name": "test_ibvs_decay",
+   "status": "passed",
+   "detail": "",
+   "time_s": 1.547
+  },
+  {
+   "file": "test_true_point_ibvs.py",
+   "name": "test_true_point_ibvs_setup_checks",
+   "status": "passed",
+   "detail": "",
+   "time_s": 1.534
+  },
+  {
+   "file": "test_true_point_ibvs.py",
+   "name": "test_true_point_ibvs_edge_cases",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.0
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_demo_starts_are_the_brief",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.001
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_feature_convergence_sift[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 65.905
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_feature_convergence_orb_reported[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 37.017
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_feature_setup_checks[mujoco-egl-sift_ibvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 58.343
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_feature_setup_checks[mujoco-egl-orb_ibvs]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 46.518
+  },
+  {
+   "file": "test_feature_ibvs.py",
+   "name": "test_feature_options[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 5.454
+  },
+  {
+   "file": "test_episode_log.py",
+   "name": "test_round_trip[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 3.536
+  },
+  {
+   "file": "test_episode_log.py",
+   "name": "test_encode_matches_edge_cases",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.001
+  },
+  {
+   "file": "test_episode_log.py",
+   "name": "test_log_without_matches_and_wrong_format",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.028
+  },
+  {
+   "file": "test_replay.py",
+   "name": "test_replay_identical[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 10.017
+  },
+  {
+   "file": "test_replay.py",
+   "name": "test_replay_command[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.863
+  },
+  {
+   "file": "test_video.py",
+   "name": "test_video_gate[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 23.407
+  },
+  {
+   "file": "test_video.py",
+   "name": "test_compose_frame_with_and_without_keypoints[mujoco-egl]",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.417
+  },
+  {
+   "file": "test_video.py",
+   "name": "test_opencv_fallback_writer",
+   "status": "passed",
+   "detail": "",
+   "time_s": 0.155
+  }
+ ],
+ "measured": [
+  "step3 contract oracle_pbvs: twist + info ['error_norm'], |v| 0.0616 m/s, |w| 0.1532 rad/s, inputs unchanged, unknown info keys []",
+  "step3 contract orb_ibvs: twist + info ['controller_s', 'error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost', 'observer_s'], |v| 0.0656 m/s, |w| 0.1602 rad/s, inputs unchanged, unknown info keys []",
+  "step3 contract sift_ibvs: twist + info ['controller_s', 'error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost', 'observer_s'], |v| 0.0659 m/s, |w| 0.1610 rad/s, inputs unchanged, unknown info keys []",
+  "step3 contract true_point_ibvs: twist + info ['error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost'], |v| 0.0592 m/s, |w| 0.1595 rad/s, inputs unchanged, unknown info keys []",
+  "step3 leak import graph: 5 modules under vsbench/methods, 0 banned imports",
+  "step3 leak transitive: import vsbench.methods adds 7 modules to the 6 of import vsbench; 0 banned: []; renderers, loop and scenes loaded: []",
+  "step3 leak spy: 20 control calls, 0 observe_truth calls, status timeout",
+  "step3 oracle decay: 20 starts, gain 1.0, 100 steps each: max |e_k - (1 - gain dt)^k e_0| 1.78e-15",
+  "step3 oracle convergence: 50 starts up to 1 m and 170 deg: all below 0.1 mm and 0.01 deg after 199 to 239 steps (median 222); worst final 0.0997 mm, 0.00999 deg",
+  "step3 zero at target oracle_pbvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+  "step3 hold at target oracle_pbvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+  "step3 restoring direction oracle_pbvs: 12 of 12 starts right and converged (converged in 81 to 81 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+  "step3 negative control vx flipped: restoring direction fails on ['vx']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 negative control vy flipped: restoring direction fails on ['vy']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 negative control vz flipped: restoring direction fails on ['vz']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 negative control wx flipped: restoring direction fails on ['wx']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 negative control wy flipped: restoring direction fails on ['wy']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 negative control wz flipped: restoring direction fails on ['wz']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+  "step3 ibvs decay true_point_ibvs: 20 offsets up to 2 cm and 2 deg, gain 1.0, 50 steps: fitted ratio 0.95999 to 0.96001 against 0.960, worst gap 8.62e-06",
+  "step3 zero at target true_point_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+  "step3 hold at target true_point_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+  "step3 restoring direction true_point_ibvs: 12 of 12 starts right and converged (converged in 80 to 82 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+  "step3 feature convergence sift_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 81 to 143, worst final 1.95 mm and 0.186 deg, 50 ms per call",
+  "step3 feature convergence orb_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 84 to 143, worst final 2.43 mm and 0.212 deg, 23 ms per call (reported, not gated)",
+  "step3 zero at target sift_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+  "step3 hold at target sift_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+  "step3 restoring direction sift_ibvs: 12 of 12 starts right and converged (converged in 78 to 83 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+  "step3 zero at target orb_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+  "step3 hold at target orb_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+  "step3 restoring direction orb_ibvs: 12 of 12 starts right and converged (converged in 73 to 94 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+  "step3 feature options sift scalar depth from start 3: converged in 98 steps, 1.82 mm",
+  "step3 log round trip: 60 rows, 286620 bytes of arrays in 13 arrays, file 166401 bytes, 30000 matches stored, worst match quantisation 0.0156 px",
+  "step3 replay: replay identical: 100 frames plus the desired view on mujoco-egl; 0 of 100 frame hashes differ",
+  "step3 video: 300-step sift_ibvs episode -> 150 frames of 960 x 720 at 12.50 fps, 2.47 MB, encoder libx264 via imageio-ffmpeg, replay identical: 300 frames plus the desired view on mujoco-egl"
+ ],
+ "gates": [
+  {
+   "gate": "Contract",
+   "status": "passed",
+   "cases": 13,
+   "lines": [
+    "contract"
+   ],
+   "setup": "every registered method through configure, reset, set_target, get_control_rate on the poster scene",
+   "rule": "finite (6,) float twist, alone or with an info dict; inputs not modified",
+   "measured": [
+    "step3 contract oracle_pbvs: twist + info ['error_norm'], |v| 0.0616 m/s, |w| 0.1532 rad/s, inputs unchanged, unknown info keys []",
+    "step3 contract orb_ibvs: twist + info ['controller_s', 'error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost', 'observer_s'], |v| 0.0656 m/s, |w| 0.1602 rad/s, inputs unchanged, unknown info keys []",
+    "step3 contract sift_ibvs: twist + info ['controller_s', 'error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost', 'observer_s'], |v| 0.0659 m/s, |w| 0.1610 rad/s, inputs unchanged, unknown info keys []",
+    "step3 contract true_point_ibvs: twist + info ['error_norm', 'inliers', 'kp_cur', 'kp_des', 'lost'], |v| 0.0592 m/s, |w| 0.1595 rad/s, inputs unchanged, unknown info keys []"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Leak",
+   "status": "passed",
+   "cases": 3,
+   "lines": [
+    "leak"
+   ],
+   "setup": "a spy method with privileged = False; static and transitive import graph of vsbench/methods",
+   "rule": "observe_truth never called; no import of the episode loop, a renderer or a scene",
+   "measured": [
+    "step3 leak import graph: 5 modules under vsbench/methods, 0 banned imports",
+    "step3 leak transitive: import vsbench.methods adds 7 modules to the 6 of import vsbench; 0 banned: []; renderers, loop and scenes loaded: []",
+    "step3 leak spy: 20 control calls, 0 observe_truth calls, status timeout"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Oracle decay",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "oracle decay"
+   ],
+   "setup": "20 random starts inside the clamp, gain 1.0, 100 rendered steps",
+   "rule": "norm of log_se3 of the pose error equals (1 - gain dt)^k times its start value within 1e-9",
+   "measured": [
+    "step3 oracle decay: 20 starts, gain 1.0, 100 steps each: max |e_k - (1 - gain dt)^k e_0| 1.78e-15"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Oracle convergence",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "oracle convergence"
+   ],
+   "setup": "50 random starts up to 1 m and 170 deg, every frame rendered",
+   "rule": "below 0.1 mm and 0.01 deg within 1000 steps",
+   "measured": [
+    "step3 oracle convergence: 50 starts up to 1 m and 170 deg: all below 0.1 mm and 0.01 deg after 199 to 239 steps (median 222); worst final 0.0997 mm, 0.00999 deg"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Zero at target",
+   "status": "passed",
+   "cases": 5,
+   "lines": [
+    "zero at target"
+   ],
+   "setup": "every method at the exact target pose",
+   "rule": "linear and angular twist norms below 1e-6",
+   "measured": [
+    "step3 zero at target oracle_pbvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+    "step3 zero at target true_point_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+    "step3 zero at target sift_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)",
+    "step3 zero at target orb_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Hold at target",
+   "status": "passed",
+   "cases": 5,
+   "lines": [
+    "hold at target"
+   ],
+   "setup": "50 steps from the target pose",
+   "rule": "pose moves less than 1e-6 m and 1e-6 rad",
+   "measured": [
+    "step3 hold at target oracle_pbvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+    "step3 hold at target true_point_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+    "step3 hold at target sift_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)",
+    "step3 hold at target orb_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Restoring direction",
+   "status": "passed",
+   "cases": 5,
+   "lines": [
+    "restoring direction"
+   ],
+   "setup": "+-2 cm and +-2 deg on each axis, 12 starts per method",
+   "rule": "first-step twist component has the sign of the same component of log_se3(inv(T_wc) @ T_wc_target); the episode converges",
+   "measured": [
+    "step3 restoring direction oracle_pbvs: 12 of 12 starts right and converged (converged in 81 to 81 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+    "step3 restoring direction true_point_ibvs: 12 of 12 starts right and converged (converged in 80 to 82 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+    "step3 restoring direction sift_ibvs: 12 of 12 starts right and converged (converged in 78 to 83 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}",
+    "step3 restoring direction orb_ibvs: 12 of 12 starts right and converged (converged in 73 to 94 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Negative control",
+   "status": "passed",
+   "cases": 6,
+   "lines": [
+    "negative control"
+   ],
+   "setup": "test-only oracle with the sign of one axis flipped, each axis in turn",
+   "rule": "the checks fail on that axis and only there",
+   "measured": [
+    "step3 negative control vx flipped: restoring direction fails on ['vx']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+    "step3 negative control vy flipped: restoring direction fails on ['vy']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+    "step3 negative control vz flipped: restoring direction fails on ['vz']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+    "step3 negative control wx flipped: restoring direction fails on ['wx']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+    "step3 negative control wy flipped: restoring direction fails on ['wy']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass",
+    "step3 negative control wz flipped: restoring direction fails on ['wz']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass"
+   ],
+   "details": []
+  },
+  {
+   "gate": "IBVS decay",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "ibvs decay"
+   ],
+   "setup": "true_point_ibvs, 20 offsets up to 2 cm and 2 deg, gain 1.0, 50 steps",
+   "rule": "fitted per-step ratio of the feature error norm within 0.002 of 1 - gain dt",
+   "measured": [
+    "step3 ibvs decay true_point_ibvs: 20 offsets up to 2 cm and 2 deg, gain 1.0, 50 steps: fitted ratio 0.95999 to 0.96001 against 0.960, worst gap 8.62e-06"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Feature convergence",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "feature convergence sift_ibvs",
+    "feature convergence orb_ibvs"
+   ],
+   "setup": "sift_ibvs, poster scene, the ten demo starts, dense depth",
+   "rule": "all ten below 5 mm and 0.5 deg within 500 steps (ORB reported, not gated)",
+   "measured": [
+    "step3 feature convergence sift_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 81 to 143, worst final 1.95 mm and 0.186 deg, 50 ms per call",
+    "step3 feature convergence orb_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 84 to 143, worst final 2.43 mm and 0.212 deg, 23 ms per call (reported, not gated)"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Log round trip",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "log round trip"
+   ],
+   "setup": "save, then load",
+   "rule": "arrays and meta identical",
+   "measured": [
+    "step3 log round trip: 60 rows, 286620 bytes of arrays in 13 arrays, file 166401 bytes, 30000 matches stored, worst match quantisation 0.0156 px"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Replay",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "replay"
+   ],
+   "setup": "re-render a logged episode in the same GL variant",
+   "rule": "all frame hashes identical",
+   "measured": [
+    "step3 replay: replay identical: 100 frames plus the desired view on mujoco-egl; 0 of 100 frame hashes differ"
+   ],
+   "details": []
+  },
+  {
+   "gate": "Video",
+   "status": "passed",
+   "cases": 1,
+   "lines": [
+    "video"
+   ],
+   "setup": "a 300-step episode",
+   "rule": "decodes, 150 frames, 960 x 720, under 5 MB",
+   "measured": [
+    "step3 video: 300-step sift_ibvs episode -> 150 frames of 960 x 720 at 12.50 fps, 2.47 MB, encoder libx264 via imageio-ffmpeg, replay identical: 300 frames plus the desired view on mujoco-egl"
+   ],
+   "details": []
+  }
+ ],
+ "tail": "timeout', 'timeout'], other axes 10 of 10 pass\n.mujoco-egl step3 negative control wy flipped: restoring direction fails on ['wy']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass\n.mujoco-egl step3 negative control wz flipped: restoring direction fails on ['wz']; flipped starts sign_ok [False, False] status ['timeout', 'timeout'], other axes 10 of 10 pass\n.step3 ibvs decay true_point_ibvs: 20 offsets up to 2 cm and 2 deg, gain 1.0, 50 steps: fitted ratio 0.95999 to 0.96001 against 0.960, worst gap 8.62e-06\n.step3 zero at target true_point_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)\nstep3 hold at target true_point_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)\nstep3 restoring direction true_point_ibvs: 12 of 12 starts right and converged (converged in 80 to 82 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}\n...mujoco-egl step3 feature convergence sift_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 81 to 143, worst final 1.95 mm and 0.186 deg, 50 ms per call\n    start  1 converged  82 steps, 1.95 mm, 0.011 deg\n    start  2 converged  81 steps, 1.88 mm, 0.003 deg\n    start  3 converged  95 steps, 1.87 mm, 0.016 deg\n    start  4 converged 107 steps, 0.44 mm, 0.185 deg\n    start  5 converged  92 steps, 0.53 mm, 0.179 deg\n    start  6 converged  93 steps, 0.46 mm, 0.186 deg\n    start  7 converged 112 steps, 1.89 mm, 0.183 deg\n    start  8 converged 123 steps, 0.71 mm, 0.182 deg\n    start  9 converged 130 steps, 1.86 mm, 0.165 deg\n    start 10 converged 143 steps, 1.77 mm, 0.121 deg\n.mujoco-egl step3 feature convergence orb_ibvs: 10 of 10 starts below 5 mm and 0.5 deg within 500 steps; steps 84 to 143, worst final 2.43 mm and 0.212 deg, 23 ms per call (reported, not gated)\n    start  1 converged  84 steps, 1.78 mm, 0.037 deg\n    start  2 converged  86 steps, 2.11 mm, 0.041 deg\n    start  3 converged  97 steps, 2.37 mm, 0.027 deg\n    start  4 converged 107 steps, 1.00 mm, 0.209 deg\n    start  5 converged  93 steps, 0.43 mm, 0.174 deg\n    start  6 converged  98 steps, 1.24 mm, 0.209 deg\n    start  7 converged 112 steps, 2.43 mm, 0.187 deg\n    start  8 converged 123 steps, 1.00 mm, 0.212 deg\n    start  9 converged 131 steps, 2.06 mm, 0.172 deg\n    start 10 converged 143 steps, 2.32 mm, 0.141 deg\n.mujoco-egl step3 zero at target sift_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)\nmujoco-egl step3 hold at target sift_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)\nmujoco-egl step3 restoring direction sift_ibvs: 12 of 12 starts right and converged (converged in 78 to 83 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}\n.mujoco-egl step3 zero at target orb_ibvs: |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)\nmujoco-egl step3 hold at target orb_ibvs: drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)\nmujoco-egl step3 restoring direction orb_ibvs: 12 of 12 starts right and converged (converged in 73 to 94 steps); per axis {'vx': True, 'vy': True, 'vz': True, 'wx': True, 'wy': True, 'wz': True}\n.mujoco-egl step3 feature options sift scalar depth from start 3: converged in 98 steps, 1.82 mm\n.mujoco-egl step3 log round trip: 60 rows, 286620 bytes of arrays in 13 arrays, file 166401 bytes, 30000 matches stored, worst match quantisation 0.0156 px\n...mujoco-egl step3 replay: replay identical: 100 frames plus the desired view on mujoco-egl; 0 of 100 frame hashes differ\n..mujoco-egl step3 video: 300-step sift_ibvs episode -> 150 frames of 960 x 720 at 12.50 fps, 2.47 MB, encoder libx264 via imageio-ffmpeg, replay identical: 300 frames plus the desired view on mujoco-egl\n...\n45 passed in 480.52s (0:08:00)\n[vost#0:0/libx264 @ 0x2b5c4d40] No filtered frames for output stream, trying to initialize anyway.\n[out#0/mp4 @ 0x2b5c4080] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)\n",
+ "all_passed": true,
+ "test_time_s": 480.01099999999997
+}

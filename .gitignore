@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv*/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+results/_tmp/
+results/friction/venv_*/
+smoke.png
+*.npz

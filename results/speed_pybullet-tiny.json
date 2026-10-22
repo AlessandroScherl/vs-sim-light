@@ -1,0 +1,111 @@
+{
+ "kind": "speed",
+ "backend": "pybullet-tiny",
+ "label": "pybullet-tiny",
+ "system": {
+  "timestamp": "2026-09-18T00:34:51+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   2.95751953125,
+   3.89697265625,
+   3.9560546875
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "cases": [
+  {
+   "scene": "poster_lit",
+   "width": 640,
+   "height": 480,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.3041729270480573,
+   "median_ms": 26.211213087663054,
+   "mean_ms": 26.33245695149526,
+   "p90_ms": 27.804910810664296,
+   "fps": 38.15161078792932,
+   "renderer": {
+    "variant": "pybullet-tiny",
+    "gl_renderer": "TinyRenderer (software)",
+    "pybullet": "3.2.7",
+    "numpy_enabled": true
+   }
+  },
+  {
+   "scene": "poster_lit",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.30169593496248126,
+   "median_ms": 110.9850644133985,
+   "mean_ms": 111.22837482020259,
+   "p90_ms": 116.19951683096588,
+   "fps": 9.010221377853041,
+   "renderer": {
+    "variant": "pybullet-tiny",
+    "gl_renderer": "TinyRenderer (software)",
+    "pybullet": "3.2.7",
+    "numpy_enabled": true
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 640,
+   "height": 480,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.3402616260573268,
+   "median_ms": 92.64146792702377,
+   "mean_ms": 92.40695588523522,
+   "p90_ms": 96.53893825598061,
+   "fps": 10.794302188602273,
+   "renderer": {
+    "variant": "pybullet-tiny",
+    "gl_renderer": "TinyRenderer (software)",
+    "pybullet": "3.2.7",
+    "numpy_enabled": true
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.339722438249737,
+   "median_ms": 374.65152563527226,
+   "mean_ms": 371.29956429824233,
+   "p90_ms": 394.62588797323406,
+   "fps": 2.669147011491185,
+   "renderer": {
+    "variant": "pybullet-tiny",
+    "gl_renderer": "TinyRenderer (software)",
+    "pybullet": "3.2.7",
+    "numpy_enabled": true
+   }
+  }
+ ]
+}

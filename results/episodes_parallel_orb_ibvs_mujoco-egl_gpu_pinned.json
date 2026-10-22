@@ -1,0 +1,103 @@
+{
+ "kind": "episodes_parallel",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": null
+ },
+ "method": "orb_ibvs",
+ "scene": "poster",
+ "cv_threads": "auto",
+ "config": {
+  "dt": 0.04,
+  "max_steps": 500,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "rows": [
+  {
+   "jobs": 1,
+   "cv_threads": 16,
+   "wall_s": 17.454138927161694,
+   "call_ms_mean": 9.963536140053655,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 1.6793185408227145
+  },
+  {
+   "jobs": 2,
+   "cv_threads": 8,
+   "wall_s": 11.713988136034459,
+   "call_ms_mean": 12.540155338332099,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 2.1366069530602543
+  },
+  {
+   "jobs": 4,
+   "cv_threads": 4,
+   "wall_s": 10.659519001841545,
+   "call_ms_mean": 21.15476678487344,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 3.396596666192636
+  },
+  {
+   "jobs": 8,
+   "cv_threads": 2,
+   "wall_s": 12.532947872765362,
+   "call_ms_mean": 44.73876042744586,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 6.878191681439057
+  },
+  {
+   "jobs": 16,
+   "cv_threads": 1,
+   "wall_s": 12.770194503013045,
+   "call_ms_mean": 58.2758000054856,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 9.220906833279878
+  }
+ ],
+ "tables_identical": true,
+ "system": {
+  "timestamp": "2026-09-19T17:35:50+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   17.47314453125,
+   16.603515625,
+   9.2431640625
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ }
+}

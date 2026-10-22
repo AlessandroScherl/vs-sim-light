@@ -1,0 +1,288 @@
+{
+ "kind": "step3_demo",
+ "method": "true_point_ibvs",
+ "params": {
+  "gain": 1.0
+ },
+ "scene": "marker",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "llvmpipe (LLVM 15.0.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "config": {
+  "dt": 0.04,
+  "max_steps": 500,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "video_start": 10,
+ "rows": [
+  {
+   "start": 1,
+   "translation_cm": [
+    5,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 103,
+   "final_error_mm": 0.746288943413554,
+   "final_error_deg": 2.735523467065356e-15,
+   "call_s_mean": 0.0003683964854450467,
+   "call_s_max": 0.0008588199998484924,
+   "lost_steps": 0,
+   "wall_s": 1.0329296780000732,
+   "error": null
+  },
+  {
+   "start": 2,
+   "translation_cm": [
+    0,
+    5,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 103,
+   "final_error_mm": 0.7462889434135773,
+   "final_error_deg": 1.2203062141427867e-15,
+   "call_s_mean": 0.0004436900291640766,
+   "call_s_max": 0.0009906650002449169,
+   "lost_steps": 0,
+   "wall_s": 1.1342404480001278,
+   "error": null
+  },
+  {
+   "start": 3,
+   "translation_cm": [
+    0,
+    0,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 117,
+   "final_error_mm": 0.7307202589866162,
+   "final_error_deg": 0.0004774288698554539,
+   "call_s_mean": 0.00040378164952475595,
+   "call_s_max": 0.0009559680001984816,
+   "lost_steps": 0,
+   "wall_s": 1.169358719000229,
+   "error": null
+  },
+  {
+   "start": 4,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    15
+   ],
+   "status": "converged",
+   "steps": 130,
+   "final_error_mm": 0.11874575222261068,
+   "final_error_deg": 0.0734806966106971,
+   "call_s_mean": 0.0003758755000560016,
+   "call_s_max": 0.0007488000001103501,
+   "lost_steps": 0,
+   "wall_s": 1.2717706989997168,
+   "error": null
+  },
+  {
+   "start": 5,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    8,
+    0
+   ],
+   "status": "converged",
+   "steps": 115,
+   "final_error_mm": 0.09967813581195542,
+   "final_error_deg": 0.07409337212434121,
+   "call_s_mean": 0.00039224048699037194,
+   "call_s_max": 0.0009402199993928662,
+   "lost_steps": 0,
+   "wall_s": 1.1452017449992127,
+   "error": null
+  },
+  {
+   "start": 6,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    -8,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 115,
+   "final_error_mm": 0.09915213222802258,
+   "final_error_deg": 0.07394138375273959,
+   "call_s_mean": 0.00040886668699069716,
+   "call_s_max": 0.0009361389993500779,
+   "lost_steps": 0,
+   "wall_s": 1.2124281850001353,
+   "error": null
+  },
+  {
+   "start": 7,
+   "translation_cm": [
+    8,
+    -5,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    20
+   ],
+   "status": "converged",
+   "steps": 133,
+   "final_error_mm": 0.6234035663804669,
+   "final_error_deg": 0.07455259775632644,
+   "call_s_mean": 0.00039705210525097846,
+   "call_s_max": 0.0009257589999833726,
+   "lost_steps": 0,
+   "wall_s": 1.3081057530007456,
+   "error": null
+  },
+  {
+   "start": 8,
+   "translation_cm": [
+    -10,
+    6,
+    8
+   ],
+   "rotation_deg": [
+    5,
+    5,
+    -25
+   ],
+   "status": "converged",
+   "steps": 146,
+   "final_error_mm": 0.3742295645354091,
+   "final_error_deg": 0.07367331752567466,
+   "call_s_mean": 0.00036786417125120053,
+   "call_s_max": 0.0007927799997560214,
+   "lost_steps": 0,
+   "wall_s": 1.3786508029998004,
+   "error": null
+  },
+  {
+   "start": 9,
+   "translation_cm": [
+    12,
+    8,
+    -15
+   ],
+   "rotation_deg": [
+    6,
+    -8,
+    40
+   ],
+   "status": "converged",
+   "steps": 148,
+   "final_error_mm": 0.6653734491562556,
+   "final_error_deg": 0.07269497299232823,
+   "call_s_mean": 0.00042743204734063976,
+   "call_s_max": 0.0010879710007429821,
+   "lost_steps": 0,
+   "wall_s": 1.5369855399994776,
+   "error": null
+  },
+  {
+   "start": 10,
+   "translation_cm": [
+    -15,
+    -10,
+    -20
+   ],
+   "rotation_deg": [
+    -6,
+    8,
+    -60
+   ],
+   "status": "converged",
+   "steps": 156,
+   "final_error_mm": 0.7500569151363443,
+   "final_error_deg": 0.06393826268994661,
+   "call_s_mean": 0.00039267370511179953,
+   "call_s_max": 0.0008636519996798597,
+   "lost_steps": 0,
+   "wall_s": 1.521078955000121,
+   "error": null
+  }
+ ],
+ "converged": 10,
+ "call_s_mean": 0.0003977872867125568,
+ "system": {
+  "timestamp": "2026-09-19T15:33:06+02:00",
+  "hostname": "lenovo",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-1335U",
+  "cores": 12,
+  "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.11.16",
+  "packages": {
+   "numpy": "2.4.6",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": null,
+   "open3d": null,
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": null,
+  "load_average": [
+   3.396484375,
+   2.74072265625,
+   2.23828125
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_GL": "egl",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/Desktop/vs_sim_light/.venv/lib/python3.11/site-packages/cv2/../../lib64:"
+  }
+ }
+}

@@ -1,0 +1,90 @@
+{
+ "kind": "episodes_parallel",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "llvmpipe (LLVM 15.0.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "method": "sift_ibvs",
+ "scene": "poster",
+ "config": {
+  "dt": 0.04,
+  "max_steps": 500,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "rows": [
+  {
+   "jobs": 1,
+   "wall_s": 65.20999924900025,
+   "call_ms_mean": 39.793694742288096,
+   "converged": 10,
+   "steps_total": 1286,
+   "episode_wall_s_mean": 6.440152903300259
+  },
+  {
+   "jobs": 2,
+   "wall_s": 63.73900970400064,
+   "call_ms_mean": 77.18059343492162,
+   "converged": 10,
+   "steps_total": 1286,
+   "episode_wall_s_mean": 12.247773600400432
+  },
+  {
+   "jobs": 4,
+   "wall_s": 61.60319832299865,
+   "call_ms_mean": 138.13247723159867,
+   "converged": 10,
+   "steps_total": 1286,
+   "episode_wall_s_mean": 21.853119253600198
+  },
+  {
+   "jobs": 8,
+   "wall_s": 60.23988360700059,
+   "call_ms_mean": 242.03593004389472,
+   "converged": 10,
+   "steps_total": 1286,
+   "episode_wall_s_mean": 37.149585813900195
+  }
+ ],
+ "tables_identical": true,
+ "system": {
+  "timestamp": "2026-09-19T17:30:04+02:00",
+  "hostname": "lenovo",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-1335U",
+  "cores": 12,
+  "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.11.16",
+  "packages": {
+   "numpy": "2.4.6",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": null,
+   "open3d": null,
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": null,
+  "load_average": [
+   48.935546875,
+   20.12939453125,
+   8.21240234375
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LD_LIBRARY_PATH": "/home/alessandro/Desktop/vs_sim_light/.venv/lib/python3.11/site-packages/cv2/../../lib64:"
+  }
+ }
+}

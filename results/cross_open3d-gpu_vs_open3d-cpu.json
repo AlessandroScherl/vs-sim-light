@@ -1,0 +1,129 @@
+{
+ "kind": "cross",
+ "a": "open3d-gpu",
+ "b": "open3d-cpu",
+ "label_a": "open3d-gpu",
+ "label_b": "open3d-cpu",
+ "system": {
+  "timestamp": "2026-09-18T11:17:19+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   1.0849609375,
+   0.9052734375,
+   0.51708984375
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "rows": [
+  {
+   "scene": "poster",
+   "poses": 10,
+   "psnr_db": [
+    44.30425950614084,
+    46.60770114348153,
+    49.19623717801252,
+    41.91976236615746,
+    46.69368753001866,
+    44.921485593825146,
+    42.38827980950974,
+    44.77881991608235,
+    40.576053334991336,
+    41.967092502263206
+   ],
+   "psnr_db_min": 40.576053334991336,
+   "max_abs_diff": [
+    35,
+    27,
+    57,
+    45,
+    56,
+    53,
+    57,
+    57,
+    40,
+    41
+   ],
+   "max_abs_diff_max": 57,
+   "depth_max_abs_diff_m": 1.517464280128479,
+   "depth_p99_abs_diff_both_hit_m": 1.4402409791946411,
+   "hit_mask_disagree_frac": 0.8038313802083333,
+   "rgb_identical": false,
+   "renderer_a": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   },
+   "renderer_b": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament headless (Vulkan on llvmpipe per Open3D's log)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  },
+  {
+   "scene": "clutter",
+   "poses": 10,
+   "psnr_db": [
+    44.059981312217424,
+    31.05212832715386,
+    28.45216758631947,
+    41.640616436201874,
+    46.51391384310664,
+    45.24267130297587,
+    41.21239598885252,
+    33.49742526251604,
+    39.61727044508856,
+    39.43402402721994
+   ],
+   "psnr_db_min": 28.45216758631947,
+   "max_abs_diff": [
+    51,
+    246,
+    244,
+    194,
+    36,
+    52,
+    51,
+    241,
+    63,
+    236
+   ],
+   "max_abs_diff_max": 246,
+   "depth_max_abs_diff_m": 7.575100898742676,
+   "depth_p99_abs_diff_both_hit_m": 1.1585288047790527,
+   "hit_mask_disagree_frac": 0.7343424479166667,
+   "rgb_identical": false,
+   "renderer_a": {
+    "variant": "open3d-gpu",
+    "gl_renderer": "Filament (GPU)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": null
+   },
+   "renderer_b": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament headless (Vulkan on llvmpipe per Open3D's log)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  }
+ ]
+}

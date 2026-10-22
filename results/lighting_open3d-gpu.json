@@ -1,0 +1,58 @@
+{
+ "kind": "lighting",
+ "backend": "open3d-gpu",
+ "label": "open3d-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:12:21+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   2.68896484375,
+   1.00341796875,
+   0.41748046875
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "renderer": {
+  "variant": "open3d-gpu",
+  "gl_renderer": "Filament (GPU)",
+  "open3d": "0.20.0",
+  "EGL_PLATFORM": null
+ },
+ "capabilities": {
+  "move_light": {
+   "yes": true,
+   "mean_abs_diff": 7.113770616319444,
+   "left_right_ratio_before": 1.4817621808507426,
+   "left_right_ratio_after": 1.0006370151467185
+  },
+  "change_intensity": {
+   "yes": true,
+   "mean_lum_before": 170.91782877604166,
+   "mean_lum_after": 91.036240234375
+  },
+  "second_light": {
+   "yes": false,
+   "mean_lum_one": 170.91782877604166,
+   "mean_lum_two": 170.91782877604166
+  }
+ },
+ "image": "lighting_open3d-gpu.png"
+}

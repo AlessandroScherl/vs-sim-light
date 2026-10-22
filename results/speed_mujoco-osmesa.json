@@ -1,0 +1,116 @@
+{
+ "kind": "speed",
+ "backend": "mujoco-osmesa",
+ "label": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:17:54+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   4.771484375,
+   1.8876953125,
+   0.86376953125
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/mm/osmesa24/lib"
+  }
+ },
+ "cases": [
+  {
+   "scene": "poster_lit",
+   "width": 640,
+   "height": 480,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.23367596790194511,
+   "median_ms": 2.1060530561953783,
+   "mean_ms": 2.121516987681389,
+   "p90_ms": 2.2483970504254103,
+   "fps": 474.8218460395853,
+   "renderer": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  },
+  {
+   "scene": "poster_lit",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.28831676999107003,
+   "median_ms": 18.20721384137869,
+   "mean_ms": 18.230450740084052,
+   "p90_ms": 18.537139100953937,
+   "fps": 54.92328528197689,
+   "renderer": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 640,
+   "height": 480,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.27484367368742824,
+   "median_ms": 9.745427640154958,
+   "mean_ms": 10.018597948364913,
+   "p90_ms": 12.442124960944057,
+   "fps": 102.6122235908469,
+   "renderer": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.3362596919760108,
+   "median_ms": 38.10477186925709,
+   "mean_ms": 38.51365429582074,
+   "p90_ms": 46.27982438541949,
+   "fps": 26.24343227748857,
+   "renderer": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  }
+ ]
+}

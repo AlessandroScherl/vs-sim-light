@@ -1,0 +1,50 @@
+name: gates
+on: [push, pull_request]
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: one system package (OSMesa for MUJOCO_GL=osmesa)
+        run: sudo apt-get update && sudo apt-get install -y libosmesa6
+      - run: pip install -e ".[all,dev]"
+      - run: ruff check .
+      - run: pytest tests/test_reference.py -q
+      - name: step 2 gates without a renderer (SE(3), motion, analytic flow, trajectory)
+        run: pytest tests/test_se3.py tests/test_motion.py tests/test_interaction.py tests/test_trajectory.py -q
+      - name: gates, winning backend (MuJoCo, OSMesa, no GPU, no display)
+        run: python tools/run_gates.py --backends mujoco-osmesa && python -c "import json,sys; d=json.load(open('results/gates_mujoco-osmesa.json')); print(d['gates']); sys.exit(0 if d['all_passed'] else 1)"
+        env:
+          VSBENCH_SOFTWARE_GL: "1"
+      - name: step 2 rendered flow gate, axis sheet and report (MuJoCo, OSMesa, no GPU, no display)
+        run: tools/run_step2.sh mujoco-osmesa
+        env:
+          VSBENCH_SOFTWARE_GL: "1"
+      - name: step 3 demo per method, thirteen servo-loop gates and report (MuJoCo, OSMesa, no GPU, no display)
+        run: tools/run_step3.sh mujoco-osmesa
+        env:
+          VSBENCH_SOFTWARE_GL: "1"
+      - name: other backends (informational)
+        run: python tools/run_gates.py --backends pybullet-tiny open3d-cpu || true
+        env:
+          VSBENCH_SOFTWARE_GL: "1"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gates-py${{ matrix.python }}
+          path: |
+            results/gates_*.json
+            results/step2_*.json
+            results/step2_axes.png
+            results/STEP2_REPORT.md
+            results/step3_gates.json
+            results/STEP3_REPORT.md
+            results/demo/*/demo.json
+            results/demo/*/start_10.mp4
+            results/demo/*/start_10_matches.png

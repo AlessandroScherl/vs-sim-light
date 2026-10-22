@@ -1,0 +1,40 @@
+# install friction: mujoco-osmesa with Python 3.12.3 on Linux 6.14.0-37-generic x86_64
+# 2026-09-18T00:40:32+02:00
+# system packages already present: 1 Mesa libs (see below)
+#   	libGL.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so.1
+#   	libGL.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so
+#   	libEGL_mesa.so.0 (libc6,x86-64) => /lib/x86_64-linux-gnu/libEGL_mesa.so.0
+$ python3 -m venv results/friction/venv_mujoco-osmesa_py3.12
+$ results/friction/venv_mujoco-osmesa_py3.12/bin/pip install --no-cache-dir -e .[mujoco]
+Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 69.5 MB/s eta 0:00:00
+Downloading absl_py-2.5.0-py3-none-any.whl (137 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.4/137.4 kB 301.6 MB/s eta 0:00:00
+Downloading glfw-2.10.2-py2.py3-none-manylinux_2_28_x86_64.whl (248 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 248.5/248.5 kB 153.0 MB/s eta 0:00:00
+Downloading pyopengl-3.1.10-py3-none-any.whl (3.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 82.2 MB/s eta 0:00:00
+Downloading etils-1.14.0-py3-none-any.whl (172 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 172.9/172.9 kB 192.0 MB/s eta 0:00:00
+Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 kB 148.6 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 292.8 MB/s eta 0:00:00
+Downloading zipp-4.1.0-py3-none-any.whl (10 kB)
+Checking if build backend supports build_editable: started
+Checking if build backend supports build_editable: finished with status 'done'
+Building wheels for collected packages: vsbench
+  Building editable for vsbench (pyproject.toml): started
+  Building editable for vsbench (pyproject.toml): finished with status 'done'
+  Created wheel for vsbench: filename=vsbench-0.1.0-0.editable-py3-none-any.whl size=5521 sha256=a3bc858cb37fb21a01c9a977ebb828ba2e52a178e79322157dd496d648397cc0
+  Stored in directory: /tmp/pip-ephem-wheel-cache-_pnfb18r/wheels/d2/09/41/0d64a632800f4cf7566259ee76e88052a8d4c174e79a6369ff
+Successfully built vsbench
+Installing collected packages: pyopengl, glfw, zipp, typing_extensions, Pillow, numpy, fsspec, etils, absl-py, opencv-python-headless, vsbench, mujoco
+Successfully installed Pillow-12.3.0 absl-py-2.5.0 etils-1.14.0 fsspec-2026.7.0 glfw-2.10.2 mujoco-3.13.0 numpy-2.5.3 opencv-python-headless-5.0.0.93 pyopengl-3.1.10 typing_extensions-4.16.0 vsbench-0.1.0 zipp-4.1.0
+# pip done in 10 s
+$ results/friction/venv_mujoco-osmesa_py3.12/bin/python -m vsbench.smoke --backend mujoco-osmesa --frames 20 --out results/friction/smoke_mujoco-osmesa.png
+backend mujoco-osmesa (llvmpipe (LLVM 19.1.7, 256 bits)) built in 0.4 s
+640x480 rgb+depth: 9.1 ms/frame = 109.5 fps over 20 frames
+wrote results/friction/smoke_mujoco-osmesa.png (rgb | depth)
+# smoke exit code 0; first image after 11 s from venv creation
+# numpy-enabled pybullet: n/a

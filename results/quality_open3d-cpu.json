@@ -1,0 +1,93 @@
+{
+ "kind": "quality",
+ "backend": "open3d-cpu",
+ "label": "open3d-cpu",
+ "system": {
+  "timestamp": "2026-09-18T00:48:18+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   3.5625,
+   5.40185546875,
+   5.70263671875
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "renderer": {
+  "variant": "open3d-cpu",
+  "gl_renderer": "Filament/EGL surfaceless (Mesa)",
+  "open3d": "0.20.0",
+  "EGL_PLATFORM": "surfaceless"
+ },
+ "sheet": "quality_open3d-cpu.png",
+ "cases": [
+  {
+   "case": "slant70_1.5m",
+   "orb": {
+    "matches": 1318,
+    "inliers": 1290,
+    "median_disp_px": 0.0,
+    "keypoints_render": 1524,
+    "keypoints_ref": 1673
+   },
+   "sift": {
+    "matches": 184,
+    "inliers": 172,
+    "median_disp_px": 0.1436963539312721,
+    "keypoints_render": 262,
+    "keypoints_ref": 244
+   },
+   "psnr_db": 43.10980564579072,
+   "psnr_poster_db": 33.16389558898286,
+   "brightness_fit": {
+    "gain": 0.9923102912089928,
+    "offset": 1.0932828271113397
+   }
+  },
+  {
+   "case": "minify3x",
+   "orb": {
+    "matches": 2506,
+    "inliers": 2444,
+    "median_disp_px": 0.0,
+    "keypoints_render": 2953,
+    "keypoints_ref": 2962
+   },
+   "sift": {
+    "matches": 717,
+    "inliers": 684,
+    "median_disp_px": 0.12371234851438397,
+    "keypoints_render": 1071,
+    "keypoints_ref": 948
+   },
+   "psnr_db": 36.040862912134585,
+   "psnr_poster_db": 32.692469325711926,
+   "brightness_fit": {
+    "gain": 0.9892636138611467,
+    "offset": 1.1627626559015605
+   }
+  }
+ ]
+}

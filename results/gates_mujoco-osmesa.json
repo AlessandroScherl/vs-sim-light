@@ -1,0 +1,136 @@
+{
+ "kind": "gates",
+ "backend": "mujoco-osmesa",
+ "label": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:16:44+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   0.6884765625,
+   0.8203125,
+   0.47509765625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/mm/osmesa24/lib"
+  }
+ },
+ "gates": [
+  {
+   "gate": "projection",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_projection[mujoco-osmesa-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.739
+    },
+    {
+     "name": "test_projection[mujoco-osmesa-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.469
+    }
+   ],
+   "measured": [
+    "mujoco-osmesa (640, 480): mean 0.038 px, max 0.122 px over 260 markers"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "depth",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_depth[mujoco-osmesa-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.624
+    },
+    {
+     "name": "test_depth[mujoco-osmesa-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.535
+    }
+   ],
+   "measured": [
+    "mujoco-osmesa (640, 480): median 0.000 mm, p99 0.001 mm over 6129087 px"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "homography",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_homography[mujoco-osmesa-640x480]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.1
+    },
+    {
+     "name": "test_homography[mujoco-osmesa-1440x1080]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.423
+    }
+   ],
+   "measured": [
+    "mujoco-osmesa (640, 480): worst median displacement 0.000 px, fewest matches 1986"
+   ],
+   "returncode": 0,
+   "tail": ""
+  },
+  {
+   "gate": "determinism",
+   "status": "passed",
+   "cases": [
+    {
+     "name": "test_same_process[mujoco-osmesa]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 0.387
+    },
+    {
+     "name": "test_fresh_processes[mujoco-osmesa]",
+     "status": "passed",
+     "detail": "",
+     "time_s": 1.115
+    }
+   ],
+   "measured": [],
+   "returncode": 0,
+   "tail": ""
+  }
+ ],
+ "available": true,
+ "reason": "",
+ "renderer": {
+  "variant": "mujoco-osmesa",
+  "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "osmesa",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "all_passed": true
+}

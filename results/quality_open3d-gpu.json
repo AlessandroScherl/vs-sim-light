@@ -1,0 +1,88 @@
+{
+ "kind": "quality",
+ "backend": "open3d-gpu",
+ "label": "open3d-gpu",
+ "system": {
+  "timestamp": "2026-09-18T11:12:18+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   2.83642578125,
+   1.00390625,
+   0.4140625
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "renderer": {
+  "variant": "open3d-gpu",
+  "gl_renderer": "Filament (GPU)",
+  "open3d": "0.20.0",
+  "EGL_PLATFORM": null
+ },
+ "sheet": "quality_open3d-gpu.png",
+ "cases": [
+  {
+   "case": "slant70_1.5m",
+   "orb": {
+    "matches": 1203,
+    "inliers": 1177,
+    "median_disp_px": 0.0,
+    "keypoints_render": 1406,
+    "keypoints_ref": 1673
+   },
+   "sift": {
+    "matches": 181,
+    "inliers": 169,
+    "median_disp_px": 0.15102932123519983,
+    "keypoints_render": 272,
+    "keypoints_ref": 244
+   },
+   "psnr_db": 40.958355362560965,
+   "psnr_poster_db": 31.012445305753104,
+   "brightness_fit": {
+    "gain": 0.9856678040602034,
+    "offset": 1.559241629115468
+   }
+  },
+  {
+   "case": "minify3x",
+   "orb": {
+    "matches": 2287,
+    "inliers": 2189,
+    "median_disp_px": 0.0,
+    "keypoints_render": 2945,
+    "keypoints_ref": 2962
+   },
+   "sift": {
+    "matches": 661,
+    "inliers": 607,
+    "median_disp_px": 0.21337097827577994,
+    "keypoints_render": 1098,
+    "keypoints_ref": 948
+   },
+   "psnr_db": 32.53971512256766,
+   "psnr_poster_db": 29.19132153614499,
+   "brightness_fit": {
+    "gain": 0.9842756425856879,
+    "offset": 1.5803919518453144
+   }
+  }
+ ]
+}

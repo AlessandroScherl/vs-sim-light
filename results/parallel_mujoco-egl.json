@@ -1,0 +1,87 @@
+{
+ "kind": "parallel",
+ "backend": "mujoco-egl",
+ "label": "mujoco-egl",
+ "system": {
+  "timestamp": "2026-09-18T11:18:20+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   5.2529296875,
+   2.21630859375,
+   1.00390625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "cpu_threads": 16,
+ "rows": [
+  {
+   "processes": 1,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    450.32495969136284
+   ],
+   "total_fps": 450.32495969136284,
+   "mean_process_fps": 450.32495969136284,
+   "wall_s_incl_startup": 0.6705347681418061
+  },
+  {
+   "processes": 2,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    198.8255060630492,
+    198.7983035661287
+   ],
+   "total_fps": 397.6238096291779,
+   "mean_process_fps": 198.81190481458896,
+   "wall_s_incl_startup": 1.0291957361623645
+  },
+  {
+   "processes": 4,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    106.6902622378529,
+    106.0071850839924,
+    105.00035747087723,
+    105.02051101653254
+   ],
+   "total_fps": 422.71831580925505,
+   "mean_process_fps": 105.67957895231376,
+   "wall_s_incl_startup": 1.5581924333237112
+  },
+  {
+   "processes": 8,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    51.48858424743344,
+    51.0281044699259,
+    50.76813129234703,
+    49.97696364427315,
+    50.389630986200345,
+    49.94464585192612,
+    50.22019400564361,
+    50.33151836488301
+   ],
+   "total_fps": 404.1477728626326,
+   "mean_process_fps": 50.51847160782907,
+   "wall_s_incl_startup": 2.803520079702139
+  }
+ ]
+}

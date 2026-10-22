@@ -1,0 +1,94 @@
+{
+ "kind": "episodes_parallel",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": null
+ },
+ "method": "orb_ibvs",
+ "scene": "poster",
+ "cv_threads": "default",
+ "config": {
+  "dt": 0.04,
+  "max_steps": 500,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "rows": [
+  {
+   "jobs": 1,
+   "cv_threads": null,
+   "wall_s": 17.51582788815722,
+   "call_ms_mean": 10.011923592774652,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 1.68455102997832
+  },
+  {
+   "jobs": 2,
+   "cv_threads": null,
+   "wall_s": 12.262423427775502,
+   "call_ms_mean": 13.22153029271179,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 2.2546826757490637
+  },
+  {
+   "jobs": 4,
+   "cv_threads": null,
+   "wall_s": 11.869624017737806,
+   "call_ms_mean": 24.276917126067783,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 3.9283879256341607
+  },
+  {
+   "jobs": 8,
+   "cv_threads": null,
+   "wall_s": 12.93758074240759,
+   "call_ms_mean": 46.72291160676122,
+   "converged": 10,
+   "steps_total": 1348,
+   "episode_wall_s_mean": 7.452538407128304
+  }
+ ],
+ "tables_identical": true,
+ "system": {
+  "timestamp": "2026-09-19T17:34:45+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   26.572265625,
+   17.81396484375,
+   9.08544921875
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ }
+}

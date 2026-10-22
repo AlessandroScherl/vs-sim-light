@@ -1,0 +1,133 @@
+{
+ "kind": "cross",
+ "a": "mujoco-egl",
+ "b": "mujoco-egl",
+ "label_a": "mujoco-egl-gpu",
+ "label_b": "mujoco-egl-llvmpipe",
+ "system": {
+  "timestamp": "2026-09-18T11:17:06+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   0.92626953125,
+   0.86767578125,
+   0.50048828125
+  ],
+  "env": {
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "rows": [
+  {
+   "scene": "poster",
+   "poses": 10,
+   "psnr_db": [
+    48.02400173544527,
+    46.30562989094889,
+    47.642420203540325,
+    50.25635107734522,
+    47.588532792836,
+    50.59847506892082,
+    50.34328695132882,
+    48.8428891419758,
+    44.57246986489152,
+    49.92994124428405
+   ],
+   "psnr_db_min": 44.57246986489152,
+   "max_abs_diff": [
+    28,
+    32,
+    56,
+    65,
+    57,
+    10,
+    57,
+    58,
+    58,
+    37
+   ],
+   "max_abs_diff_max": 65,
+   "depth_max_abs_diff_m": 1.2378321886062622,
+   "depth_p99_abs_diff_both_hit_m": 2.6226043701171875e-06,
+   "hit_mask_disagree_frac": 6.510416666666667e-06,
+   "rgb_identical": false,
+   "renderer_a": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   },
+   "renderer_b": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  },
+  {
+   "scene": "clutter",
+   "poses": 10,
+   "psnr_db": [
+    48.00254116643426,
+    46.23450312209684,
+    47.67860132974694,
+    50.17487706277735,
+    47.63458606197004,
+    50.559036951595466,
+    50.16152816852986,
+    48.91589197471412,
+    44.57487554184986,
+    49.860381334466936
+   ],
+   "psnr_db_min": 44.57487554184986,
+   "max_abs_diff": [
+    14,
+    33,
+    22,
+    35,
+    23,
+    34,
+    27,
+    24,
+    34,
+    14
+   ],
+   "max_abs_diff_max": 35,
+   "depth_max_abs_diff_m": 2.6159555912017822,
+   "depth_p99_abs_diff_both_hit_m": 2.1457672119140625e-05,
+   "hit_mask_disagree_frac": 3.2552083333333335e-06,
+   "rgb_identical": false,
+   "renderer_a": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "NVIDIA GeForce RTX 4090/PCIe/SSE2",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": null
+   },
+   "renderer_b": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  }
+ ]
+}

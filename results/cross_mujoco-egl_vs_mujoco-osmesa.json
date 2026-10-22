@@ -1,0 +1,134 @@
+{
+ "kind": "cross",
+ "a": "mujoco-egl",
+ "b": "mujoco-osmesa",
+ "label_a": "mujoco-egl",
+ "label_b": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:17:11+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   1.0927734375,
+   0.9033203125,
+   0.51416015625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ },
+ "rows": [
+  {
+   "scene": "poster",
+   "poses": 10,
+   "psnr_db": [
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956
+   ],
+   "psnr_db_min": 361.20199909921956,
+   "max_abs_diff": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "max_abs_diff_max": 0,
+   "depth_max_abs_diff_m": 0.0,
+   "depth_p99_abs_diff_both_hit_m": 0.0,
+   "hit_mask_disagree_frac": 0.0,
+   "rgb_identical": true,
+   "renderer_a": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   },
+   "renderer_b": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  },
+  {
+   "scene": "clutter",
+   "poses": 10,
+   "psnr_db": [
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956,
+    361.20199909921956
+   ],
+   "psnr_db_min": 361.20199909921956,
+   "max_abs_diff": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "max_abs_diff_max": 0,
+   "depth_max_abs_diff_m": 0.0,
+   "depth_p99_abs_diff_both_hit_m": 0.0,
+   "hit_mask_disagree_frac": 0.0,
+   "rgb_identical": true,
+   "renderer_a": {
+    "variant": "mujoco-egl",
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "egl",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   },
+   "renderer_b": {
+    "variant": "mujoco-osmesa",
+    "gl_renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "mujoco": "3.13.0",
+    "MUJOCO_GL": "osmesa",
+    "MUJOCO_EGL_DEVICE_ID": "1"
+   }
+  }
+ ]
+}

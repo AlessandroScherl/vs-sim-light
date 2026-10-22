@@ -1,0 +1,111 @@
+{
+ "kind": "speed",
+ "backend": "open3d-cpu",
+ "label": "open3d-cpu",
+ "system": {
+  "timestamp": "2026-09-18T00:36:25+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   13.4853515625,
+   6.8525390625,
+   4.97998046875
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1"
+  }
+ },
+ "cases": [
+  {
+   "scene": "poster_lit",
+   "width": 640,
+   "height": 480,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.5925070932134986,
+   "median_ms": 32.49395778402686,
+   "mean_ms": 32.664554479997605,
+   "p90_ms": 34.59256673231721,
+   "fps": 30.77495227409856,
+   "renderer": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament/EGL surfaceless (Mesa)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  },
+  {
+   "scene": "poster_lit",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 2,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.6097626853734255,
+   "median_ms": 85.3553859051317,
+   "mean_ms": 85.51372219109908,
+   "p90_ms": 89.27556294947863,
+   "fps": 11.715722322566155,
+   "renderer": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament/EGL surfaceless (Mesa)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 640,
+   "height": 480,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.5859391512349248,
+   "median_ms": 91.50185692124069,
+   "mean_ms": 97.51623732736334,
+   "p90_ms": 120.74523572809994,
+   "fps": 10.928739958367622,
+   "renderer": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament/EGL surfaceless (Mesa)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  },
+  {
+   "scene": "clutter",
+   "width": 1440,
+   "height": 1080,
+   "triangles": 49808,
+   "frames": 200,
+   "warmup": 20,
+   "build_s": 0.5775286080315709,
+   "median_ms": 182.95213766396046,
+   "mean_ms": 192.26678942563012,
+   "p90_ms": 234.59794078953564,
+   "fps": 5.465910443947706,
+   "renderer": {
+    "variant": "open3d-cpu",
+    "gl_renderer": "Filament/EGL surfaceless (Mesa)",
+    "open3d": "0.20.0",
+    "EGL_PLATFORM": "surfaceless"
+   }
+  }
+ ]
+}

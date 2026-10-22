@@ -1,0 +1,88 @@
+{
+ "kind": "parallel",
+ "backend": "mujoco-osmesa",
+ "label": "mujoco-osmesa",
+ "system": {
+  "timestamp": "2026-09-18T11:18:26+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   10.11767578125,
+   3.275390625,
+   1.35302734375
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/mm/osmesa24/lib"
+  }
+ },
+ "cpu_threads": 16,
+ "rows": [
+  {
+   "processes": 1,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    482.9878982080556
+   ],
+   "total_fps": 482.9878982080556,
+   "mean_process_fps": 482.9878982080556,
+   "wall_s_incl_startup": 0.6561184800229967
+  },
+  {
+   "processes": 2,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    207.9985038483474,
+    207.92339053672262
+   ],
+   "total_fps": 415.92189438507,
+   "mean_process_fps": 207.960947192535,
+   "wall_s_incl_startup": 1.0082632503472269
+  },
+  {
+   "processes": 4,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    109.12358171382009,
+    109.51769799510001,
+    110.61626749227054,
+    107.89097943626284
+   ],
+   "total_fps": 437.1485266374535,
+   "mean_process_fps": 109.28713165936337,
+   "wall_s_incl_startup": 1.527009575162083
+  },
+  {
+   "processes": 8,
+   "frames_per_process": 100,
+   "per_process_fps": [
+    50.898391657972276,
+    50.744993249414804,
+    52.817220781649326,
+    50.38594550880511,
+    51.66560563831271,
+    50.671678768348464,
+    52.32216452899963,
+    52.333717709850305
+   ],
+   "total_fps": 411.8397178433526,
+   "mean_process_fps": 51.47996473041908,
+   "wall_s_incl_startup": 2.794894677121192
+  }
+ ]
+}

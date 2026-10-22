@@ -1,0 +1,296 @@
+{
+ "kind": "step3_demo",
+ "method": "sift_ibvs",
+ "params": {
+  "detector": "sift",
+  "gain": 1.0,
+  "depth": "dense",
+  "ransac": "homography",
+  "ransac_px": 3.0,
+  "ratio": 0.75,
+  "max_features": 2000,
+  "min_inliers": 8,
+  "seed": 0
+ },
+ "scene": "poster",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "llvmpipe (LLVM 15.0.7, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "config": {
+  "dt": 0.04,
+  "max_steps": 500,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "video_start": 10,
+ "rows": [
+  {
+   "start": 1,
+   "translation_cm": [
+    5,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 106,
+   "final_error_mm": 0.814920424308839,
+   "final_error_deg": 0.008857200679731267,
+   "call_s_mean": 0.029835509405615395,
+   "call_s_max": 0.04694526999992377,
+   "lost_steps": 0,
+   "wall_s": 4.041938436000237,
+   "error": null
+  },
+  {
+   "start": 2,
+   "translation_cm": [
+    0,
+    5,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 104,
+   "final_error_mm": 0.7893990773986632,
+   "final_error_deg": 0.004622538310574051,
+   "call_s_mean": 0.029937461201921697,
+   "call_s_max": 0.04812089000006381,
+   "lost_steps": 0,
+   "wall_s": 3.9547395310000866,
+   "error": null
+  },
+  {
+   "start": 3,
+   "translation_cm": [
+    0,
+    0,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 118,
+   "final_error_mm": 0.8701706026963814,
+   "final_error_deg": 0.025720667388005693,
+   "call_s_mean": 0.033285574432207116,
+   "call_s_max": 0.057066551000389154,
+   "lost_steps": 0,
+   "wall_s": 4.860377179999887,
+   "error": null
+  },
+  {
+   "start": 4,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    15
+   ],
+   "status": "converged",
+   "steps": 130,
+   "final_error_mm": 0.30934155586041234,
+   "final_error_deg": 0.0744817344682553,
+   "call_s_mean": 0.03794579467695747,
+   "call_s_max": 0.06063797899969359,
+   "lost_steps": 0,
+   "wall_s": 6.040535133999583,
+   "error": null
+  },
+  {
+   "start": 5,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    8,
+    0
+   ],
+   "status": "converged",
+   "steps": 114,
+   "final_error_mm": 0.3481645939278096,
+   "final_error_deg": 0.06785004051135181,
+   "call_s_mean": 0.04245247166662075,
+   "call_s_max": 0.06686077300037141,
+   "lost_steps": 0,
+   "wall_s": 6.076119764000396,
+   "error": null
+  },
+  {
+   "start": 6,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    -8,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 116,
+   "final_error_mm": 0.2382514921757861,
+   "final_error_deg": 0.07872426491652143,
+   "call_s_mean": 0.04321087809484166,
+   "call_s_max": 0.06283136500042019,
+   "lost_steps": 0,
+   "wall_s": 6.324569829999746,
+   "error": null
+  },
+  {
+   "start": 7,
+   "translation_cm": [
+    8,
+    -5,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    20
+   ],
+   "status": "converged",
+   "steps": 135,
+   "final_error_mm": 0.7856665222597214,
+   "final_error_deg": 0.07156733322006154,
+   "call_s_mean": 0.0427850430888645,
+   "call_s_max": 0.06710161299997708,
+   "lost_steps": 0,
+   "wall_s": 7.104625631999625,
+   "error": null
+  },
+  {
+   "start": 8,
+   "translation_cm": [
+    -10,
+    6,
+    8
+   ],
+   "rotation_deg": [
+    5,
+    5,
+    -25
+   ],
+   "status": "converged",
+   "steps": 145,
+   "final_error_mm": 0.10302631732225956,
+   "final_error_deg": 0.07397819864233096,
+   "call_s_mean": 0.04539802954484536,
+   "call_s_max": 0.07462195199968846,
+   "lost_steps": 0,
+   "wall_s": 8.101538167000399,
+   "error": null
+  },
+  {
+   "start": 9,
+   "translation_cm": [
+    12,
+    8,
+    -15
+   ],
+   "rotation_deg": [
+    6,
+    -8,
+    40
+   ],
+   "status": "converged",
+   "steps": 153,
+   "final_error_mm": 0.7440022203601476,
+   "final_error_deg": 0.06747102809281973,
+   "call_s_mean": 0.04252067995424476,
+   "call_s_max": 0.06463179799993668,
+   "lost_steps": 0,
+   "wall_s": 7.960990956000387,
+   "error": null
+  },
+  {
+   "start": 10,
+   "translation_cm": [
+    -15,
+    -10,
+    -20
+   ],
+   "rotation_deg": [
+    -6,
+    8,
+    -60
+   ],
+   "status": "converged",
+   "steps": 165,
+   "final_error_mm": 0.717867356367279,
+   "final_error_deg": 0.04959243538894348,
+   "call_s_mean": 0.04500193035758209,
+   "call_s_max": 0.0829648859998997,
+   "lost_steps": 0,
+   "wall_s": 9.090656531000604,
+   "error": null
+  }
+ ],
+ "converged": 10,
+ "call_s_mean": 0.03923733724237008,
+ "system": {
+  "timestamp": "2026-09-19T15:31:52+02:00",
+  "hostname": "lenovo",
+  "cpu": "13th Gen Intel(R) Core(TM) i5-1335U",
+  "cores": 12,
+  "os": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.11.16",
+  "packages": {
+   "numpy": "2.4.6",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": null,
+   "open3d": null,
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": null,
+  "load_average": [
+   5.51025390625,
+   2.8232421875,
+   2.22509765625
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_GL": "egl",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/Desktop/vs_sim_light/.venv/lib/python3.11/site-packages/cv2/../../lib64:"
+  }
+ }
+}

@@ -1,0 +1,40 @@
+# install friction: mujoco-egl with Python 3.10.21 on Linux 6.14.0-37-generic x86_64
+# 2026-09-18T00:42:38+02:00
+# system packages already present: 1 Mesa libs (see below)
+#   	libGL.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so.1
+#   	libGL.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libGL.so
+#   	libEGL_mesa.so.0 (libc6,x86-64) => /lib/x86_64-linux-gnu/libEGL_mesa.so.0
+$ /home/alessandro/genvs_ws/uvhome/pythons/cpython-3.10-linux-x86_64-gnu/bin/python3.10 -m venv results/friction/venv_mujoco-egl_py3.10
+$ results/friction/venv_mujoco-egl_py3.10/bin/pip install --no-cache-dir -e .[mujoco]
+  Downloading absl_py-2.5.0-py3-none-any.whl (137 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.4/137.4 kB 155.6 MB/s eta 0:00:00
+Collecting pyopengl
+  Downloading pyopengl-3.1.10-py3-none-any.whl (3.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 116.8 MB/s eta 0:00:00
+Collecting fsspec
+  Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 kB 155.8 MB/s eta 0:00:00
+Collecting importlib_resources
+  Downloading importlib_resources-7.1.0-py3-none-any.whl (37 kB)
+Collecting zipp
+  Downloading zipp-4.1.0-py3-none-any.whl (10 kB)
+Collecting typing_extensions
+  Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 330.1 MB/s eta 0:00:00
+Building wheels for collected packages: vsbench
+  Building editable for vsbench (pyproject.toml): started
+  Building editable for vsbench (pyproject.toml): finished with status 'done'
+  Created wheel for vsbench: filename=vsbench-0.1.0-0.editable-py3-none-any.whl size=5521 sha256=922edec17ce606dc5c49a9c82370c3638a982479fe0d2d4385e11ccfe8bf1e93
+  Stored in directory: /tmp/pip-ephem-wheel-cache-hxz96t61/wheels/24/be/b4/3aee77ee4ae428b85909a737fcaef1c6dab078920bd90c22a0
+Successfully built vsbench
+Installing collected packages: pyopengl, glfw, zipp, typing_extensions, Pillow, numpy, importlib_resources, fsspec, etils, absl-py, opencv-python-headless, vsbench, mujoco
+Successfully installed Pillow-12.3.0 absl-py-2.5.0 etils-1.13.0 fsspec-2026.7.0 glfw-2.10.2 importlib_resources-7.1.0 mujoco-3.13.0 numpy-2.2.6 opencv-python-headless-5.0.0.93 pyopengl-3.1.10 typing_extensions-4.16.0 vsbench-0.1.0 zipp-4.1.0
+[notice] A new release of pip is available: 23.0.1 -> 26.2.1
+[notice] To update, run: /home/alessandro/genvs_ws/vs_sim_light/results/friction/venv_mujoco-egl_py3.10/bin/python3.10 -m pip install --upgrade pip
+# pip done in 13 s
+$ results/friction/venv_mujoco-egl_py3.10/bin/python -m vsbench.smoke --backend mujoco-egl --frames 20 --out results/friction/smoke_mujoco-egl.png
+backend mujoco-egl (llvmpipe (LLVM 20.1.2, 256 bits)) built in 0.3 s
+640x480 rgb+depth: 8.8 ms/frame = 113.2 fps over 20 frames
+wrote results/friction/smoke_mujoco-egl.png (rgb | depth)
+# smoke exit code 0; first image after 14 s from venv creation
+# numpy-enabled pybullet: n/a

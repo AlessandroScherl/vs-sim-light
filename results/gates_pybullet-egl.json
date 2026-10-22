@@ -1,0 +1,35 @@
+{
+ "kind": "gates",
+ "backend": "pybullet-egl",
+ "label": "pybullet-egl",
+ "system": {
+  "timestamp": "2026-09-18T11:10:05+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "5.0.0.93",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   0.61669921875,
+   0.21044921875,
+   0.1162109375
+  ],
+  "env": {}
+ },
+ "gates": [],
+ "available": false,
+ "reason": "  File \"/home/alessandro/genvs_ws/vs_sim_light/vsbench/render/base.py\", line 82, in make_renderer\n    return getattr(mod, cls)(scene, cam, **{**kwargs, **extra})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/alessandro/genvs_ws/vs_sim_light/vsbench/render/pybullet_backend.py\", line 63, in __init__\n    raise RuntimeError(\"eglRendererPlugin is not available in this pybullet build\")\nRuntimeError: eglRendererPlugin is not available in this pybullet build",
+ "all_passed": false
+}
