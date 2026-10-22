@@ -1,0 +1,341 @@
+{
+ "unit": "U7 - extent spot check (docs/PORT_PLAN.md section 7)",
+ "seed": 7,
+ "n": 12,
+ "population": 317,
+ "tolerance_mm": 1.0,
+ "pose": "canonical: library (the upright library pose), yaw 0, category scale",
+ "checks": [
+  "the converted object's scaled measure (longest, or height for the height categories) equals target_for(category) within 1 mm",
+  "the same from the SOURCE USD measured by usd-core alone (Isaac's wrapper + unitsResolve + BBoxCache), within 1 mm",
+  "converted vs pxr scaled box extents, every axis, within 1 mm",
+  "diagnostic (not gated): the tight box of the converted points vs the tight box of the composed source points (pxr; it counts loose points too)"
+ ],
+ "all_pass": true,
+ "objects": [
+  {
+   "instance_id": "2e5132fabf7943d9b39743a966e2a1a7",
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "mode": "longest",
+   "target_m": 0.22,
+   "converted_scale": 0.04423614963889122,
+   "pxr_scale": 0.04423614963889122,
+   "converted_extent_m": [
+    0.05835688771294417,
+    0.05823601211005218,
+    0.22000000243331633
+   ],
+   "pxr_extent_m": [
+    0.05835688771294417,
+    0.05823602669964337,
+    0.22000000590921354
+   ],
+   "converted_measure_m": 0.22000000243331633,
+   "pxr_measure_m": 0.22000000590921354,
+   "converted_vs_target_mm": 2.4333163262113544e-06,
+   "pxr_vs_target_mm": 5.909213535160163e-06,
+   "converted_vs_pxr_max_axis_mm": 1.4589591187941231e-05,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 4.538861508862624e-06,
+   "scaled_longest_mm": 220.00000243331633,
+   "pass": true
+  },
+  {
+   "instance_id": "e30380ec13d740719b7de6e3113add72",
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "mode": "longest",
+   "target_m": 0.15,
+   "converted_scale": 0.012248610146343708,
+   "pxr_scale": 0.012248610146343708,
+   "converted_extent_m": [
+    0.0689222134716725,
+    0.1499999994398626,
+    0.0604536643634708
+   ],
+   "pxr_extent_m": [
+    0.06892221347167252,
+    0.15000000146946288,
+    0.06045367025026254
+   ],
+   "converted_measure_m": 0.1499999994398626,
+   "pxr_measure_m": 0.15000000146946288,
+   "converted_vs_target_mm": -5.601373809227539e-07,
+   "pxr_vs_target_mm": 1.4694628847067293e-06,
+   "converted_vs_pxr_max_axis_mm": 5.886791741571695e-06,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 2.2089782364398403e-06,
+   "scaled_longest_mm": 149.99999943986262,
+   "pass": true
+  },
+  {
+   "instance_id": "gso_Crazy_Shadow_2",
+   "source_kind": "gso",
+   "category": "shoe",
+   "mode": "longest",
+   "target_m": 0.25,
+   "converted_scale": 0.7894149422645569,
+   "pxr_scale": 0.7894149422645569,
+   "converted_extent_m": [
+    0.15060679323318854,
+    0.25000000308319603,
+    0.1348739162669373
+   ],
+   "pxr_extent_m": [
+    0.15060679323318854,
+    0.250000003083196,
+    0.1348739162669373
+   ],
+   "converted_measure_m": 0.25000000308319603,
+   "pxr_measure_m": 0.250000003083196,
+   "converted_vs_target_mm": 3.083196031816726e-06,
+   "pxr_vs_target_mm": 3.083195976305575e-06,
+   "converted_vs_pxr_max_axis_mm": 5.551115123125783e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 1.145456229867392e-06,
+   "scaled_longest_mm": 250.00000308319602,
+   "pass": true
+  },
+  {
+   "instance_id": "gso_D_ROSE_45",
+   "source_kind": "gso",
+   "category": "shoe",
+   "mode": "longest",
+   "target_m": 0.25,
+   "converted_scale": 0.8369041085243225,
+   "pxr_scale": 0.8369041085243225,
+   "converted_extent_m": [
+    0.09697626212863808,
+    0.249999997118131,
+    0.14005507048266833
+   ],
+   "pxr_extent_m": [
+    0.09697626212863819,
+    0.24999999711813115,
+    0.14005507048266846
+   ],
+   "converted_measure_m": 0.249999997118131,
+   "pxr_measure_m": 0.24999999711813115,
+   "converted_vs_target_mm": -2.881868993442893e-06,
+   "pxr_vs_target_mm": -2.881868854665015e-06,
+   "converted_vs_pxr_max_axis_mm": 1.3877787807814457e-13,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 5.416331078089698e-06,
+   "scaled_longest_mm": 249.999997118131,
+   "pass": true
+  },
+  {
+   "instance_id": "hc6d_bottle-sloth",
+   "source_kind": "housecat6d",
+   "category": "bottle",
+   "mode": "longest",
+   "target_m": 0.22,
+   "converted_scale": 1.2462189197540283,
+   "pxr_scale": 1.2462189197540283,
+   "converted_extent_m": [
+    0.08497842512623954,
+    0.0844487777622227,
+    0.2200000071145638
+   ],
+   "pxr_extent_m": [
+    0.08497842512623954,
+    0.08444877776222276,
+    0.22000000711456383
+   ],
+   "converted_measure_m": 0.2200000071145638,
+   "pxr_measure_m": 0.22000000711456383,
+   "converted_vs_target_mm": 7.1145637992042765e-06,
+   "pxr_vs_target_mm": 7.114563826959852e-06,
+   "converted_vs_pxr_max_axis_mm": 5.551115123125783e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 6.594504498025344e-06,
+   "scaled_longest_mm": 220.0000071145638,
+   "pass": true
+  },
+  {
+   "instance_id": "hc6d_teapot-white_rectangle_sprout",
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "mode": "longest",
+   "target_m": 0.2,
+   "converted_scale": 1.2745754718780518,
+   "pxr_scale": 1.2745754718780518,
+   "converted_extent_m": [
+    0.12329351138373255,
+    0.2000000068961595,
+    0.13016474307542403
+   ],
+   "pxr_extent_m": [
+    0.12329351138373257,
+    0.20000000689615946,
+    0.13016474307542403
+   ],
+   "converted_measure_m": 0.2000000068961595,
+   "pxr_measure_m": 0.20000000689615946,
+   "converted_vs_target_mm": 6.896159476799113e-06,
+   "pxr_vs_target_mm": 6.896159449043537e-06,
+   "converted_vs_pxr_max_axis_mm": 2.7755575615628914e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 6.056364298956396e-07,
+   "scaled_longest_mm": 200.00000689615948,
+   "pass": true
+  },
+  {
+   "instance_id": "objv_6add0a1fa819",
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "mode": "longest",
+   "target_m": 0.22,
+   "converted_scale": 0.0003701198729686439,
+   "pxr_scale": 0.0003701198729686439,
+   "converted_extent_m": [
+    0.07805515177852426,
+    0.07805520081019426,
+    0.21999999213149496
+   ],
+   "pxr_extent_m": [
+    0.07805515177852426,
+    0.07805520081019524,
+    0.21999999213149757
+   ],
+   "converted_measure_m": 0.21999999213149496,
+   "pxr_measure_m": 0.21999999213149757,
+   "converted_vs_target_mm": -7.868505041974672e-06,
+   "pxr_vs_target_mm": -7.868502432950564e-06,
+   "converted_vs_pxr_max_axis_mm": 2.609024107869118e-12,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 1.518261516508801e-06,
+   "scaled_longest_mm": 219.99999213149496,
+   "pass": true
+  },
+  {
+   "instance_id": "objv_f9e6ca9552e7",
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "mode": "longest",
+   "target_m": 0.22,
+   "converted_scale": 0.01769089326262474,
+   "pxr_scale": 0.01769089139997959,
+   "converted_extent_m": [
+    0.0641178737558656,
+    0.06411787375586558,
+    0.22000000902773048
+   ],
+   "pxr_extent_m": [
+    0.06411786700499977,
+    0.06411788206555726,
+    0.2199999902536124
+   ],
+   "converted_measure_m": 0.22000000902773048,
+   "pxr_measure_m": 0.2199999902536124,
+   "converted_vs_target_mm": 9.02773047983807e-06,
+   "pxr_vs_target_mm": -9.74638761364055e-06,
+   "converted_vs_pxr_max_axis_mm": 1.877411809347862e-05,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 2.2952400868803124e-05,
+   "scaled_longest_mm": 220.00000902773047,
+   "pass": true
+  },
+  {
+   "instance_id": "oo3d_cup_032",
+   "source_kind": "oo3d",
+   "category": "mug",
+   "mode": "longest",
+   "target_m": 0.1,
+   "converted_scale": 0.0008403958054259419,
+   "pxr_scale": 0.0008403958054259419,
+   "converted_extent_m": [
+    0.06794762174926919,
+    0.0999999966697196,
+    0.09158296834225646
+   ],
+   "pxr_extent_m": [
+    0.06794762174926919,
+    0.09999999666971962,
+    0.09158296834225649
+   ],
+   "converted_measure_m": 0.0999999966697196,
+   "pxr_measure_m": 0.09999999666971962,
+   "converted_vs_target_mm": -3.330280398672336e-06,
+   "pxr_vs_target_mm": -3.3302803847945484e-06,
+   "converted_vs_pxr_max_axis_mm": 2.7755575615628914e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 3.0859581418019033e-06,
+   "scaled_longest_mm": 99.99999666971961,
+   "pass": true
+  },
+  {
+   "instance_id": "oo3d_shoe_014",
+   "source_kind": "oo3d",
+   "category": "shoe",
+   "mode": "longest",
+   "target_m": 0.25,
+   "converted_scale": 0.0008806194528006017,
+   "pxr_scale": 0.0008806194528006017,
+   "converted_extent_m": [
+    0.0894427859937002,
+    0.24999999958262428,
+    0.10395020222092066
+   ],
+   "pxr_extent_m": [
+    0.08944278599370023,
+    0.24999999958262428,
+    0.10395020222092069
+   ],
+   "converted_measure_m": 0.24999999958262428,
+   "pxr_measure_m": 0.24999999958262428,
+   "converted_vs_target_mm": -4.173757173209225e-07,
+   "pxr_vs_target_mm": -4.173757173209225e-07,
+   "converted_vs_pxr_max_axis_mm": 2.7755575615628914e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 4.077151283254921e-06,
+   "scaled_longest_mm": 249.99999958262427,
+   "pass": true
+  },
+  {
+   "instance_id": "oo3d_teapot_002",
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "mode": "longest",
+   "target_m": 0.2,
+   "converted_scale": 0.000953937298618257,
+   "pxr_scale": 0.000953937298618257,
+   "converted_extent_m": [
+    0.1517014149167998,
+    0.1804341244351941,
+    0.20000000118007133
+   ],
+   "pxr_extent_m": [
+    0.15170141491679984,
+    0.18043412443519408,
+    0.20000000118007136
+   ],
+   "converted_measure_m": 0.20000000118007133,
+   "pxr_measure_m": 0.20000000118007136,
+   "converted_vs_target_mm": 1.1800713184406675e-06,
+   "pxr_vs_target_mm": 1.180071346196243e-06,
+   "converted_vs_pxr_max_axis_mm": 2.7755575615628914e-14,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 4.398250152970462e-06,
+   "scaled_longest_mm": 200.00000118007134,
+   "pass": true
+  },
+  {
+   "instance_id": "oo3d_teapot_021",
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "mode": "longest",
+   "target_m": 0.2,
+   "converted_scale": 0.0015419716946780682,
+   "pxr_scale": 0.0015419716946780682,
+   "converted_extent_m": [
+    0.13871402524142518,
+    0.20000000623578268,
+    0.13106484119899875
+   ],
+   "pxr_extent_m": [
+    0.13871402524142531,
+    0.2000000062357828,
+    0.1310648411989988
+   ],
+   "converted_measure_m": 0.20000000623578268,
+   "pxr_measure_m": 0.2000000062357828,
+   "converted_vs_target_mm": 6.235782668007062e-06,
+   "pxr_vs_target_mm": 6.235782779029364e-06,
+   "converted_vs_pxr_max_axis_mm": 1.3877787807814457e-13,
+   "diag_points_extent_converted_vs_pxr_max_axis_mm": 4.195030184339643e-06,
+   "scaled_longest_mm": 200.00000623578268,
+   "pass": true
+  }
+ ]
+}

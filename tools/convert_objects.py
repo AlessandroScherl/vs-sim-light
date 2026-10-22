@@ -443,6 +443,10 @@ def _render_tile(p, W: int, H: int, text_lines, renderer_cls, scene_mod, cam_mod
     cam_i = cam_mod.CameraModel(cam.K, W, H, near=max(0.01, d / 20.0), far=d * 10.0)
     r = renderer_cls(spec, cam_i, gl="egl", samples=4)
     try:
+        gl_renderer = str(getattr(r, "gl_renderer", "unknown"))
+        if os.environ.get("VSBENCH_SOFTWARE_GL") and "llvmpipe" not in gl_renderer.lower():
+            raise RuntimeError(f"software GL requested but MuJoCo renders on {gl_renderer!r} - "
+                               "refused (no GPU on the station while the eval runs)")
         rgb, _ = r.render(look_at(eye, c))
     finally:
         r.close()
@@ -452,7 +456,7 @@ def _render_tile(p, W: int, H: int, text_lines, renderer_cls, scene_mod, cam_mod
     dr.rectangle([0, 0, W, 12 * len(lines) + 3], fill=(255, 255, 255))
     for k, t in enumerate(lines):
         dr.text((3, 1 + 12 * k), t, fill=(0, 0, 0))
-    return im
+    return im, gl_renderer
 
 
 def _placeholder(W: int, H: int, lines, colour):
@@ -489,7 +493,7 @@ def cmd_sheet(args) -> int:
     lib = full_library(vs, ids)
     rules = A.rules_from(vs.assets, vs.scenes)
     nch = max(8, W // 6 - 1)
-    tiles, ratios, t0 = [], [], time.perf_counter()
+    tiles, ratios, gl_seen, t0 = [], [], {}, time.perf_counter()
     for n, item in enumerate(sheet_items(vs, ids, lib), 1):
         iid = item["instance_id"]
         st = index["objects"].get(iid, {}).get("status", "absent")
@@ -516,8 +520,10 @@ def cmd_sheet(args) -> int:
                 return [name, f"{src}  longest {1e3 * float(max(ext)):.0f} mm  scale {p.scale:.4g}",
                         f"{m['counts']['vertices']} v  {m['counts']['faces']} f  "
                         f"tex {m['texture']['width']}px"]
-        tiles.append(_render_tile(p, W, H, lines, MujocoRenderer, scene_mod, cam_mod, look_at))
-        print(f"  [{n}/{len(ids)}] {iid}: rendered", flush=True)
+        im, glr = _render_tile(p, W, H, lines, MujocoRenderer, scene_mod, cam_mod, look_at)
+        tiles.append(im)
+        gl_seen[glr] = gl_seen.get(glr, 0) + 1
+        print(f"  [{n}/{len(ids)}] {iid}: rendered ({glr})", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
     cols, per = (8, 48) if args.all else (4, len(tiles))
     written = []
@@ -533,6 +539,11 @@ def cmd_sheet(args) -> int:
         else:
             path = OUT / "u3_objects.png"
             sheet.save(path)
+            _merge_into_u7("u3_sheet_redraw", {
+                "path": str(path.relative_to(REPO)), "gl_renderer": gl_seen,
+                "note": "re-drawn in U7 on Mesa llvmpipe: the first U3 sheet built MujocoRenderer "
+                        "directly, past make_renderer's software-GL switch, so EGL most likely "
+                        "drew it on the station GPU"})
         written.append({"path": str(path.relative_to(REPO)), "first": k0 + 1,
                         "last": k0 + len(chunk), "bytes": path.stat().st_size})
         print(f"wrote {path} (tiles {k0 + 1}-{k0 + len(chunk)})", flush=True)
@@ -541,7 +552,7 @@ def cmd_sheet(args) -> int:
             "tiles": len(tiles), "tile_px": [W, H], "cols": cols, "per_sheet": per,
             "pose": "the library's upright canonical pose (canonical: library), category scale, "
                     "azimuth -60 deg, elevation 30 deg; grey = nucleus only, red = failed",
-            "seconds": round(time.perf_counter() - t0, 1), "sheets": written,
+            "seconds": round(time.perf_counter() - t0, 1), "sheets": written, "gl_renderer": gl_seen,
             "box_vs_points": {
                 "what": "longest side of the tight box of the converted points / longest side of "
                         "Isaac's box rule (authored extents through the transforms), at the sheet "
@@ -554,7 +565,11 @@ def cmd_sheet(args) -> int:
 
 
 def _merge_into_u7(key: str, value) -> None:
-    p = OUT / "u7_convert.json"
+    _merge_into("u7_convert.json", key, value)
+
+
+def _merge_into(name: str, key: str, value) -> None:
+    p = OUT / name
     rec = json.loads(p.read_text()) if p.exists() else {}
     rec[key] = value
     OUT.mkdir(parents=True, exist_ok=True)
