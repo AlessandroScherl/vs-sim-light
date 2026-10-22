@@ -1,0 +1,53 @@
+# DINOBot (Di Palo & Johns, ICRA 2024) — the ALIGNMENT PHASE ONLY, run as its published
+# gist implements it (final revision, 2024-05-21) inside ShirAmir/dino-vit-features:
+# DINO v1 ViT-S/8 at stride 4, key facet of block 9, 17-bin log-binning, saliency
+# foreground (0.05), best buddies, K-means to 8 pairs, depth on both sides, Kabsch fit,
+# the whole transform per iteration. Not a matcher + IBVS: `matcher.variant: dinobot`
+# dispatches to vssim.baselines.dinobot.build_dinobot_arm and the IBVS knobs are refused.
+#
+# WEIGHTS: dino_deitsmall8_pretrain.pth in $TORCH_HOME/hub/checkpoints (torch.hub
+# facebookresearch/dino:main, dino_vits8) - staged once by hand, never downloaded by a run.
+# DEPENDENCY: scikit-learn (the published K-means), in the `baselines` extra.
+#
+# Spec and the owner's rulings (D1-D7, 2026-09-22): ../docs/dinobot_baseline_spec_2026-09-22.md
+# (workspace root). The fences the record states on every row - `dinobot_*` fields -
+# and the per-step measurements (pairs used, buddies, dropped depth, the degenerate and
+# reflection flags, both errors, the jump) are in the step debug and the telemetry.
+
+seed: 20260902                       # unused (K-means is random_state=0 by publication);
+                                     # stated because it is required
+
+matcher:
+  variant: dinobot
+  device: cuda                       # stated, no default (cpu in the fast tier)
+  num_landmarks: 8                   # the gist's num_pairs - USED, unlike CNS's column
+
+dinobot:
+  model_type: dino_vits8             # gist rev. 3+; `dino_vitb8` = the February cell (D2: not built)
+  load_size: 224                     # smaller edge; [224, 224] = the paper's squash
+  stride: 4
+  layer: 9
+  facet: key
+  bin_hierarchy: 2                   # the library's default: 17 bins, 6528-d
+  saliency_thresh: 0.05
+  kmeans_n_init: 10                  # scikit-learn 1.0.1's default in the library's env
+  step_fraction: 1.0                 # the whole transform per iteration (published)
+  min_pairs: 3                       # below: no motion, recorded (deviation, spec §3.4)
+  reflection: none                   # none = published formula, no motion on det<0; fix = Sorkine
+  err_space: pixel_load              # pixel_load | metric (spec §3.6)
+  err_threshold: 50                  # the gist's ERR_THRESHOLD
+
+controller:
+  dt: 0.016666666666666666           # the loop's period only; DINOBot has no gain
+
+stop:
+  rule: cns_plateau                  # the protocol's scored rule
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dinobot_err]   # NOT dec_plateau (refused)
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

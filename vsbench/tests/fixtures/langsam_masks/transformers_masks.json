@@ -1,0 +1,62 @@
+[
+ {
+  "name": "inst_shoe_same_goal",
+  "box": [
+   300.64520263671875,
+   306.1264953613281,
+   1644.349609375,
+   781.582275390625
+  ],
+  "score": 0.9251366257667542,
+  "mask_px": 478074,
+  "xor_px_vs_langsam": 45244,
+  "mask": "inst_shoe_same_goal_transformers_mask.png",
+  "mask_md5": "41509da75a7203e8105572ea3997d2b1",
+  "made_with": "vs-sim 5c9ebf6 GroundingSam (transformers path), torch 2.11.0+cu128 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_mug_rev_other_big_goal",
+  "box": [
+   423.17877197265625,
+   93.13574981689453,
+   1608.6973876953125,
+   988.1995849609375
+  ],
+  "score": 0.8029869794845581,
+  "mask_px": 626487,
+  "xor_px_vs_langsam": 22793,
+  "mask": "inst_mug_rev_other_big_goal_transformers_mask.png",
+  "mask_md5": "9588cee653250e2989f5638a5978ac38",
+  "made_with": "vs-sim 5c9ebf6 GroundingSam (transformers path), torch 2.11.0+cu128 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_teapot_rev_other_big_goal",
+  "box": [
+   356.73046875,
+   175.83580017089844,
+   1563.0447998046875,
+   902.8521118164062
+  ],
+  "score": 0.8766345381736755,
+  "mask_px": 444996,
+  "xor_px_vs_langsam": 4174,
+  "mask": "inst_teapot_rev_other_big_goal_transformers_mask.png",
+  "mask_md5": "fc24635c0e80511c7d9b93cc59411a41",
+  "made_with": "vs-sim 5c9ebf6 GroundingSam (transformers path), torch 2.11.0+cu128 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_hammer_same_goal",
+  "box": [
+   159.67974853515625,
+   223.30545043945312,
+   1761.5067138671875,
+   855.6007080078125
+  ],
+  "score": 0.9165146350860596,
+  "mask_px": 287701,
+  "xor_px_vs_langsam": 185,
+  "mask": "inst_hammer_same_goal_transformers_mask.png",
+  "mask_md5": "b329db92036bbceda69d78daa5d890de",
+  "made_with": "vs-sim 5c9ebf6 GroundingSam (transformers path), torch 2.11.0+cu128 CPU fp32, 4 threads"
+ }
+]

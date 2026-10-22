@@ -1,0 +1,73 @@
+# ART-VS as the release's SIMULATION program runs its object mode (ros_controller.py, ROS1/Gazebo),
+# with the simulation config's method values (config_dinov3_256_6x6_tiling.yaml) and the code
+# defaults for the ROI keys it does not set: DINOv3-S at 256 (16x16 cells), 9-bin log-binned
+# descriptors, K 24, LangSAM + LightTrack boxes padded 10 %, crops to 256, the switch on the MEAN
+# pixel error of the integer points (0.2 of its first value, after 10 frames, one frame later),
+# a ceil(box/256) tile grid from the UNPADDED goal box (at most 5 per side), max(1, 24//n) pairs per
+# tile, the top 24 when more, points truncated to whole pixels, EMA 0.8, and LangSAM's GOAL MASK
+# through the simulation controller's own mask branch (owner ruling D-B (b), 2026-10-05 evening:
+# SAM 2.1's mask of the best GroundingDINO box on the goal, as if `mask_path` named it - coarse:
+# float-box crop, LANCZOS to 256, the release's temporary-JPEG round trip, a cell counts when the
+# mean of its pixels > 0.5 after `> 128`; tiled: int-box crop, BICUBIC to the tiled size, the same
+# cell rule per tile; SAM run as the `lang_sam` package runs it - the stability fallback off and
+# SAM2Transforms' float resize - so the mask is the package's own bit for bit: the LangSAM check,
+# 2026-10-06, docs/results/2026-10-06_langsam_check/ at the workspace root; the 2026-10-05 smoke ran
+# transformers' SAM and its label has no `sam-langsam`). Rotation compensation OFF (owner). Gain,
+# step cap and scored stop are the bench's shared ones (section 3 of the spec maps the clock: one
+# step = 2.7 release iterations; the release's 1.0 velocity cap becomes 10.0). The release's
+# visual-only stop (90 % less mean pixel error) is recorded beside the scored one. The old port is
+# the `artvs_roi*` cells, labelled "as ported". vssim.baselines.objroi.RoiTiledMatcherSim. Spec:
+# docs/results/2026-10-05_artvs_release_check/sim_spec.md (workspace root).
+#
+# The one stated deviation: in the tiled phase, a frame with no live box and nothing cached runs
+# the coarse full-picture match instead of the release's full-image 6x6 tiling at 1536 (counted on
+# the record as `full_fallback_deviation`; no instance-suite record shows a box-less frame).
+#
+# WEIGHTS: `facebook/dinov3-vits16-pretrain-lvd1689m`, `IDEA-Research/grounding-dino-base` and
+# `facebook/sam2.1-hiera-small` in $HF_HOME (HF_HUB_OFFLINE=1); the researchmm LightTrack checkout
+# at $LIGHTTRACK_ROOT with the release's wrapper at tracking/lighttrack.py and
+# snapshot/LightTrackM/LightTrackM.pth.
+seed: 20260902
+matcher:
+  variant: artvs_roi_sim
+  device: cuda                            # stated, no default (cpu in the fast tier)
+  backbone_name: dinov3_vits16_artvs256   # HF DINOv3-S/16 at 256; last_hidden_state; 9 bins on raw tokens; L2
+  num_landmarks: 24                       # num_pairs (S:18)
+  tie_order: stable
+  threshold: 1.0                          # distance_threshold 1 (matcher.py:124)
+  vit_input_size: 256                     # S:6 (checked against the backbone)
+  switch_threshold: 0.20                  # hybrid_switch_threshold (S:51; wins over roi_tiling_switch_threshold)
+  switch_min_frames: 10                   # ros_controller.py:619
+  switch_iteration: 0                     # tiling_switch_iteration (S:50)
+  prompt: scene                           # detection_keyword = the scene's word (configs/scenes.yaml)
+  roi_padding: 0.1                        # roi_padding_ratio default (core/config.py:136)
+  cache_timeout: 10                       # core/config.py:150
+  box_threshold: 0.3                      # lang_sam's defaults, as the release calls it (checked 2026-10-06, the LangSAM check section 3)
+  text_threshold: 0.25
+  max_tiles_per_dim: 5                    # ros_controller.py:2816
+  auto_calculate_tiles: true              # owner decision D-A (a): the paper's adaptive grid (S:55 says false)
+  roi_mask: langsam                       # owner ruling D-B (b): LangSAM's goal mask via the release's mask branch
+  roi_sam_path: langsam                   # SAM as the lang_sam package runs it (2026-10-06): fallback off, float resize;
+                                          # the goal mask = lang_sam's bit for bit; label token `sam-langsam`
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666
+  pixel_quantisation: truncate            # calculate_uv_roi: astype(int), clip (ros_controller.py:899-914)
+  ema_alpha: 0.8                          # S:40; core/controller.py:58-73 (new-value weight)
+  max_velocity: 10.0                      # the release's 1.0 at lambda 0.2, times 2.0/0.2 (never binds, as there)
+  degenerate_policy: hold                 # a frame with < 4 points publishes nothing; Gazebo holds the twist
+  depth_fallback_m: 100.0                 # get_depth: 0 or outside the frame -> 100 m (ros_controller.py:423-425)
+                                          # stated gap (review 2026-10-05): the release's Gazebo camera also writes 0
+                                          # below 0.2 m (RealSensePlugin.cpp:253-258), read as 100 m; the bench keeps
+                                          # its own camera (owner plan: the benchmark's camera), so it binds only
+                                          # if the camera comes within 20 cm of the object
+  weighting: {use_trust: false, use_margin: false, per_axis: false}
+stop:
+  rule: cns_plateau
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau, artvs_visual90]
+  telemetry_extended: false
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

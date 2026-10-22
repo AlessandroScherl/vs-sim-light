@@ -1,0 +1,66 @@
+[
+ {
+  "name": "inst_shoe_same_goal",
+  "picture": "/home/alessandro/genvs_ws/vssim_out/inst_shoe_same/inst_shoe_goal.png",
+  "picture_md5": "fb58824706e8edaa0cfa1614a8f7ec7f",
+  "prompt": "shoe",
+  "box": [
+   300.64520263671875,
+   306.1264953613281,
+   1644.349609375,
+   781.582275390625
+  ],
+  "score": 0.9251366257667542,
+  "mask_px": 433768,
+  "mask": "fixtures/inst_shoe_same_goal_langsam_mask.png",
+  "made_with": "lang-sam 918043e + sam2 c2ec8e14, transformers 4.57.1, torch 2.11.0 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_mug_rev_other_big_goal",
+  "picture": "/home/alessandro/genvs_ws/vssim_out/inst_mug_rev_other_big/inst_mug_rev_goal.png",
+  "picture_md5": "4b5eb41a56e43e4c75d618d9e1d580ff",
+  "prompt": "mug",
+  "box": [
+   423.17877197265625,
+   93.13574981689453,
+   1608.6973876953125,
+   988.1995849609375
+  ],
+  "score": 0.8029869794845581,
+  "mask_px": 604050,
+  "mask": "fixtures/inst_mug_rev_other_big_goal_langsam_mask.png",
+  "made_with": "lang-sam 918043e + sam2 c2ec8e14, transformers 4.57.1, torch 2.11.0 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_teapot_rev_other_big_goal",
+  "picture": "/home/alessandro/genvs_ws/vssim_out/inst_teapot_rev_other_big/inst_teapot_rev_goal.png",
+  "picture_md5": "08a1eadc712dd2897be14ad180d0bcc3",
+  "prompt": "teapot",
+  "box": [
+   356.73046875,
+   175.83580017089844,
+   1563.0447998046875,
+   902.8521118164062
+  ],
+  "score": 0.8766345381736755,
+  "mask_px": 440922,
+  "mask": "fixtures/inst_teapot_rev_other_big_goal_langsam_mask.png",
+  "made_with": "lang-sam 918043e + sam2 c2ec8e14, transformers 4.57.1, torch 2.11.0 CPU fp32, 4 threads"
+ },
+ {
+  "name": "inst_hammer_same_goal",
+  "picture": "/home/alessandro/genvs_ws/vssim_out/inst_hammer_same/inst_hammer_goal.png",
+  "picture_md5": "76443221fb643f8678ad16a0f812ee27",
+  "prompt": "hammer",
+  "box": [
+   159.67974853515625,
+   223.30545043945312,
+   1761.5067138671875,
+   855.6007080078125
+  ],
+  "score": 0.9165146350860596,
+  "mask_px": 287802,
+  "mask": "fixtures/inst_hammer_same_goal_langsam_mask.png",
+  "made_with": "lang-sam 918043e + sam2 c2ec8e14, transformers 4.57.1, torch 2.11.0 CPU fp32, 4 threads"
+ }
+]

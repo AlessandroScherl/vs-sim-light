@@ -1,0 +1,249 @@
+{
+  "fixture": "u2_matches_mug1.npz",
+  "unit": "U2 (refinevs/match.py)",
+  "created_utc": "2026-09-02T20:50:36Z",
+  "md5": "7f9bd86ff9d27f31567def14c28944f5",
+  "bytes": 1511598,
+  "command": "HF_HUB_OFFLINE=1 PYTHONPATH=/home/alessandro/Desktop/runpod_dev/genvs-sim python tests/fixtures/u2_make_match_fixture.py --device cpu   (conda env refinevs)",
+  "source_repo_commit": "genvs-sim 2b11ab8 (tag legacy-pre-cleanup = 905d42b)",
+  "pair": {
+    "goal": "u1_frame_mug1_goal.jpg (md5 0ce3c308f2323b85a6e8ee5724783ed3) - the U1 fixture image",
+    "current": "u2_frame_mug1_roll010.jpg (md5 002cf1f4ed22cd58965c6bd901760f1d)",
+    "current_source": "/home/alessandro/Desktop/runpod_dev/docs/results/2026-08-16_rotsym_wpc_preview/bench_frames/mug1/roll010.jpg"
+  },
+  "episode": {
+    "scene": "mug1",
+    "start_id": 7,
+    "seed_base": 0,
+    "subsample_seed": 493031399
+  },
+  "pool_size": 612,
+  "vendored_order_equals_stable_order": false,
+  "arrays": {
+    "pool_goal_lin": {
+      "shape": [
+        612
+      ],
+      "dtype": "int64"
+    },
+    "pool_cur_lin": {
+      "shape": [
+        612
+      ],
+      "dtype": "int64"
+    },
+    "pool_sim": {
+      "shape": [
+        612
+      ],
+      "dtype": "float32"
+    },
+    "pool_margin": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "pool_cyclic": {
+      "shape": [
+        612
+      ],
+      "dtype": "float32"
+    },
+    "cyclic_all": {
+      "shape": [
+        1024
+      ],
+      "dtype": "float32"
+    },
+    "sorted_order_vendored": {
+      "shape": [
+        1024
+      ],
+      "dtype": "int64"
+    },
+    "sorted_order_stable": {
+      "shape": [
+        1024
+      ],
+      "dtype": "int64"
+    },
+    "sig_s1": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_second": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_margin": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_ratio": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_n_lookalikes": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_entropy_t05": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "sig_entropy_t1": {
+      "shape": [
+        612
+      ],
+      "dtype": "float64"
+    },
+    "draw24_goal_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "draw24_cur_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "draw24_sim": {
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "draw24_margin": {
+      "shape": [
+        24
+      ],
+      "dtype": "float64"
+    },
+    "draw24_goal_px": {
+      "shape": [
+        24,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "draw24_cur_px": {
+      "shape": [
+        24,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "draw48_goal_lin": {
+      "shape": [
+        48
+      ],
+      "dtype": "int64"
+    },
+    "draw48_cur_lin": {
+      "shape": [
+        48
+      ],
+      "dtype": "int64"
+    },
+    "draw48_sim": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "draw48_margin": {
+      "shape": [
+        48
+      ],
+      "dtype": "float64"
+    },
+    "draw48_goal_px": {
+      "shape": [
+        48,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "draw48_cur_px": {
+      "shape": [
+        48,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "fs2_goal_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "fs2_cur_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "fs2_sim": {
+      "shape": [
+        24
+      ],
+      "dtype": "float64"
+    },
+    "fs2_margin": {
+      "shape": [
+        24
+      ],
+      "dtype": "float64"
+    },
+    "fs3_goal_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "fs3_cur_lin": {
+      "shape": [
+        24
+      ],
+      "dtype": "int64"
+    },
+    "fs3_sim": {
+      "shape": [
+        24
+      ],
+      "dtype": "float64"
+    },
+    "fs3_margin": {
+      "shape": [
+        24
+      ],
+      "dtype": "float64"
+    }
+  },
+  "env": {
+    "python": "3.11.16",
+    "torch": "2.14.0+cpu",
+    "transformers": "4.57.1",
+    "numpy": "1.26.4",
+    "device": "cpu"
+  },
+  "provenance_note": "tests/fixtures/u2_fixture_provenance.md",
+  "read_by": [
+    "tests/fast/test_match.py"
+  ]
+}

@@ -28,6 +28,14 @@ dev = ["pytest>=8", "ruff>=0.6", "psutil>=5", "scipy>=1.10"]   # scipy: expm/log
 
 [tool.setuptools.packages.find]
 include = ["vsbench*"]
+# the vs-sim copy's tests and Isaac drivers are reference trees, not runtime modules
+exclude = ["vsbench.tests*", "vsbench.scripts*", "vsbench.experiments*"]
+
+[tool.setuptools.package-data]
+# the vs-sim copy's data root is vsbench/ (layout B, docs/PORT_PLAN.md section 2): the camera,
+# scenes, protocol, arm configs, layouts, the frozen starts (+ md5 sidecars) and the library
+vsbench = ["configs/**/*", "benchmark/**/*", "assets/asset_library_v2.json"]
+"vsbench.vs" = ["COPY_MANIFEST.json", "PROVENANCE.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -36,6 +44,8 @@ addopts = "-ra"
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+# the vs-sim copy is linted with vs-sim's own rules: tools/ruff_vssim_copy.toml
+extend-exclude = ["vsbench/vs", "vsbench/tests", "vsbench/scripts"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

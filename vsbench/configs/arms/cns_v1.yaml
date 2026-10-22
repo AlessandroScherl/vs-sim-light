@@ -1,0 +1,66 @@
+# CNS (v1) — run AS PUBLISHED.
+#
+# CNS is not a matcher: it replaces the control law as well, so `matcher.variant:
+# cns_v1` dispatches to `vssim.baselines.cns.build_cns_arm` and the IBVS knobs are
+# refused rather than silently ignored (`gain`, `weighting`, `solve_unrounded`,
+# `ema_alpha`, `min_matches`, and the `dec` stop). Only `controller.dt` is kept — it is
+# the loop's period, not a control knob.
+#
+# CNS's code and weights come from its own checkout (github.com/hhcaz/CNS), found
+# through `$CNS_ROOT`; nothing of it is vendored here.
+#
+# THE ×2, AND WHY IT BECOMES ×2.4 HERE. CNS's benchmark commands `env.action(vel * 2)`
+# (`benchmark.py:161`) into an integrator running at dt = 1/50 (`sim/environment.py:64`),
+# so its published per-iteration displacement is `vel * 0.04`. Our loop integrates at
+# 1/60. `rate_compensate: true` (the default) commands `vel * 2 * (1/50)/(1/60) = vel *
+# 2.4`, which moves the camera exactly as far per iteration as CNS's does — iteration i
+# is its iteration i — and restores its published decay budget λ·T = 2.4 · 600/60 = 24
+# (ours stay at 20). The literal ×2 is reachable (`rate_compensate: false`, λ·T = 20)
+# and is a SENSITIVITY CELL, not the arm: it would quote CNS at 83 % of its own budget.
+# Both settings and the effective scale are on the record (`cns_step_gain`,
+# `cns_rate_compensate`, `cns_step_scale`, `cns_published_dt`).
+#
+# RANSAC is ON here and that is not a contradiction: CNS's own front end runs geometric
+# verification; the no-RANSAC rule is about the ViT-VS/ART-VS baselines. Turning it
+# off would be an ablation of CNS, not CNS.
+
+seed: 20260902                       # unused by CNS's front end; stated because it is required
+
+matcher:
+  variant: cns_v1
+  num_landmarks: 24                  # RECORDED, NOT USED: CNS builds its own graph, and a
+                                     # CNS record's `n_matches` is the constant node count
+                                     # for the whole episode (read the step debug's
+                                     # `n_matched` for the per-frame number)
+
+cns:
+  detector: SIFT                     # CNS's default observer front end
+  device: cuda:0                     # where CNS's own network runs. Stated: `cns_v1` is
+                                     # not a BACKBONE_VARIANT, so the loader's
+                                     # `matcher.device` rule does not reach it and only
+                                     # this line keeps the compute column honest.
+  ransac: true                       # part of the published method
+  step_gain: 2.0                     # `benchmark.py:161`
+  published_dt: 0.02                 # `sim/environment.py:64` — 1/50 s
+  rate_compensate: true              # -> effective ×2.4 at our 60 Hz; see the header
+  # `cns_root` and `ckpt` are left unset: `resolve_cns_root` finds $CNS_ROOT,
+  # /workspace/CNS or ~/CNS, and the default artifact is the STATE DICT
+  # (checkpoints/cns_state_dict.pth), never `cns.pth`.
+  # `dist_scale` unset = the median valid goal depth, CNS's own convention.
+
+controller:
+  dt: 0.016666666666666666           # the loop's period only; CNS runs its own controller
+
+stop:
+  rule: cns_plateau                  # CNS's own rule, fed CNS's own graph errors
+  # `dt: 0.02` would clock the 0.8 s hold at CNS's 50 Hz (its 41st interval instead of
+  # our 49th). Left unset: the arm's period.
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet]     # NOT dec_plateau — a λ schedule cannot scale CNS's twist
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

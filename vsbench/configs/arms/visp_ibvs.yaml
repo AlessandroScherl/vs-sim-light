@@ -1,0 +1,53 @@
+# The standard IBVS as the ViSP team defines it - `vpServo` on point features - on a
+# published front end.
+#
+# ViSP's law is a CONTROLLER: it takes matched goal/current points and returns a
+# camera twist. It has no front end of its own for natural images (ViSP's tutorials
+# track four blobs or an AprilTag), so a ViSP cell pairs its law with one of this
+# repository's matchers. The front end here is ViT-VS's (mutual-NN on DINOv3); the
+# protocol's `visp_ibvs_sift` cell pairs the same law with SIFT + RANSAC. Both are
+# labelled `.../visp-current/...` so a table can never mistake them for the bench's
+# own law on the same matcher (`vitvs_dinov3`, `sift_ransac`).
+#
+# `interaction: current` is ViSP's tutorial choice (`tutorial-ibvs-4pts`: L at the
+# live points and their live depth) and is what makes this cell like-for-like with
+# the bench's law - the two then differ only in the pseudo-inverse rule (ViSP drops
+# singular values below 1e-6 of the largest). `desired` (vpServo's constructor
+# default, L at the goal points with the goal depth, no live depth needed) and `mean`
+# (the average, the tutorial's recommendation for large motions) are the same cell's
+# stated alternatives. `gain: 2.0` is the protocol's, so every arm decays on the same
+# budget; ViSP's tutorial 0.5 or its adaptive gain (4, 0.4, 30) are stated options:
+#   adaptive_gain: {gain_at_zero: 4.0, gain_at_infinity: 0.4, slope_at_zero: 30.0}
+#
+# `backend: auto` runs ViSP itself where its Python bindings import and the numpy
+# twin otherwise; every record says which (`visp_backend`). A paper cites the `visp`
+# backend; the twin is proven equal to it on the station (tests/slow/test_visp_parity.py).
+
+seed: 20260902
+
+matcher:
+  variant: mutual_nn_seeded_subsample
+  device: cuda                     # stated, no default (cpu in the fast tier)
+  backbone_name: dinov3_vits16
+  num_landmarks: 24
+  tie_order: stable
+  threshold: 1.0
+
+controller:
+  law: visp
+  interaction: current             # current | desired | mean
+  gain: 2.0
+  dt: 0.016666666666666666
+  backend: auto                    # visp | numpy | auto
+
+stop:
+  rule: cns_plateau
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

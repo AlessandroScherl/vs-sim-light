@@ -1,12 +1,35 @@
 {
- "doc": "docs/PORT_PLAN.md 2.3: the reviewed patch list (dest file -> exact old/new pairs, applied after the rewrite rules). Six or fewer files; a seventh is a question for the owner, not a commit.",
+ "doc": "docs/PORT_PLAN.md 2.3: the reviewed patch list (dest file -> exact old/new pairs, applied after the rewrite rules). Six or fewer files; a seventh is a question for the owner, not a commit. Layout B (mirror, parent decision 2026-10-22) makes the plan's camera.py data-root patch unnecessary: vsbench/ is the copy's repository root, so vs-sim's own REPO_ROOT = parents[1] already lands on vsbench/configs, vsbench/benchmark, vsbench/assets.",
  "patches": [
-  {"id": "P1", "dest": "vsbench/vs/camera.py",
-   "reason": "the one data root: configs/, benchmark/ and assets/ live in vsbench/vs/data/ (every other module derives its paths from REPO_ROOT)",
+  {"id": "P1", "dest": "vsbench/tests/fast/test_package.py",
+   "reason": "the package-hygiene test names the package by its import name; here that is vsbench (vsbench.vs), not vssim",
    "pairs": [
-    {"old": "REPO_ROOT = Path(__file__).resolve().parents[1]\n",
-     "new": "REPO_ROOT = Path(__file__).resolve().parent / \"data\"\n",
-     "reason": "vsbench/vs/data/ is the copy's data root (PORT_PLAN 2.1, 2.3)"}
+    {"old": "CORE_ALLOWED = {\"numpy\", \"yaml\", \"vssim\"}\n",
+     "new": "CORE_ALLOWED = {\"numpy\", \"yaml\", \"vsbench\"}\n",
+     "reason": "the copied core imports itself as vsbench.vs.*, whose top-level name is vsbench"},
+    {"old": "code = (\"import sys, vssim; \" + ",
+     "new": "code = (\"import sys, vsbench.vs; \" + ",
+     "reason": "the fresh-interpreter no-torch check imports the copy (vsbench.vs), the module that exists here"},
+    {"old": "        assert hasattr(vssim, name)\n",
+     "new": "        assert hasattr(vsbench.vs, name)\n",
+     "reason": "the one bare use of the module object; rule R3b binds vsbench, not vssim"}
+   ]},
+  {"id": "P2", "dest": "vsbench/vs/bench/run.py",
+   "reason": "the run sidecar: the package's version under its name here, and git paths relative to the copy's root (vsbench/) instead of this repository's top",
+   "pairs": [
+    {"old": "\"vssim_version\": __import__(\"vssim\").__version__,",
+     "new": "\"vssim_version\": __import__(\"vsbench.vs\", fromlist=[\"__version__\"]).__version__,",
+     "reason": "there is no module vssim here; fromlist makes __import__ return vsbench.vs itself (not the top package vsbench); the record key stays vssim_version (schema data)"},
+    {"old": "status = _git(\"status\", \"--porcelain\", strip=False)",
+     "new": "status = _git(\"-c\", \"color.status=false\", \"status\", \"--short\", strip=False)",
+     "reason": "porcelain paths are relative to the repository top (vsbench/x), but dirty_paths filters them against REPO_ROOT = vsbench/; --short prints them relative to git -C REPO_ROOT (x, ../y) in the same two-column format, so the experiments/ filter works in the nested copy; the whole tree is still reported"}
+   ]},
+  {"id": "P3", "dest": "vsbench/tests/fast/test_debuglog.py",
+   "reason": "the throwaway checkout the debug chain is driven in mirrors the repository's layout; the package directory is vs/ here",
+   "pairs": [
+    {"old": "for name in (\"vssim\", \"configs\", \"benchmark\"):",
+     "new": "for name in (\"vs\", \"configs\", \"benchmark\"):",
+     "reason": "vsbench/vs is the copy of vssim/; configs/ and benchmark/ are mirrored under the same names"}
    ]}
  ]
 }

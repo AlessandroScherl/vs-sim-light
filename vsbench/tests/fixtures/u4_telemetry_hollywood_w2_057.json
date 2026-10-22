@@ -1,0 +1,104 @@
+{
+  "fixture": "u4_telemetry_hollywood_w2_057.npz",
+  "unit": "U4 (refinevs/control.py)",
+  "created_utc": "2026-09-02T22:33:42Z",
+  "md5": "0a97b4b8462f6b9201abf078d3cd49b5",
+  "bytes": 163315,
+  "command": "python tests/fixtures/u4_make_control_fixture.py --episode w2_057",
+  "source_repo_commit": "genvs-sim 2b11ab8 (tag legacy-pre-cleanup = 905d42b)",
+  "source_record": "docs/results/2026-08-21_n2_admission/gates/hollywood_wide/telemetry.jsonl.gz",
+  "source_record_md5": "44f1d4a6ad918c35ce9eebb534a204c7",
+  "depth_reconstruction": "plane z=0 through the current pixel; see the module docstring",
+  "scene": "hollywood",
+  "arm": "head_w_g3_axw@v11",
+  "episode": "w2_057",
+  "stride": 2,
+  "gain": 2.0,
+  "fx": 1406.748094934653,
+  "fy": 1406.748094934653,
+  "cx": 960.0,
+  "cy": 540.0,
+  "width": 1920,
+  "height": 1080,
+  "conf_gamma": 3.0,
+  "axis_weighting": true,
+  "solve_unrounded": false,
+  "margin_weighting": false,
+  "n_landmarks": 24,
+  "n_steps_recorded": 600,
+  "terminated_reason": "max_iter",
+  "stop_mode": null,
+  "lam_in_record": false,
+  "t_final_mm": 1.651,
+  "zmed_reconstruction_max_err_m": 0.0002673951370191219,
+  "arrays": {
+    "step_index": {
+      "shape": [
+        300
+      ],
+      "dtype": "int64"
+    },
+    "pts_goal": {
+      "shape": [
+        300,
+        24,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "pts_cur": {
+      "shape": [
+        300,
+        24,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "conf": {
+      "shape": [
+        300,
+        24
+      ],
+      "dtype": "float64"
+    },
+    "w_recorded": {
+      "shape": [
+        300,
+        24
+      ],
+      "dtype": "float64"
+    },
+    "depth": {
+      "shape": [
+        300,
+        24
+      ],
+      "dtype": "float64"
+    },
+    "v_recorded": {
+      "shape": [
+        300,
+        6
+      ],
+      "dtype": "float64"
+    },
+    "feature_error_recorded": {
+      "shape": [
+        300
+      ],
+      "dtype": "float64"
+    },
+    "t_mm": {
+      "shape": [
+        300
+      ],
+      "dtype": "float64"
+    },
+    "z_med_recorded": {
+      "shape": [
+        300
+      ],
+      "dtype": "float64"
+    }
+  }
+}

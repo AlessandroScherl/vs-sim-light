@@ -1,0 +1,48 @@
+# ViT-VS on DINOv2 — the published baseline exactly as ViT-VS ships it.
+#
+# Also code-free: the same `vssim.baselines.match.DenseMatcher`, pointed at the published
+# descriptor chain (`vssim.baselines.features.PublishedDinoV2Backbone`) — torch.hub
+# `facebookresearch/dinov2:dinov2_vits14`, ToTensor+Normalize, a forward hook on
+# block 11 facet `token`, CLS stripped, log-binned to 3456-d **un-normalized**
+# descriptors. `mutual_nn_match` normalizes what it is given, so the same matcher
+# serves the 384-d DINOv3 grid and this one.
+#
+# The geometry is NOT stated here and must not be: 518 / 14 = 37x37 comes from the
+# backbone entry (`vssim.baselines.features.BACKBONES["dinov2_vits14"]`) and is read
+# off the loaded object.
+#
+# WEIGHTS: the torch.hub weights must be in the machine's cache
+# (`~/.cache/torch/hub/checkpoints/dinov2_vits14_pretrain.pth`); this repository never
+# downloads weights, and the parity test skips with the reason where the cache is absent.
+
+seed: 20260902
+
+matcher:
+  variant: mutual_nn_seeded_subsample
+  device: cuda                     # stated, no default (cpu in the fast tier)
+  backbone_name: dinov2_vits14     # the published torch.hub + log-binned chain
+  num_landmarks: 24
+  tie_order: stable
+  threshold: 1.0
+
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666
+  solve_unrounded: true            # sub-pixel on every arm
+  ema_alpha: 0.0
+  weighting:
+    use_trust: false
+    use_margin: false
+    per_axis: false
+
+stop:
+  rule: cns_plateau
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

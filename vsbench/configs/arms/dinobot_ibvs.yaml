@@ -1,0 +1,55 @@
+# DINOBot's FRONT END behind the bench's IBVS law — the controlled comparison (owner
+# decision D7, spec §3.8): the same eight best-buddy pairs per frame as the `dinobot`
+# arm (DINO v1 ViT-S/8 at stride 4, key facet of block 9, 17-bin log-binning, saliency
+# foreground, K-means to 8 pairs), handed to the textbook velocity law instead of the
+# whole-transform jump. The `dinobot` / `dinobot_ibvs` pair answers "is it the
+# correspondences or the look-then-move rule?" with a number. NOT DINOBot: a different
+# method on DINOBot's matches, labelled `dinobot_corr@dino_vits8`.
+#
+# `matcher.variant: dinobot_corr` is a real matcher (vssim.baselines.dinobot.
+# DinoBotCorrespondences); its knobs are the `dinobot:` block's front-end keys, the
+# same block the arm reads. The look-then-move keys (step_fraction, min_pairs,
+# reflection, err_space, err_threshold) are refused here: the IBVS law does not use them.
+# The law is the bench's own, unweighted (the pair cosine is no weight), sub-pixel, gain
+# 2.0, no RANSAC (DINOBot has none); only the LIVE depth is read (the IBVS rule).
+#
+# WEIGHTS / DEPENDENCY: as `dinobot.yaml`.
+
+seed: 20260902                       # unused (K-means is random_state=0 by publication)
+
+matcher:
+  variant: dinobot_corr
+  device: cuda                       # stated, no default (cpu in the fast tier)
+  num_landmarks: 8                   # the gist's num_pairs
+
+dinobot:
+  model_type: dino_vits8
+  load_size: 224
+  stride: 4
+  layer: 9
+  facet: key
+  bin_hierarchy: 2
+  saliency_thresh: 0.05
+  kmeans_n_init: 10
+
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666
+  solve_unrounded: true              # sub-pixel on every arm
+  ema_alpha: 0.0
+  weighting:                         # unweighted, like every keypoint arm
+    use_trust: false
+    use_margin: false
+    per_axis: false
+
+stop:
+  rule: cns_plateau
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

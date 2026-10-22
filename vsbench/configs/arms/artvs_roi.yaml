@@ -1,0 +1,54 @@
+# ART-VS in its PUBLISHED OBJECT MODE (the release's "MODE 4": LangSAM detection +
+# LightTrack tracking + ROI tiling), on the same DINOv2 encoder and ViT input size as the
+# `artvs` cell. A text prompt names the object; GroundingDINO + SAM2 find it in the goal
+# picture and the first live frame, LightTrack follows it, both boxes are padded 10 % and
+# cropped, the crops are matched at `vit_input_size`, and after the feature error has
+# fallen to `switch_threshold` of its first value the crops are cut into ceil(box / vit)
+# tiles per dimension (at most 5) and matched tile against tile. Points come back in
+# full-image pixels for the same IBVS law as every other arm. vssim.baselines.objroi.
+#
+# WEIGHTS: `IDEA-Research/grounding-dino-base` and `facebook/sam2.1-hiera-small` in
+# $HF_HOME (HF_HUB_OFFLINE=1); the researchmm LightTrack checkout at $LIGHTTRACK_ROOT with
+# the release's wrapper at tracking/lighttrack.py and snapshot/LightTrackM/LightTrackM.pth.
+
+seed: 20260902
+
+matcher:
+  variant: artvs_roi
+  device: cuda                     # stated, no default (cpu in the fast tier)
+  backbone_name: dinov2_vits14     # ART-VS's own backbone, as the artvs cell
+  num_landmarks: 24                # the release's num_pairs; spread over the ROI tiles
+  tie_order: stable
+  threshold: 1.0
+  vit_input_size: 224              # the artvs cell's; the release's real-robot ROI config says 256
+  switch_threshold: 0.20           # roi_tiling_switch_threshold
+  switch_iteration: 0              # tiling_switch_iteration (0 = error-based)
+  prompt: shoe                     # detection_keyword
+  roi_padding: 0.1                 # roi_padding_ratio
+  cache_timeout: 10
+  box_threshold: 0.3               # LangSAM's defaults
+  text_threshold: 0.25
+  max_tiles_per_dim: 5
+  use_sam_mask: true               # the goal's SAM mask as the patch mask (the release's mask_path)
+
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666
+  solve_unrounded: true
+  ema_alpha: 0.0
+  weighting:
+    use_trust: false
+    use_margin: false
+    per_axis: false
+
+stop:
+  rule: cns_plateau
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

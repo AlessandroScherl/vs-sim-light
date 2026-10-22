@@ -14,3 +14,20 @@ smoke.png
 # the vs-sim clone (docs/PORT_PLAN.md section 2): ignored; the pin is committed
 external/*
 !external/VSSIM_COMMIT
+# the vs-sim copy (docs/PORT_PLAN.md section 2, layout B): its size-capped parity fixtures are
+# committed despite *.npz above
+!vsbench/tests/fixtures/**
+# ... but never their bytecode (the negation above would re-include it)
+vsbench/tests/fixtures/**/__pycache__/
+vsbench/tests/fixtures/**/*.pyc
+# vs-sim's run directory, mirrored: run payloads stay out of git, provenance files and the
+# tracked README.md/.gitkeep stay visible (vs-sim's own rules; `!.../**/` is load-bearing:
+# without it git never descends and the negations below cannot match)
+vsbench/experiments/**
+!vsbench/experiments/**/
+!vsbench/experiments/.gitkeep
+!vsbench/experiments/README.md
+!vsbench/experiments/**/README.md
+!vsbench/experiments/**/MD5SUMS
+!vsbench/experiments/**/run.json
+!vsbench/experiments/**/resolved_config.yaml

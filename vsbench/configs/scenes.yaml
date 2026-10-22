@@ -1,0 +1,782 @@
+# The scenes.
+#
+# Six BENCHMARK scenes come first (`vssim.scenes.EVAL_SCENES` names them in this
+# order); the "additional scenes" section at the end holds older probe scenes that
+# still build and that no benchmark start file exists for.
+#
+# Working distances are NEVER tabulated here — they are derived at build time from
+# `configs/camera.yaml` against each scene's extent (posters: `fill_frame` from the
+# plate size; rooms: `scene_view` from the MEASURED bounding box of the placed
+# objects). Every geometric value below is frozen: the frozen start files in
+# `benchmark/starts/` were built against the goal poses these values produce, and
+# `vssim.benchmark.check_scene_goal` refuses a scene whose goal drifted.
+#
+# Heavy data is NOT in git. Textures are absolute paths on the station volume
+# (`/workspace/assets/...`); object USDs resolve through `$VSSIM_ASSET_ROOT`
+# (curated library ids) and `$VSSIM_YCB_ROOT` (`ycb/...` ids). See benchmark/README.md.
+
+version: 1
+
+# How the GOAL view is captured: `render_warmup_steps` is the number of whole goal
+# captures taken, of which `goal_capture_keep` (`last`) is kept; 1 = no warm-up.
+# Required, no default in code (`vssim.scenes.goal_capture_settings`). EIGHT because
+# the first RTX capture after a pose change still carries render history: on the
+# station the third capture still differed from the second by 0.56–0.59 grey levels
+# and the brightness was still climbing at the fourth (settle experiment, 2026-09-05;
+# ruled 2026-09-06).
+scene:
+  render_warmup_steps: 8
+  goal_capture_keep: last
+
+scenes:
+
+  # ===================================================================== posters
+  # Three 0.8 x 0.6 m textured plates in the world XY plane, seen fronto-parallel
+  # from +Z. The goal camera COVERS the frame with poster (coverage 1.35 leaves
+  # margin so a perturbed start still sees only poster) — the ART-VS Gazebo
+  # benchmark's framing. A mid-grey backdrop replaces the void at wide starts and
+  # adds no matchable structure of its own.
+
+  hollywood:
+    kind: poster
+    description: >
+      Planar textured target reproducing the ART-VS Gazebo poster benchmark.
+      A plane is well-posed for homography-based classical IBVS, so ORB/SIFT
+      converging here is a genuine correctness check for those baselines.
+    # Geometry recovered from ART-VS/catkin_ws/ibvs/models/viso/meshes/resized.dae:
+    # positions span x[-0.4,0.4], z[-0.3,0.3], y[+-0.005].
+    width_m: 0.8
+    height_m: 0.6
+    thickness_m: 0.01
+    # The texture is not committed (third-party artwork). Staged on the volume.
+    texture: /workspace/assets/hollywood/resized.png
+    backdrop:
+      size_m: 4.0
+      gray: 0.5
+    goal:
+      kind: fill_frame
+      coverage: 1.35
+    ransac: homography        # correct model for a planar target
+
+  poster2:
+    kind: poster
+    description: >
+      Identical geometry to `hollywood` with a DIFFERENT texture (a held-out
+      COCO photo, staged on the volume). The scene-specificity guard: a method
+      tuned to hollywood rather than to the task degrades here.
+    width_m: 0.8
+    height_m: 0.6
+    thickness_m: 0.01
+    texture: /workspace/assets/poster2/poster2.png
+    texture_asset_id: texture/coco/000000000724
+    backdrop:
+      size_m: 4.0
+      gray: 0.5
+    goal:
+      kind: fill_frame
+      coverage: 1.35
+    ransac: homography
+
+  poster3:
+    kind: poster
+    description: >
+      Never-seen planar scene. Identical geometry to hollywood/poster2 with a
+      texture from a source outside every training pool: Pieter Bruegel's "The
+      Tower of Babel" (Vienna), public domain, Wikimedia Commons, 3840x2810
+      (well above the camera's sampling density). Never previewed; zero tuning.
+    width_m: 0.8
+    height_m: 0.6
+    thickness_m: 0.01
+    texture: /workspace/assets/poster3/poster3.jpg
+    backdrop:
+      size_m: 4.0
+      gray: 0.5
+    goal:
+      kind: fill_frame
+      coverage: 1.35
+    ransac: homography
+
+  # ======================================================================= rooms
+  # Objects on a textured, non-repeating 2.4 m ground (tile_period_m == size_m).
+  # The goal frames the MEASURED bounding box of everything placed from straight
+  # above (`scene_view`, frame_fill 0.85, elevation 90). Object resting poses were
+  # gravity-settled ONCE and frozen to `layout_file` — a re-settle may never define
+  # a goal (PhysX is not bit-stable across processes).
+
+  industrial1_drill:
+    kind: multi_object
+    description: >
+      Industrial single-object scene: ONE HANDAL drill instance lying on its side
+      on a non-repeating concrete floor — genuinely non-planar.
+    ground:
+      texture: /workspace/assets/industrial1/ground.png
+      asset_id: texture/concrete042d
+      size_m: 2.4
+      tile_period_m: 2.4        # single span — never repeats
+    objects:
+      - {category: drill, instance_id: handal_drill_25, dx: 0.00, dy: 0.00}
+    settle:
+      # Gravity on; the drill LIES on its side — dropped at exactly 90° tilt
+      # (random yaw, seeded). The settled pose is frozen in `layout_file`.
+      seed: 20260821
+      tilt_deg: 90
+      drop_m: 0.05
+      steps: 240
+    layout_file: configs/layouts/industrial1_drill.json
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    ransac: fundamental
+
+  cluttered2:
+    kind: multi_object
+    description: >
+      Cluttered scene of EXTERNAL objects (YCB google_16k scans, metric — placed
+      at native scale) on an external Polyhaven ground texture, single span.
+      Eight objects in a seeded scatter; the tall pitcher is placed upright and
+      held static while the others settle around it.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4        # single span — never repeats
+    objects:
+      # Positions come from the seeded `scatter` sampler; the item list fixes
+      # WHICH objects and their order.
+      - {category: ycb, instance_id: ycb/003_cracker_box}
+      - {category: ycb, instance_id: ycb/004_sugar_box}
+      - {category: ycb, instance_id: ycb/005_tomato_soup_can}
+      - {category: ycb, instance_id: ycb/008_pudding_box}
+      - {category: ycb, instance_id: ycb/010_potted_meat_can}
+      - {category: ycb, instance_id: ycb/011_banana}
+      # settle: false — the handle-heavy pitcher topples from ANY drop; the tallest
+      # object must stand, so it is placed upright and held static (with collider)
+      # while the others settle around it.
+      - {category: ycb, instance_id: ycb/019_pitcher_base, settle: false,
+         pre_rot_x_deg: -90}  # the native scan LIES, mouth at -Y: Rx(-90) stands it mouth-UP
+      - {category: ycb, instance_id: ycb/024_bowl}
+    scatter:
+      seed: 20260821
+      # Aspect-matched to the 16:9 goal frame (image-right = world +X): a square
+      # scatter always leaves the frame's left/right thirds empty.
+      half_extent_x_m: 0.62
+      half_extent_y_m: 0.35
+      min_dist_m: 0.22          # spacing enforced at the drop positions
+    settle:
+      # Gravity on — natural resting poses; a gentle initial tilt (≤ 5°) so boxes,
+      # cans and the pitcher land upright and the scene keeps a big depth spread.
+      seed: 20260821
+      tilt_max_deg: 5
+      drop_m: 0.04
+      steps: 240
+    layout_file: configs/layouts/cluttered2.json
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    ransac: fundamental
+
+  cluttered3:
+    kind: multi_object
+    description: >
+      Never-seen cluttered scene: the same YCB pool minus the pitcher (its
+      cluttered2 settle special-case was hand-tuned), i.e. seven external scans
+      in a FRESH seeded scatter+settle on a FRESH external Polyhaven ground
+      (laminate_floor_02). Scatter/settle constants are cluttered2's verbatim;
+      only the seed is new. Layout baked headlessly before any episode.
+    ground:
+      texture: /workspace/assets/cluttered3/ground.png
+      asset_id: texture/polyhaven/laminate_floor_02
+      size_m: 2.4
+      tile_period_m: 2.4        # single span — never repeats
+    objects:
+      - {category: ycb, instance_id: ycb/003_cracker_box}
+      - {category: ycb, instance_id: ycb/004_sugar_box}
+      - {category: ycb, instance_id: ycb/005_tomato_soup_can}
+      - {category: ycb, instance_id: ycb/008_pudding_box}
+      - {category: ycb, instance_id: ycb/010_potted_meat_can}
+      - {category: ycb, instance_id: ycb/011_banana}
+      - {category: ycb, instance_id: ycb/024_bowl}
+    scatter:
+      seed: 20260827
+      half_extent_x_m: 0.62
+      half_extent_y_m: 0.35
+      min_dist_m: 0.22
+    settle:
+      seed: 20260827
+      tilt_max_deg: 5
+      drop_m: 0.04
+      steps: 240
+    layout_file: configs/layouts/cluttered3.json
+    goal:
+      kind: scene_view
+      frame_fill: 0.85          # cluttered2's value, verbatim
+      elevation_deg: 90         # cluttered2's value, verbatim
+    ransac: fundamental
+
+  # ========================================================= additional scenes
+  # Older probe scenes. They build (their objects are in assets/asset_library_v2.json
+  # and their textures are on the volume) but NO benchmark start file exists for
+  # them and they are not in `EVAL_SCENES`. Analytic placement, no settle, no
+  # layout: the objects stand upright at their (dx, dy) offsets.
+  #
+  # objects1 and its two variants: five curated held-out instances on a TILED
+  # gravel ground (0.6 m period ⇒ ~2 copies visible; the p12/p24 variants stretch
+  # the same texture to 1.2 m and 2.4 m periods — the tiling-ambiguity dose-response).
+  # bottle1 / mug1: one symmetric (bottle) or near-symmetric (mug) object filling
+  # the goal frame; bottle1p / mug1p: the same with a flat mid-grey ground (RGB 128,
+  # generated on the volume — no library asset behind it) as the ground-confound
+  # control.
+
+  objects1:
+    kind: multi_object
+    description: >
+      Five curated held-out instances on a tiled gravel ground (0.6 m period).
+    ground:
+      texture: /workspace/assets/objects1/ground.png
+      asset_id: texture/gravel038
+      size_m: 2.4
+      tile_period_m: 0.6
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx:  0.00, dy:  0.00}
+      - {category: drill,  instance_id: 1ef6b1c978ee4d7dacd3752d28b631c5, dx:  0.20, dy:  0.12}
+      - {category: hammer, instance_id: handal_hammer_06,                 dx: -0.19, dy:  0.14}
+      - {category: mug,    instance_id: de23895b6e9b4cfd870e30d14c2150dd, dx:  0.04, dy: -0.20}
+      - {category: shoe,   instance_id: Reebok_SOMERSET_RUN,              dx: -0.18, dy: -0.13}
+    goal:
+      kind: scene_view
+      frame_fill: 0.70
+    ransac: fundamental
+
+  objects1_p12:
+    kind: multi_object
+    description: >
+      objects1 with the ground texture repeated every 1.2 m. Geometry identical.
+    ground:
+      texture: /workspace/assets/objects1/ground.png
+      asset_id: texture/gravel038
+      size_m: 2.4
+      tile_period_m: 1.2
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx:  0.00, dy:  0.00}
+      - {category: drill,  instance_id: 1ef6b1c978ee4d7dacd3752d28b631c5, dx:  0.20, dy:  0.12}
+      - {category: hammer, instance_id: handal_hammer_06,                 dx: -0.19, dy:  0.14}
+      - {category: mug,    instance_id: de23895b6e9b4cfd870e30d14c2150dd, dx:  0.04, dy: -0.20}
+      - {category: shoe,   instance_id: Reebok_SOMERSET_RUN,              dx: -0.18, dy: -0.13}
+    goal:
+      kind: scene_view
+      frame_fill: 0.70
+    ransac: fundamental
+
+  objects1_p24:
+    kind: multi_object
+    description: >
+      objects1 with the ground texture stretched once across the 2.4 m floor
+      (no repetition). Geometry identical.
+    ground:
+      texture: /workspace/assets/objects1/ground.png
+      asset_id: texture/gravel038
+      size_m: 2.4
+      tile_period_m: 2.4
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx:  0.00, dy:  0.00}
+      - {category: drill,  instance_id: 1ef6b1c978ee4d7dacd3752d28b631c5, dx:  0.20, dy:  0.12}
+      - {category: hammer, instance_id: handal_hammer_06,                 dx: -0.19, dy:  0.14}
+      - {category: mug,    instance_id: de23895b6e9b4cfd870e30d14c2150dd, dx:  0.04, dy: -0.20}
+      - {category: shoe,   instance_id: Reebok_SOMERSET_RUN,              dx: -0.18, dy: -0.13}
+    goal:
+      kind: scene_view
+      frame_fill: 0.70
+    ransac: fundamental
+
+  bottle1:
+    kind: multi_object
+    description: >
+      A single bottle (every roll angle image-equivalent up to the cap/label
+      micro-structure) on the objects1 gravel ground.
+    ground:
+      texture: /workspace/assets/objects1/ground.png
+      asset_id: texture/gravel038
+      size_m: 2.4
+      tile_period_m: 0.6
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx: 0.00, dy: 0.00}
+    goal:
+      kind: scene_view
+      frame_fill: 0.88
+    ransac: fundamental
+
+  mug1:
+    kind: multi_object
+    description: >
+      A single mug whose handle is a large asymmetric feature, always visible
+      from the top-down goal view.
+    ground:
+      texture: /workspace/assets/objects1/ground.png
+      asset_id: texture/gravel038
+      size_m: 2.4
+      tile_period_m: 0.6
+    objects:
+      - {category: mug, instance_id: de23895b6e9b4cfd870e30d14c2150dd, dx: 0.00, dy: 0.00}
+    goal:
+      kind: scene_view
+      frame_fill: 0.88
+    ransac: fundamental
+
+  bottle1p:
+    kind: multi_object
+    description: >
+      bottle1 with a flat mid-grey ground (RGB 128). Geometry identical to bottle1.
+    ground:
+      texture: /workspace/assets/wpc/gray128.png
+      size_m: 2.4
+      tile_period_m: 0.6
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx: 0.00, dy: 0.00}
+    goal:
+      kind: scene_view
+      frame_fill: 0.88
+    ransac: fundamental
+
+  mug1p:
+    kind: multi_object
+    description: >
+      mug1 with a flat mid-grey ground (RGB 128). Geometry identical to mug1.
+    ground:
+      texture: /workspace/assets/wpc/gray128.png
+      size_m: 2.4
+      tile_period_m: 0.6
+    objects:
+      - {category: mug, instance_id: de23895b6e9b4cfd870e30d14c2150dd, dx: 0.00, dy: 0.00}
+    goal:
+      kind: scene_view
+      frame_fill: 0.88
+    ransac: fundamental
+
+# --- The historical narrow start sampler's numbers (`vssim.starts.NARROW`) ---
+# Kept here because `SceneSpec` loaders read them; the sampler lives in
+# `vssim.starts.sample_narrow` and the frozen files in benchmark/starts/.
+  # ------------------------------------------------------------------ added 2026-09-20
+  # The instance-generalisation scene (owner request): ONE Google-Scanned-Objects shoe
+  # lying flat on the cluttered2 wood floor, laces up (`pre_rot_x_deg: -90` lays the
+  # canonicalised scan down), analytic pose (no settle, no bake: deterministic), framed
+  # at 85 % from straight above -> goal distance 0.383 m (near the posters' 0.434 m).
+  # The goal picture always shows THIS shoe; the `swap_instance` perturbation puts
+  # another shoe at the same pose for the flight (vssim.bench.perturb).
+  shoe1:
+    kind: multi_object
+    description: >
+      Instance generalisation: one GSO shoe (Great Jones wingtip, scan 1) flat on the
+      cluttered2 wood floor; other shoe instances are swapped in at the same pose by
+      the swap_instance perturbation.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    objects:
+      - {category: shoe, instance_id: gso_Great_Jones_Wingtip, dx: 0.00, dy: 0.00, pre_rot_x_deg: -90}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    ransac: fundamental
+
+  # ------------------------------------------------------------------ added 2026-09-22
+  # shoe1 with the shoe turned 90 deg about the vertical: it lies along the image's long
+  # axis, so the 85 % framing brings the goal camera closer and the shoe fills far more
+  # of the picture (owner request). Same shoe, same floor, same swap machinery.
+  shoe2:
+    kind: multi_object
+    description: >
+      Instance generalisation, close framing: the GSO wingtip (scan 1) flat on the
+      cluttered2 wood floor, turned 90 deg so it lies along the image width.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    objects:
+      - {category: shoe, instance_id: gso_Great_Jones_Wingtip, dx: 0.00, dy: 0.00, pre_rot_x_deg: -90, yaw_deg: 90}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    ransac: fundamental
+
+  # ======================================================== added 2026-09-23 (instance suite)
+  # The INSTANCE SUITE (owner 2026-09-23; picks shown in the workspace page
+  # docs/instance_suite_picks_2026-09-23.md, revision 2): six kinds of object - GEN-VS's six
+  # (shoe, bottle, teapot, drill, mug, hammer) - one object alone on the cluttered2 wood,
+  # seen straight from above at 85 % frame fill. Two scenes per kind: `inst_<kind>` shows
+  # the BIG object in the goal picture, `inst_<kind>_rev` the SMALL one. The world the
+  # camera then flies in is one of the scene's named `live:` objects, put in the goal
+  # object's place by the perturbation `swap:@<name>` (vssim.bench.perturb), on the
+  # concrete floor (`+ground:concrete`). Live names - forward: `same` (the check),
+  # `same_small` (the goal object at the small size), `other_small` (the other object at
+  # its real small size), `mine1`/`mine2` (the mug also `mine3`: `025_mug`, GEN-VS's mug
+  # TRAIN reference, not held out) and `gen1..` (other objects of the kind scaled to the
+  # goal's size; `gen*` = GEN-VS's held-out set, gen-vs configs/eval/heldout_split_v2.yaml);
+  # reverse: `same`, `same_big`, `other_big`.
+  # `placement:` states each kind's orientation once (vssim.scenes.placed_item): the asset
+  # library's upright canonical pose (`canonical: library` = Rz(yaw_pick) * R_orient(pick),
+  # the GEN-VS renderer's), then `pre_rot_x_deg` (a lay-down about world X), then `yaw_deg`
+  # (`long_axis_x` = turned so the object lies along the frame's width). `size_m` is the
+  # longest extent after that orientation - real sizes where the scan is metric (shoes,
+  # teapots, mugs, hammers), stated real-world sizes where the model has no units (bottles:
+  # 1.5 L = 0.31 m, 0.5 L = 0.205-0.21 m; drills: 0.24 m and a 0.16 m compact driver).
+  # The object lists live HERE and only here: edit a `live:` entry to swap an object.
+
+  inst_shoe:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows Reebok running shoe, 29.3 cm;
+      live objects under `live:`. Placement: flat on its sole, laces up, toe to the
+      left (the library's upright canonical pose), long axis along the image width.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: shoe, instance_id: Reebok_SOMERSET_RUN, dx: 0.0, dy: 0.0, size_m: 0.293}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: shoe
+    ransac: fundamental
+    live:
+      same:        {instance_id: Reebok_SOMERSET_RUN, size_m: 0.293}   # the same
+      same_small:  {instance_id: Reebok_SOMERSET_RUN, size_m: 0.217}   # the same at 21.7 cm
+      other_small: {instance_id: gso_Reebok_BREAKPOINT_LO_2V, size_m: 0.217}   # Reebok kids' shoe (velcro), 21.7 cm
+      mine1:       {instance_id: ASICS_GELChallenger_9_Royal_BlueWhiteBlack, size_m: 0.293}   # ASICS running shoe (scaled to 29.3 cm)
+      mine2:       {instance_id: Mens_ASV_Billfish_Boat_Shoe_in_Tan_Leather_wmUJ5PbwANc, size_m: 0.293}   # tan boat shoe (scaled to 29.3 cm)
+      gen1:        {instance_id: SUPERSTAR_CLR, size_m: 0.293}   # adidas Superstar (scaled to 29.3 cm)
+      gen2:        {instance_id: gso_ASICS_GELTour_Lyte_WhiteOrchidSilver, size_m: 0.293}   # ASICS white/pink (scaled to 29.3 cm)
+      gen3:        {instance_id: gso_Mens_ASV_Billfish_Boat_Shoe_in_Dark_Brown_Leather_zdHVHXueI3w, size_m: 0.293}   # dark brown boat shoe (scaled to 29.3 cm)
+      gen4:        {instance_id: gso_Mens_Gold_Cup_ASV_2Eye_Boat_Shoe_in_Cognac_Leather, size_m: 0.293}   # cognac boat shoe (scaled to 29.3 cm)
+      gen5:        {instance_id: gso_Reebok_CL_DIBELLO_II, size_m: 0.293}   # Reebok high-top (scaled to 29.3 cm)
+      gen6:        {instance_id: gso_TZX_Runner, size_m: 0.293}   # purple runner (scaled to 29.3 cm)
+
+  inst_shoe_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows Reebok kids' shoe (velcro),
+      21.7 cm;
+      live objects under `live:`. Placement: flat on its sole, laces up, toe to the
+      left (the library's upright canonical pose), long axis along the image width.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: shoe, instance_id: gso_Reebok_BREAKPOINT_LO_2V, dx: 0.0, dy: 0.0, size_m: 0.217}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: shoe
+    ransac: fundamental
+    live:
+      same:        {instance_id: gso_Reebok_BREAKPOINT_LO_2V, size_m: 0.217}   # the same
+      same_big:    {instance_id: gso_Reebok_BREAKPOINT_LO_2V, size_m: 0.293}   # the same at 29.3 cm
+      other_big:   {instance_id: Reebok_SOMERSET_RUN, size_m: 0.293}   # Reebok running shoe, 29.3 cm
+
+  inst_bottle:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows evian 1.5 L (clear), 31 cm;
+      live objects under `live:`. Placement: the upright bottle laid on its side (90
+      deg about world X), cap to the right, long axis along the image width.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, yaw_deg: long_axis_x}
+    objects:
+      - {category: bottle, instance_id: objv_affd4ebf5fd1, dx: 0.0, dy: 0.0, size_m: 0.31}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: bottle
+    ransac: fundamental
+    live:
+      same:        {instance_id: objv_affd4ebf5fd1, size_m: 0.31}   # the same
+      same_small:  {instance_id: objv_affd4ebf5fd1, size_m: 0.205}   # the same at 20.5 cm
+      other_small: {instance_id: 7c46341c63f0495c89d6871429dad261, size_m: 0.205, upright_yaw_add_deg: 180}   # Pocari Sweat 0.5 L (clear), 20.5 cm
+      mine1:       {instance_id: objv_d17b8f44d154, size_m: 0.31}   # Aquafina (clear) (scaled to 31.0 cm)
+      mine2:       {instance_id: objv_58f61a86bdfd, size_m: 0.31}   # Coca-Cola (clear) (scaled to 31.0 cm)
+      gen1:        {instance_id: hc6d_bottle-v8_small, size_m: 0.31}   # V8 juice bottle (scaled to 31.0 cm)
+      gen2:        {instance_id: objv_6add0a1fa819, size_m: 0.31}   # black bottle (scaled to 31.0 cm)
+      gen3:        {instance_id: objv_842aad779f0d, size_m: 0.31, upright_yaw_add_deg: 180}   # white, black label (scaled to 31.0 cm)
+      gen4:        {instance_id: objv_c002e2aa017d, size_m: 0.31}   # light-blue bottle (scaled to 31.0 cm)
+      gen5:        {instance_id: objv_f9e6ca9552e7, size_m: 0.31}   # grey, red band (scaled to 31.0 cm)
+
+  inst_bottle_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows Pocari Sweat 0.5 L (clear),
+      20.5 cm;
+      live objects under `live:`. Placement: the upright bottle laid on its side (90
+      deg about world X), cap to the right, long axis along the image width.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, yaw_deg: long_axis_x}
+    objects:
+      - {category: bottle, instance_id: 7c46341c63f0495c89d6871429dad261, dx: 0.0, dy: 0.0, size_m: 0.205, upright_yaw_add_deg: 180}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: bottle
+    ransac: fundamental
+    live:
+      same:        {instance_id: 7c46341c63f0495c89d6871429dad261, size_m: 0.205, upright_yaw_add_deg: 180}   # the same
+      same_big:    {instance_id: 7c46341c63f0495c89d6871429dad261, size_m: 0.31, upright_yaw_add_deg: 180}   # the same at 31.0 cm
+      other_big:   {instance_id: objv_affd4ebf5fd1, size_m: 0.31}   # evian 1.5 L (clear), 31 cm
+
+  inst_teapot:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows floral teapot, 25.8 cm;
+      live objects under `live:`. Placement: upright, lid up, spout to the right,
+      handle to the left.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: teapot, instance_id: hc6d_teapot-big_white_floral, dx: 0.0, dy: 0.0, size_m: 0.258}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: teapot
+    ransac: fundamental
+    live:
+      same:        {instance_id: hc6d_teapot-big_white_floral, size_m: 0.258}   # the same
+      same_small:  {instance_id: hc6d_teapot-big_white_floral, size_m: 0.166}   # the same at 16.6 cm
+      other_small: {instance_id: hc6d_teapot-brown_chinese, size_m: 0.166}   # brown clay teapot, 16.6 cm
+      mine1:       {instance_id: teapot-pale_pink, size_m: 0.258}   # cream ribbed teapot (scaled to 25.8 cm)
+      mine2:       {instance_id: teapot-green_grass, size_m: 0.258}   # green teapot (scaled to 25.8 cm)
+      gen1:        {instance_id: hc6d_teapot-ambition_brand, size_m: 0.258}   # white square teapot (scaled to 25.8 cm)
+      gen2:        {instance_id: oo3d_teapot_005, size_m: 0.258}   # blue-grey kettle (scaled to 25.8 cm)
+      gen3:        {instance_id: oo3d_teapot_018, size_m: 0.258}   # orange clay teapot (scaled to 25.8 cm)
+      gen4:        {instance_id: oo3d_teapot_020, size_m: 0.258}   # dark square teapot (scaled to 25.8 cm)
+      gen5:        {instance_id: oo3d_teapot_024, size_m: 0.258}   # ornate frog teapot (scaled to 25.8 cm)
+      gen6:        {instance_id: oo3d_teapot_026, size_m: 0.258}   # blue/white teapot (scaled to 25.8 cm)
+
+  inst_teapot_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows brown clay teapot, 16.6 cm;
+      live objects under `live:`. Placement: upright, lid up, spout to the right,
+      handle to the left.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: teapot, instance_id: hc6d_teapot-brown_chinese, dx: 0.0, dy: 0.0, size_m: 0.166}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: teapot
+    ransac: fundamental
+    live:
+      same:        {instance_id: hc6d_teapot-brown_chinese, size_m: 0.166}   # the same
+      same_big:    {instance_id: hc6d_teapot-brown_chinese, size_m: 0.258}   # the same at 25.8 cm
+      other_big:   {instance_id: hc6d_teapot-big_white_floral, size_m: 0.258}   # floral teapot, 25.8 cm
+
+  inst_drill:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows blue cordless drill, 24 cm;
+      live objects under `live:`. Placement: turned 90 deg while upright, then laid on
+      its side: every drill shows its side profile, chuck to the left, battery up.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, upright_yaw_add_deg: 90, yaw_deg: 0}
+    objects:
+      - {category: drill, instance_id: a2de48529b1549488940fa98a3a3bac6, dx: 0.0, dy: 0.0, size_m: 0.24}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: drill
+    ransac: fundamental
+    live:
+      same:        {instance_id: a2de48529b1549488940fa98a3a3bac6, size_m: 0.24}   # the same
+      same_small:  {instance_id: a2de48529b1549488940fa98a3a3bac6, size_m: 0.16}   # the same at 16.0 cm
+      other_small: {instance_id: objv_0de890446936, size_m: 0.16}   # Ryobi compact impact driver, 16 cm
+      mine1:       {instance_id: 2bb97220052b484a85113afd6fda403e, size_m: 0.24}   # blue/white drill (scaled to 24.0 cm)
+      mine2:       {instance_id: objv_e3b3290b8200, size_m: 0.24}   # lime drill (scaled to 24.0 cm)
+      gen1:        {instance_id: 1ef6b1c978ee4d7dacd3752d28b631c5, size_m: 0.24}   # yellow DeWalt drill (scaled to 24.0 cm)
+      gen2:        {instance_id: handal_drill_24, size_m: 0.24}   # red impact driver (scaled to 24.0 cm)
+      gen3:        {instance_id: handal_drill_25, size_m: 0.24}   # red drill (scaled to 24.0 cm)
+      gen4:        {instance_id: objv_3a39f00e4401, size_m: 0.24}   # green drill (scaled to 24.0 cm)
+      gen5:        {instance_id: objv_6e1934bf0e73, size_m: 0.24}   # lime Guild drill (scaled to 24.0 cm)
+
+  inst_drill_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows Ryobi compact impact driver, 16
+      cm;
+      live objects under `live:`. Placement: turned 90 deg while upright, then laid on
+      its side: every drill shows its side profile, chuck to the left, battery up.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, upright_yaw_add_deg: 90, yaw_deg: 0}
+    objects:
+      - {category: drill, instance_id: objv_0de890446936, dx: 0.0, dy: 0.0, size_m: 0.16}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: drill
+    ransac: fundamental
+    live:
+      same:        {instance_id: objv_0de890446936, size_m: 0.16}   # the same
+      same_big:    {instance_id: objv_0de890446936, size_m: 0.24}   # the same at 24.0 cm
+      other_big:   {instance_id: a2de48529b1549488940fa98a3a3bac6, size_m: 0.24}   # blue cordless drill, 24 cm
+
+  inst_mug:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows green mug, 12.7 cm;
+      live objects under `live:`. Placement: upright, opening up, handle to the left.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: mug, instance_id: SM_Mug_A2, dx: 0.0, dy: 0.0, size_m: 0.127}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: mug
+    ransac: fundamental
+    live:
+      same:        {instance_id: SM_Mug_A2, size_m: 0.127}   # the same
+      same_small:  {instance_id: SM_Mug_A2, size_m: 0.0931}   # the same at 9.3 cm
+      other_small: {instance_id: hc6d_cup-new_york, size_m: 0.0931}   # small yellow cup, 9.3 cm
+      mine1:       {instance_id: SM_Mug_D1, size_m: 0.127}   # blue mug (scaled to 12.7 cm)
+      mine2:       {instance_id: hc6d_cup-red, size_m: 0.127}   # red mug (scaled to 12.7 cm)
+      mine3:       {instance_id: 025_mug, size_m: 0.127}   # red YCB mug (GEN-VS's mug reference) (scaled to 12.7 cm)
+      gen1:        {instance_id: de23895b6e9b4cfd870e30d14c2150dd, size_m: 0.127}   # white low-poly mug (scaled to 12.7 cm)
+      gen2:        {instance_id: hc6d_cup-stanford, size_m: 0.127}   # white mug (scaled to 12.7 cm)
+      gen3:        {instance_id: hc6d_cup-yellow_handle, size_m: 0.127}   # white mug, yellow handle (scaled to 12.7 cm)
+      gen4:        {instance_id: oo3d_cup_001, size_m: 0.127}   # white printed cup (scaled to 12.7 cm)
+      gen5:        {instance_id: oo3d_cup_010, size_m: 0.127}   # grey cup (scaled to 12.7 cm)
+      gen6:        {instance_id: oo3d_cup_015, size_m: 0.127}   # light-blue cup (scaled to 12.7 cm)
+
+  inst_mug_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows small yellow cup, 9.3 cm;
+      live objects under `live:`. Placement: upright, opening up, handle to the left.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, yaw_deg: long_axis_x}
+    objects:
+      - {category: mug, instance_id: hc6d_cup-new_york, dx: 0.0, dy: 0.0, size_m: 0.0931}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: mug
+    ransac: fundamental
+    live:
+      same:        {instance_id: hc6d_cup-new_york, size_m: 0.0931}   # the same
+      same_big:    {instance_id: hc6d_cup-new_york, size_m: 0.127}   # the same at 12.7 cm
+      other_big:   {instance_id: SM_Mug_A2, size_m: 0.127}   # green mug, 12.7 cm
+
+  inst_hammer:
+    kind: multi_object
+    description: >
+      Instance suite (forward): the goal picture shows claw hammer, 33.1 cm;
+      live objects under `live:`. Placement: laid on its side: the side profile, head
+      to the right, claw up.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, yaw_deg: long_axis_x}
+    objects:
+      - {category: hammer, instance_id: handal_hammer_01, dx: 0.0, dy: 0.0, size_m: 0.331}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: hammer
+    ransac: fundamental
+    live:
+      same:        {instance_id: handal_hammer_01, size_m: 0.331}   # the same
+      same_small:  {instance_id: handal_hammer_01, size_m: 0.185}   # the same at 18.5 cm
+      other_small: {instance_id: oo3d_hammer_017, size_m: 0.185}   # small hammer, 18.5 cm
+      mine1:       {instance_id: objv_784fd1ea80da, size_m: 0.331}   # Red Line claw hammer (scaled to 33.1 cm)
+      mine2:       {instance_id: objv_39b03d18881f, size_m: 0.331}   # wood/black claw hammer (scaled to 33.1 cm)
+      gen1:        {instance_id: handal_hammer_06, size_m: 0.331}   # red/grey hammer (scaled to 33.1 cm)
+      gen2:        {instance_id: handal_hammer_08, size_m: 0.331}   # white-handle hammer (scaled to 33.1 cm)
+      gen3:        {instance_id: objv_cce3dec670fc, size_m: 0.331}   # yellow-handle hammer (scaled to 33.1 cm)
+      gen4:        {instance_id: oo3d_hammer_012, size_m: 0.331}   # orange/green hammer (scaled to 33.1 cm)
+      gen5:        {instance_id: oo3d_hammer_022, size_m: 0.331}   # wooden hammer (scaled to 33.1 cm)
+
+  inst_hammer_rev:
+    kind: multi_object
+    description: >
+      Instance suite (reverse): the goal picture shows small hammer, 18.5 cm;
+      live objects under `live:`. Placement: laid on its side: the side profile, head
+      to the right, claw up.
+    ground:
+      texture: /workspace/assets/cluttered2/ground.png
+      asset_id: texture/polyhaven/wood_table_001
+      size_m: 2.4
+      tile_period_m: 2.4
+    placement: {canonical: library, pre_rot_x_deg: 90, yaw_deg: long_axis_x}
+    objects:
+      - {category: hammer, instance_id: oo3d_hammer_017, dx: 0.0, dy: 0.0, size_m: 0.185}
+    goal:
+      kind: scene_view
+      frame_fill: 0.85
+      elevation_deg: 90
+    prompt: hammer
+    ransac: fundamental
+    live:
+      same:        {instance_id: oo3d_hammer_017, size_m: 0.185}   # the same
+      same_big:    {instance_id: oo3d_hammer_017, size_m: 0.331}   # the same at 33.1 cm
+      other_big:   {instance_id: handal_hammer_01, size_m: 0.331}   # claw hammer, 33.1 cm
+
+starts:
+  n: 10
+  seed: 20260727
+  translation_frac: 0.18     # +-18% of the goal working distance, per axis
+  rotation_deg: 12.0         # max rotation magnitude about a random axis

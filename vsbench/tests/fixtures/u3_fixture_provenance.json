@@ -1,0 +1,47 @@
+{
+ "made": "2026-09-03",
+ "made_by": "tests/fixtures/u3_make_baseline_fixtures.py",
+ "command": "HF_HUB_OFFLINE=1 python3 tests/fixtures/u3_make_baseline_fixtures.py",
+ "old_repo": "../genvs-sim @ tag legacy-pre-cleanup",
+ "old_repo_commit": "2b11ab8311674605129d88ab03187f47a6265b98",
+ "inputs": {
+  "goal": "u1_frame_mug1_goal.jpg",
+  "current": "u2_frame_mug1_roll010.jpg",
+  "image_wh": [
+   1920,
+   1080
+  ],
+  "scene": "mug1",
+  "start_id": 7,
+  "seed": 0,
+  "num_pairs": 24
+ },
+ "files": {
+  "u3_classical_mug1.json": {
+   "from": "src/control/matchers/classical.py::ClassicalMatcher, 3 detectors x 3 RANSAC models",
+   "md5": "1133410909669c116183e981a06585ed",
+   "bytes": 20206
+  },
+  "u3_vitvs_dinov2.json": {
+   "from": "src/control/matchers/vit_dense.py::ViTDenseMatcher(backbone='dinov2') - the published log-binned 3456-d chain",
+   "md5": "dff725f67ffd5770a4bc446c20efa3f2",
+   "bytes": 2770
+  },
+  "u3_artvs_dinov3.json": {
+   "from": "src/control/matchers/vit_tiled.py::ARTVSMatcher(backbone='dinov3') - one coarse frame, one tiled frame, the tile grid",
+   "md5": "e408eb1d219296c1656da18efcb6d8d9",
+   "bytes": 6404
+  }
+ },
+ "measured_parity": {
+  "classical_points_px": 0.0,
+  "classical_cross_opencv_4_10_vs_4_11": 0.0,
+  "vitvs_dinov2_descriptors": 0.0,
+  "vitvs_dinov2_points_px": 0.0,
+  "vitvs_dinov2_conf": 1.1e-06,
+  "artvs_coarse_points_px": 0.0,
+  "artvs_tiled_points_px": 2.3e-13,
+  "artvs_conf": 1.3e-06
+ },
+ "notes": "See u3_fixture_provenance.md. The torch.hub DINOv2 weights ARE cached (~/.cache/torch/hub/checkpoints, 2026-05-07); only the HF facebook/dinov2-small copy is missing. Nothing was downloaded. No runbook has invoked vitvs/artvs since 2026-07-27 - re-run on the station before quoting any number."
+}
