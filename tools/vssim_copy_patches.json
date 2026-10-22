@@ -1,0 +1,12 @@
+{
+ "doc": "docs/PORT_PLAN.md 2.3: the reviewed patch list (dest file -> exact old/new pairs, applied after the rewrite rules). Six or fewer files; a seventh is a question for the owner, not a commit.",
+ "patches": [
+  {"id": "P1", "dest": "vsbench/vs/camera.py",
+   "reason": "the one data root: configs/, benchmark/ and assets/ live in vsbench/vs/data/ (every other module derives its paths from REPO_ROOT)",
+   "pairs": [
+    {"old": "REPO_ROOT = Path(__file__).resolve().parents[1]\n",
+     "new": "REPO_ROOT = Path(__file__).resolve().parent / \"data\"\n",
+     "reason": "vsbench/vs/data/ is the copy's data root (PORT_PLAN 2.1, 2.3)"}
+   ]}
+ ]
+}
