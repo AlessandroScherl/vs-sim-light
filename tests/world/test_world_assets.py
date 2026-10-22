@@ -4,7 +4,7 @@ Fast tests build tiny OBJ / USD files in a temp folder; ``usd-core`` (pxr) is th
 reference for every USD rule: the composed points, Isaac's box rule, the orient op's
 matrix and the up-axis correction. The cache tests run when the U3 cache exists
 (``tools/convert_objects.py convert --rooms --coverage``); the gate test also needs
-vs-sim's modules (the copy ``vsbench.vs`` or the pinned clone).
+vs-sim's modules (the copy ``vsbench.vs``).
 """
 
 from __future__ import annotations
@@ -306,10 +306,7 @@ def _vs():
     sys.path.insert(0, str(REPO))
     from tools.convert_objects import vs_modules
 
-    try:
-        return vs_modules()
-    except SystemExit as e:
-        pytest.skip(str(e))
+    return vs_modules()
 
 
 @needs_cache

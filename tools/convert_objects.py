@@ -10,8 +10,7 @@
 docs/PORT_PLAN.md sections 5 and 7 (U3). The converter itself is
 ``vsbench.world.assets`` and imports no vs-sim code; this driver needs vs-sim's library,
 scene, layout, start-file and goal functions and takes them from the copy
-(``vsbench.vs``) when it exists, else from the pinned clone ``external/vs-sim`` (the
-module set it used is written into every result). ``--all`` (U7) is not in this unit.
+``vsbench.vs`` (the module set it used is written into every result). ``--all`` (U7) is not in this unit.
 """
 
 from __future__ import annotations
@@ -44,30 +43,12 @@ OUT = REPO / "results" / "bridge"
 
 # ----------------------------------------------------------------- vs-sim modules
 def vs_modules() -> types.SimpleNamespace:
-    """vs-sim's modules: the copy ``vsbench.vs`` if present, else the pinned clone.
+    """vs-sim's modules, from the copy ``vsbench.vs`` (the only source since U-copy)."""
+    from vsbench.vs import assets, benchmark, camera, isaac_scene, scenes, starts
 
-    The clone is ``external/vs-sim`` of this checkout, else ``$VSSIM_SRC``, else the main
-    tree's ``~/genvs_ws/vs_sim_light/external/vs-sim`` (a worktree has no clone).
-    """
-    try:
-        from vsbench.vs import assets, benchmark, camera, isaac_scene, scenes, starts
-
-        label = "vsbench.vs (the copy)"
-    except ImportError:
-        cands = [REPO / "external" / "vs-sim", os.environ.get("VSSIM_SRC"),
-                 Path.home() / "genvs_ws" / "vs_sim_light" / "external" / "vs-sim"]
-        src = next((Path(c) for c in cands if c and (Path(c) / "vssim").is_dir()), None)
-        if src is None:
-            raise SystemExit("neither vsbench.vs nor an external/vs-sim clone is available") from None
-        if str(src) not in sys.path:
-            sys.path.append(str(src))
-        from vssim import assets, benchmark, camera, isaac_scene, scenes, starts
-
-        pin = (REPO / "external" / "VSSIM_COMMIT").read_text().strip()
-        label = f"vssim from {src} (pin {pin})"
     return types.SimpleNamespace(assets=assets, benchmark=benchmark, camera=camera,
                                  isaac_scene=isaac_scene, scenes=scenes, starts=starts,
-                                 label=label)
+                                 label="vsbench.vs (the copy)")
 
 
 def workspace_path(p: str) -> Path:
