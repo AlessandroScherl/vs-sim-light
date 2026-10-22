@@ -1,0 +1,96 @@
+[
+  {
+    "cell": "hollywood_sift_ransac",
+    "n": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "predicate_a": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "paper_3cm_3deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "cns_code_0p1d_10deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "abs_10mm_1deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "abs_20mm_2deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "abs_50mm_5deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    },
+    "abs_100mm_10deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 0.1758,
+      "cap_rotation_deg_med": 0.1047
+    }
+  },
+  {
+    "cell": "hollywood_vitvs_dinov3",
+    "n": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "predicate_a": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "paper_3cm_3deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "cns_code_0p1d_10deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "abs_10mm_1deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "abs_20mm_2deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "abs_50mm_5deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    },
+    "abs_100mm_10deg": {
+      "stop": 0,
+      "cap": 1,
+      "cap_translation_mm_med": 3.7775,
+      "cap_rotation_deg_med": 0.5182
+    }
+  }
+]
