@@ -211,7 +211,7 @@ this repository, which stands alone and stays separate from vs-sim for good. A l
 vs-sim sits in `external/vs-sim` (git-ignored), checked out at the commit in
 `external/VSSIM_COMMIT` (committed): it is the pinned **source** of that copy and of a drift
 check, not a runtime dependency, and it is **not** pip-installed in the venv (its fast tier is
-run from the clone's own directory, where `python -m pytest` finds the `vssim` package).
+run with `PYTHONPATH=external/vs-sim`).
 Weights are a copy, outside the repository, so the shared caches are never opened:
 
 ```
@@ -224,7 +224,8 @@ $VSBENCH_PY -m pip install --only-binary=:all: "transformers>=4.57" "PyYAML>=6" 
 #   ~/genvs_ws/vsbench_assets/weights/hf/hub/models--facebook--dinov3-vits16-pretrain-lvd1689m/   (HF_HOME)
 #   ~/genvs_ws/vsbench_assets/weights/torch/hub/{checkpoints/dinov2_vits14_pretrain.pth,
 #                                                facebookresearch_dinov2_main/, trusted_list}  (TORCH_HOME)
-cd external/vs-sim && $VSBENCH_PY -m pytest tests/fast -q   # vs-sim's fast tier in this venv (from the clone)
+PYTHONPATH=external/vs-sim env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT \
+  $VSBENCH_PY -m pytest external/vs-sim/tests/fast -q   # the clone's fast tier in this venv
 ```
 
 `~/genvs_ws/vsbench_assets/` (outside the repository) is the bridge's cache: `weights/` now,
@@ -232,7 +233,9 @@ the converted objects later. Torch is the CPU build (`+cpu`); `torch.cuda.is_ava
 `False` by construction. Known drift: OpenCV 5.0 has no `AKAZE_create`, so vs-sim's AKAZE
 arms cannot be built in this venv, and its classical fixture (pinned to OpenCV 4.10 / 4.11)
 skips (with OpenCV 4.11, the flight interpreter's version, those tests pass); everything else
-in the fast tier passes. The measured record is `results/bridge/u0_env.json`.
+in the fast tier passes. The two asset-root variables must be unset for that tier (three
+`test_assets.py` tests assert the defaults). The measured record is `results/bridge/u0_env.json`;
+the per-test split, which the copy must reproduce, is `results/bridge/u0_clone_fast_tier.txt`.
 
 ## Layout
 

@@ -22,7 +22,13 @@
     "usd-core": "26.11 (cp312 wheel; pxr imports)",
     "PyYAML": "6.0.3",
     "pytest": "9.1.1",
-    "unchanged": {"numpy": "2.5.3", "opencv-python-headless": "5.0.0.93", "mujoco": "3.13.0", "pillow": "12.3.0", "scipy": "1.18.1"},
+    "unchanged": {
+      "numpy": "2.5.3",
+      "opencv-python-headless": "5.0.0.93",
+      "mujoco": "3.13.0",
+      "pillow": "12.3.0",
+      "scipy": "1.18.1"
+    },
     "pip_check": "No broken requirements found"
   },
   "weights": {
@@ -38,8 +44,8 @@
   "gates": {
     "import": "python -c 'import vssim, torch, transformers, mujoco' -> cuda available False (vssim importable from the clone directory / PYTHONPATH)",
     "vssim_fast_tier": {
-      "command": "cd external/vs-sim && PYTHONPATH=$PWD nice -n 19 ../../.venv/bin/python -m pytest tests/fast -q (tools/cpu_env.sh sourced, 2 threads)",
-      "result": "774 passed, 6 failed, 22 skipped in 228 s (also 774/6/22 in 181 s with vssim pip-installed -e, before it was removed)",
+      "command": "PYTHONPATH=external/vs-sim env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT nice -n 19 .venv/bin/python -m pytest external/vs-sim/tests/fast -q (repo root, tools/cpu_env.sh sourced, 2 threads)",
+      "result": "774 passed, 6 failed, 22 skipped (802) in 178-179 s; the same split from inside the clone directory (228 s) and with vssim pip-installed -e (181 s, before it was removed)",
       "failed": [
         "test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model",
         "test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]",
@@ -54,7 +60,10 @@
         "11 legacy parity tests (test_control 1, test_features_dinov2 3, test_isaac_scene 1, test_prealign 4, test_scenes 1, test_objroi_sim 1)": "they look for ../genvs-sim and ../ART-VS beside the clone",
         "1 test_dinobot.py:314": "DINO v1 ViT-S/8 not copied (DINOBot is not in U0's scope)",
         "1 test_lightglue.py:87": "lightglue package not installed (later arm)"
-      }
+      },
+      "per_test_record": "results/bridge/u0_clone_fast_tier.txt (the split U-copy must match, skip-for-skip)",
+      "env_var_finding": "with VSSIM_ASSET_ROOT / VSSIM_YCB_ROOT set (tools/cpu_env.sh sets them for U3), 3 more failures in test_assets.py (test_the_ycb_root_is_an_environment_setting, test_the_three_resolution_branches, test_relative_paths_resolve_against_the_asset_root_not_this_repo): they assert the built-in defaults and do not clear the variables; run the tier with both unset",
+      "note_on_classical_parity": "the 9 fixture skips include SIFT and ORB (test_parity_with_the_old_classical_matcher[none|homography|fundamental-sift|orb|akaze]): under OpenCV 5.0 the classical arms' parity is not proven in this venv, only under 4.11 (probe)"
     },
     "probe_legacy_parity": "one-off: external/genvs-sim -> ~/runpod_dev/genvs-sim and external/ART-VS -> ~/runpod_dev/ART-VS as symlinks, PYTHONDONTWRITEBYTECODE=1: the six files with the 11 skipped parity tests -> 200 passed, 0 skipped, 56 s; nothing written in either tree (find -newer); symlinks removed afterwards",
     "probe_opencv_4_11": "one-off: opencv-python-headless 4.11.0.86 in /tmp on PYTHONPATH (the flight interpreter's version), test_classical + test_arms + test_match + test_protocol -> 112 passed, 0 failed, 0 skipped, 30 s; the six AKAZE failures and the nine fixture skips are all the OpenCV 5.0 drift; removed afterwards",
