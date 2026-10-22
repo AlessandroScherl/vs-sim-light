@@ -18,6 +18,7 @@ export MUJOCO_GL=egl
 export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 NUMEXPR_NUM_THREADS=2
 export TORCH_NUM_THREADS=2                # the bridge calls torch.set_num_threads(2) too
 export LP_NUM_THREADS=2                   # Mesa llvmpipe's rasteriser threads (default: one per CPU)
+export PXR_WORK_THREAD_LIMIT=2            # usd-core's TBB pool (default: one per CPU)
 export HF_HOME="$HOME/genvs_ws/vsbench_assets/weights/hf"  HF_HUB_OFFLINE=1  TRANSFORMERS_OFFLINE=1
 export TORCH_HOME="$HOME/genvs_ws/vsbench_assets/weights/torch"
 export VSBENCH_WORKSPACE_ROOT="$HOME/genvs_ws"   # where /workspace/... textures and USDs really are

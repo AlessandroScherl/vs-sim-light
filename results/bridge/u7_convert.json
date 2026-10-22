@@ -1,0 +1,8397 @@
+{
+ "unit": "U7 - convert the full library (docs/PORT_PLAN.md sections 5 and 7)",
+ "cache": "/home/alessandro/genvs_ws/vsbench_assets/objects",
+ "vs_modules": "vsbench.vs (the copy)",
+ "converter": "vsbench-objects-1",
+ "usd_core": "26.11",
+ "n_ok": 325,
+ "n_requested": 331,
+ "seconds_total": 0.4,
+ "cache_total_bytes": 2514268528,
+ "cap_bytes": 10737418240,
+ "objects": [
+  {
+   "instance_id": "035_power_drill",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/YCB/Axis_Aligned/035_power_drill.usd",
+   "source_kind": "isaac_native",
+   "category": "drill"
+  },
+  {
+   "instance_id": "Black and Decker Cordless Drill",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "drill",
+   "source_bytes": 288191,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8916,
+   "faces": 2972,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1328023,
+   "seconds": 0.543,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "repeat uvs wrapped per face into [0, 1] (1486 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "023c84c399814304b3f876103faccb98",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 21391948,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 171339,
+   "faces": 315204,
+   "n_looks": 10,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5074124,
+   "seconds": 2.762,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "10 materials packed into one 4x4 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "0da5a950ebd34a9bb76408a625f076af",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 131177931,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1071482,
+   "faces": 1872152,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 25559153,
+   "seconds": 9.685,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "130a7f4c3739460187fb219596fbef66",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 8225504,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 62083,
+   "faces": 118068,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2670582,
+   "seconds": 0.901,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "normal texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "1ef6b1c978ee4d7dacd3752d28b631c5",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 4637367,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 38332,
+   "faces": 66696,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 4916556,
+   "seconds": 1.233,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "2bb97220052b484a85113afd6fda403e",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 14003524,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 116156,
+   "faces": 199984,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4008424,
+   "seconds": 1.418,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "emissiveColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "5ae22f04776a4a06997eb427eafcb07c",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 10478179,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 111743,
+   "faces": 148986,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1806137,
+   "seconds": 0.78,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 684801,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8328,
+   "faces": 9186,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1743431,
+   "seconds": 0.568,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "a549f6cca4834731b7dea0f98d1f7b29",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 70214516,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 587893,
+   "faces": 1000000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 14835199,
+   "seconds": 4.692,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "df273c86ffc9442dbf59128b7c843aa9",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 33409827,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 329018,
+   "faces": 467406,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 9927853,
+   "seconds": 3.098,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "normal texture ignored",
+    "repeat uvs wrapped per face into [0, 1] (204822 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "07b07f7292ed41019a8b6aebd98a5c29",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 576924,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 5397,
+   "faces": 8152,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 158054,
+   "seconds": 0.156,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 07b07f7292ed41019a8b6aebd98a5c29_texture0.png dropped",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "opacity texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "1450ccf286f64ca4882422d0751334ae",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 10676805,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 97623,
+   "faces": 154297,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 1437316,
+   "seconds": 0.611,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "2b80440f980049c6b89be1428073545f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 96282,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 810,
+   "faces": 1322,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 231517,
+   "seconds": 0.217,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "UsdUVTexture scale (1.0, 1.0, 1.0, 0.0) ignored",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "2e5132fabf7943d9b39743a966e2a1a7",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 26171335,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 216913,
+   "faces": 384444,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 2883828,
+   "seconds": 1.711,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "33dedbfe99e24379a422db4d5c809752",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 8510872,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 72777,
+   "faces": 121876,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2115980,
+   "seconds": 0.748,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 33dedbfe99e24379a422db4d5c809752_texture0.png dropped",
+    "opacity texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "5e530e4e82f3413a9516b3cc8287c42f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 11431979,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 93144,
+   "faces": 169008,
+   "n_looks": 3,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 1366757,
+   "seconds": 1.182,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "7c46341c63f0495c89d6871429dad261",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 39192132,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 321432,
+   "faces": 578688,
+   "n_looks": 3,
+   "texture": {
+    "height": 512,
+    "width": 512
+   },
+   "bytes": 4883915,
+   "seconds": 2.931,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 256 px tiles",
+    "320 faces span a texture seam and were clamped to [0, 1]",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "93d9991078204bc4921269c3c8fa4576",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 1092025,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 21312,
+   "faces": 13872,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 140196,
+   "seconds": 0.046,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "99c3800812b4445d9f14c1555668c784",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 15093988,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 122409,
+   "faces": 224728,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 1891151,
+   "seconds": 0.912,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "a7785ac7ce7f4ba79df661db33637ba9",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 566685,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 5810,
+   "faces": 8180,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 163997,
+   "seconds": 0.154,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "800 faces span a texture seam and were clamped to [0, 1]",
+    "normal texture ignored",
+    "repeat uvs wrapped per face into [0, 1] (800 faces shifted)",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "acc232eb79fc438b963823b6047cd919",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 349188,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2900,
+   "faces": 4960,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 371191,
+   "seconds": 0.197,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "c730cefa973944eea0adab30f2afb76d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 34174,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 432,
+   "faces": 412,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 10601,
+   "seconds": 0.013,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "efa1c4c1f2a947659ded2e61e20eff31",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 719116,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 5508,
+   "faces": 10296,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 103602,
+   "seconds": 0.05,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "f17cf7f2da59456d8d7e532e72b807c6",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 11431237,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 93144,
+   "faces": 169008,
+   "n_looks": 3,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 1368959,
+   "seconds": 0.631,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "025_mug",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/YCB/Axis_Aligned/025_mug.usd",
+   "source_kind": "isaac_native",
+   "category": "mug"
+  },
+  {
+   "instance_id": "SM_Mug_A2",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_A2.usd",
+   "source_kind": "isaac_native",
+   "category": "mug"
+  },
+  {
+   "instance_id": "SM_Mug_B1",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_B1.usd",
+   "source_kind": "isaac_native",
+   "category": "mug"
+  },
+  {
+   "instance_id": "SM_Mug_C1",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_C1.usd",
+   "source_kind": "isaac_native",
+   "category": "mug"
+  },
+  {
+   "instance_id": "SM_Mug_D1",
+   "status": "nucleus",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_D1.usd",
+   "source_kind": "isaac_native",
+   "category": "mug"
+  },
+  {
+   "instance_id": "Threshold_Porcelain_Coffee_Mug_All_Over_Bead_White",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "mug",
+   "source_bytes": 1160882,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8559,
+   "faces": 16644,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 3376080,
+   "seconds": 2.247,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "1f6a331e21db4f919f6e448bfde3a090",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "mug",
+   "source_bytes": 1596064,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14520,
+   "faces": 22208,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 213301,
+   "seconds": 0.099,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "7cc9e64d7ffd4e369595062abb3ab177",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "mug",
+   "source_bytes": 7237939,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 56505,
+   "faces": 108032,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 778559,
+   "seconds": 0.544,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "8632380517a043ccbd364e1418cfed74",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "mug",
+   "source_bytes": 522554,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 4593,
+   "faces": 7680,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 348246,
+   "seconds": 0.165,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "de23895b6e9b4cfd870e30d14c2150dd",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "mug",
+   "source_bytes": 17026,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 364,
+   "faces": 262,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 7793,
+   "seconds": 0.009,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "ASICS_GELChallenger_9_Royal_BlueWhiteBlack",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2332079,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18155,
+   "faces": 33438,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6875712,
+   "seconds": 2.394,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Glycerin_11_Color_BrllntBluSkydvrSlvrBlckWht_Size_80",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2990270,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 24595,
+   "faces": 42844,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7052580,
+   "seconds": 2.191,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Great_Jones_Wingtip_kAqSg6EgG0I",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1574701,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12449,
+   "faces": 22530,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6685120,
+   "seconds": 2.829,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Great_Jones_Wingtip_wxH3dbtlvBC",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1303399,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10025,
+   "faces": 18654,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7074842,
+   "seconds": 2.566,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Mens_ASV_Billfish_Boat_Shoe_in_Tan_Leather_wmUJ5PbwANc",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1473885,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11142,
+   "faces": 21110,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7020159,
+   "seconds": 2.965,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Mens_Billfish_Ultra_Lite_Boat_Shoe_in_Dark_Brown_Blue_c6zDZTtRJr6",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2234988,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17167,
+   "faces": 32020,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5838202,
+   "seconds": 2.325,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Mens_Mako_Canoe_Moc_2Eye_Boat_Shoe_in_Coffee_K9e8FoV73uZ",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1480989,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11325,
+   "faces": 21168,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 3479344,
+   "seconds": 1.575,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Mens_Striper_Sneaker_in_White_rnp8HUli59Y",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1946876,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15538,
+   "faces": 27882,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5506934,
+   "seconds": 2.581,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Reebok_SOMERSET_RUN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2297536,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18281,
+   "faces": 32926,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5800226,
+   "seconds": 2.553,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Reebok_TURBO_RC",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2012309,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15684,
+   "faces": 28818,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5216301,
+   "seconds": 2.146,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "SUPERSTAR_CLR",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 3212822,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 25630,
+   "faces": 46090,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5330808,
+   "seconds": 2.281,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Womens_Betty_Chukka_Boot_in_Navy_Jersey_Sequin_y0SsHk7dKUX",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1417878,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11216,
+   "faces": 20268,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8081768,
+   "seconds": 3.022,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "adistar_boost_m",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2296597,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18299,
+   "faces": 32918,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6413912,
+   "seconds": 2.808,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-blue_floral",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7391086,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 68021,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2450,
+    "width": 2496
+   },
+   "bytes": 8646972,
+   "seconds": 3.073,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-green_grass",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7356979,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 64681,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2488,
+    "width": 2522
+   },
+   "bytes": 6076035,
+   "seconds": 1.989,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-pale_pink",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7248560,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 70483,
+   "faces": 99999,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2285630,
+   "seconds": 0.894,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-white_blue_cone_top",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7390036,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 67785,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2365,
+    "width": 2369
+   },
+   "bytes": 7352780,
+   "seconds": 2.082,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-white_floral",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7087687,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 57844,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2102710,
+   "seconds": 0.812,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "teapot-white_rectangle",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7101944,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 59077,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2099046,
+   "seconds": 0.916,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "tube-hansaplast_gel",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tube",
+   "source_bytes": 7449821,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 86776,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2536953,
+   "seconds": 0.751,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "tube-kiwi",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tube",
+   "source_bytes": 7281675,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 59530,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1149,
+    "width": 1081
+   },
+   "bytes": 2713684,
+   "seconds": 0.918,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "tube-skincare_hydralist",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tube",
+   "source_bytes": 7144289,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 62047,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2227921,
+   "seconds": 0.972,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "tube-skincare_provencale",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tube",
+   "source_bytes": 7179953,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 64980,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2184165,
+   "seconds": 0.695,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "0adcf1771a3c4b5c922c47dd09d149b0",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "stapler",
+   "source_bytes": 33164,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 439,
+   "faces": 384,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 49435,
+   "seconds": 0.092,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "7c5f400773d940cdb2bc6884c990e888",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "stapler",
+   "source_bytes": 1086215,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 6423,
+   "faces": 10000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 909949,
+   "seconds": 0.371,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "emissiveColor texture ignored",
+    "vertex colours (displayColor) ignored"
+   ]
+  },
+  {
+   "instance_id": "94aa850d29c54f0d8e8dc9947f4b37fd",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "stapler",
+   "source_bytes": 1485484,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15332,
+   "faces": 21012,
+   "n_looks": 5,
+   "texture": {
+    "height": 3072,
+    "width": 3072
+   },
+   "bytes": 1239516,
+   "seconds": 0.646,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "5 materials packed into one 3x3 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "f15c7f6fbf7d4c4a88217b32dfd39eec",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "stapler",
+   "source_bytes": 135798,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2677,
+   "faces": 1577,
+   "n_looks": 3,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 25779,
+   "seconds": 0.017,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "can-beer_delta",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "can",
+   "source_bytes": 7309833,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 60636,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1601,
+    "width": 1549
+   },
+   "bytes": 3718389,
+   "seconds": 1.521,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "can-cheakpeas",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "can",
+   "source_bytes": 7317991,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61286,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1669,
+    "width": 1609
+   },
+   "bytes": 5027827,
+   "seconds": 1.633,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "can-fanta",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "can",
+   "source_bytes": 7310132,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 60620,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1449,
+    "width": 1446
+   },
+   "bytes": 3877073,
+   "seconds": 1.51,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "can-hoegaarden",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "can",
+   "source_bytes": 7293369,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 59172,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1446,
+    "width": 1404
+   },
+   "bytes": 3607902,
+   "seconds": 1.018,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "212d33f6b5904bed965a87b018325b26",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "tv_remote",
+   "source_bytes": 4060891,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 22282,
+   "faces": 39236,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 701020,
+   "seconds": 0.386,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored",
+    "vertex colours (displayColor) ignored"
+   ]
+  },
+  {
+   "instance_id": "2924224f899b43de93e9fd43c9a0a079",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "tv_remote",
+   "source_bytes": 380286,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 5146,
+   "faces": 5348,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 698012,
+   "seconds": 0.403,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "52f142c052564d85b6ef21413af34e25",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "tv_remote",
+   "source_bytes": 455395,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 3919,
+   "faces": 3526,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 675442,
+   "seconds": 0.313,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 52f142c052564d85b6ef21413af34e25_texture0.png dropped",
+    "opacity texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "67a5956349574fac8431b9b12aad8b81",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "tv_remote",
+   "source_bytes": 12983104,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 191695,
+   "faces": 262500,
+   "n_looks": 8,
+   "texture": {
+    "height": 192,
+    "width": 192
+   },
+   "bytes": 2924254,
+   "seconds": 1.466,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "8 materials packed into one 3x3 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "remote-black",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 6999150,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 51863,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2539,
+    "width": 3008
+   },
+   "bytes": 3396862,
+   "seconds": 1.554,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-factory_svc",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7017262,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 53347,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2019,
+    "width": 2330
+   },
+   "bytes": 2989042,
+   "seconds": 1.25,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-grey",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7156532,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 67436,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1666,
+    "width": 1526
+   },
+   "bytes": 3588472,
+   "seconds": 1.049,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-heitech",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7158673,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 67371,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1562,
+    "width": 1510
+   },
+   "bytes": 4043417,
+   "seconds": 1.234,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-jaxster_d1170",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7019368,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 53624,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1530,
+    "width": 2133
+   },
+   "bytes": 2626067,
+   "seconds": 0.927,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-nvtc",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7011653,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 52911,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 2098,
+    "width": 1932
+   },
+   "bytes": 2869070,
+   "seconds": 1.103,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-silver",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7146094,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 66526,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1600,
+    "width": 1524
+   },
+   "bytes": 3614024,
+   "seconds": 1.262,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "remote-thin_silver",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "tv_remote",
+   "source_bytes": 7023950,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 54076,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1762,
+    "width": 2169
+   },
+   "bytes": 3131310,
+   "seconds": 1.003,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "Prius Hybrid",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "toy_car",
+   "source_bytes": 156808,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1899,
+   "faces": 2180,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1857612,
+   "seconds": 0.639,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 faces span a texture seam and were clamped to [0, 1]",
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of Hybrid.png dropped",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "29496edf3dcc4dbdb57565726a514457",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 166394,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2099,
+   "faces": 2120,
+   "n_looks": 10,
+   "texture": {
+    "height": 512,
+    "width": 512
+   },
+   "bytes": 123143,
+   "seconds": 0.045,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "10 materials packed into one 4x4 atlas of 128 px tiles",
+    "53 faces span a texture seam and were clamped to [0, 1]",
+    "repeat uvs wrapped per face into [0, 1] (92 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "33657ac0e044493daf495d45424ead7a",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 221851,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 3490,
+   "faces": 3108,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 75077,
+   "seconds": 0.055,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "48d41b9edeb44def903b6930333c7699",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 3037644,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 53560,
+   "faces": 59482,
+   "n_looks": 13,
+   "texture": {
+    "height": 256,
+    "width": 256
+   },
+   "bytes": 640193,
+   "seconds": 0.453,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "13 materials packed into one 4x4 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "89dbf73cd4bc4a068bf7b0727d8c09a1",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 348597,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 7794,
+   "faces": 6832,
+   "n_looks": 8,
+   "texture": {
+    "height": 192,
+    "width": 192
+   },
+   "bytes": 60890,
+   "seconds": 0.028,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "8 materials packed into one 3x3 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "8c5b991b4c0a4bfcb13e0eea894343b1",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 570465,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16380,
+   "faces": 9916,
+   "n_looks": 15,
+   "texture": {
+    "height": 256,
+    "width": 256
+   },
+   "bytes": 119319,
+   "seconds": 0.075,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "15 materials packed into one 4x4 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "a82af6d92f0d47edb5a5bfe998469205",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 325911,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17897,
+   "faces": 10166,
+   "n_looks": 7,
+   "texture": {
+    "height": 192,
+    "width": 192
+   },
+   "bytes": 108631,
+   "seconds": 0.076,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "7 materials packed into one 3x3 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "bbee8a44206f4fae8f672f3f93297bd5",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 5078331,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 53372,
+   "faces": 52088,
+   "n_looks": 18,
+   "texture": {
+    "height": 320,
+    "width": 320
+   },
+   "bytes": 618595,
+   "seconds": 0.281,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "18 materials packed into one 5x5 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "cfa91c978d4e4dd7b7b7a4462082a3a7",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 8058076,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 127126,
+   "faces": 107075,
+   "n_looks": 17,
+   "texture": {
+    "height": 320,
+    "width": 320
+   },
+   "bytes": 1184683,
+   "seconds": 0.445,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "17 materials packed into one 5x5 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "e30380ec13d740719b7de6e3113add72",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "toy_car",
+   "source_bytes": 9114506,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 150392,
+   "faces": 121414,
+   "n_looks": 49,
+   "texture": {
+    "height": 448,
+    "width": 448
+   },
+   "bytes": 1517067,
+   "seconds": 0.898,
+   "seconds_this_run": 0.01,
+   "lost": [
+    "49 materials packed into one 7x7 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "0ce3b89790954c499f9dc67f3e3a621f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 362984,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 4063,
+   "faces": 5044,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 54503,
+   "seconds": 0.019,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "0d381d2a89104f59ae500c4157aa912f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 1202396,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9711,
+   "faces": 17521,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 326683,
+   "seconds": 0.218,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "10fe3d13e1d24c358ee0a88fb29f8840",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 3308505,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 37742,
+   "faces": 74136,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 619439,
+   "seconds": 0.419,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "8265a807b0914fb9ae4afedc7eb6d462",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 1311797,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12185,
+   "faces": 19072,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 153930,
+   "seconds": 0.064,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "91535afacf004ff8b9bb5db7c1641441",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 127450,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1283,
+   "faces": 1744,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 19391,
+   "seconds": 0.009,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "f03145e303cf4f2b9c0a585564b44292",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drinking_glass",
+   "source_bytes": 108317,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2432,
+   "faces": 1276,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 16806,
+   "seconds": 0.007,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "193b1c220e47478698c62985bfdf0ab4",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 49428,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 468,
+   "faces": 680,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 9083,
+   "seconds": 0.012,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "5aa5eb5ffad8437eadf331c098d08296",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 550755,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 4971,
+   "faces": 7635,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1128238,
+   "seconds": 0.491,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "95f1afb745b948fd9bac0908b6546d0c",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 265041,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2098,
+   "faces": 3888,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 326865,
+   "seconds": 0.161,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "b95ee38c708746399153f2b00b52551c",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 80855,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1561,
+   "faces": 984,
+   "n_looks": 1,
+   "texture": {
+    "height": 8,
+    "width": 8
+   },
+   "bytes": 12892,
+   "seconds": 0.023,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "c63510b103fc4954ad36a84d7e26e7ec",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 289580,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2452,
+   "faces": 4196,
+   "n_looks": 5,
+   "texture": {
+    "height": 1536,
+    "width": 1536
+   },
+   "bytes": 317153,
+   "seconds": 0.145,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "5 materials packed into one 3x3 atlas of 512 px tiles"
+   ]
+  },
+  {
+   "instance_id": "fb8ba6812b6847f8b7f26dc319c07f93",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "wine_bottle",
+   "source_bytes": 796785,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8508,
+   "faces": 11280,
+   "n_looks": 2,
+   "texture": {
+    "height": 512,
+    "width": 512
+   },
+   "bytes": 133039,
+   "seconds": 0.049,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 256 px tiles",
+    "34 faces span a texture seam and were clamped to [0, 1]",
+    "alpha channel of fb8ba6812b6847f8b7f26dc319c07f93_texture0.png dropped",
+    "opacity texture ignored",
+    "repeat uvs wrapped per face into [0, 1] (16 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "handal_hammer_01",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 3827429,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29471,
+   "faces": 55560,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1985034,
+   "seconds": 0.676,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_02",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 5962310,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 44623,
+   "faces": 86688,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2299859,
+   "seconds": 0.97,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_03",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 3050758,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 22952,
+   "faces": 44162,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1356281,
+   "seconds": 0.726,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_04",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 4857825,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 38122,
+   "faces": 70464,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1887938,
+   "seconds": 1.068,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_05",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 1844770,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14210,
+   "faces": 26376,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1439427,
+   "seconds": 0.537,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_06",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 1730346,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13253,
+   "faces": 24955,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1531701,
+   "seconds": 0.565,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_07",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 2946613,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 23420,
+   "faces": 42172,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1789274,
+   "seconds": 0.695,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_08",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 3150062,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 26356,
+   "faces": 45177,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2047513,
+   "seconds": 0.691,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_hammer_09",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "hammer",
+   "source_bytes": 4290948,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 32189,
+   "faces": 61794,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1732165,
+   "seconds": 0.714,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_drill_20",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "drill",
+   "source_bytes": 1649455,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18451,
+   "faces": 22083,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1591068,
+   "seconds": 0.751,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_drill_22",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "drill",
+   "source_bytes": 2462537,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 33042,
+   "faces": 31970,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2251737,
+   "seconds": 0.619,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_drill_23",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "drill",
+   "source_bytes": 2836671,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 37313,
+   "faces": 37051,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2369524,
+   "seconds": 0.685,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_drill_24",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "drill",
+   "source_bytes": 1619943,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 21976,
+   "faces": 20975,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2096564,
+   "seconds": 0.505,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "handal_drill_25",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "handal_bop",
+   "category": "drill",
+   "source_bytes": 2240283,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29946,
+   "faces": 29100,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2257960,
+   "seconds": 1.056,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-ambition_brand",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7102968,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 58932,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2007673,
+   "seconds": 0.784,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-big_white_floral",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7188162,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 70073,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 3266,
+    "width": 3399
+   },
+   "bytes": 12708352,
+   "seconds": 4.464,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-brown_chinese",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7072943,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 58621,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1495,
+    "width": 1513
+   },
+   "bytes": 3551756,
+   "seconds": 1.253,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-new_chinese",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7377012,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 66431,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1806,
+    "width": 1739
+   },
+   "bytes": 4098212,
+   "seconds": 1.373,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_malacasa",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 3630848,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29091,
+   "faces": 50000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1313321,
+   "seconds": 0.449,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_rectangle_sprout",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7153233,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 63637,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2124569,
+   "seconds": 0.77,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_royal_norfolk",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7146813,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 62019,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2197162,
+   "seconds": 1.042,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_small",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7164636,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 64309,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2151882,
+   "seconds": 1.125,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_spherical",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7164584,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 63949,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2176852,
+   "seconds": 0.811,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_teapot-white_was_brand",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "teapot",
+   "source_bytes": 7130361,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61698,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2056204,
+   "seconds": 0.785,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_bottle-sloth",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "bottle",
+   "source_bytes": 7313848,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61588,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1555,
+    "width": 1562
+   },
+   "bytes": 3252735,
+   "seconds": 1.275,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_bottle-v8_small",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "bottle",
+   "source_bytes": 7261361,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 57213,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1104,
+    "width": 1077
+   },
+   "bytes": 2766867,
+   "seconds": 0.922,
+   "seconds_this_run": 0.01,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_cup-new_york",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "mug",
+   "source_bytes": 7098479,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61301,
+   "faces": 99999,
+   "n_looks": 1,
+   "texture": {
+    "height": 1490,
+    "width": 1470
+   },
+   "bytes": 3176556,
+   "seconds": 1.083,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_cup-plastic_green_flowers",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "mug",
+   "source_bytes": 7340874,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 63071,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1712,
+    "width": 1736
+   },
+   "bytes": 3266092,
+   "seconds": 1.356,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_cup-red",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "mug",
+   "source_bytes": 7104199,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61540,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1579,
+    "width": 1583
+   },
+   "bytes": 3560819,
+   "seconds": 1.111,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_cup-stanford",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "mug",
+   "source_bytes": 7322415,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 62676,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1865,
+    "width": 1926
+   },
+   "bytes": 3363552,
+   "seconds": 1.052,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "hc6d_cup-yellow_handle",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "housecat6d",
+   "category": "mug",
+   "source_bytes": 7325735,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61770,
+   "faces": 100000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1802,
+    "width": 1867
+   },
+   "bytes": 3374908,
+   "seconds": 1.189,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_bottle_001",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "bottle",
+   "source_bytes": 6011508,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 44579,
+   "faces": 87096,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2049239,
+   "seconds": 0.835,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_001",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 191352088,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1340822,
+   "faces": 2615795,
+   "n_looks": 1,
+   "texture": {
+    "height": 2403,
+    "width": 2416
+   },
+   "bytes": 46650458,
+   "seconds": 22.056,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_005",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 8732251,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 64916,
+   "faces": 126320,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 11602658,
+   "seconds": 4.894,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_006",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 9585208,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 71197,
+   "faces": 138646,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 12530772,
+   "seconds": 5.283,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_008",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 10644752,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 79641,
+   "faces": 154018,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2701830,
+   "seconds": 1.041,
+   "seconds_this_run": 0.01,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_009",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 7285937,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 54259,
+   "faces": 105438,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 3181108,
+   "seconds": 1.229,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_010",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181086499,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1256316,
+   "faces": 2500004,
+   "n_looks": 1,
+   "texture": {
+    "height": 2025,
+    "width": 2207
+   },
+   "bytes": 42281836,
+   "seconds": 21.813,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_012",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180969109,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1270371,
+   "faces": 2500008,
+   "n_looks": 1,
+   "texture": {
+    "height": 1834,
+    "width": 1812
+   },
+   "bytes": 43294665,
+   "seconds": 20.181,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_015",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181467726,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1269012,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1842,
+    "width": 1690
+   },
+   "bytes": 43205145,
+   "seconds": 20.973,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_016",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181006997,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1263730,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1617,
+    "width": 1610
+   },
+   "bytes": 43135503,
+   "seconds": 21.298,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_019",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180954286,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267259,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1879,
+    "width": 1644
+   },
+   "bytes": 42458083,
+   "seconds": 21.464,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_020",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180840894,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1265451,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1521,
+    "width": 1603
+   },
+   "bytes": 43082132,
+   "seconds": 20.899,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_023",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181049875,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1270237,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1676,
+    "width": 1473
+   },
+   "bytes": 42460017,
+   "seconds": 18.18,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_025",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181969083,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267196,
+   "faces": 2500000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1646,
+    "width": 1490
+   },
+   "bytes": 42439324,
+   "seconds": 20.879,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_026",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181474684,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1268213,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1759,
+    "width": 1645
+   },
+   "bytes": 42810880,
+   "seconds": 18.159,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_027",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180671140,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267542,
+   "faces": 2500014,
+   "n_looks": 1,
+   "texture": {
+    "height": 1755,
+    "width": 1721
+   },
+   "bytes": 42658841,
+   "seconds": 20.431,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_029",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181370796,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267707,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1822,
+    "width": 1588
+   },
+   "bytes": 42609678,
+   "seconds": 19.838,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_032",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180882508,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267646,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1689,
+    "width": 1677
+   },
+   "bytes": 42494212,
+   "seconds": 19.89,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_033",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 181157866,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1266139,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1774,
+    "width": 1621
+   },
+   "bytes": 43388844,
+   "seconds": 21.039,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_034",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180878316,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1268037,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1629,
+    "width": 1619
+   },
+   "bytes": 42476414,
+   "seconds": 20.547,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_cup_035",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "mug",
+   "source_bytes": 180830796,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1269012,
+   "faces": 2499994,
+   "n_looks": 1,
+   "texture": {
+    "height": 1557,
+    "width": 1447
+   },
+   "bytes": 41834482,
+   "seconds": 20.017,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_002",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 3936122,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29307,
+   "faces": 56920,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2786659,
+   "seconds": 1.1,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_003",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 5434553,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 40981,
+   "faces": 78654,
+   "n_looks": 1,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 3000128,
+   "seconds": 1.26,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_009",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 2657027,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19998,
+   "faces": 38452,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1021588,
+   "seconds": 0.413,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_011",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 2152401,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16197,
+   "faces": 31084,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 881589,
+   "seconds": 0.328,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_012",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 3566283,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 26961,
+   "faces": 51604,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1236020,
+   "seconds": 0.508,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_014",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 6019425,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 45180,
+   "faces": 87132,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1892358,
+   "seconds": 0.751,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_016",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 5673611,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 44698,
+   "faces": 82030,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 9640708,
+   "seconds": 4.553,
+   "seconds_this_run": 0.01,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_017",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 9554781,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 68728,
+   "faces": 133278,
+   "n_looks": 1,
+   "texture": {
+    "height": 1162,
+    "width": 1926
+   },
+   "bytes": 3002947,
+   "seconds": 1.078,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_018",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 180557495,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1258912,
+   "faces": 2499996,
+   "n_looks": 1,
+   "texture": {
+    "height": 1562,
+    "width": 2389
+   },
+   "bytes": 42034918,
+   "seconds": 21.326,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_019",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 163959369,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1155718,
+   "faces": 2285232,
+   "n_looks": 1,
+   "texture": {
+    "height": 1134,
+    "width": 2073
+   },
+   "bytes": 37324930,
+   "seconds": 17.732,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_021",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 2732426,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20980,
+   "faces": 39500,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1147910,
+   "seconds": 0.505,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_hammer_022",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "hammer",
+   "source_bytes": 3917410,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29581,
+   "faces": 56650,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1404639,
+   "seconds": 0.523,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_shoe_014",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "shoe",
+   "source_bytes": 18558226,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 136230,
+   "faces": 268584,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 14331575,
+   "seconds": 6.78,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_002",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 22515590,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 168210,
+   "faces": 325867,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 5095804,
+   "seconds": 2.053,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_003",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 21135735,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 155547,
+   "faces": 305992,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4798709,
+   "seconds": 2.693,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_005",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 18416107,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 135114,
+   "faces": 266084,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4154196,
+   "seconds": 1.851,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_008",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 19815919,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 147267,
+   "faces": 286588,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4655474,
+   "seconds": 1.901,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_009",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 17472754,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 132072,
+   "faces": 252828,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4224254,
+   "seconds": 1.684,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_010",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 15053723,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 120493,
+   "faces": 217990,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 3857629,
+   "seconds": 1.395,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_011",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 18906459,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 140225,
+   "faces": 273376,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4206751,
+   "seconds": 1.79,
+   "seconds_this_run": 0.01,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_013",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 19097456,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 141722,
+   "faces": 276366,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4162552,
+   "seconds": 1.746,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_014",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 8252691,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 61911,
+   "faces": 119448,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2429445,
+   "seconds": 0.813,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_018",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 180908068,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1269913,
+   "faces": 2500006,
+   "n_looks": 1,
+   "texture": {
+    "height": 1257,
+    "width": 1161
+   },
+   "bytes": 42435904,
+   "seconds": 21.428,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_019",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181275127,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1264151,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1126,
+    "width": 1172
+   },
+   "bytes": 42136850,
+   "seconds": 22.028,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_020",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181430728,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1265501,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1163,
+    "width": 1162
+   },
+   "bytes": 42454712,
+   "seconds": 22.56,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_021",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181216824,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1267032,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1631,
+    "width": 1404
+   },
+   "bytes": 43336096,
+   "seconds": 22.924,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_022",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181120342,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1273935,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1206,
+    "width": 1181
+   },
+   "bytes": 42555035,
+   "seconds": 21.778,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_023",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181078133,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1265172,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1192,
+    "width": 1136
+   },
+   "bytes": 41818663,
+   "seconds": 17.875,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_024",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181541698,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1287546,
+   "faces": 2500004,
+   "n_looks": 1,
+   "texture": {
+    "height": 1345,
+    "width": 1342
+   },
+   "bytes": 43649655,
+   "seconds": 15.355,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_025",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181177165,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1290054,
+   "faces": 2500088,
+   "n_looks": 1,
+   "texture": {
+    "height": 1476,
+    "width": 1516
+   },
+   "bytes": 43441553,
+   "seconds": 20.941,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_026",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181535086,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1284326,
+   "faces": 2500004,
+   "n_looks": 1,
+   "texture": {
+    "height": 1501,
+    "width": 1511
+   },
+   "bytes": 43657219,
+   "seconds": 22.501,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_028",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181071477,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1269307,
+   "faces": 2500000,
+   "n_looks": 1,
+   "texture": {
+    "height": 1419,
+    "width": 1386
+   },
+   "bytes": 42992220,
+   "seconds": 22.747,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_034",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 11748724,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 88208,
+   "faces": 170066,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 3211418,
+   "seconds": 1.731,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_035",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181892532,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1275670,
+   "faces": 2499998,
+   "n_looks": 1,
+   "texture": {
+    "height": 1311,
+    "width": 1205
+   },
+   "bytes": 41996756,
+   "seconds": 23.806,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "oo3d_teapot_036",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "oo3d",
+   "category": "teapot",
+   "source_bytes": 181728982,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1274511,
+   "faces": 2500002,
+   "n_looks": 1,
+   "texture": {
+    "height": 1432,
+    "width": 1228
+   },
+   "bytes": 42036853,
+   "seconds": 22.696,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_11pro_SL_TRX_FG",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1444996,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11846,
+   "faces": 20706,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5332806,
+   "seconds": 2.67,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ASICS_GELBlur33_20_GS_BlackWhiteSafety_Orange",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2726927,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 21285,
+   "faces": 39092,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6897765,
+   "seconds": 3.134,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ASICS_GELLinksmaster_WhiteCoffeeSand",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2412507,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20162,
+   "faces": 34586,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5616508,
+   "seconds": 3.248,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ASICS_GELLinksmaster_WhiteSilverCarolina_Blue",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2383695,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19650,
+   "faces": 34160,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6722694,
+   "seconds": 3.292,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ASICS_GELTour_Lyte_WhiteOrchidSilver",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1815918,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15434,
+   "faces": 26000,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5931669,
+   "seconds": 3.143,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Adrenaline_GTS_13_Color_DrkDenimWhtBachlorBttnSlvr_Size_50_yfK40TNjq0V",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 3200758,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 25326,
+   "faces": 45866,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6760765,
+   "seconds": 3.249,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Azure_Snake_Tieks_Leather_Snake_Print_Ballet_Flats",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2164502,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16731,
+   "faces": 30976,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6447414,
+   "seconds": 3.157,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_CLIMACOOL_BOAT_BREEZE_IE6CyqSaDwN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2916455,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 24954,
+   "faces": 41832,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5175067,
+   "seconds": 2.644,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_California_Navy_Tieks_Italian_Leather_Ballet_Flats",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1645212,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13117,
+   "faces": 23540,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6229811,
+   "seconds": 3.512,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Cascadia_8_Color_AquariusHibscsBearingSeaBlk_Size_50",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2950400,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 24364,
+   "faces": 42288,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7592065,
+   "seconds": 3.583,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ClimaCool_Aerate_2_W_Wide",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1989129,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15699,
+   "faces": 28482,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7607880,
+   "seconds": 3.328,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Colton_Wntr_Chukka_y4jO0I8JQFW",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1869620,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15387,
+   "faces": 26766,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4932493,
+   "seconds": 2.614,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Court_Attitude",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2648031,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20061,
+   "faces": 37954,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5332095,
+   "seconds": 2.615,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Crazy_8",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1749373,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13616,
+   "faces": 25056,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6665558,
+   "seconds": 3.082,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Crazy_Shadow_2",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2745654,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 22044,
+   "faces": 39326,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6128064,
+   "seconds": 2.99,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Crazy_Shadow_2_oW4Jd10HFFr",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1666702,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13045,
+   "faces": 23866,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5831212,
+   "seconds": 2.747,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Cream_Tieks_Italian_Leather_Ballet_Flats",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1203388,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9371,
+   "faces": 17216,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6282348,
+   "seconds": 3.869,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_DRAGON_W",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1323798,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10152,
+   "faces": 18932,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4872162,
+   "seconds": 2.478,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_D_ROSE_45",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2162662,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16936,
+   "faces": 30974,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8870541,
+   "seconds": 4.074,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_D_ROSE_773_II_Kqclsph05pE",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 3326471,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 25893,
+   "faces": 47688,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4725616,
+   "seconds": 2.613,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_D_ROSE_773_II_hvInJwJ5HUD",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 3195399,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 25055,
+   "faces": 45804,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5540392,
+   "seconds": 2.682,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_D_ROSE_ENGLEWOOD_II",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2503367,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19669,
+   "faces": 35868,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6325691,
+   "seconds": 3.143,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ENFR_MID_ENFORCER",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2492214,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19253,
+   "faces": 35714,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5601804,
+   "seconds": 3.086,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_F10_TRX_FG_ssscuo9tGxb",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1027211,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8475,
+   "faces": 14708,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4107026,
+   "seconds": 2.369,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_F5_TRX_FG",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 994412,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 7810,
+   "faces": 14248,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5009052,
+   "seconds": 2.605,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_FYW_ALTERNATION",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2315944,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17717,
+   "faces": 33206,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7476668,
+   "seconds": 3.206,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_FYW_DIVISION",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2567496,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19988,
+   "faces": 36812,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8642322,
+   "seconds": 3.25,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_GIRLS_DECKHAND",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1314998,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10132,
+   "faces": 18796,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6746127,
+   "seconds": 3.103,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Ghost_6_Color_BlckWhtLavaSlvrCitrus_Size_80",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 4116447,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 35062,
+   "faces": 59036,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7346513,
+   "seconds": 3.03,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Ghost_6_Color_MdngtDenmPomBrtePnkSlvBlk_Size_50",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 4009113,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 33914,
+   "faces": 57462,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7583128,
+   "seconds": 2.714,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Ghost_6_GTX_Color_AnthBlckSlvrFernSulphSprng_Size_80",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 4052383,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 34367,
+   "faces": 58118,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7362810,
+   "seconds": 2.661,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Glycerin_11_Color_AqrsDrsdnBluBlkSlvShckOrng_Size_50",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2576455,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20502,
+   "faces": 36936,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8077094,
+   "seconds": 3.563,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Grand_Prix",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1624574,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12311,
+   "faces": 23248,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7091968,
+   "seconds": 4.017,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Great_Jones_Wingtip",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1303671,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9944,
+   "faces": 18656,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5756471,
+   "seconds": 2.691,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Great_Jones_Wingtip_j5NV8GRnitM",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1592046,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12484,
+   "faces": 22786,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8170536,
+   "seconds": 3.683,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_LEUCIPPUS_ADIPURE",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1739517,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14519,
+   "faces": 24908,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5909666,
+   "seconds": 2.861,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_ASV_Billfish_Boat_Shoe_in_Dark_Brown_Leather_zdHVHXueI3w",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1492021,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11737,
+   "faces": 21364,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8374020,
+   "seconds": 4.396,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_ASV_Shock_Light_Bungee_in_Light_Grey_xGCOvtLDnQJ",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2676197,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 21022,
+   "faces": 38368,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7897795,
+   "seconds": 3.427,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Authentic_Original_Boat_Shoe_in_Navy_Leather_NHHQddDLQys",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2021284,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17504,
+   "faces": 28948,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6334472,
+   "seconds": 3.456,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Authentic_Original_Boat_Shoe_in_Navy_Leather_xgoEcZtRNmH",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1328310,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9981,
+   "faces": 19012,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8818137,
+   "seconds": 3.939,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Bahama_in_White_vSwvGMCo32f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1607486,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12683,
+   "faces": 23030,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7177699,
+   "seconds": 3.483,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Billfish_Slip_On_in_Coffee_nK6AJJAHOae",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1346278,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10246,
+   "faces": 19276,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6864342,
+   "seconds": 3.085,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Billfish_Slip_On_in_Tan_Beige_aaVUk0tNTv8",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1374439,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10281,
+   "faces": 19680,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8253079,
+   "seconds": 4.258,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Gold_Cup_ASV_2Eye_Boat_Shoe_in_Cognac_Leather",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1716652,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12896,
+   "faces": 24598,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5171602,
+   "seconds": 2.947,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Gold_Cup_ASV_Capetown_Penny_Loafer_in_Black_EjPnk3E8fCs",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1967503,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14432,
+   "faces": 28192,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7511087,
+   "seconds": 4.092,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Gold_Cup_ASV_Dress_Casual_Venetian_in_Dark_Brown_Leather",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1404550,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10484,
+   "faces": 20090,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6503212,
+   "seconds": 3.781,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Mako_Canoe_Moc_2Eye_Boat_Shoe_in_Coffee_9d05GG33QQQ",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1453081,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11537,
+   "faces": 20804,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7107430,
+   "seconds": 3.69,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Mako_Canoe_Moc_2Eye_Boat_Shoe_in_OysterTaupe_otyRrfvPMiA",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1248320,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9964,
+   "faces": 17868,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8209803,
+   "seconds": 4.292,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Mens_Tremont_Kiltie_Tassel_Loafer_in_Black_Amaretto",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2042157,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15665,
+   "faces": 29246,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6931956,
+   "seconds": 3.348,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_PHEEHAN_RUN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2302102,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 19516,
+   "faces": 33016,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7558905,
+   "seconds": 3.789,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Predator_LZ_TRX_FG",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1545230,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12489,
+   "faces": 22122,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4872030,
+   "seconds": 2.739,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_PureCadence_2_Color_HiRskRedNghtlfeSlvrBlckWht_Size_70",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2609422,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20859,
+   "faces": 37382,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7410249,
+   "seconds": 3.517,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Ravenna_4_Color_WhtOlyBluBlkShkOrngSlvRdO_Size_70",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 4542095,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 42689,
+   "faces": 65146,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6221904,
+   "seconds": 3.14,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Real_Deal_1nIwCHX1MTh",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2641975,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20631,
+   "faces": 37872,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6230876,
+   "seconds": 3.057,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_BREAKPOINT_LO_2V",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2269765,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17281,
+   "faces": 32522,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6322321,
+   "seconds": 3.588,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_CL_DIBELLO_II",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2166846,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17807,
+   "faces": 31018,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4992192,
+   "seconds": 2.948,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_CL_RAYEN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1704061,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13048,
+   "faces": 24400,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5363665,
+   "seconds": 3.098,
+   "seconds_this_run": 0.02,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_DMX_MAX_PLUS_ATHLETIC",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1949767,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15453,
+   "faces": 27920,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5186173,
+   "seconds": 2.645,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_DMX_MAX_PLUS_RAINWALKER",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1913727,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15221,
+   "faces": 27446,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4143171,
+   "seconds": 2.731,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_EASYTONE_CL_LEATHER",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1242198,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9430,
+   "faces": 17784,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5282603,
+   "seconds": 2.642,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_FS_HI_MINI",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1781022,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13585,
+   "faces": 25484,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4828171,
+   "seconds": 2.837,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_FUELTRAIN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1922430,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15021,
+   "faces": 27552,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5844311,
+   "seconds": 3.098,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_GL_6000",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1728213,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14243,
+   "faces": 24766,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4695722,
+   "seconds": 2.862,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_HIMARA_LTR",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2000389,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15526,
+   "faces": 28674,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7486478,
+   "seconds": 3.697,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_REALFLEX_SELECT",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1878542,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15270,
+   "faces": 26914,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7782023,
+   "seconds": 3.718,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_SH_COURT_MID_II",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1993023,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15818,
+   "faces": 28546,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5113315,
+   "seconds": 2.511,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_SH_NEWPORT_LOW",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1357431,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10570,
+   "faces": 19432,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5027102,
+   "seconds": 2.933,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_SH_PRIME_COURT_LOW",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1725133,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 12851,
+   "faces": 24708,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6662734,
+   "seconds": 3.618,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_SMOOTHFLEX_CUSHRUN_20",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 3842439,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 30707,
+   "faces": 55096,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7776461,
+   "seconds": 3.203,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_STUDIO_BEAT_LOW_V",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2306919,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 17548,
+   "faces": 33052,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 3863497,
+   "seconds": 2.163,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_TRIPLE_BREAK_LITE",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1015883,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 7916,
+   "faces": 14528,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5249538,
+   "seconds": 2.928,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_ULTIMATIC_2V",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2328282,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18422,
+   "faces": 33366,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6999296,
+   "seconds": 3.109,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_VERSA_TRAIN",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2779598,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 22394,
+   "faces": 39860,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5043517,
+   "seconds": 2.857,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Reebok_ZIGCOOPERSTOWN_QUAG",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2855220,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 22884,
+   "faces": 40876,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4048626,
+   "seconds": 2.343,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_SAMOA",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1793494,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15243,
+   "faces": 25698,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5507683,
+   "seconds": 3.037,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_SLACK_CRUISER",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1730918,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14231,
+   "faces": 24796,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6036491,
+   "seconds": 3.088,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Samoa_onepiece",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1679486,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14195,
+   "faces": 24064,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4281332,
+   "seconds": 2.203,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Santa_Cruz_Mens",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1538158,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 11577,
+   "faces": 22024,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6247906,
+   "seconds": 2.802,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_TROCHILUS_BOOST",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2562822,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 20092,
+   "faces": 36728,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 7579530,
+   "seconds": 3.415,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_TZX_Runner",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2807109,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 21861,
+   "faces": 40238,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 3163683,
+   "seconds": 1.741,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Timberland_Mens_Earthkeepers_Casco_Bay_Canvas_Oxford",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1932982,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 14601,
+   "faces": 27704,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8256266,
+   "seconds": 3.515,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Timberland_Mens_Earthkeepers_Heritage_2Eye_Boat_Shoe",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1381975,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10795,
+   "faces": 19778,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5395975,
+   "seconds": 2.65,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Timberland_Mens_Earthkeepers_Stormbuck_Lite_Plain_Toe_Oxford",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1250382,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9957,
+   "faces": 17872,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5246931,
+   "seconds": 2.639,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Timberland_Mens_Earthkeepers_Stormbuck_Plain_Toe_Oxford",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2008622,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16516,
+   "faces": 28750,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5704638,
+   "seconds": 2.815,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Timberland_Womens_Classic_Amherst_2Eye_Boat_Shoe",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1994773,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15407,
+   "faces": 28578,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6861921,
+   "seconds": 3.287,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Womens_Authentic_Original_Boat_Shoe_in_Classic_Brown_Leather_48Nh7VuMwW6",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1303040,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 10287,
+   "faces": 18644,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5251625,
+   "seconds": 2.504,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_Womens_Bluefish_2Eye_Boat_Shoe_in_Linen_Natural_Sparkle_Suede_w34KNQ41csH",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1257181,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9599,
+   "faces": 17972,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5051010,
+   "seconds": 2.212,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ZX700_lYiwcTIekXk",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 2038878,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15704,
+   "faces": 29206,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5625936,
+   "seconds": 2.902,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "gso_ZigKick_Hoops",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "gso",
+   "category": "shoe",
+   "source_bytes": 1840293,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 15055,
+   "faces": 26360,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 6304369,
+   "seconds": 2.636,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "objv_3a39f00e4401",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 808526,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9983,
+   "faces": 10865,
+   "n_looks": 6,
+   "texture": {
+    "height": 3072,
+    "width": 3072
+   },
+   "bytes": 2231928,
+   "seconds": 1.121,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "6 materials packed into one 3x3 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_e3b3290b8200",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 846756,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 7533,
+   "faces": 12108,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 950394,
+   "seconds": 0.404,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_bfaa6854d59f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 154393075,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1274900,
+   "faces": 2204816,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 30021436,
+   "seconds": 11.93,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "objv_80b7858eee5b",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 250566422,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2551287,
+   "faces": 3499996,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 53740698,
+   "seconds": 18.753,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "objv_dd14ccedba4d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 8225504,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 62083,
+   "faces": 118068,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2670518,
+   "seconds": 1.002,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "normal texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_8fd5608b449f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 344957,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2625,
+   "faces": 4824,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1135438,
+   "seconds": 0.25,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "normal texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_1f79787e200d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 19818097,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 157879,
+   "faces": 286356,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 4180426,
+   "seconds": 2.015,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "155 faces span a texture seam and were clamped to [0, 1]",
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "repeat uvs wrapped per face into [0, 1] (202 faces shifted)",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_0de890446936",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 70757702,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 703142,
+   "faces": 995560,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 16355810,
+   "seconds": 5.636,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "objv_6e1934bf0e73",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "drill",
+   "source_bytes": 1327622,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 25228,
+   "faces": 18250,
+   "n_looks": 11,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 447698,
+   "seconds": 0.686,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "11 materials packed into one 4x4 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_090bc73cec79",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 4808156,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 37138,
+   "faces": 68434,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1583897,
+   "seconds": 0.567,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of 090bc73cec794ede8ec528dfa9eb7db3_texture0.png dropped",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_f96384640d53",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 2315150,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 24184,
+   "faces": 32506,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 617951,
+   "seconds": 0.407,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "74 faces span a texture seam and were clamped to [0, 1]",
+    "repeat uvs wrapped per face into [0, 1] (20 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "objv_c2ed3556af1f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 4992591,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18205,
+   "faces": 44764,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 321886,
+   "seconds": 0.432,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_58f61a86bdfd",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 395113,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 3034,
+   "faces": 5680,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 927063,
+   "seconds": 0.301,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_f9e6ca9552e7",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 5799425,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 46642,
+   "faces": 86496,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 676418,
+   "seconds": 0.351,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_f5dd9fee1085",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 4736280,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 36468,
+   "faces": 67280,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1196847,
+   "seconds": 0.679,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles",
+    "UsdUVTexture scale (0.989963710308075, 0.989963710308075, 0.989963710308075, 0.0) ignored",
+    "alpha channel of f5dd9fee10854a3d8288602c32714592_texture3.png dropped",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "opacity texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_3a8d0d7db289",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 2383776,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18937,
+   "faces": 34816,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 412043,
+   "seconds": 0.194,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 3a8d0d7db2894afb9d4b5680a0bf2a53_texture0.png dropped",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_c002e2aa017d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 2248803,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16141,
+   "faces": 31310,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 452597,
+   "seconds": 0.206,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "objv_c9eb3ec6a975",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 1174408,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13425,
+   "faces": 25978,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 336237,
+   "seconds": 0.339,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_842aad779f0d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 66817,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 623,
+   "faces": 874,
+   "n_looks": 3,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 112401,
+   "seconds": 0.07,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 512 px tiles",
+    "alpha channel of 842aad779f0d4794ac7a2185cf2f8a3c_texture0.png dropped",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_6add0a1fa819",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 4328636,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 35145,
+   "faces": 63232,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 894534,
+   "seconds": 0.44,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 6add0a1fa81942acbb24504b130661c1_texture0.png dropped",
+    "opacity texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_0e8acc8ad98f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 3848084,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 32721,
+   "faces": 56640,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 461086,
+   "seconds": 0.478,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of 0e8acc8ad98f4d1794985e4579ce18eb_texture0.png dropped",
+    "normal texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_1837c2463663",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 1697064,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 16326,
+   "faces": 25688,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 794912,
+   "seconds": 0.519,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of 1837c24636634148935c922e49892daa_texture0.png dropped",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_79740b6f1be7",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 1471458,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 13789,
+   "faces": 22366,
+   "n_looks": 4,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 931951,
+   "seconds": 0.673,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of 79740b6f1be743a6ba84bfda9891ea4e_texture0.png dropped",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_7f2daeea9eea",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 22879479,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 543914,
+   "faces": 272384,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 4274912,
+   "seconds": 1.562,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 7f2daeea9eea45f8a9ef854661e99ee4_texture0.png dropped",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "opacity texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_8256f67f7d8b",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 153956,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1472,
+   "faces": 2142,
+   "n_looks": 5,
+   "texture": {
+    "height": 3072,
+    "width": 3072
+   },
+   "bytes": 1939668,
+   "seconds": 0.782,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "5 materials packed into one 3x3 atlas of 1024 px tiles",
+    "alpha channel of 8256f67f7d8b4cb9b06ac33243839bc7_texture1.png dropped",
+    "alpha channel of 8256f67f7d8b4cb9b06ac33243839bc7_texture3.png dropped",
+    "alpha channel of 8256f67f7d8b4cb9b06ac33243839bc7_texture5.png dropped",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_e83926de8d37",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 482827,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 3642,
+   "faces": 6930,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 403066,
+   "seconds": 0.174,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_b3f2d2309afa",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 223737,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2498,
+   "faces": 3054,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 303457,
+   "seconds": 0.316,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_9d3519c8af66",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 396363,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 3458,
+   "faces": 5760,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1707686,
+   "seconds": 0.471,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "alpha channel of 9d3519c8af664b46a50e85533e307cee_texture0.png dropped",
+    "alpha channel of 9d3519c8af664b46a50e85533e307cee_texture2.png dropped",
+    "normal texture ignored",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_4d16a5659d6d",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 4512753,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 53355,
+   "faces": 44682,
+   "n_looks": 5,
+   "texture": {
+    "height": 3072,
+    "width": 3072
+   },
+   "bytes": 1251231,
+   "seconds": 0.637,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 faces span a texture seam and were clamped to [0, 1]",
+    "5 materials packed into one 3x3 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_2b807dda52eb",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 2419087,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 18448,
+   "faces": 35144,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 512033,
+   "seconds": 0.323,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_bdb663c8be5e",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 496615,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 4143,
+   "faces": 6956,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1396874,
+   "seconds": 0.381,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_39b03d18881f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 88142,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1152,
+   "faces": 1120,
+   "n_looks": 2,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 751264,
+   "seconds": 0.267,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_e1f901eaa02f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 282233,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2652,
+   "faces": 3908,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 526160,
+   "seconds": 0.197,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_76a75a4cafb7",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 251510,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2106,
+   "faces": 3502,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1719265,
+   "seconds": 0.3,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_cce3dec670fc",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 1525478,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 32213,
+   "faces": 17896,
+   "n_looks": 2,
+   "texture": {
+    "height": 128,
+    "width": 128
+   },
+   "bytes": 174788,
+   "seconds": 0.112,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 64 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_784fd1ea80da",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 110936,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 984,
+   "faces": 1498,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 127290,
+   "seconds": 0.062,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_8cfd79dc47cf",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 7534031,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 134007,
+   "faces": 98048,
+   "n_looks": 2,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 2020254,
+   "seconds": 0.709,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "2 materials packed into one 2x2 atlas of 512 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_8ea667e09dfe",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 63890,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 581,
+   "faces": 838,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1026448,
+   "seconds": 0.399,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_ad5c151b4b7f",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 7242011,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 58475,
+   "faces": 107776,
+   "n_looks": 3,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1596495,
+   "seconds": 0.541,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 512 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_273b6144ab91",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "hammer",
+   "source_bytes": 4173000,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 94228,
+   "faces": 50220,
+   "n_looks": 3,
+   "texture": {
+    "height": 256,
+    "width": 256
+   },
+   "bytes": 844967,
+   "seconds": 0.388,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "206 faces span a texture seam and were clamped to [0, 1]",
+    "3 materials packed into one 2x2 atlas of 128 px tiles",
+    "repeat uvs wrapped per face into [0, 1] (970 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "objv_3fd793a9686b",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 9204438,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 99027,
+   "faces": 127100,
+   "n_looks": 4,
+   "texture": {
+    "height": 512,
+    "width": 512
+   },
+   "bytes": 1093847,
+   "seconds": 0.77,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "4 materials packed into one 2x2 atlas of 256 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_78ef2c18ed95",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 377737,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 9029,
+   "faces": 4416,
+   "n_looks": 1,
+   "texture": {
+    "height": 512,
+    "width": 512
+   },
+   "bytes": 82005,
+   "seconds": 0.089,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of 78ef2c18ed954e1f95e3342d5422fbee_texture0.png dropped",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_1f1cd422af20",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 286156,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 2720,
+   "faces": 3854,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1097115,
+   "seconds": 0.475,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles",
+    "84 faces span a texture seam and were clamped to [0, 1]",
+    "alpha channel of 1f1cd422af2044aaa97aa158c18c436d_texture0.png dropped",
+    "normal texture ignored",
+    "repeat uvs wrapped per face into [0, 1] (84 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "objv_affd4ebf5fd1",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 5005515,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 29252,
+   "faces": 54551,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1736488,
+   "seconds": 0.694,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles"
+   ]
+  },
+  {
+   "instance_id": "objv_d17b8f44d154",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 138450,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 1590,
+   "faces": 1848,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 207156,
+   "seconds": 0.088,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of d17b8f44d1544364b8ad9fe2554ddfdf_texture0.png dropped",
+    "opacity texture ignored",
+    "roughness texture ignored",
+    "specularColor texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_b58d4eb47f04",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 34551,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 341,
+   "faces": 434,
+   "n_looks": 1,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 373142,
+   "seconds": 0.206,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "alpha channel of b58d4eb47f044bd9871201af4d72ec1d_texture0.png dropped",
+    "normal texture ignored",
+    "opacity texture ignored"
+   ]
+  },
+  {
+   "instance_id": "objv_ff5ce07b85a8",
+   "status": "ok",
+   "kind": "usd",
+   "cached_before": true,
+   "source_kind": "objaverse",
+   "category": "bottle",
+   "source_bytes": 625613,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 4910,
+   "faces": 9158,
+   "n_looks": 3,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 1548880,
+   "seconds": 0.634,
+   "seconds_this_run": 0.0,
+   "lost": [
+    "3 materials packed into one 2x2 atlas of 1024 px tiles",
+    "36 faces span a texture seam and were clamped to [0, 1]",
+    "repeat uvs wrapped per face into [0, 1] (36 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "ycb/003_cracker_box",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1431701,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8411,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 9878645,
+   "seconds": 5.044,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/004_sugar_box",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1431193,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8393,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 11130894,
+   "seconds": 4.969,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/005_tomato_soup_can",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1436770,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8560,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 9054289,
+   "seconds": 3.89,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/008_pudding_box",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1431450,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8442,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8605680,
+   "seconds": 4.752,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/010_potted_meat_can",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1445269,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8516,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8049369,
+   "seconds": 3.95,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/011_banana",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1431169,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8368,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4200084,
+   "seconds": 3.045,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/019_pitcher_base",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1439840,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8565,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5507610,
+   "seconds": 3.604,
+   "seconds_this_run": 0.0,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/024_bowl",
+   "status": "ok",
+   "kind": "obj",
+   "cached_before": true,
+   "source_kind": null,
+   "category": "ycb",
+   "source_bytes": 1435379,
+   "up_axis": "Y",
+   "meters_per_unit": 1.0,
+   "units_flag": null,
+   "vertices": 8412,
+   "faces": 16384,
+   "n_looks": 1,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5694868,
+   "seconds": 3.478,
+   "seconds_this_run": 0.0,
+   "lost": []
+  }
+ ],
+ "library_entries": 323,
+ "curated": {
+  "n_entries": 323,
+  "n_on_disk": 317,
+  "n_ok": 317,
+  "n_failed": 0,
+  "n_nucleus_skipped": 6
+ },
+ "ycb_room_scans": {
+  "n": 8,
+  "n_ok": 8
+ },
+ "gate": {
+  "curated_ok_at_least": 310,
+  "cap_bytes": 10737418240
+ },
+ "gate_pass": true,
+ "stopped": null,
+ "nucleus_skipped": [
+  {
+   "instance_id": "035_power_drill",
+   "usd_path": "/Isaac/Props/YCB/Axis_Aligned/035_power_drill.usd"
+  },
+  {
+   "instance_id": "025_mug",
+   "usd_path": "/Isaac/Props/YCB/Axis_Aligned/025_mug.usd"
+  },
+  {
+   "instance_id": "SM_Mug_A2",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_A2.usd"
+  },
+  {
+   "instance_id": "SM_Mug_B1",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_B1.usd"
+  },
+  {
+   "instance_id": "SM_Mug_C1",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_C1.usd"
+  },
+  {
+   "instance_id": "SM_Mug_D1",
+   "usd_path": "/Isaac/Props/Mugs/SM_Mug_D1.usd"
+  }
+ ],
+ "failures": [],
+ "units": {
+  "rule": "flag every layer whose upAxis != Y or metersPerUnit != 1 (units_resolve's unit factor is an assumption)",
+  "counts": {
+   "Y / 1.0": 325
+  },
+  "flagged": []
+ },
+ "sizes": {
+  "source_bytes_ok": 7353130612,
+  "cache_bytes_ok": 2514268528,
+  "largest_cache_mb": [
+   [
+    53.7,
+    "objv_80b7858eee5b"
+   ],
+   [
+    46.7,
+    "oo3d_cup_001"
+   ],
+   [
+    43.7,
+    "oo3d_teapot_026"
+   ],
+   [
+    43.6,
+    "oo3d_teapot_024"
+   ],
+   [
+    43.4,
+    "oo3d_teapot_025"
+   ],
+   [
+    43.4,
+    "oo3d_cup_033"
+   ],
+   [
+    43.3,
+    "oo3d_teapot_021"
+   ],
+   [
+    43.3,
+    "oo3d_cup_012"
+   ],
+   [
+    43.2,
+    "oo3d_cup_015"
+   ],
+   [
+    43.1,
+    "oo3d_cup_020"
+   ]
+  ]
+ },
+ "memory_notes": {
+  "textures_by_longest_side": {
+   "4096 px": 117,
+   "<= 2048 px": 79,
+   "<= 1024 px": 77,
+   "<= 512 px": 24,
+   "<= 4095 px": 17,
+   "<= 16 px (a flat colour)": 11
+  },
+  "texture_4096_count": 117,
+  "rgb_texture_bytes_in_memory_total": 7202895588,
+  "most_faces": [
+   [
+    3499996,
+    "objv_80b7858eee5b"
+   ],
+   [
+    2615795,
+    "oo3d_cup_001"
+   ],
+   [
+    2500088,
+    "oo3d_teapot_025"
+   ],
+   [
+    2500014,
+    "oo3d_cup_027"
+   ],
+   [
+    2500008,
+    "oo3d_cup_012"
+   ],
+   [
+    2500006,
+    "oo3d_teapot_018"
+   ],
+   [
+    2500004,
+    "oo3d_teapot_026"
+   ],
+   [
+    2500004,
+    "oo3d_teapot_024"
+   ],
+   [
+    2500004,
+    "oo3d_cup_010"
+   ],
+   [
+    2500002,
+    "oo3d_teapot_036"
+   ]
+  ],
+  "atlases": [
+   [
+    "023c84c399814304b3f876103faccb98",
+    10
+   ],
+   [
+    "1ef6b1c978ee4d7dacd3752d28b631c5",
+    4
+   ],
+   [
+    "a2de48529b1549488940fa98a3a3bac6",
+    2
+   ],
+   [
+    "df273c86ffc9442dbf59128b7c843aa9",
+    2
+   ],
+   [
+    "2b80440f980049c6b89be1428073545f",
+    2
+   ],
+   [
+    "2e5132fabf7943d9b39743a966e2a1a7",
+    2
+   ],
+   [
+    "5e530e4e82f3413a9516b3cc8287c42f",
+    3
+   ],
+   [
+    "7c46341c63f0495c89d6871429dad261",
+    3
+   ],
+   [
+    "93d9991078204bc4921269c3c8fa4576",
+    2
+   ],
+   [
+    "a7785ac7ce7f4ba79df661db33637ba9",
+    2
+   ],
+   [
+    "c730cefa973944eea0adab30f2afb76d",
+    2
+   ],
+   [
+    "efa1c4c1f2a947659ded2e61e20eff31",
+    2
+   ],
+   [
+    "f17cf7f2da59456d8d7e532e72b807c6",
+    3
+   ],
+   [
+    "de23895b6e9b4cfd870e30d14c2150dd",
+    2
+   ],
+   [
+    "94aa850d29c54f0d8e8dc9947f4b37fd",
+    5
+   ],
+   [
+    "f15c7f6fbf7d4c4a88217b32dfd39eec",
+    3
+   ],
+   [
+    "67a5956349574fac8431b9b12aad8b81",
+    8
+   ],
+   [
+    "Prius Hybrid",
+    4
+   ],
+   [
+    "29496edf3dcc4dbdb57565726a514457",
+    10
+   ],
+   [
+    "48d41b9edeb44def903b6930333c7699",
+    13
+   ],
+   [
+    "89dbf73cd4bc4a068bf7b0727d8c09a1",
+    8
+   ],
+   [
+    "8c5b991b4c0a4bfcb13e0eea894343b1",
+    15
+   ],
+   [
+    "a82af6d92f0d47edb5a5bfe998469205",
+    7
+   ],
+   [
+    "bbee8a44206f4fae8f672f3f93297bd5",
+    18
+   ],
+   [
+    "cfa91c978d4e4dd7b7b7a4462082a3a7",
+    17
+   ],
+   [
+    "e30380ec13d740719b7de6e3113add72",
+    49
+   ],
+   [
+    "5aa5eb5ffad8437eadf331c098d08296",
+    2
+   ],
+   [
+    "95f1afb745b948fd9bac0908b6546d0c",
+    2
+   ],
+   [
+    "c63510b103fc4954ad36a84d7e26e7ec",
+    5
+   ],
+   [
+    "fb8ba6812b6847f8b7f26dc319c07f93",
+    2
+   ],
+   [
+    "objv_3a39f00e4401",
+    6
+   ],
+   [
+    "objv_1f79787e200d",
+    2
+   ],
+   [
+    "objv_6e1934bf0e73",
+    11
+   ],
+   [
+    "objv_090bc73cec79",
+    4
+   ],
+   [
+    "objv_f96384640d53",
+    4
+   ],
+   [
+    "objv_c2ed3556af1f",
+    3
+   ],
+   [
+    "objv_58f61a86bdfd",
+    4
+   ],
+   [
+    "objv_f9e6ca9552e7",
+    2
+   ],
+   [
+    "objv_f5dd9fee1085",
+    3
+   ],
+   [
+    "objv_c9eb3ec6a975",
+    4
+   ],
+   [
+    "objv_842aad779f0d",
+    3
+   ],
+   [
+    "objv_0e8acc8ad98f",
+    2
+   ],
+   [
+    "objv_1837c2463663",
+    4
+   ],
+   [
+    "objv_79740b6f1be7",
+    4
+   ],
+   [
+    "objv_8256f67f7d8b",
+    5
+   ],
+   [
+    "objv_e83926de8d37",
+    3
+   ],
+   [
+    "objv_b3f2d2309afa",
+    3
+   ],
+   [
+    "objv_9d3519c8af66",
+    2
+   ],
+   [
+    "objv_4d16a5659d6d",
+    5
+   ],
+   [
+    "objv_2b807dda52eb",
+    2
+   ],
+   [
+    "objv_39b03d18881f",
+    2
+   ],
+   [
+    "objv_cce3dec670fc",
+    2
+   ],
+   [
+    "objv_8cfd79dc47cf",
+    2
+   ],
+   [
+    "objv_ad5c151b4b7f",
+    3
+   ],
+   [
+    "objv_273b6144ab91",
+    3
+   ],
+   [
+    "objv_3fd793a9686b",
+    4
+   ],
+   [
+    "objv_1f1cd422af20",
+    3
+   ],
+   [
+    "objv_affd4ebf5fd1",
+    3
+   ],
+   [
+    "objv_ff5ce07b85a8",
+    3
+   ]
+  ]
+ },
+ "lost_kinds": {
+  "N materials packed into one NxN atlas of N px tiles": 59,
+  "normal texture ignored": 37,
+  "roughness texture ignored": 37,
+  "metallic texture ignored": 29,
+  "alpha channel of <file> dropped": 23,
+  "opacity texture ignored": 15,
+  "N faces span a texture seam and were clamped to [N, N]": 11,
+  "repeat uvs wrapped per face into [N, N] (...)": 10,
+  "specularColor texture ignored": 8,
+  "emissiveColor texture ignored": 2,
+  "UsdUVTexture scale (...) ignored": 2,
+  "vertex colours (...) ignored": 2
+ },
+ "conversion_seconds_sum": 1177.1,
+ "passes": [
+  {
+   "pass": 1,
+   "log": "~/genvs_ws/u7_logs/convert_all.log",
+   "seconds": 1133.8,
+   "ok": 318,
+   "failed": 7,
+   "failure_reason": "CppException 'Used null prim - UsdExpiredPrimAccessError' in the reader: _connected_shader called HasConnectedSource() on a missing input (a UsdUVTexture asked for diffuseColor) when a material's only texture is a normal/metallic/roughness map - a converter bug, not a broken asset; fixed in vsbench/world/assets.py (+ a regression test)",
+   "failed_ids": [
+    "5e530e4e82f3413a9516b3cc8287c42f",
+    "7c46341c63f0495c89d6871429dad261",
+    "f15c7f6fbf7d4c4a88217b32dfd39eec",
+    "objv_58f61a86bdfd",
+    "objv_f9e6ca9552e7",
+    "objv_0e8acc8ad98f",
+    "objv_1f1cd422af20"
+   ]
+  },
+  {
+   "pass": 2,
+   "log": "~/genvs_ws/u7_logs/convert_all_pass2.log",
+   "seconds": 6.3,
+   "what": "the same command (resumable: cached objects are read back, not re-converted); the 7 converted with the fixed reader"
+  }
+ ],
+ "spot_check": {
+  "seed": 7,
+  "n": 12,
+  "population": 317,
+  "tolerance_mm": 1.0,
+  "all_pass": true,
+  "record": "results/bridge/u7_extent_spot_check.json",
+  "max_converted_vs_pxr_mm": 1.877411809347862e-05,
+  "max_abs_vs_target_mm": 9.74638761364055e-06
+ },
+ "contact_sheets": {
+  "tiles": 323,
+  "tile_px": [
+   200,
+   160
+  ],
+  "cols": 8,
+  "per_sheet": 48,
+  "pose": "the library's upright canonical pose (canonical: library), category scale, azimuth -60 deg, elevation 30 deg; grey = nucleus only, red = failed",
+  "seconds": 560.7,
+  "sheets": [
+   {
+    "path": "results/bridge/u7_sheet_1.png",
+    "first": 1,
+    "last": 48,
+    "bytes": 134672
+   },
+   {
+    "path": "results/bridge/u7_sheet_2.png",
+    "first": 49,
+    "last": 96,
+    "bytes": 134959
+   },
+   {
+    "path": "results/bridge/u7_sheet_3.png",
+    "first": 97,
+    "last": 144,
+    "bytes": 140435
+   },
+   {
+    "path": "results/bridge/u7_sheet_4.png",
+    "first": 145,
+    "last": 192,
+    "bytes": 156774
+   },
+   {
+    "path": "results/bridge/u7_sheet_5.png",
+    "first": 193,
+    "last": 240,
+    "bytes": 173168
+   },
+   {
+    "path": "results/bridge/u7_sheet_6.png",
+    "first": 241,
+    "last": 288,
+    "bytes": 162967
+   },
+   {
+    "path": "results/bridge/u7_sheet_7.png",
+    "first": 289,
+    "last": 323,
+    "bytes": 82290
+   }
+  ],
+  "gl_renderer": {
+   "llvmpipe (LLVM 20.1.2, 256 bits)": 317
+  },
+  "box_vs_points": {
+   "what": "longest side of the tight box of the converted points / longest side of Isaac's box rule (authored extents through the transforms), at the sheet pose; < 1 means the category scale was set by a box looser than the visible mesh (in Isaac too), so the object looks smaller than its target",
+   "n_below_0.9": 7,
+   "below_0.9": [
+    [
+     0.6088,
+     "91535afacf004ff8b9bb5db7c1641441"
+    ],
+    [
+     0.742,
+     "a549f6cca4834731b7dea0f98d1f7b29"
+    ],
+    [
+     0.7556,
+     "0da5a950ebd34a9bb76408a625f076af"
+    ],
+    [
+     0.807,
+     "bbee8a44206f4fae8f672f3f93297bd5"
+    ],
+    [
+     0.8428,
+     "objv_bfaa6854d59f"
+    ],
+    [
+     0.8614,
+     "objv_bdb663c8be5e"
+    ],
+    [
+     0.8659,
+     "objv_80b7858eee5b"
+    ]
+   ],
+   "min": 0.6088
+  }
+ },
+ "u3_sheet_redraw": {
+  "path": "results/bridge/u3_objects.png",
+  "gl_renderer": {
+   "llvmpipe (LLVM 20.1.2, 256 bits)": 12
+  },
+  "note": "re-drawn in U7 on Mesa llvmpipe: the first U3 sheet built MujocoRenderer directly, past make_renderer's software-GL switch, so EGL most likely drew it on the station GPU"
+ },
+ "gpu_incident": "before the port/vssim software-GL fix was merged, this unit drew a 10-tile trial sheet (00:42) and ~300 tiles of a first sheet --all attempt (killed at 299/323 on the coordinator's warning, no sheet written) with MujocoRenderer built directly, i.e. past make_renderer's software-GL switch: EGL most likely took device 0, the station GPU (200x160 px renders, a few minutes). After merging port/vssim every tile reports gl_renderer 'llvmpipe' and _render_tile refuses any other renderer when VSBENCH_SOFTWARE_GL is set.",
+ "visual_check_notes": [
+  "the high-poly oo3d scans (2.5 M faces) look speckled on the sheets: their uvs are right (oo3d_teapot_022: 0.05% of faces sample the dark gaps between charts as converted, 22% with v unflipped) - it is per-face shading of noisy scan geometry at 200 px plus the 256-colour dithering of the sheet PNG, not a uv error",
+  "transparent objects render opaque (alpha dropped on 23 objects, opacity textures ignored on 15): glasses and some bottles come out black / solid",
+  "7 objects have Isaac's box rule >10% looser than their visible points at the sheet pose (min ratio 0.61, 91535afacf004ff8b9bb5db7c1641441): the category scale makes them look smaller than the target - in Isaac too, since the rule is Isaac's"
+ ]
+}

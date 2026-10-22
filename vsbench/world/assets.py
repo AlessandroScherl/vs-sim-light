@@ -331,7 +331,9 @@ def _asset_file(attr_value, attr, layer_dir: Path) -> Path | None:
 def _connected_shader(inp):
     from pxr import UsdShade
 
-    if inp is None or not inp.HasConnectedSource():
+    # a shader without that input (a UsdUVTexture asked for ``diffuseColor``) gives an
+    # invalid input whose HasConnectedSource() throws "Used null prim" (U7: 3 GSO assets)
+    if inp is None or not inp or not inp.HasConnectedSource():
         return None
     src = inp.GetConnectedSource()
     return UsdShade.Shader(src[0].GetPrim()) if src else None
