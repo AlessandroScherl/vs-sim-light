@@ -31,3 +31,7 @@ vsbench/experiments/**
 !vsbench/experiments/**/MD5SUMS
 !vsbench/experiments/**/run.json
 !vsbench/experiments/**/resolved_config.yaml
+# the bridge's flights (results/bridge): records, run sidecars and short films are committed;
+# telemetry and loose film frames are payload
+results/bridge/**/telemetry.jsonl.gz
+results/bridge/**/film/**/*.jpg
