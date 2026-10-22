@@ -260,6 +260,32 @@ $VSBENCH_PY -m pytest tests/vs -q                       # drift + empty-glob gua
 .venv/bin/ruff check --config tools/ruff_vssim_copy.toml vsbench/vs vsbench/tests vsbench/scripts
 ```
 
+## The MuJoCo world and the bench driver (port units U1, U2)
+
+`vsbench.world.mujoco_scene.MujocoScene` is vs-sim's `Scene` contract on this renderer (the
+posters so far; the D435i camera with Isaac's half-pixel principal point, `PORT_PLAN` §4), and
+`python -m vsbench.world.fly` is vs-sim's `scripts/fly.py run` on it: the copied arms, loop,
+records and success rules, unchanged.
+
+```
+source tools/cpu_env.sh
+$VSBENCH_PY -m vsbench.world.fly run --scene hollywood --arms vitvs_dinov3 sift_ransac \
+    --start-set near60 --limit 1 --max-iter 100 --out results/bridge/m1 --film
+$VSBENCH_PY -m vsbench.world.fly run --scene hollywood --arms sift_ransac \
+    --start-set near60 --limit 1 --max-iter 100 --out <dir> --telemetry-extended   # + per-match truth
+$VSBENCH_PY -m vsbench.world.fly summary --out results/bridge/m1
+$VSBENCH_PY -m pytest tests/world -q                    # VSBENCH_WRITE_GATES=1 rewrites the committed gate JSONs
+```
+
+The driver never touches the GPU: it forces `CUDA_VISIBLE_DEVICES=""` and
+`VSBENCH_SOFTWARE_GL=1`, runs torch on 2 intra- and 2 inter-op threads, hides `nvidia-smi`
+(the loop would otherwise record the Isaac evaluation's GPU as this run's), and refuses to fly
+unless the built scene is on Mesa llvmpipe (`--allow-gpu`, off by default, lifts that; never
+while the Isaac evaluation runs). It accepts only the protocol's start sets. Every record
+carries `render_mode`, `vsbench_commit` (`+dirty` by the rule in `vsbench_commit_rule`) and
+`vssim_commit`, so a MuJoCo number is never pooled with an Isaac one. The world tests that
+render skip unless software GL is requested.
+
 ## Layout
 
 ```

@@ -12,6 +12,17 @@ the baseline, bench, scene and start code is copied into `vsbench`, not imported
 **D-2 = the MuJoCo world stays here for good** and never moves into vs-sim. §2 and §7 were
 rewritten for that; D-3 … D-9 stay open with the recommendations as working defaults.*
 
+*Revision 3 (2026-10-23, after the Fable review of Milestone 1, verdict PASS WITH
+CORRECTIONS): §2.1–2.4 now describe the copy **as built** (layout B, the mirror: `vsbench/`
+plays vs-sim's repository root, the copied fast tier is `vsbench/tests/fast`, `tests/vs/` holds
+the drift test only, patches P1/P2/P3, the plan's `camera.py` patch dropped); §4 gate 3 is
+ECC-gated with a calibration row, phaseCorrelate reported plus two null tests, the
+marker-centroid signed mean as the primary evidence; §7 records the OpenCV 4.11.0.86 pin and
+the 789 / 13 split (U0), the ViT-VS curve statistics (U2) and the station rules as enforced
+(`LP_NUM_THREADS=2`, `torch.set_num_interop_threads(2)`, the hard GPU refusal); §8 D-3 now
+carries measured evidence, and two risks were added (the pre-U1 llvmpipe thread gap, a
+renderer path that bypassed software GL).*
+
 ---
 
 ## 0. Scope, in one paragraph
@@ -71,51 +82,55 @@ edit to `vs-sim`, anything that touches the GPU.
 
 ## 2. Architecture (owner rulings D-1 = copy, D-2 = separate for good)
 
-### 2.1 Where the copy lives: `vsbench/vs/`, mirroring `vssim/` file for file
+### 2.1 Where the copy lives: layout B, the mirror (as built in U-copy)
+
+`vsbench/` plays the part of vs-sim's **repository root**: `vssim/` becomes `vsbench/vs/` and
+vs-sim's repository-level trees sit beside it inside `vsbench/`, so every
+`Path(__file__).resolve().parents[k]` in the copied code lands on its counterpart (parent
+decision 2026-10-22, after a first attempt with the `vsbench/vs/data/` layout of revision 2
+needed ~18 patched files).
 
 ```
-vsbench/vs/                      ← the copy; NOTHING hand-written lives here (drift-clean)
-  __init__.py scene.py camera.py scenes.py assets.py labels.py starts.py benchmark.py demo.py
-  isaac_scene.py                 ← copied verbatim as the REFERENCE world (importable without
-                                   Isaac; `IsaacScene(...)` raises ImportError here) — needed
-                                   for `scatter_items` and the Isaac-free maths tests
-  bake.py                        ← copied, reference only (PhysX settle; never run here)
-  baselines/  (all 14 modules)   ← ViT-VS, ART-VS, prealign, classical, control = FLOWN HERE;
-                                   cns, dinobot, objroi, lightglue, roma, visp_ibvs = copied,
-                                   NOT WIRED (deps absent; tests skip with the reason)
-  bench/      (all 12 modules)   ← the loop, arms, config, scoring, stats, perturb, films,
-                                   debuglog, debugview, truth, io, run
-  data/                          ← the one data root (REPO_ROOT, see 2.3)
-    configs/{camera.yaml, scenes.yaml, protocol.yaml, arms/*.yaml, layouts/*.json}
-    benchmark/{README.md, starts/*.json + *.md5}
-    assets/asset_library_v2.json
-  COPY_MANIFEST.json             ← dest -> {src path, src blob sha, vs-sim commit, rewrite
-                                   rules applied, per-file patch id}
-  PROVENANCE.md                  ← what was copied from which commit, what was left behind
-                                   and why, what is wired and what is not
-tests/vs/                        ← the copied fast tier
-  conftest.py  fast/test_*.py  fixtures/  (vs-sim's tests/{conftest.py,fast,fixtures})
-vsbench/world/                   ← NEW code (hand-written): the MuJoCo world and the glue
-  mujoco_scene.py build.py camera.py assets.py fly.py method_arm.py check_baselines.py
-vsbench/methods/vssim_arms.py    ← NEW: the copied arms as vsbench methods (demo/video side)
-tools/vssim_copy.py tools/vssim_drift.py tools/vssim_copy_patches.json tools/convert_objects.py
+vsbench/vs/                      ← the copy of vssim/ (11 modules, baselines/ 13, bench/ 13):
+                                   rewrite rules + provenance line; isaac_scene.py and bake.py
+                                   are the REFERENCE world (importable without Isaac)
+  COPY_MANIFEST.json             ← generated: per file src path, blob sha, mode, rules fired,
+                                   patch id, sha256 written
+  PROVENANCE.md                  ← hand-written: what, from which commit, what is wired
+vsbench/configs/                 ← byte-identical (camera, scenes, protocol, 13 arms, 3 layouts)
+vsbench/benchmark/               ← byte-identical (README + 29 start files + 29 md5 sidecars)
+vsbench/assets/asset_library_v2.json   ← byte-identical
+vsbench/tests/conftest.py, vsbench/tests/fast/ (37 files)   ← THE COPIED FAST TIER (rules)
+vsbench/tests/fixtures/ (56 files, incl. the MIT-vendored reference/)   ← byte-identical
+vsbench/scripts/ (8 drivers + chains/)   ← reference only (R1/R2 on .sh); nothing runs them
+vsbench/experiments/{README.md,.gitkeep}  ← byte-identical (a test watches git see a tracked file)
+vsbench/world/                   ← NEW code (hand-written): mujoco_scene.py build.py camera.py
+                                   assets.py fly.py (+ method_arm.py check_baselines.py later)
+vsbench/methods/vssim_arms.py    ← NEW (U6b): the copied arms as vsbench methods
+tests/vs/test_drift.py           ← hand-written: the drift test and the empty-glob guards ONLY
+tests/world/                     ← hand-written: the world's gates (U1, U2, U3)
+tools/vssim_copy.py tools/vssim_drift.py tools/vssim_copy_patches.json
+tools/ruff_vssim_copy.toml tools/convert_objects.py tools/cpu_env.sh
 external/vs-sim  external/VSSIM_COMMIT   (U0; git-ignored clone + committed pin — the SOURCE
                                           of the copy and the drift reference, never imported)
 ```
 
-Why a subpackage and not flattening into `vsbench/`: `vssim` has its own `scene.py`,
-`camera.py`, `scenes.py` and `assets.py`, which collide with vsbench's; a subpackage keeps the
-copied tree a one-to-one mirror of `vssim/` (so the drift diff is a path map), keeps vsbench's
-Step 1–3 code untouched, and keeps the fence "nothing hand-written under `vsbench/vs/`"
-checkable by one glob.
+225 files: 88 rewritten (3 of them patched), 137 byte-identical. vs-sim's `scene.py`,
+`camera.py`, `scenes.py`, `assets.py` live at `vsbench/vs/…` and do not collide with
+vsbench's own `vsbench/{scene,camera,scenes}.py`. The fence "nothing hand-written in the six
+copied trees" is checked by the drift test (every file under them is in the manifest). One
+caveat of the mirror: the copied `vsbench/tests/conftest.py` puts `vsbench/` on `sys.path` (as
+vs-sim's puts its root), and it and vsbench's `tests/conftest.py` are both the module
+`conftest`, so the copied tier runs in **its own pytest process**.
 
 ### 2.2 What is copied, what is left behind
 
 | copied (verbatim modulo §2.3) | left behind | why |
 | --- | --- | --- |
-| `vssim/*.py` (11 modules incl. `isaac_scene.py`, `bake.py`), `vssim/baselines/*`, `vssim/bench/*` | `scripts/` (`fly.py`, `check_baselines.py`, `build_starts.py`, `bake_layout.py`, `render_goal.py`, `debug_view.py`, `dev_compare.py`, `smoke_arms_plane.py`, `chains/`) | drivers that hard-wire `IsaacScene` and the station; the bridge writes its own two drivers (U2, U9) |
-| `configs/` whole, `benchmark/` whole, `assets/asset_library_v2.json` | `examples/`, `experiments/`, `docs/`, `DESIGN.md`, `README.md`, `CLAUDE.md`, `pyproject.toml` | repo-level material; the owner's one-home rule says link, don't copy docs |
-| `tests/conftest.py`, `tests/fast/*` (38 files), `tests/fixtures/*` (4.4 MB, incl. `reference/`) | `tests/slow/*` | station/Isaac-only checks |
+| `vssim/*.py` (11 modules incl. `isaac_scene.py`, `bake.py`), `vssim/baselines/*`, `vssim/bench/*` | — | the code that is flown (and the reference world) |
+| `scripts/` (8 drivers + `chains/`) → `vsbench/scripts/`, **reference only** | — | they hard-wire `IsaacScene` and the station and nothing here runs them, but vs-sim's fast tier tests some of them, so they come along for those tests; the bridge writes its own drivers (U2, U9) |
+| `configs/` whole, `benchmark/` whole, `assets/asset_library_v2.json`, `experiments/{README.md,.gitkeep}` | `examples/`, the rest of `experiments/`, `docs/`, `DESIGN.md`, `README.md`, `CLAUDE.md`, `pyproject.toml`, `.gitignore` | repo-level material; the owner's one-home rule says link, don't copy docs (`experiments/README.md` comes because a `test_run.py` test watches git see a tracked file there) |
+| `tests/conftest.py`, `tests/fast/*` (37 files), `tests/fixtures/*` (56 files, 4.4 MB, incl. `reference/`) | `tests/slow/*` | station/Isaac-only checks |
 
 Instance-suite scenes (`inst_*`) and their starts come along inside `scenes.yaml` and
 `benchmark/starts/` for free; flying them needs the converted library (U7).
@@ -127,44 +142,51 @@ Instance-suite scenes (`inst_*`) and their starts come along inside `scenes.yaml
 writes the file and the manifest entry. The **same function** is what `tools/vssim_drift.py`
 applies to the source before diffing, so the two can never disagree.
 
-Rules (regexes, in this order, on `.py` files; yaml/json/md/npz are copied byte-identical):
+Rules as built (`tools/vssim_copy.py::RULES`; regexes, in this order, on `.py` files; `.sh`
+files get R1 and R2 only; yaml/json/md/npz are copied byte-identical):
 1. `\bfrom vssim import\b` → `from vsbench.vs import`
 2. `\bfrom vssim\.` → `from vsbench.vs.`
-3. `\bimport vssim\.` → `import vsbench.vs.`  and bare `\bimport vssim\b` → `from vsbench import vs as vssim`
+3. `\bimport vssim\.` → `import vsbench.vs.`  and bare `\bimport vssim\b` → `import vsbench.vs`
+   (R3b; revision 2's `from vsbench import vs as vssim` bound `vssim` while rule 4 spelled its
+   uses `vsbench.vs.`, unbound — the built rule binds `vsbench` and agrees with rule 4)
 4. `\bvssim\.(?=[A-Za-z_])` → `vsbench.vs.` everywhere else — docstring references, dotted
    module strings (`importorskip("vssim.scenes")`, `__import__("vssim.baselines.match")`,
    `match="vssim.baselines.cns..."`) — so that error messages and tests keep naming modules
    that exist. Hyphenated / underscored identifiers (`vssim-config-1`, `vssim_out`) do **not**
    match and stay as they are (they are schema names and record data).
-5. The provenance line: `# vs-sim copy: <src path> @ <sha> (tools/vssim_copy.py); edits: rewrite rules [+ patch <id>]` as line 1 of every `.py` (before the docstring; the drift tool strips it). For yaml/json a sibling `PROVENANCE.md` carries the list instead (the md5 sidecars of the start files must stay bit-exact).
+5. The provenance line: `# vs-sim copy: <src path> @ <sha> (tools/vssim_copy.py); edits: rewrite rules [+ patch <id>]  # noqa: E501` as line 1 of every rewritten file (line 2 after a shebang; the drift tool strips it). For yaml/json the manifest and `vsbench/vs/PROVENANCE.md` carry the list instead (the md5 sidecars of the start files must stay bit-exact).
 
-Patches (`tools/vssim_copy_patches.json`: dest file → exact `old → new` string pairs, each
-with a one-line reason; expected to be **six or fewer**):
-- `vsbench/vs/camera.py`: `REPO_ROOT = Path(__file__).resolve().parents[1]` → `REPO_ROOT = Path(__file__).resolve().parent / "data"` (the one data root; every other module derives from it, so this is the only data-path edit).
-- `tests/vs/fast/test_package.py`: `CORE_ALLOWED = {"numpy", "yaml", "vssim"}` → `{"numpy", "yaml", "vsbench"}`; the Isaac-only set and the `startswith` checks follow rule 4. The test keeps asserting that `import vsbench.vs` pulls no torch in a fresh interpreter — which also pins that `import vsbench` itself stays numpy-only.
-- `tests/vs/fast/{test_protocol,test_debuglog,test_arm_plugin}.py`: `REPO = Path(__file__).resolve().parents[2]` → a `DATA = Path(vsbench.vs.__file__).parent / "data"` for `configs/…` reads and `TESTS = Path(__file__).resolve().parents[1]` for `tests/fast/…` loads; `test_debuglog.py:1069`'s tuple `("vssim", "configs", "benchmark")` → the matching paths. The builder lists every `REPO /` use in those three files in the patch reasons.
-- `vsbench/vs/bench/run.py`: no patch — `git_head()` now reports **vsbench's** commit (it runs git in the data dir, which is inside this repository), and the driver adds `vssim_commit` from the manifest (U2).
+Patches as built (`tools/vssim_copy_patches.json`: dest file → exact `old → new` string
+pairs, each with a one-line reason; cap **six**, three used):
+- **P1** `vsbench/tests/fast/test_package.py` (3 pairs): `CORE_ALLOWED = {"numpy", "yaml", "vssim"}` → `{"numpy", "yaml", "vsbench"}`; the fresh-interpreter no-torch check imports `vsbench.vs`; `hasattr(vsbench.vs, name)` (the one bare use of the module object). The test keeps asserting that `import vsbench.vs` pulls no torch in a fresh interpreter.
+- **P2** `vsbench/vs/bench/run.py` (2 pairs): `"vssim_version": __import__("vsbench.vs", fromlist=["__version__"]).__version__` (there is no module `vssim`; the record key stays `vssim_version`), and `dirty_paths` runs `_git("-c", "color.status=false", "-c", "status.relativePaths=true", "-c", "status.branch=false", "-c", "status.showStash=false", "status", "--short", strip=False)` instead of `status --porcelain`: porcelain paths are relative to the repository top (`vsbench/x`), `--short` prints them relative to `git -C REPO_ROOT` (= `vsbench/`), so the copied `experiments/` filter works in the nested copy; the four `-c` settings pin that output against a user's git config (revision 3).
+- **P3** `vsbench/tests/fast/test_debuglog.py` (1 pair): the throwaway checkout the debug chain is driven in symlinks `("vs", "configs", "benchmark")`, not `("vssim", …)`.
+- **Dropped:** revision 2's `vsbench/vs/camera.py` data-root patch (in layout B vs-sim's own `REPO_ROOT = parents[1]` is `vsbench/`) and the `test_protocol` / `test_arm_plugin` `REPO` patches (their `parents[2]` is `vsbench/` too). `git_head()` reports **vsbench's** commit (it runs `git -C vsbench/`); the driver adds `vssim_commit` from the manifest (U2).
 
 Anything else that fails after the rules is a finding to report, not a seventh patch: the
 builder stops and asks.
 
 ### 2.4 Proving and keeping faithfulness
 
-1. **The copied fast tier is the proof.** `pytest tests/vs -q` must pass with the same
+1. **The copied fast tier is the proof.** `env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT
+   pytest vsbench/tests/fast -q`, in its own pytest process, must pass with the same
    pass/skip split the pristine clone gives in the same venv (U0 measures the clone's split
-   with `PYTHONPATH=external/vs-sim`; U-copy must match it, skip-for-skip). The tier carries
+   with `PYTHONPATH=external/vs-sim`; U-copy matches it, skip-for-skip: **789 passed, 13
+   skipped** at the pin and OpenCV 4.11.0.86). The tier carries
    the parity fixtures that pin "as published": DINOv3 tokens (`u1_*`, 1e-5 on CPU), the
    612-pair mutual pool and the exact 24 drawn landmarks (`u2_*`), ART-VS tiling and the
    classical arms (`u3_*`), the control law and stop rules against the vendored CNS and ART-VS
    reference files (`u4_*`, `fixtures/reference/`), the record schema (`u7_*`), the 4-way
    search (`u8_*`), every `configs/arms/*.yaml` building with its derived label, the md5 pins
    of every start file, the goal poses of all six scenes.
-2. **`tools/vssim_drift.py`** (also `tests/vs/test_drift.py`, in the fast tier): for every
-   manifest entry, `git show <pin>:<src>` → rules → patches → compare to the dest minus its
-   provenance line; byte-identical or the test fails naming the file and the first differing
-   line. Also checks that no file under `vsbench/vs/` or `tests/vs/` is absent from the
-   manifest (nothing hand-written hides there), and that `external/VSSIM_COMMIT` equals every
-   manifest entry's commit.
+2. **`tools/vssim_drift.py`** (also `tests/vs/test_drift.py`, the only file in `tests/vs/`,
+   run as `pytest tests/vs`): for every manifest entry, `git show <pin>:<src>` → rules →
+   patches → compare to the dest minus its provenance line; byte-identical or the test fails
+   naming the file and the first differing line. Also checks that no file under the six
+   copied trees (`vsbench/{vs,configs,benchmark,assets,tests,scripts}`, `vsbench/experiments`)
+   is absent from the manifest (nothing hand-written hides there), that
+   `external/VSSIM_COMMIT` equals every manifest entry's commit, ≤ 6 patches each with a
+   reason, and that no glob loop of the copied tier can pass on an empty directory.
 3. **Pulling a vs-sim fix in deliberately** (documented in `PROVENANCE.md`):
    `git -C external/vs-sim fetch` (reads GitHub or the local checkout), `tools/vssim_drift.py
    --upstream <newsha>` prints, per copied file, whether upstream changed it and the diff;
@@ -173,10 +195,16 @@ builder stops and asks.
    refused by design (one commit pin for the whole copy), so the copy is always *a* vs-sim.
 4. **Record provenance**: every record written by the bridge carries `render_mode`,
    `vsbench_commit` and `vssim_commit` (from the manifest), so a number can always be traced
-   to the exact published-baseline code that produced it.
+   to the exact published-baseline code that produced it. `vsbench_commit` gets `+dirty` by
+   the copied `dirty_paths` rule (tracked changes and untracked, not-ignored files) minus the
+   run's own `--out`; the record states that rule (`vsbench_commit_rule`), because the copied
+   `run.json` `git_dirty_paths` cannot drop an `--out` outside `vsbench/` and so lists the
+   first arm's fresh output as dirty on the second arm's sidecar (revision 3).
 5. **Fence in words** (`vsbench/vs/PROVENANCE.md`, repeated in README): "Nothing under
-   `vsbench/vs/` is edited by hand. A baseline is run as published; a knob that changes a
-   published method is a different arm config with a different label, never an edit."
+   `vsbench/vs/`, `vsbench/configs/`, `vsbench/benchmark/`, `vsbench/assets/`,
+   `vsbench/tests/` or `vsbench/scripts/` is edited by hand. A baseline is run as published;
+   a knob that changes a published method is a different arm config with a different label,
+   never an edit."
 
 ### 2.5 One scored loop, two adapters (how the copy meets vsbench's registry)
 
@@ -293,10 +321,21 @@ the branch Isaac's background (inf / > 10 m) takes. Clipping: vsbench's gate-tes
 2. *Depth* — the plane gate (`tests/test_depth.py`) at 1920×1080 from the three poster goal
    poses and six `narrow` starts: median |z − analytic| ≤ 1 mm, p99 ≤ 3 mm; report at 0.43 m
    and 1.29 m.
-3. *Convention* — render the hollywood plate with the copied `MockPlaneScene(texture=hollywood,
-   render_scale=1)` and with `MujocoScene("hollywood")` from the goal pose and three `near60`
-   starts; `cv2.phaseCorrelate` must return the predicted (0.5, 0.5) px shift within 0.1 px at
-   every pose; green-channel gradient correlation ≥ 0.8 (mock-vs-Isaac was 0.81).
+3. *Convention* (revision 3: as built) — render the hollywood plate with the copied
+   `MockPlaneScene(texture=hollywood, render_scale=1)` and with `MujocoScene("hollywood")` from
+   the goal pose and three `near60` starts. **Gated by ECC** (`cv2.findTransformECC`,
+   translation): the MuJoCo picture sits at the predicted (−0.5, −0.5) px from the mock's,
+   ± 0.1 px per axis and view; ECC's own bias is **calibrated** on the mock's goal picture
+   moved by known exact shifts (−0.5,−0.5), (−0.3,−0.3), (−0.5,0), (−1.5,−1.5): ≤ 0.1 px
+   (measured ≤ 0.056 px). `cv2.phaseCorrelate` is **reported, not gated**: an exact half
+   pixel is its degenerate case (the same calibration shift of −0.5 reads −0.17), so the
+   revision-2 wording "phaseCorrelate returns (0.5, 0.5) within 0.1 px" could not be met by
+   any renderer. Two phaseCorrelate **null tests** are gated at 0.1 px: MuJoCo moved back by
+   the predicted half pixel (residual ~0), and MuJoCo rendered with the mock's principal point
+   (960, 540) (~0). Green-channel gradient correlation ≥ 0.8 (mock-vs-Isaac was 0.81). The
+   **primary evidence** for the convention is gate 1's signed mean of the marker centroids
+   against the exact sphere-image centroid: (−0.002, +0.003) px with `cx = 959.5`, against
+   (−0.50, −0.50) px if the principal point were (960, 540).
 4. *Contract* — `isinstance(scene, vsbench.vs.scene.Scene)`; `check_scene_goal` on all three
    posters.
 
@@ -384,9 +423,12 @@ number: different pixels → different matches → different landings. Every MuJ
 
 ## 7. Units of work (ordered; `∥` = can run in parallel with the previous unit)
 
-Every unit runs under the station rules, scripted once in **U0** (`tools/cpu_env.sh`, being
-written now; its content is U0's): `CUDA_VISIBLE_DEVICES=""`, `VSBENCH_SOFTWARE_GL=1`,
-`MUJOCO_GL=egl`, `OMP/MKL/OPENBLAS_NUM_THREADS=2`, `torch.set_num_threads(2)`,
+Every unit runs under the station rules, scripted once in **U0** (`tools/cpu_env.sh`):
+`CUDA_VISIBLE_DEVICES=""`, `VSBENCH_SOFTWARE_GL=1`,
+`MUJOCO_GL=egl`, `OMP/MKL/OPENBLAS_NUM_THREADS=2`, `LP_NUM_THREADS=2` (Mesa llvmpipe's
+rasteriser threads; added in U1 — before that llvmpipe spawned one thread per CPU, §8),
+`torch.set_num_threads(2)` and `torch.set_num_interop_threads(2)` (the bridge driver, before
+any torch op, so records read 2 / 2),
 `HF_HOME=~/genvs_ws/vsbench_assets/weights/hf`, `HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`,
 `TORCH_HOME=~/genvs_ws/vsbench_assets/weights/torch`, `VSBENCH_WORKSPACE_ROOT=~/genvs_ws`,
 `VSSIM_ASSET_ROOT=~/genvs_ws/genvs-sim`, `VSSIM_YCB_ROOT=~/genvs_ws/assets/ycb`, every command
@@ -396,15 +438,33 @@ written now; its content is U0's): `CUDA_VISIBLE_DEVICES=""`, `VSBENCH_SOFTWARE_
 `~/genvs_ws/cache`, `~/genvs_ws/torch_home`. CPU budgets are estimates at load ~20, to be
 replaced by measured numbers in each gate's report.
 
+**Enforced, not only scripted (revision 3):** `python -m vsbench.world.fly` sets
+`CUDA_VISIBLE_DEVICES=""` and `VSBENCH_SOFTWARE_GL=1` by force (not `setdefault`), refuses to
+run when torch sees a GPU, and after building the scene refuses unless `render_mode ==
+"mujoco-llvmpipe"` and the context's GL renderer string names llvmpipe/softpipe/swrast;
+`--allow-gpu` (off by default, never during the eval) lifts both. Once software GL is
+requested, `vsbench.glenv.force_software_gl` overwrites the EGL vendor / device variables
+instead of `setdefault`, and `MujocoRenderer` honours `VSBENCH_SOFTWARE_GL` itself (not only
+through `make_renderer`). Every world test that renders skips unless software GL is
+requested, so `pytest tests/world` without `cpu_env.sh` cannot open a GPU context. Gate tests
+write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp file).
+
 ### Milestone 1 — "a faithful copy, the depth camera, the poster, ViT-VS flying one start on CPU"
 
-**U0 — Environment, pin, weights copy** *(in progress; unchanged)*
+**U0 — Environment, pin, weights copy** *(done)*
 - Gate: `import torch` prints `cuda available: False`; `nvidia-smi` memory unchanged;
   `external/vs-sim` at the pinned commit (`external/VSSIM_COMMIT`), **not** pip-installed;
-  the pristine clone's fast tier run once via `PYTHONPATH=external/vs-sim py -m pytest
-  external/vs-sim/tests/fast -q` and its pass/skip split written to
-  `results/bridge/u0_clone_fast_tier.txt` (this is the number U-copy must match). Any red test
-  caused by cv2 5.0 / numpy 2.5 is reported, never patched.
+  the pristine clone's fast tier run once via `PYTHONPATH=external/vs-sim env -u
+  VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT py -m pytest external/vs-sim/tests/fast -q` and its
+  pass/skip split written to `results/bridge/u0_clone_fast_tier.txt` (this is the number
+  U-copy must match). Any red test caused by library versions is reported, never patched.
+- As built: under OpenCV 5.0 six AKAZE tests failed (5.0 has no `AKAZE_create`) and nine
+  classical-fixture tests skipped (pinned to 4.10 / 4.11), so OpenCV is **pinned to
+  `opencv-python-headless==4.11.0.86`**, the Isaac flight interpreter's version
+  (`tools/constraints.txt`, `pyproject.toml`; parent decision 2026-10-22). At the pin the
+  clone's tier is **789 passed, 13 skipped** of 802 (the 13 need the frozen genvs-sim or
+  ART-VS checkouts, DINO v1 or LightGlue); the two asset-root variables must be unset (three
+  `test_assets.py` tests assert the defaults).
 - Cost: ~10 min; disk ~1.5 GB venv + 0.25 GB weights.
 
 **U-copy — The faithful copy and the drift tool** (`tools/vssim_copy.py`, `tools/vssim_drift.py`, `tools/vssim_copy_patches.json`, `vsbench/vs/**`, `tests/vs/**`, `vsbench/vs/{COPY_MANIFEST.json,PROVENANCE.md}`, `tests/vs/test_drift.py`; `pyproject.toml` package-data **after U0 has finished with that file**)
@@ -412,13 +472,16 @@ replaced by measured numbers in each gate's report.
 - Do: §2.1–2.4 exactly: copy list of §2.2, rules of §2.3, ≤ 6 patches, provenance line,
   manifest; `[tool.setuptools.package-data] "vsbench.vs" = ["data/**/*"]`; the drift tool and
   its test; `PROVENANCE.md` naming what is flown here and what is copied-not-wired.
-- Gate: `py -m pytest tests/vs -q` passes with the **same pass/skip split as U0's clone run**
-  (skip-for-skip); `tools/vssim_drift.py` exits 0 and `tests/vs/test_drift.py` is in the
-  tier; copied `test_package.py` proves `import vsbench.vs` pulls no torch; `ruff check
-  vsbench/vs tests/vs` with vs-sim's own ruff rules (`E,F,I,UP,B,SIM`, line 100) is clean
-  modulo the provenance line; `git status` shows no file under `vsbench/vs/` outside the
-  manifest; vsbench's own gates (`pytest tests --backends mujoco-egl -x -k "not vs"`) still
-  green.
+- Gate (as built, layout B): `env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT py -m pytest
+  vsbench/tests/fast -q` (own process) passes with the **same pass/skip split as U0's clone
+  run**, skip-for-skip (789 / 13; `results/bridge/ucopy_fast_tier.txt`);
+  `tools/vssim_drift.py` exits 0 and `py -m pytest tests/vs -q` (the drift test) is green;
+  copied `test_package.py` proves `import vsbench.vs` pulls no torch; `ruff check --config
+  tools/ruff_vssim_copy.toml vsbench/vs vsbench/tests vsbench/scripts` with vs-sim's own
+  rules (`E,F,I,UP,B,SIM`, line 100) is clean (the lines the rewrite pushed past 100 columns
+  are listed per-file ignores); no file under the copied trees outside the manifest;
+  vsbench's own gates (`pytest tests --backends mujoco-egl --ignore=tests/vs
+  --ignore=tests/world`) still green.
 - Cost: ~5 min of scripting runtime; the tier ≈ 2–4 min at nice 19. Disk ~9 MB.
 
 **U1 — `MujocoScene` for the posters + the D435i gates** (`vsbench/world/{__init__,mujoco_scene,build,camera}.py`, `tests/world/test_scene_posters.py`)
@@ -436,12 +499,24 @@ replaced by measured numbers in each gate's report.
 **U2 — The bench driver and the first flight** (`vsbench/world/fly.py`, `tests/world/test_fly_smoke.py`)
 - Inputs: U1; `vsbench.vs.bench.{config,arms,runner,run,scoring}`, `vsbench.vs.benchmark`,
   `vsbench/vs/data/configs/arms/*.yaml`.
-- Do: §2.6. `torch.set_num_threads(2)` at start-up; refuse to run if `torch.cuda.is_available()`.
-- Gate (**the M1 gate**): ViT-VS DINOv3 (real weights, CPU) on hollywood from the first
-  `near60` start (3–8 mm away), 100 steps: the record exists, `final_translation_mm` < the
-  start's offset and < 5 mm, `predicate_a` success under the frozen schema, `n_matches` ≥ 20
-  on frame 1; plus `sift_ransac` on the same start as a weight-free smoke. Records under
-  `results/bridge/`.
+- Do: §2.6. `torch.set_num_threads(2)` and `torch.set_num_interop_threads(2)` at start-up;
+  refuse to run if `torch.cuda.is_available()` or the scene is not on llvmpipe (§7 station
+  rules); only the protocol's start sets (as vs-sim's `fly.py`).
+- Gate (**the M1 gate**, revision 3): on hollywood from the first `near60` start
+  (`n_000`, 5.58 mm / 2.98° away), 100 steps, real weights on the CPU:
+  - **ViT-VS DINOv3: "ran and was recorded"** — the record exists with 100 steps, ≥ 20
+    matches on frame 1, passes the copied frozen-schema tests and carries the provenance
+    fields — **plus its error-curve statistics, reported**: the median true translation error
+    over steps 75–100 and the maximum over steps 50–100, from the per-step telemetry of the
+    same start (`results/bridge/m1_telemetry/`, which reproduces the M1 flight's curve). Its
+    landing is reported, not gated: at 100 steps ViT-VS is still on its way in (3.78 mm at the
+    cap), so revision 2's "< 5 mm, `predicate_a`" read a landing that had not happened.
+  - **`sift_ransac` keeps the landing gate**: `final_translation_mm` < the start's offset and
+    < 5 mm, `predicate_a`, ≥ 20 matches on frame 1, schema-valid.
+  - **The truth seam in a flight**: `sift_ransac` flown again with `--telemetry-extended`:
+    every `gt_*` / `err_patch` column finite on every step, valid share ≥ 0.99.
+  Records under `results/bridge/m1/` and `results/bridge/m1_telemetry/`; numbers in
+  `results/bridge/u2_m1_gate.json`.
 - Cost: DINOv3-S/16 at 512 on 2 threads ≈ 0.4–0.8 s/step + render ≈ 0.3 s → **100 steps ≈ 2 min**.
 
 ### Milestone 2 — the rooms, the objects, ART-VS, parity, one loop
@@ -536,6 +611,13 @@ Decided by the owner (2026-10-22):
 Open — the recommendation is the working default until the owner rules:
 - **D-3 Half-pixel convention.** Isaac's `cx = 959.5` (default) vs the mock's 960;
   `scene.intrinsics` reports (960, 540) either way. Cost: none; 0.15 mm at the poster distance.
+  *Measured (U1, `results/bridge/u1_camera_gates.json`):* with the default the 78 marker
+  centroids sit (−0.002, +0.003) px from the exact sphere-image centroids (median 0.016 px,
+  max 0.040 px); with (960, 540) they would sit (−0.50, −0.50) px. Against the mock, ECC reads
+  the MuJoCo picture at (−0.45 … −0.51, −0.53 … −0.56) px over four views (ECC's calibrated
+  bias ≤ 0.056 px), the phaseCorrelate residual after the predicted half pixel is ≤ 0.062 px
+  and MuJoCo drawn at (960, 540) matches the mock to ≤ 0.070 px. So the default is exactly
+  Isaac's geometry and exactly half a pixel from the mock's; the choice remains the owner's.
 - **D-4 When our room bbox misses the frozen goal tolerance.** (a) the frozen file's goal wins,
   residual recorded (default); (b) our measured goal wins (breaks start pairing); (c) refuse.
 - **D-5 Depth noise model.** vs-sim has none; adding one is a science decision. Default: not now.
@@ -552,12 +634,26 @@ Open — the recommendation is the working default until the owner rules:
 Risks (technical, with the mitigation in the plan):
 - *Shared CPU*: load ~22 on 16 threads; everything `nice -n 19`, ≤ 2 threads; wall times
   1.5–3× the estimates; long units in the background with `timeout`.
+- *The pre-U1 llvmpipe thread gap* (found in U1, revision 3): until U1 `tools/cpu_env.sh` did
+  not set `LP_NUM_THREADS`, so every MuJoCo render on llvmpipe before it (e.g. vsbench's own
+  gates in U-copy) ran Mesa's rasteriser with one thread per CPU (16) — at nice 19, but above
+  the ≤ 2-thread rule. Mitigation: `cpu_env.sh` exports `LP_NUM_THREADS=2`
+  since U1 and the bridge driver sets it too (`setdefault`) before any GL load; a shell that
+  renders without `cpu_env.sh` still has the gap (vsbench's Step 1–3 tools do not set it).
+- *A renderer path that bypassed software GL* (found in the M1 review pass, revision 3):
+  `VSBENCH_SOFTWARE_GL` was honoured only by `make_renderer`; `tools/convert_objects.py
+  sheet` builds `MujocoRenderer` directly, and without `MUJOCO_EGL_DEVICE_ID` MuJoCo's EGL
+  takes the first device that initialises — device 0, the GPU (the Mesa software device is
+  index 1 on the station). U3's contact sheet (`results/bridge/u3_objects.png`, 12 small
+  tiles) was therefore most likely drawn on the GPU; the record does not say. Fixed on `port/vssim`:
+  `MujocoRenderer` now forces software GL itself when it is requested. Any branch cut before
+  the fix (e.g. `port/u7-library`) still has the bypass until it merges `port/vssim`.
 - *Faithfulness erosion*: the only defence is mechanical — the manifest, the ≤ 6 patch list,
   the drift test in the fast tier, and the fence "nothing hand-written under `vsbench/vs/`".
   A seventh patch is a question for the owner, not a commit.
 - *Library versions*: cv2 5.0 / numpy 2.5 vs vs-sim's last green (cv2 4.x / numpy 1.26–2.x);
   U0's clone run is the baseline; a red test is a vs-sim finding reported upstream, never
-  patched in the copy.
+  patched in the copy. As built: OpenCV pinned to 4.11.0.86 (U0), numpy 2.5 green.
 - *llvmpipe memory*: 1920×1080 ×2 contexts + a 4096² texture ≈ 0.3–0.6 GB RSS per scene
   process; never more than two bridge processes at once.
 - *ART-VS on CPU* (~1.5 s/step): gates use 100–200 steps and near/narrow starts; a 600-step
