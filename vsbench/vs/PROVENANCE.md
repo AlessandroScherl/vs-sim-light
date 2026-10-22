@@ -61,7 +61,7 @@ Line 1 of every rewritten file (line 2 after a shebang) is
 | id | file | pairs | why |
 | --- | --- | --- | --- |
 | P1 | `vsbench/tests/fast/test_package.py` | 3 | the hygiene test names the package by its import name: `CORE_ALLOWED` gets `vsbench`; the fresh-interpreter no-torch check imports `vsbench.vs`; `hasattr(vsbench.vs, name)` (the one bare use of the module object) |
-| P2 | `vsbench/vs/bench/run.py` | 2 | `__import__("vsbench.vs", fromlist=["__version__"]).__version__` (there is no `vssim`; the record key stays `vssim_version`); `git status --short` instead of `--porcelain` so `dirty_paths` reports paths relative to `REPO_ROOT = vsbench/` (porcelain is relative to the repository top, and the `experiments/` filter never matched in the nested copy) |
+| P2 | `vsbench/vs/bench/run.py` | 2 | `__import__("vsbench.vs", fromlist=["__version__"]).__version__` (there is no `vssim`; the record key stays `vssim_version`); `git -c color.status=false -c status.relativePaths=true -c status.branch=false -c status.showStash=false status --short` instead of `status --porcelain` so `dirty_paths` reports paths relative to `REPO_ROOT = vsbench/` (porcelain is relative to the repository top, and the `experiments/` filter never matched in the nested copy); the four `-c` settings pin the output against a user's git config (`relativePaths=false` would bring top-relative paths back, `branch` / `showStash` would add lines the parser reads as paths) |
 | P3 | `vsbench/tests/fast/test_debuglog.py` | 1 | the throwaway checkout the debug chain is driven in symlinks `vs`, not `vssim` |
 
 The plan's `camera.py` data-root patch is not needed in layout B: vs-sim's own
@@ -130,3 +130,18 @@ $VSBENCH_PY tools/vssim_drift.py                        # exit 0 = the copy is t
    re-review the patch.
 4. Re-run the copied tier (and the clone's tier at the new pin for the new split), the drift
    test and ruff; commit with a message naming the vs-sim commits pulled.
+
+## Upstream findings to report when vs-sim unfreezes
+
+vs-sim is frozen while the T1 Stage 2 evaluation flies; these are written down here, never
+patched in the copy (a fix comes in by moving the pin).
+
+- **The film encoder doubles a relative path** (`vssim/bench/films.py::encode_episode`, copied
+  as `vsbench/vs/bench/films.py`). It runs ffmpeg with `cwd=str(ep_dir)` but passes
+  `-i str(ep_dir / "_frames.txt")` and the output `str(ep_dir / out_name)` as given; when
+  `ep_dir` is relative, ffmpeg resolves them inside `ep_dir` again (`<ep_dir>/<ep_dir>/...`),
+  fails, and the encoder falls back to cv2's writer (`[film] ffmpeg failed ..., cv2
+  fallback`). vs-sim's own drivers pass absolute run directories, so it never shows there.
+  Fix upstream: `ep_dir = Path(ep_dir).resolve()` at the top of `encode_episode` (or pass
+  `lst.name` / `out.name` to ffmpeg). Here `vsbench.world.fly` resolves `--out` to an
+  absolute path before any film is written (found in U2, 2026-10-22).

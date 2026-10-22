@@ -96,7 +96,9 @@ def dirty_paths(ignore_prefix: Path | None = None) -> list[str] | None:
     written under ``experiments/`` do not make the next run refuse.
     """
     # NOT stripped: a porcelain line like ' M path' leads with a space.
-    status = _git("-c", "color.status=false", "status", "--short", strip=False)
+    status = _git("-c", "color.status=false", "-c", "status.relativePaths=true",
+                  "-c", "status.branch=false", "-c", "status.showStash=false",
+                  "status", "--short", strip=False)
     if status is None:
         return None
     rel_prefix = None

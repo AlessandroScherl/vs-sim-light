@@ -21,8 +21,8 @@
      "new": "\"vssim_version\": __import__(\"vsbench.vs\", fromlist=[\"__version__\"]).__version__,",
      "reason": "there is no module vssim here; fromlist makes __import__ return vsbench.vs itself (not the top package vsbench); the record key stays vssim_version (schema data)"},
     {"old": "status = _git(\"status\", \"--porcelain\", strip=False)",
-     "new": "status = _git(\"-c\", \"color.status=false\", \"status\", \"--short\", strip=False)",
-     "reason": "porcelain paths are relative to the repository top (vsbench/x), but dirty_paths filters them against REPO_ROOT = vsbench/; --short prints them relative to git -C REPO_ROOT (x, ../y) in the same two-column format, so the experiments/ filter works in the nested copy; the whole tree is still reported"}
+     "new": "status = _git(\"-c\", \"color.status=false\", \"-c\", \"status.relativePaths=true\",\n                  \"-c\", \"status.branch=false\", \"-c\", \"status.showStash=false\",\n                  \"status\", \"--short\", strip=False)",
+     "reason": "porcelain paths are relative to the repository top (vsbench/x), but dirty_paths filters them against REPO_ROOT = vsbench/; --short prints them relative to git -C REPO_ROOT (x, ../y) in the same two-column format, so the experiments/ filter works in the nested copy; the whole tree is still reported. The four -c settings pin what --short prints against a user's git config (status.relativePaths=false would print top-relative paths again; status.branch=true / status.showStash=true would add a '## branch' / stash line that _parse_porcelain would read as a path); color.status=false keeps escape codes out"}
    ]},
   {"id": "P3", "dest": "vsbench/tests/fast/test_debuglog.py",
    "reason": "the throwaway checkout the debug chain is driven in mirrors the repository's layout; the package directory is vs/ here",
