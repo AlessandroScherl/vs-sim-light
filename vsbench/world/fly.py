@@ -22,12 +22,15 @@ What the bridge adds, and nothing else:
   ``vsbench_commit`` (this repository's HEAD, ``+dirty`` when the tree is) and
   ``vssim_commit`` (the pin of the copy, from ``vsbench/vs/COPY_MANIFEST.json``), so a
   MuJoCo number can never be pooled with an Isaac one (PORT_PLAN D-9);
-* the station rules: torch on 2 threads; refuses to run when torch sees a GPU; the
+* the station rules: torch on 2 threads (intra- and inter-op); ``CUDA_VISIBLE_DEVICES=""`` and
+  ``VSBENCH_SOFTWARE_GL=1`` forced; refuses to run when torch sees a GPU **or** the built
+  scene's GL context is not Mesa llvmpipe (``--allow-gpu`` lifts both; off by default); the
   ``nvidia-smi`` the copied loop polls for its hardware columns is shadowed by a stub
   (on this shared machine it would report the Isaac evaluation's GPU as this run's), so
   ``vram_used_mb`` / ``gpu_util_*`` read ``None``, the truth for a CPU run;
-* ``--max-iter`` and ``--device`` overrides (stated on the record as ``max_iter`` and in
-  the resolved config); ``--film`` writes the copied ``FilmWriter``'s match film.
+* ``--max-iter``, ``--device`` and ``--telemetry-extended`` overrides (stated in the
+  resolved config; ``max_iter`` on the record); ``--film`` writes the copied
+  ``FilmWriter``'s match film. Start sets: the protocol's only, as vs-sim's driver.
 
 ``--method`` (a vsbench method through ``MethodArm``) is port unit U6a, not here.
 """
@@ -35,6 +38,7 @@ What the bridge adds, and nothing else:
 from __future__ import annotations
 
 import argparse
+import atexit
 import copy
 import json
 import os
@@ -50,40 +54,127 @@ MANIFEST = REPO / "vsbench" / "vs" / "COPY_MANIFEST.json"
 
 
 # ----------------------------------------------------------------- the station rules
-def station_guard(threads: int = 2) -> dict:
-    """Two threads everywhere, no GPU, no ``nvidia-smi``. Call before torch / mujoco load."""
-    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
-    os.environ.setdefault("VSBENCH_SOFTWARE_GL", "1")
-    for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "LP_NUM_THREADS"):
-        os.environ.setdefault(k, str(threads))
-    stub_dir = Path(tempfile.mkdtemp(prefix="vsbench_nosmi_"))
-    stub = stub_dir / "nvidia-smi"
+#: the GL renderer strings of Mesa's software rasterisers (``glGetString(GL_RENDERER)``)
+SOFTWARE_GL_NAMES = ("llvmpipe", "softpipe", "swrast")
+_KEEP: list = []
+
+
+def _nosmi_stub() -> Path:
+    """A throwaway directory holding an ``nvidia-smi`` that always fails, removed at exit."""
+    tmp = tempfile.TemporaryDirectory(prefix="vsbench_nosmi_")
+    atexit.register(tmp.cleanup)
+    stub = Path(tmp.name) / "nvidia-smi"
     stub.write_text("#!/bin/sh\necho 'vsbench.world.fly: nvidia-smi hidden (CPU run)' >&2\nexit 9\n")
     stub.chmod(stub.stat().st_mode | stat.S_IXUSR)
+    _KEEP.append(tmp)   # the object must outlive this call, or its finaliser cleans up at once
+    return Path(tmp.name)
+
+
+def station_guard(threads: int = 2, *, allow_gpu: bool = False) -> dict:
+    """Two threads everywhere, no GPU, no ``nvidia-smi``. Call before torch / mujoco load.
+
+    Without ``allow_gpu`` the GPU is hidden by force, not by default: ``CUDA_VISIBLE_DEVICES``
+    is set to ``""`` and ``VSBENCH_SOFTWARE_GL`` to ``1`` whatever the shell exported (so a
+    shell that forgot ``tools/cpu_env.sh``, or exported ``VSBENCH_SOFTWARE_GL=0``, still runs
+    on llvmpipe), and :func:`require_software_gl` refuses the scene afterwards if MuJoCo
+    nevertheless opened a hardware context. ``allow_gpu`` (``--allow-gpu``, off by default;
+    never while the Isaac evaluation runs) leaves both variables as exported and lifts both
+    refusals. The thread caps are ``setdefault`` (a smaller cap the shell set wins).
+    """
+    if allow_gpu:
+        os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+        os.environ.setdefault("VSBENCH_SOFTWARE_GL", "1")
+    else:
+        os.environ["CUDA_VISIBLE_DEVICES"] = ""
+        os.environ["VSBENCH_SOFTWARE_GL"] = "1"
+    for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "LP_NUM_THREADS"):
+        os.environ.setdefault(k, str(threads))
+    stub_dir = _nosmi_stub()
     os.environ["PATH"] = f"{stub_dir}{os.pathsep}{os.environ.get('PATH', '')}"
     import torch
 
+    # before any torch op: the inter-op pool can only be sized before it first runs
+    try:
+        torch.set_num_interop_threads(int(threads))
+    except RuntimeError as exc:   # already started in this process (e.g. a test imported torch)
+        print(f"[fly] torch.set_num_interop_threads({threads}) refused: {exc}", flush=True)
     torch.set_num_threads(int(threads))
-    if torch.cuda.is_available():
+    cuda = bool(torch.cuda.is_available())
+    if cuda and not allow_gpu:
         raise SystemExit("torch sees a GPU - the bridge runs on the CPU only "
-                         "(source tools/cpu_env.sh: CUDA_VISIBLE_DEVICES='')")
+                         "(source tools/cpu_env.sh: CUDA_VISIBLE_DEVICES=''; --allow-gpu lifts this)")
     return {"torch": torch.__version__, "torch_threads": torch.get_num_threads(),
-            "cuda_available": False, "nvidia_smi": "hidden",
+            "torch_interop_threads": torch.get_num_interop_threads(),
+            "cuda_available": cuda, "nvidia_smi": "hidden", "allow_gpu": bool(allow_gpu),
             "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "VSBENCH_SOFTWARE_GL": os.environ.get("VSBENCH_SOFTWARE_GL"),
             "LP_NUM_THREADS": os.environ.get("LP_NUM_THREADS")}
 
 
-def vsbench_commit() -> str | None:
-    """This repository's HEAD, with ``+dirty`` when tracked files changed."""
+def require_software_gl(scene, *, allow_gpu: bool = False) -> None:
+    """The hard refusal: the built scene must draw on Mesa's software rasteriser.
+
+    Checks both the scene's ``render_mode`` and the GL renderer string the context reports,
+    so an unreadable string can not pass for llvmpipe. ``allow_gpu`` lifts it.
+    """
+    if allow_gpu:
+        return
+    gl_name = str(getattr(scene.renderer, "gl_renderer", "") or "").lower()
+    if scene.render_mode != "mujoco-llvmpipe" or not any(n in gl_name for n in SOFTWARE_GL_NAMES):
+        scene.close()
+        raise SystemExit(f"refusing to fly: the MuJoCo context is {scene.render_mode!r} "
+                         f"(GL renderer {gl_name!r}), not Mesa llvmpipe - the bridge never "
+                         "touches the GPU while the Isaac evaluation runs (--allow-gpu lifts this)")
+
+
+def vsbench_commit(ignore: Path | None = None) -> str | None:
+    """This repository's HEAD, with ``+dirty`` when the working tree is dirty.
+
+    "Dirty" is the copied ``vsbench.vs.bench.run.dirty_paths`` rule (tracked changes **and**
+    untracked, not-ignored files; ignored files do not count), with the run's own output
+    (paths under ``ignore`` = ``--out``) left out. The one difference from the ``git_dirty``
+    the copied sidecar writes into ``run.json``: the copied rule drops only paths under the
+    arm's run root *inside* ``vsbench/`` (its ``REPO_ROOT``), so for the bridge's ``--out``
+    (outside ``vsbench/``) the second arm's ``run.json`` lists the first arm's fresh output
+    (``../<out>/``) as dirty. ``vsbench_commit`` does not; the record states the rule
+    (``vsbench_commit_rule``).
+    """
     try:
         head = subprocess.run(["git", "-C", str(REPO), "rev-parse", "HEAD"], capture_output=True,
                               text=True, check=True, timeout=30).stdout.strip()
-        dirty = subprocess.run(["git", "-C", str(REPO), "status", "--porcelain",
-                                "--untracked-files=no"], capture_output=True, text=True,
-                               check=True, timeout=30).stdout.strip()
+        status = subprocess.run(["git", "-C", str(REPO), "-c", "color.status=false",
+                                 "-c", "status.relativePaths=false", "status", "--porcelain",
+                                 "--untracked-files=all"], capture_output=True, text=True,
+                                check=True, timeout=30).stdout
     except (OSError, subprocess.SubprocessError):
         return None
-    return head + ("+dirty" if dirty else "")
+    return head + ("+dirty" if dirty_paths(status, ignore) else "")
+
+
+def dirty_paths(porcelain: str, ignore: Path | None = None) -> list[str]:
+    """Paths of ``git status --porcelain`` output (repository-top relative), minus those
+    under ``ignore``."""
+    rel = None
+    if ignore is not None:
+        try:
+            rel = Path(ignore).resolve().relative_to(REPO).as_posix().rstrip("/")
+        except ValueError:
+            rel = None
+    out = []
+    for line in porcelain.splitlines():
+        if not line.strip():
+            continue
+        path = line[3:].split(" -> ", 1)[-1].strip().strip('"')
+        if rel and (path == rel or path.startswith(rel + "/")):
+            continue
+        out.append(path)
+    return out
+
+
+VSBENCH_COMMIT_RULE = ("HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist "
+                       "outside --out (the copied dirty_paths rule minus the run's own output; "
+                       "run.json's git_dirty_paths cannot drop --out because it lies outside "
+                       "vsbench/)")
 
 
 def vssim_commit() -> str:
@@ -124,9 +215,11 @@ def arm_entry(protocol: dict, arm_id: str) -> dict:
 
 
 def arm_config(protocol: dict, arm_id: str, *, max_iter: int | None = None,
-               device: str | None = None) -> dict:
+               device: str | None = None, telemetry_extended: bool = False) -> dict:
     """The cell's config: its arm file deep-merged with the protocol's deltas (as vs-sim's
-    ``fly.py`` does), then the bridge's two overrides, then resolved by the copied loader."""
+    ``fly.py`` does), then the bridge's overrides (``--max-iter``, ``--device``,
+    ``--telemetry-extended``), then resolved by the copied loader. None of them is part of a
+    cell's derived label."""
     from vsbench.vs.bench import config as cfgmod
     from vsbench.vs.camera import REPO_ROOT
 
@@ -135,7 +228,9 @@ def arm_config(protocol: dict, arm_id: str, *, max_iter: int | None = None,
                  entry.get("overrides") or {})
     over: dict = {}
     if max_iter is not None:
-        over["episode"] = {"max_iter": int(max_iter)}
+        over.setdefault("episode", {})["max_iter"] = int(max_iter)
+    if telemetry_extended:
+        over.setdefault("episode", {})["telemetry_extended"] = True
     if device is not None and cfg["matcher"]["variant"] in cfgmod.DEVICE_VARIANTS:
         over["matcher"] = {"device": device}
     cfg = _merge(cfg, over)
@@ -188,7 +283,7 @@ class _Film:
 
 
 def cmd_run(args) -> int:
-    env = station_guard(args.threads)
+    env = station_guard(args.threads, allow_gpu=args.allow_gpu)
     from vsbench.vs import benchmark
     from vsbench.vs.bench.runner import open_run, run_episode
     from vsbench.vs.scenes import load_scenes
@@ -196,19 +291,22 @@ def cmd_run(args) -> int:
 
     protocol = load_protocol(args.protocol)
     specs, _ = load_scenes()
-    if args.start_set not in protocol["start_sets"] and args.start_set not in benchmark.START_SETS:
-        raise SystemExit(f"start set {args.start_set!r} is unknown")
+    if args.start_set not in protocol["start_sets"]:     # vs-sim's fly.py: the protocol's sets only
+        raise SystemExit(f"start set {args.start_set!r} is not in the protocol "
+                         f"(have {', '.join(protocol['start_sets'])})")
     picked = benchmark.select_starts(args.scene, args.start_set, limit=args.limit)
     if args.start_ids:
         picked = [s for s in picked if s["start_id"] in set(args.start_ids)]
         if not picked:
             raise SystemExit(f"none of {args.start_ids} is in {args.scene}/{args.start_set}")
     payload = benchmark.load_starts(args.scene, benchmark.START_SETS[args.start_set]["file"])
-    provenance = {"vsbench_commit": vsbench_commit(), "vssim_commit": vssim_commit()}
     out_root = Path(args.out).resolve()   # the copied encoder runs ffmpeg with cwd = the film dir
+    provenance = {"vsbench_commit": vsbench_commit(ignore=out_root), "vssim_commit": vssim_commit(),
+                  "vsbench_commit_rule": VSBENCH_COMMIT_RULE}
     out_root.mkdir(parents=True, exist_ok=True)
     summary_rows = []
     with MujocoScene(args.scene, samples=args.samples, specs=specs) as scene:
+        require_software_gl(scene, allow_gpu=args.allow_gpu)   # before the first frame
         benchmark.check_scene_goal(scene, payload)
         goal_rgb, _goal_depth = scene.render_goal()        # once, served to every arm
         goal_capture = scene.goal_capture_record()
@@ -216,7 +314,8 @@ def cmd_run(args) -> int:
               f"(file {payload['goal']['distance_m']:.6f}), goal md5 {goal_capture['goal_frame_md5']}, "
               f"{len(picked)} start(s) of {args.start_set}", flush=True)
         for arm_id in args.arms:
-            cfg = arm_config(protocol, arm_id, max_iter=args.max_iter, device=args.device)
+            cfg = arm_config(protocol, arm_id, max_iter=args.max_iter, device=args.device,
+                             telemetry_extended=args.telemetry_extended)
             t_build = time.monotonic()
             arm = build(protocol, arm_id, cfg, intrinsics=scene.intrinsics,
                         scene_name=args.scene, scene_spec=specs[args.scene])
@@ -313,12 +412,18 @@ def main(argv=None) -> int:
     r.add_argument("--max-iter", type=int, default=None, help="override episode.max_iter")
     r.add_argument("--device", default="cpu", help="matcher.device for encoder arms (default cpu)")
     r.add_argument("--out", required=True)
-    r.add_argument("--telemetry", action="store_true")
+    r.add_argument("--telemetry", action="store_true",
+                   help="the copied per-step telemetry (telemetry.jsonl.gz in each run dir)")
+    r.add_argument("--telemetry-extended", action="store_true",
+                   help="episode.telemetry_extended: the per-match truth columns (gt_u, gt_v_px, "
+                        "gt_ok, err_patch, ...); implies --telemetry")
     r.add_argument("--film", action="store_true", help="the copied FilmWriter's match film")
     r.add_argument("--film-every", type=int, default=2)
     r.add_argument("--film-scale", type=float, default=0.25)
     r.add_argument("--samples", type=int, default=4, help="MuJoCo multisampling (colour only)")
     r.add_argument("--threads", type=int, default=2)
+    r.add_argument("--allow-gpu", action="store_true",
+                   help="lift the GPU refusals (never while the Isaac evaluation runs)")
     r.set_defaults(fn=cmd_run)
 
     s = sub.add_parser("summary", help="tabulate the flat records of an --out directory")
@@ -327,6 +432,8 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_summary)
 
     args = ap.parse_args(argv)
+    if getattr(args, "telemetry_extended", False):
+        args.telemetry = True
     return int(args.fn(args))
 
 

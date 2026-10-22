@@ -60,6 +60,100 @@
     "render_mode": "mujoco-llvmpipe"
   },
   "convention": {
+    "ecc_calibration": {
+      "gate": "|ecc_bias| <= 0.1 px per axis",
+      "image": "the copied mock's goal picture of the hollywood texture (grey, 1920 x 1080), moved by cv2.warpAffine INTER_CUBIC",
+      "rows": [
+        {
+          "ecc_bias_px": [
+            -0.0069,
+            -0.01
+          ],
+          "ecc_px": [
+            -0.5069,
+            -0.51
+          ],
+          "phase_bias_px": [
+            0.326,
+            0.3257
+          ],
+          "phase_px": [
+            -0.174,
+            -0.1743
+          ],
+          "true_px": [
+            -0.5,
+            -0.5
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0561,
+            -0.0521
+          ],
+          "ecc_px": [
+            -0.3561,
+            -0.3521
+          ],
+          "phase_bias_px": [
+            0.0388,
+            0.0389
+          ],
+          "phase_px": [
+            -0.2612,
+            -0.2611
+          ],
+          "true_px": [
+            -0.3,
+            -0.3
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0149,
+            -0.001
+          ],
+          "ecc_px": [
+            -0.5149,
+            -0.001
+          ],
+          "phase_bias_px": [
+            0.3259,
+            -0.0001
+          ],
+          "phase_px": [
+            -0.1741,
+            -0.0001
+          ],
+          "true_px": [
+            -0.5,
+            0.0
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0154,
+            0.0155
+          ],
+          "ecc_px": [
+            -1.5154,
+            -1.4845
+          ],
+          "phase_bias_px": [
+            0.3259,
+            0.3258
+          ],
+          "phase_px": [
+            -1.1741,
+            -1.1742
+          ],
+          "true_px": [
+            -1.5,
+            -1.5
+          ]
+        }
+      ]
+    },
     "gate": "per view and axis: |ecc - (-0.5)| <= 0.1, |residual| <= 0.1, |control_960| <= 0.1, raw < -0.25 (told apart from 0); green gradient corr >= 0.8",
     "note": "an exact half-pixel shift is cv2.phaseCorrelate's degenerate case (the peak splits between two bins; a synthetic exact -0.5 shift of the mock reads -0.17 or -0.83), so the plan's literal 'raw within 0.1 of -0.5' is reported per view and the shift is gated by ECC plus the two phaseCorrelate null tests",
     "predicted_shift_px": [
@@ -338,5 +432,5 @@
   },
   "truth_seam_vs_mock_px": 2.3480197341996245e-08,
   "unit": "U1 - MujocoScene for the posters + the D435i gates (docs/PORT_PLAN.md section 4)",
-  "written": "2026-10-23 00:00:41 +0200"
+  "written": "2026-10-23 00:43:33 +0200"
 }

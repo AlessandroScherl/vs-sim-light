@@ -9,13 +9,20 @@ vs-sim's ``Scene`` contract.
 4. contract   - ``isinstance(scene, Scene)`` and ``check_scene_goal`` on all three posters,
                 plus the goal cache, determinism and the truth seam.
 
-Every number lands in ``results/bridge/u1_camera_gates.json``. CPU only:
-``source tools/cpu_env.sh`` first (``VSBENCH_SOFTWARE_GL=1``, two threads, nice 19).
+Every number lands in a gate JSON: ``results/bridge/u1_camera_gates.json`` (the committed
+record) only when ``VSBENCH_WRITE_GATES=1``, else a pytest temp file, so a plain run never
+rewrites a tracked file. CPU only: ``source tools/cpu_env.sh`` first
+(``VSBENCH_SOFTWARE_GL=1``, two threads, nice 19); without software GL requested the whole
+module is skipped, so it can never open a GPU context.
+
+    source tools/cpu_env.sh
+    VSBENCH_WRITE_GATES=1 $VSBENCH_PY -m pytest tests/world/test_scene_posters.py -q
 """
 
 from __future__ import annotations
 
 import json
+import os
 import time
 from pathlib import Path
 
@@ -24,7 +31,12 @@ import pytest
 
 pytest.importorskip("mujoco")
 
+from vsbench.glenv import software_gl_requested  # noqa: E402
 from vsbench.world.camera import HALF_PIXEL, d435i_camera_model, d435i_intrinsics  # noqa: E402
+
+pytestmark = pytest.mark.skipif(
+    not software_gl_requested(),
+    reason="renders: needs VSBENCH_SOFTWARE_GL=1 (source tools/cpu_env.sh) so no GPU is touched")
 
 REPO = Path(__file__).resolve().parents[2]
 OUT = REPO / "results" / "bridge" / "u1_camera_gates.json"
@@ -32,23 +44,35 @@ POSTERS = ("hollywood", "poster2", "poster3")
 RESULTS: dict = {}
 
 
+def write_gates() -> bool:
+    return os.environ.get("VSBENCH_WRITE_GATES", "").strip() == "1"
+
+
 @pytest.fixture(scope="module", autouse=True)
-def _write_results():
+def _write_results(tmp_path_factory):
     yield
     if not RESULTS:
         return
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    old = json.loads(OUT.read_text()) if OUT.exists() else {}
+    out = OUT if write_gates() else tmp_path_factory.mktemp("gates") / OUT.name
+    out.parent.mkdir(parents=True, exist_ok=True)
+    old = json.loads(out.read_text()) if out.exists() else {}
     old.update(RESULTS)
     old["unit"] = "U1 - MujocoScene for the posters + the D435i gates (docs/PORT_PLAN.md section 4)"
     old["written"] = time.strftime("%Y-%m-%d %H:%M:%S %z")
-    OUT.write_text(json.dumps(old, indent=2, sort_keys=True) + "\n")
+    out.write_text(json.dumps(old, indent=2, sort_keys=True) + "\n")
+    print(f"[gates] wrote {out}")
 
 
 def _scene(name):
     from vsbench.world.mujoco_scene import MujocoScene
 
-    return MujocoScene(name)
+    if not software_gl_requested():      # belt and braces beside the module mark
+        pytest.skip("MujocoScene renders: needs VSBENCH_SOFTWARE_GL=1")
+    scene = MujocoScene(name)
+    if scene.render_mode != "mujoco-llvmpipe":
+        scene.close()
+        pytest.fail(f"MuJoCo opened {scene.render_mode!r}, not llvmpipe - refusing to render")
+    return scene
 
 
 # --------------------------------------------------------------- 1. projection
@@ -213,6 +237,10 @@ def _shift(img, dx, dy):
                           flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
 
 
+#: known exact image shifts (px) for the ECC calibration row
+CALIBRATION_SHIFTS = ((-0.5, -0.5), (-0.3, -0.3), (-0.5, 0.0), (-1.5, -1.5))
+
+
 def test_half_pixel_convention_against_the_copied_mock():
     """MuJoCo renders with Isaac's principal point (959.5, 539.5); the copied mock puts it
     on pixel 960's centre. So the whole MuJoCo picture sits half a pixel left of and above
@@ -232,6 +260,11 @@ def test_half_pixel_convention_against_the_copied_mock():
                         where phaseCorrelate has no bias; gated at 0.1 px;
     * ``control_960`` - phaseCorrelate of MuJoCo rendered with the mock's principal point
                         (960, 540): ~0; gated at 0.1 px.
+
+    ``ecc_calibration`` - the instrument itself: the mock's goal picture of the hollywood
+    texture moved by known exact shifts (``CALIBRATION_SHIFTS``, bicubic) and read back by
+    ECC and by phaseCorrelate; ECC's bias is gated at 0.1 px per axis, phaseCorrelate's is
+    reported (it is what makes the half pixel its degenerate case).
     """
     import cv2
 
@@ -280,10 +313,26 @@ def test_half_pixel_convention_against_the_copied_mock():
                              "grad_corr_green": round(_grad_corr(mk, mj), 4),
                              "mean_grey_mujoco": round(float(b.mean()), 3),
                              "mean_grey_mock": round(float(a.mean()), 3)})
+            # the calibration row: known shifts of the mock's goal picture, read back
+            mock.reset(scene.goal_pose)
+            mk, _dm, _pm = mock.render()
+            a = cv2.cvtColor(mk, cv2.COLOR_RGB2GRAY).astype(np.float64)
+            calib_rows = []
+            for dx, dy in CALIBRATION_SHIFTS:
+                b = _shift(a, dx, dy)
+                ecc, ph = _ecc(a, b), _phase(a, b, win)
+                calib_rows.append({"true_px": [dx, dy],
+                                   "ecc_px": [round(v, 4) for v in ecc],
+                                   "ecc_bias_px": [round(ecc[0] - dx, 4), round(ecc[1] - dy, 4)],
+                                   "phase_px": [round(v, 4) for v in ph],
+                                   "phase_bias_px": [round(ph[0] - dx, 4), round(ph[1] - dy, 4)]})
         finally:
             r960.close()
     RESULTS["convention"] = {
         "views": rows, "predicted_shift_px": [-HALF_PIXEL, -HALF_PIXEL],
+        "ecc_calibration": {"image": "the copied mock's goal picture of the hollywood texture "
+                                     "(grey, 1920 x 1080), moved by cv2.warpAffine INTER_CUBIC",
+                            "rows": calib_rows, "gate": "|ecc_bias| <= 0.1 px per axis"},
         "gate": "per view and axis: |ecc - (-0.5)| <= 0.1, |residual| <= 0.1, |control_960| <= 0.1, "
                 "raw < -0.25 (told apart from 0); green gradient corr >= 0.8",
         "note": "an exact half-pixel shift is cv2.phaseCorrelate's degenerate case (the peak splits "
@@ -291,6 +340,8 @@ def test_half_pixel_convention_against_the_copied_mock():
                 "so the plan's literal 'raw within 0.1 of -0.5' is reported per view and the shift "
                 "is gated by ECC plus the two phaseCorrelate null tests"}
     print(json.dumps(RESULTS["convention"], indent=1))
+    for c in calib_rows:
+        assert max(abs(v) for v in c["ecc_bias_px"]) <= 0.1, c
     for r in rows:
         for i in (0, 1):
             assert abs(r["ecc_px"][i] + HALF_PIXEL) <= 0.1, r
@@ -342,6 +393,7 @@ def test_goal_cache_determinism_reortho_and_truth():
         assert scene.n_renders == 1 and np.array_equal(g1, g2)
         rec = scene.goal_capture_record()
         assert rec["goal_frame_md5"] and rec["goal_render_warmup"] == 1
+        assert rec["goal_render_warmup_protocol"] == 8 and rec["goal_render_warmup_reason"]
         assert rec["goal_settle_series"]["n_captures"] == 1
         assert rec["render_mode"] == "mujoco-llvmpipe"
         start = benchmark.select_starts("hollywood", "near60", limit=1)[0]

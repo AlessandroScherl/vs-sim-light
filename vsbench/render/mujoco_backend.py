@@ -36,6 +36,13 @@ class MujocoRenderer:
         if "mujoco" in sys.modules and have and have != want:
             raise RuntimeError(f"mujoco already imported with MUJOCO_GL={have!r}; one GL backend per process")
         os.environ["MUJOCO_GL"] = want
+        # VSBENCH_SOFTWARE_GL is honoured here too, not only in make_renderer: a caller that
+        # builds this class directly (tools/convert_objects.py's contact sheet did) would
+        # otherwise let glvnd hand MuJoCo's EGL the first device, the GPU on the station
+        from vsbench.glenv import force_software_gl, software_gl_requested
+
+        if software_gl_requested() and want == "egl":
+            force_software_gl()
         import mujoco
 
         self._mj = mujoco
