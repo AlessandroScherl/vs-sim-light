@@ -252,6 +252,36 @@ def test_two_materials_make_one_atlas(tmp_path):
 
 
 # ------------------------------------------------------------------- placement
+def test_a_material_with_only_a_normal_texture_takes_its_diffuse_colour(tmp_path):
+    """U7: a surface whose diffuse is a constant and whose only texture is a normal map
+    (3 GSO assets) - the UsdUVTexture has no ``diffuseColor`` input; reading it must not
+    throw, the look is the constant colour and the normal texture is not mistaken for it."""
+    st = Usd.Stage.CreateNew(str(tmp_path / "n.usda"))
+    UsdGeom.SetStageUpAxis(st, UsdGeom.Tokens.y)
+    root = UsdGeom.Xform.Define(st, "/World")
+    st.SetDefaultPrim(root.GetPrim())
+    m = UsdGeom.Mesh.Define(st, "/World/mesh")
+    m.CreatePointsAttr([Gf.Vec3f(0, 0, 0), Gf.Vec3f(1, 0, 0), Gf.Vec3f(0, 1, 0)])
+    m.CreateFaceVertexCountsAttr([3])
+    m.CreateFaceVertexIndicesAttr([0, 1, 2])
+    (tmp_path / "textures").mkdir()
+    _png(tmp_path / "textures" / "n.png")
+    mat = UsdShade.Material.Define(st, "/World/Looks/M")
+    sh = UsdShade.Shader.Define(st, "/World/Looks/M/surf")
+    sh.CreateIdAttr("UsdPreviewSurface")
+    sh.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(0.18, 0.2, 0.3))
+    tex = UsdShade.Shader.Define(st, "/World/Looks/M/normalTex")
+    tex.CreateIdAttr("UsdUVTexture")
+    tex.CreateInput("file", Sdf.ValueTypeNames.Asset).Set("./textures/n.png")
+    sh.CreateInput("normal", Sdf.ValueTypeNames.Normal3f).ConnectToSource(tex.ConnectableAPI(), "rgb")
+    mat.CreateSurfaceOutput().ConnectToSource(sh.ConnectableAPI(), "surface")
+    UsdShade.MaterialBindingAPI.Apply(m.GetPrim()).Bind(mat)
+    st.Save()
+    parts, _ = A.read_usd(tmp_path / "n.usda")
+    assert len(parts) == 1 and parts[0].look[0] == "color"
+    assert np.allclose(parts[0].look[1:], (0.18, 0.2, 0.3), atol=1e-6)
+
+
 def test_placement_scale_seat_and_layout(tmp_path):
     A.convert_source("t/u", _usd_asset(tmp_path / "u"), root=tmp_path / "c")
     o = A.load_object("t/u", tmp_path / "c")
@@ -299,7 +329,21 @@ def test_converted_objects_are_sound(iid):
 def test_the_index_is_under_the_plan_budget():
     idx = A.read_index()
     assert all(idx["objects"][i]["status"] == "ok" for i in U3_IDS)
-    assert idx["total_bytes"] < 200e6  # PORT_PLAN U3: < 200 MB
+    assert sum(idx["objects"][i]["bytes"] for i in U3_IDS) < 200e6  # PORT_PLAN U3: < 200 MB
+    assert idx["total_bytes"] < A.SIZE_CAP_BYTES  # D-7: the whole cache (U7: the full library)
+
+
+def test_u7_record_meets_the_gate():
+    """PORT_PLAN U7: >= 310 of the 317 on-disk curated objects ok, under the 10 GB cap,
+    the 12-object extent spot check green, every failure named with its reason."""
+    p = REPO / "results" / "bridge" / "u7_convert.json"
+    if not p.exists():
+        pytest.skip("U7 not run (tools/convert_objects.py convert --all --record)")
+    rec = json.loads(p.read_text())
+    assert rec["curated"]["n_ok"] >= 310 and rec["cache_total_bytes"] < rec["cap_bytes"]
+    assert rec["curated"]["n_ok"] + rec["curated"]["n_failed"] == rec["curated"]["n_on_disk"]
+    assert len(rec["failures"]) == rec["curated"]["n_failed"] and all(f["reason"] for f in rec["failures"])
+    assert rec["spot_check"]["all_pass"] and rec["spot_check"]["n"] == 12
 
 
 def _vs():
