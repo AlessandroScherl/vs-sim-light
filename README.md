@@ -203,6 +203,37 @@ checks, negative control, IBVS decay, feature convergence, log round trip, repla
 and writes `results/STEP3_REPORT.md` with every measured number, the demo tables and the
 time per `get_control_rate` call. The brief is in `docs/STEP3_SERVO_LOOP.md`.
 
+## The vs-sim bridge: environment and pin (port unit U0)
+
+The port of vs-sim's scenes, camera, objects and published baselines onto this simulator is
+planned in `docs/PORT_PLAN.md`. Owner decision 2026-10-22: the vs-sim code is **copied** into
+this repository, which stands alone and stays separate from vs-sim for good. A local clone of
+vs-sim sits in `external/vs-sim` (git-ignored), checked out at the commit in
+`external/VSSIM_COMMIT` (committed): it is the pinned **source** of that copy and of a drift
+check, not a runtime dependency, and it is **not** pip-installed in the venv (its fast tier is
+run from the clone's own directory, where `python -m pytest` finds the `vssim` package).
+Weights are a copy, outside the repository, so the shared caches are never opened:
+
+```
+source tools/cpu_env.sh                                   # no GPU, llvmpipe, 2 threads, nice 19, offline weights
+git clone ~/runpod_dev/vs-sim external/vs-sim             # a local clone only reads the source
+git -C external/vs-sim checkout "$(cat external/VSSIM_COMMIT)"
+$VSBENCH_PY -m pip install --only-binary=:all: --index-url https://download.pytorch.org/whl/cpu torch torchvision
+$VSBENCH_PY -m pip install --only-binary=:all: "transformers>=4.57" "PyYAML>=6" "scikit-learn>=1.0" usd-core "pytest>=8"
+# weights (~250 MB), copied once from the station's caches:
+#   ~/genvs_ws/vsbench_assets/weights/hf/hub/models--facebook--dinov3-vits16-pretrain-lvd1689m/   (HF_HOME)
+#   ~/genvs_ws/vsbench_assets/weights/torch/hub/{checkpoints/dinov2_vits14_pretrain.pth,
+#                                                facebookresearch_dinov2_main/, trusted_list}  (TORCH_HOME)
+cd external/vs-sim && $VSBENCH_PY -m pytest tests/fast -q   # vs-sim's fast tier in this venv (from the clone)
+```
+
+`~/genvs_ws/vsbench_assets/` (outside the repository) is the bridge's cache: `weights/` now,
+the converted objects later. Torch is the CPU build (`+cpu`); `torch.cuda.is_available()` is
+`False` by construction. Known drift: OpenCV 5.0 has no `AKAZE_create`, so vs-sim's AKAZE
+arms cannot be built in this venv, and its classical fixture (pinned to OpenCV 4.10 / 4.11)
+skips (with OpenCV 4.11, the flight interpreter's version, those tests pass); everything else
+in the fast tier passes. The measured record is `results/bridge/u0_env.json`.
+
 ## Layout
 
 ```
@@ -229,7 +260,9 @@ tests/                  step 1: test_reference, test_projection, test_depth, tes
                         step 2: test_se3, test_motion, test_interaction, test_flow_rendered, test_trajectory
                         step 3: test_contract, test_leak, test_oracle, test_checks, test_true_point_ibvs,
                         test_feature_ibvs, test_episode_log, test_replay, test_video
-tools/                  measurements and the reports (run_all.sh, run_step2.sh, run_step3.sh)
+tools/                  measurements and the reports (run_all.sh, run_step2.sh, run_step3.sh);
+                        cpu_env.sh (the station rules for the vs-sim bridge, source it first)
+external/               the pinned vs-sim clone, the copy's source (git-ignored), and VSSIM_COMMIT (the pin, committed)
 assets/poster.png       CC0 photograph (see assets/README.md)
 results/                JSON records, contact sheets, bakeoff_report.md, step2_axes.png, STEP2_REPORT.md,
                         STEP3_REPORT.md, demo/<method>/ (one video and one match sheet per method; logs are not committed)

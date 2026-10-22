@@ -11,3 +11,6 @@ results/_tmp/
 results/friction/venv_*/
 smoke.png
 *.npz
+# the vs-sim clone (docs/PORT_PLAN.md section 2): ignored; the pin is committed
+external/*
+!external/VSSIM_COMMIT
