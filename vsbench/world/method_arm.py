@@ -34,6 +34,16 @@ False``) falls back to ``cap_only``, **loudly**: a :class:`StopFallbackWarning` 
 on stderr, ``stop_mode: cap_only`` and the label ``.../cap_only`` on the record, and the
 record's ``stop_fallback`` block says which rule was configured and why it did not run.
 
+**The goal mask** (``--mask objects|<file.png>``, 2026-10-23). A method whose ``set_target``
+takes ``goal_mask`` (``vsbench.methods.takes_goal_mask``) can fly a masked cell: the arm is
+built with ``goal_mask_mode`` ``objects`` (the copied runner computes the mask from the goal
+depth, as for every ``objmask`` cell, and hands it to ``reset``) or ``file`` (the driver's
+``vsbench.world.masks.attach_goal_mask`` hands it the file's mask); the front end passes it
+to ``set_target(..., goal_mask=...)`` as a read-only bool array. The label gains the mask's
+token before the stop (``external:<method>@<params>/objmask/<stop>`` or
+``.../filemask-<md5>/<stop>``). A method without the parameter refuses a mask (a masked
+label over an unmasked flight would be a lie) and flies exactly as before without one.
+
 **GT-blind.** The method gets frames, depth (if asked), the reported intrinsics and the
 control period - nothing else. A privileged method (vsbench's two truth instruments) is
 refused; :func:`assert_method_gt_blind` refuses a method holding a pose or an object with
@@ -146,6 +156,10 @@ def validate_external(config: dict) -> None:
     name = _get(config, "method.name")
     if not isinstance(name, str) or not name:
         raise ExternalConfigError("method.name must name a registered vsbench method")
+    gm = (config.get("matcher") or {}).get("goal_mask")
+    if gm is not None and gm not in METHOD_MASK_MODES:
+        raise ExternalConfigError(f"matcher.goal_mask must be one of {METHOD_MASK_MODES}, "
+                                  f"got {gm!r}")
     if not isinstance((config.get("method") or {}).get("params", {}), dict):
         raise ExternalConfigError("method.params must be a mapping (constructor arguments)")
     for block, what in FOREIGN_BLOCKS.items():
@@ -183,8 +197,13 @@ def params_tag(params: dict) -> str:
     return hashlib.sha256(blob.encode()).hexdigest()[:8]
 
 
-def method_label(method, stop_rule: str) -> str:
-    return f"{LABEL_PREFIX}{method.name}@{params_tag(_params(method))}/{stop_rule}"
+def method_label(method, stop_rule: str, mask_token: str | None = None) -> str:
+    mask = f"{mask_token}/" if mask_token else ""
+    return f"{LABEL_PREFIX}{method.name}@{params_tag(_params(method))}/{mask}{stop_rule}"
+
+
+#: ``goal_mask_mode`` of a method cell: none, the runner's depth outline, or the driver's file
+METHOD_MASK_MODES = ("none", "objects", "file")
 
 
 def _params(method) -> dict:
@@ -237,15 +256,18 @@ def _K(intrinsics) -> np.ndarray:
 class MethodFrontEnd(CorrespondenceMatcher):
     """The arm's ``matcher``: owns the method, sets it up at every episode's ``reset``."""
 
-    honours_goal_mask = False
     provides_margin = False
     provides_conf_weight = False
     tie_order = None
     frozen_landmarks = False
 
     def __init__(self, method, *, intrinsics, dt: float) -> None:
+        from vsbench.methods.masking import takes_goal_mask
+
         self.method = method
         self.name = str(method.name)
+        #: the method's ``set_target`` takes ``goal_mask`` (``vsbench.methods.takes_goal_mask``)
+        self.honours_goal_mask = takes_goal_mask(method)
         self.intrinsics = intrinsics
         self.dt = float(dt)
         self.episode: tuple[str | None, Any] = (None, None)
@@ -254,9 +276,9 @@ class MethodFrontEnd(CorrespondenceMatcher):
         self.episode = (None if scene is None else str(scene), start_id)
 
     def reset(self, goal_rgb, goal_depth=None, goal_mask=None) -> None:
-        if goal_mask is not None:
-            raise ValueError(f"{self.name}: a vsbench method has no goal-mask seam "
-                             "(matcher.goal_mask must stay none on a method cell)")
+        if goal_mask is not None and not self.honours_goal_mask:
+            raise ValueError(f"{self.name}: this method's set_target takes no goal_mask, so it "
+                             "cannot fly a masked cell (add goal_mask=None to set_target)")
         m = self.method
         intr = self.intrinsics
         m.configure(_K(intr), int(intr.width), int(intr.height), self.dt)
@@ -265,9 +287,16 @@ class MethodFrontEnd(CorrespondenceMatcher):
         dense = mode == "dense"
         prior = (_distance_prior(goal_depth) if (mode != "none" and goal_depth is not None)
                  else None)
+        kw = {}
+        if goal_mask is not None:
+            gm = np.asarray(goal_mask).astype(bool)
+            if gm.shape != (int(intr.height), int(intr.width)):
+                raise ValueError(f"{self.name}: goal_mask is {gm.shape}, the picture "
+                                 f"{(int(intr.height), int(intr.width))}")
+            kw["goal_mask"] = _ro_copy(gm)
         m.set_target(_ro_copy(goal_rgb),
                      desired_depth=_ro_copy(goal_depth, np.float32) if dense else None,
-                     distance_prior=prior if mode != "none" else None)
+                     distance_prior=prior if mode != "none" else None, **kw)
 
     def match(self, current_rgb, current_mask=None) -> Matches:
         raise RuntimeError("MethodArm.step drives the method; its front end has no match()")
@@ -328,7 +357,8 @@ class MethodArm(Arm):
 
     requires_live_mask = False
 
-    def __init__(self, method, config: dict, *, intrinsics) -> None:
+    def __init__(self, method, config: dict, *, intrinsics, goal_mask_mode: str = "none",
+                 mask_token: str | None = None) -> None:
         from vsbench.methods.base import check_method
 
         validate_external(config)
@@ -342,11 +372,25 @@ class MethodArm(Arm):
         rule = str(config["stop"]["rule"])
         stop = build_stop_rule(config, **({"dt": dt} if rule == "cns_plateau"
                                           and "dt" not in config["stop"] else {}))
-        super().__init__(name=method_label(method, rule),
-                         matcher=MethodFrontEnd(method, intrinsics=intrinsics, dt=dt),
+        if goal_mask_mode not in METHOD_MASK_MODES:
+            raise ValueError(f"goal_mask_mode must be one of {METHOD_MASK_MODES}, "
+                             f"got {goal_mask_mode!r}")
+        cfg_mode = str((config.get("matcher") or {}).get("goal_mask") or "none")
+        if cfg_mode != goal_mask_mode:
+            raise ValueError(f"the config says matcher.goal_mask {cfg_mode!r}, the arm is built "
+                             f"with goal_mask_mode {goal_mask_mode!r}")
+        front = MethodFrontEnd(method, intrinsics=intrinsics, dt=dt)
+        if goal_mask_mode != "none" and not front.honours_goal_mask:
+            raise ValueError(f"{method.name!r} takes no goal mask (its set_target has no "
+                             "goal_mask parameter): it cannot fly a masked cell")
+        if (goal_mask_mode == "none") != (mask_token is None):
+            raise ValueError("a masked method cell needs its label token, an unmasked one none")
+        self.mask_token = mask_token
+        super().__init__(name=method_label(method, rule, mask_token),
+                         matcher=front,
                          controller=MethodController(dt, gain, gain_source), stop=stop,
                          config=config, checkpoint=None, kind=EXTERNAL_KIND,
-                         goal_mask_mode="none")
+                         goal_mask_mode=goal_mask_mode)
         self._configured_stop = stop
         self._configured_name = self.name
         self.stop_fallback: dict | None = None
@@ -365,7 +409,7 @@ class MethodArm(Arm):
             return
         self.stop = build_stop_rule({"stop": {"rule": FALLBACK_STOP}})
         self.stop.reset()
-        self.name = method_label(self.method, FALLBACK_STOP)
+        self.name = method_label(self.method, FALLBACK_STOP, self.mask_token)
         self.stop_fallback = {"configured": rule, "ran": FALLBACK_STOP, "reason": reason}
         msg = (f"[method_arm] STOP FALLBACK: {self.method.name}: {reason}, so the scored stop "
                f"{rule!r} (it reads the method's points) cannot run - this cell flies "
@@ -450,20 +494,32 @@ class MethodArm(Arm):
         return Twist(twist_arr), debug, matches
 
     def record_fields(self) -> dict:
-        return {**super().record_fields(),
-                "stop_rule_configured": self._configured_stop.name,
-                "stop_fallback": self.stop_fallback}
+        out = {**super().record_fields(),
+               "stop_rule_configured": self._configured_stop.name,
+               "stop_fallback": self.stop_fallback}
+        if self.goal_mask_mode != "none":       # an unmasked record stays key for key as before
+            out["external_method_takes_goal_mask"] = bool(self.matcher.honours_goal_mask)
+        return out
 
 
 def build_method_arm(method_name: str, params: dict | None = None, *, intrinsics,
-                     config: dict | None = None, **config_kw) -> tuple[MethodArm, dict]:
+                     config: dict | None = None, goal_mask_mode: str = "none",
+                     mask_token: str | None = None, mask_source: str | None = None,
+                     **config_kw) -> tuple[MethodArm, dict]:
     """``(arm, config)`` for a registered vsbench method: ``make_method(name, **params)``,
-    the template config (unless one is given) and :class:`MethodArm`."""
+    the template config (unless one is given) and :class:`MethodArm`. A masked cell
+    (``goal_mask_mode`` ``objects`` / ``file``) states the mode and its source in the config's
+    ``matcher`` block (``goal_mask``, ``goal_mask_source``)."""
     from vsbench.methods import make_method
 
     cfg = config if config is not None else external_config(method_name, params, **config_kw)
+    if config is None and goal_mask_mode != "none":
+        cfg["matcher"]["goal_mask"] = goal_mask_mode
+        cfg["matcher"]["goal_mask_source"] = mask_source
+        validate_external(cfg)
     method = make_method(method_name, **dict(cfg["method"].get("params") or {}))
-    return MethodArm(method, cfg, intrinsics=intrinsics), cfg
+    return MethodArm(method, cfg, intrinsics=intrinsics, goal_mask_mode=goal_mask_mode,
+                     mask_token=mask_token), cfg
 
 
 # ------------------------------------------------------------------- the run sidecar
