@@ -61,6 +61,61 @@ ARM_IDS: tuple[str, ...] = ("vitvs_dinov3", "vitvs_dinov2", "artvs",
 DEFAULT_SCENE_RANSAC = "homography"
 
 
+#: The encoder each ViT cell loads (its arm file's ``matcher.backbone_name``).
+BACKBONE_OF = {"vitvs_dinov3": "dinov3_vits16", "vitvs_dinov2": "dinov2_vits14",
+               "artvs": "dinov2_vits14"}
+#: Where the offline weights must sit (``local_files_only`` / ``torch.hub`` from cache):
+#: under ``$HF_HOME/hub`` and ``$TORCH_HOME/hub`` (``tools/cpu_env.sh`` sets both).
+WEIGHT_FILES = {
+    "dinov3_vits16": ("hf", "models--facebook--dinov3-vits16-pretrain-lvd1689m/snapshots"),
+    "dinov2_vits14": ("torch", "checkpoints/dinov2_vits14_pretrain.pth",
+                      "facebookresearch_dinov2_main"),
+}
+
+
+def _hub_dir(kind: str):
+    import os
+    from pathlib import Path
+
+    if kind == "hf":
+        root = os.environ.get("HF_HOME") or str(Path.home() / ".cache" / "huggingface")
+    else:
+        root = os.environ.get("TORCH_HOME") or str(Path.home() / ".cache" / "torch")
+    return Path(root) / "hub"
+
+
+def unavailable_reason(arm_id: str) -> str | None:
+    """Why the copied arm cannot run in this interpreter, or ``None`` when it can.
+
+    Nothing is imported or loaded: the copied bench needs ``torch`` (every arm, the matcher
+    module imports it), the DINOv3 cell ``transformers`` too, the ViT cells their weights in
+    the offline caches, the AKAZE cell an OpenCV that has ``AKAZE_create``. vsbench's own
+    contract gate skips a method that says why (``tests/test_contract.py``); where the
+    dependencies are present this returns ``None`` and every check runs in full.
+    """
+    import importlib.util
+
+    if importlib.util.find_spec("torch") is None:
+        return "needs torch (the copied vs-sim bench imports it); not installed here"
+    if arm_id == "akaze_ransac":
+        import cv2
+
+        if not hasattr(cv2, "AKAZE_create"):
+            return f"OpenCV {cv2.__version__} has no AKAZE_create (pin 4.11.0.86)"
+    backbone = BACKBONE_OF.get(arm_id)
+    if backbone is None:
+        return None
+    if backbone.startswith("dinov3") and importlib.util.find_spec("transformers") is None:
+        return "needs transformers for DINOv3; not installed here"
+    kind, *paths = WEIGHT_FILES[backbone]
+    hub = _hub_dir(kind)
+    missing = [p for p in paths if not (hub / p).exists()]
+    if missing:
+        return (f"the {backbone} weights are not in {hub} (missing {', '.join(missing)}; "
+                "source tools/cpu_env.sh, which points HF_HOME / TORCH_HOME at the offline copy)")
+    return None
+
+
 def _ro(a):
     """A read-only view (or ``None``)."""
     if a is None:
@@ -79,6 +134,11 @@ class VssimArmMethod:
     #: tells ``vsbench.world.method_arm.MethodArm`` that ``kp_cur`` / ``kp_des`` come with
     #: every step (so its ``cns_plateau`` stop can run)
     reports_points = True
+
+    @classmethod
+    def unavailable(cls) -> str | None:
+        """Why this arm cannot run here (``None``: it can) - see :func:`unavailable_reason`."""
+        return unavailable_reason(cls.arm_id)
 
     def __init__(self, device: str = "cpu", scene_ransac: str = DEFAULT_SCENE_RANSAC,
                  episode: str = "vsbench", start_id=0):
@@ -123,7 +183,6 @@ class VssimArmMethod:
         self._key = key
         self.config = cfg
         self.label = self._arm.name
-        self.params["label"] = self.label
 
     def reset(self) -> None:
         self._targeted = False

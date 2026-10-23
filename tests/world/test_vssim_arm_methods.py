@@ -108,6 +108,72 @@ def test_vssim_arm_is_the_protocol_cell(name):
         m.close()
 
 
+def test_vssim_unavailable_says_why_and_is_none_here(monkeypatch, tmp_path):
+    """vsbench's contract gate skips a copied arm only when it says why; in the bridge's
+    environment (weights in the offline copy) none says anything, so no check is skipped."""
+    import importlib.util
+
+    from vsbench.methods import method_class
+    from vsbench.methods import vssim_arms as va
+
+    if not os.environ.get("HF_HOME") or not os.environ.get("TORCH_HOME"):
+        pytest.skip("source tools/cpu_env.sh (HF_HOME / TORCH_HOME at the offline weights)")
+    assert {n: method_class(n).unavailable() for n in ARM_IDS} == {n: None for n in ARM_IDS}
+    monkeypatch.setenv("HF_HOME", str(tmp_path))
+    monkeypatch.setenv("TORCH_HOME", str(tmp_path))
+    assert "weights" in va.unavailable_reason("vitvs_dinov3")
+    assert "weights" in va.unavailable_reason("artvs")
+    assert va.unavailable_reason("sift_ransac") is None
+    real = importlib.util.find_spec
+    monkeypatch.setattr(importlib.util, "find_spec",
+                        lambda name, *a: None if name == "torch" else real(name, *a))
+    assert all("torch" in va.unavailable_reason(n) for n in ARM_IDS)
+
+
+@needs_gl
+@pytest.mark.parametrize("name", ARM_IDS)
+def test_vssim_wrapper_hands_the_arm_the_frames_camera(backend, renderer_factory, methods, name):
+    """The intrinsics the arm solves with are the frame's own (vsbench.check's 640 x 480 gate
+    camera: fx 600, fy 620, off-centre principal point), and the wrapper's twist is the copied
+    arm's own on the same frames, to the bit."""
+    from vsbench.camera import gate_camera
+    from vsbench.episode import distance_prior
+    from vsbench.scenes import poster_target_pose
+    from vsbench.se3 import exp_se3
+    from vsbench.vs.baselines.control import Intrinsics
+    from vsbench.vs.bench.arms import build_arm
+
+    cam = gate_camera()
+    r = renderer_factory(backend, "poster", (640, 480))
+    T_t = poster_target_pose(cam)
+    rgb_t, d_t = r.render(T_t)
+    rgb_0, d_0 = r.render(T_t @ exp_se3([0.06, 0.0, 0.0, 0.0, 0.0, 0.0]))
+    m = methods(name)
+    m.configure(cam.K.copy(), cam.width, cam.height, 0.04)
+    m.reset()
+    m.set_target(rgb_t, d_t, distance_prior(d_t))
+    got = m._arm.controller.intrinsics
+    want = (cam.fx, cam.fy, cam.cx, cam.cy, cam.width, cam.height)
+    assert (got.fx, got.fy, got.cx, got.cy, got.width, got.height) == want
+    tw, info = m.get_control_rate(rgb_0, d_0)
+    classical = m.config["matcher"]["variant"].startswith("classical")
+    direct = build_arm(m.config, intrinsics=Intrinsics(*want),
+                       **({"scene_spec": {"ransac": "homography"}} if classical else {}))
+    try:
+        direct.set_episode("vsbench", 0)
+        direct.reset(rgb_t, d_t, None)
+        tw_d, _dbg, _m = direct.step(rgb_0, d_0)
+    finally:
+        direct.close()
+    assert np.array_equal(tw, tw_d.as_array()), (tw, tw_d.as_array())
+    pts = info["kp_cur"]
+    assert len(pts) and pts[:, 0].min() >= 0 and pts[:, 0].max() < 640
+    assert pts[:, 1].min() >= 0 and pts[:, 1].max() < 480
+    GATES.setdefault("frame_camera", {})[name] = {
+        "intrinsics": dict(zip(("fx", "fy", "cx", "cy", "width", "height"), map(float, want))),
+        "twist_6cm_right": [round(float(x), 6) for x in tw], "equals_direct_arm": True}
+
+
 # ------------------------------------------------------------------ vsbench's gates
 @needs_gl
 @pytest.mark.parametrize("name", ARM_IDS)
@@ -231,3 +297,23 @@ def test_parse_check_reads_the_report():
     assert r["budget"] == 300 and r["all"] is False and r["axes"]["vx"] == "FAIL"
     assert r["checks"]["zero_at_target"]["passed"] and not r["checks"]["restoring_direction"]["passed"]
     assert np.isclose(len(r["axes"]), 6)
+
+
+# ------------------------------------------------------------------ equivalence (U6)
+def test_vssim_equivalence_gate():
+    """The copied ViT-VS arm flown directly vs through the U6b wrapper inside the U6a
+    ``MethodArm`` on the copied loop (MuJoCo D435i, hollywood near60 n_000, 100 steps):
+    ``tools/u6_equivalence.py`` -> ``results/bridge/u6_equivalence.json``."""
+    path = REPO / "results" / "bridge" / "u6_equivalence.json"
+    if not path.exists():
+        pytest.skip(f"{path} not run yet (tools/u6_equivalence.py)")
+    eq = json.loads(path.read_text())
+    assert eq["render_mode"] == "mujoco-llvmpipe" and "llvmpipe" in eq["gl_renderer"]
+    assert eq["n_compared"] == eq["steps"] == 100
+    assert eq["path_a"]["controller_intrinsics"] == eq["path_b"]["controller_intrinsics"] \
+        == eq["scene_reported_intrinsics"]
+    assert eq["twist_max_abs_diff"] == 0.0 and eq["steps_bit_identical"] == 100
+    assert eq["path_a"]["final_translation_mm"] == eq["path_b"]["final_translation_mm"]
+    assert eq["path_b"]["arm_kind"] == "external" and eq["path_b"]["inner_label"] == eq["path_a"]["label"]
+    assert abs(eq["path_a"]["final_translation_mm"] - eq["m1_record"]["final_translation_mm"]) < 1e-9
+    GATES["equivalence"] = {k: v for k, v in eq.items() if k != "twist_max_abs_diff_per_step"}
