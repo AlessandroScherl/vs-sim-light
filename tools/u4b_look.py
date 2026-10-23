@@ -428,8 +428,6 @@ def cmd_measure(args) -> int:
 
     from vsbench.vs.camera import CameraConfig
     from vsbench.vs.labels import object_mask_from_depth
-    from vsbench.vs.scene import Pose
-
     from vsbench.world.fly import vsbench_commit
 
     commit = vsbench_commit()           # before this command writes anything
@@ -595,8 +593,8 @@ def cmd_smoke_table(args) -> int:
         print(f"[u4b] {tag}: raw {row['raw']['final_translation_mm']:.3f} mm | {LOOK} "
               f"{row[LOOK]['final_translation_mm']:.3f} mm (100 steps) | Isaac {n['final_mm']:.3f} mm "
               f"({n['steps']} steps)")
-    _merge_record("smoke_table", {"rows": rows, "note": cmd_smoke_table.__doc__.split(":", 1)[1].strip()
-                                  .replace("\n", " "), "isaac_check": str(ISAAC / "check.json")})
+    note = " ".join(cmd_smoke_table.__doc__.split())
+    _merge_record("smoke_table", {"rows": rows, "note": note, "isaac_check": str(ISAAC / "check.json")})
     return 0
 
 

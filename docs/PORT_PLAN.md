@@ -406,7 +406,9 @@ reads `vsbench.vs.scenes.load_scenes()` and returns a `vsbench.scene.SceneSpec`:
 - lighting: ambient 0.2 + one directional `Light` whose direction is the USD distant light's
   `−Z` rotated by `Rx(−30°)·Ry(0)·Rz(30°)` (computed, not guessed), `cast_shadow=True`, intensity
   fitted once so the hollywood goal render's mean grey matches the mock's tone fit — stated in
-  `meta`, never claimed as photometric parity.
+  `meta`, never claimed as photometric parity. **Since U4b this is the `raw` look**; flights
+  draw in the `isaac_fit_v1` look by default (§7 U4b: a fitted fill share and light gain, a
+  scene-fitted 8192 shadow map, a per-scene tone curve fitted to Isaac's goal pictures).
 
 **Starts** — `benchmark.select_starts(scene, set)` → `Pose.from_start(s)` → `scene.reset`.
 Identical poses, identical draw seeds, identical arms.
@@ -546,10 +548,55 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   the goal mask share is in (0.02, 0.6); a goal render per room under `results/bridge/`.
 - Cost: a room compile ≈ 1–3 s (the 4096² ground texture dominates).
 
+**U4b ∥ U5 — Match Isaac's look** (`vsbench/world/look.py`, `vsbench/world/configs/look_isaac_fit_v1.json`, `tools/u4b_look.py`, `tests/world/test_look.py`) *(done, 2026-10-23)*
+- Owner decision 2026-10-23: "fit one brightness/tone curve per scene to the Isaac goal
+  pictures already on disk, raise the light, and use a finer, softer shadow map". Why: the
+  geometry already matched (goal ~1e-11 mm, depth µm, mask IoU ≥ 0.99) but the raw picture was
+  far darker and flatter (cluttered2's ground mean grey 32 vs Isaac's 131), its shadows jagged
+  (1.8 mm shadow-map texels), and `sift_ransac` on `industrial1_drill` landed 16.4 mm in MuJoCo
+  vs 0.17 mm in Isaac from the same near start.
+- Built: `MujocoScene(name, look=...)`, default **`isaac_fit_v1`**, **`raw`** = the U1/U4
+  picture bit for bit (gated: hollywood's and the drill's goal md5s). The look = (1) a fill
+  share 0.15 (was 0.2) chosen on the rooms' dim pixels (shadows, turned-away faces) and a
+  per-scene light gain - the largest with ≤ 0.1 % of the goal picture clipped and the sun's
+  term ≤ 1 (MuJoCo saturates the diffuse term at 1, measured; Isaac never clips): 1.175 on the
+  rooms and poster3, 1.065 hollywood, 1.0 poster2; (2) an 8192 shadow map over a square fitted
+  to the scene's geometry seen from the sun (`vis.map.shadowclip`; 0.41 mm per texel in a
+  room) - the backend gained `shadowsize` / `shadowclip_m`, and the depth context (never
+  shadowed) a 64 px map, so memory grows by ~200 MB, not 456; (3) per scene and channel a
+  monotone curve `255·srgb(v/(1+v))`, `v = floor + e^k·x^γ`, fitted by least squares on binned
+  medians of Isaac's goal picture against the real look-lit MuJoCo goal, applied as a 256-entry
+  table (md5 in the config, with the Isaac source md5s) to the RGB only. Every record carries
+  `look`, `look_curve_id`, `look_curve_md5`, `look_record` (through `goal_capture_record`).
+  `fly run --look`, `tools/u4_rooms.py smoke --look`. U1's mock-comparison gate draws `raw`.
+- Measured (`results/bridge/u4b_look.json`; Isaac = `vssim_out/check1`, read only): mean grey
+  raw → look vs Isaac, goal (fitted) / held-out near view: hollywood 91 → 182 vs 184 / 89 →
+  180 vs 181; poster2 97 → 190 vs 191 / 97 → 190 vs 191; poster3 84 → 181 vs 182 / 83 → 180 vs
+  181; drill 83 → 185 vs 185 / 84 → 185 vs 185; cluttered2 35 → 127 vs 132 / 35 → 127 vs 132;
+  cluttered3 126 → 216 vs 217 / 125 → 216 vs 217. Histogram distance (mean per-channel EMD,
+  grey levels) 92–102 → 2.3–8.9 on both views; Isaac against its own re-render 0.01–0.2 (the
+  floor). The held-out view is only 3–8 mm from the goal (nearly the same content). Depth
+  identical in both looks (every scene, goal and near). Cost at load ~24 on 2 llvmpipe threads:
+  +0.1–0.2 s per frame (curve 15–30 ms; the rest the larger shadow map — 4096 over the same
+  square measured ≈ raw's cost at 0.82 mm per texel, the fallback if frame time matters more),
+  +200 MB. Sampling the 0.53° sun with 2 / 4 lights: +0.1 / +0.5–0.7 s per frame for a penumbra
+  of 1–2 px, not used (Isaac's edges are 1–2 px sharp too).
+- Smoke (recorded, not thresholded; `results/bridge/u4b/`): `sift_ransac`, 100 steps, `n_000`:
+  the raw re-fly reproduces U4 to the last digit; in the look `industrial1_drill` 16.39 → 0.56 mm
+  (Isaac 0.17 mm at 200 steps), `cluttered2` 0.31 → 1.20 mm (Isaac 0.66), `cluttered3` 0.57 →
+  0.51 mm (Isaac 2.19). Context only, never pooled (D-9).
+- Still different: specular highlights, transparency and ambient occlusion (MuJoCo shades
+  diffuse only); shadows stay lighter than Isaac's on dark ground (Isaac's dark-tone floor is a
+  sun-lit reflection that vanishes in shadow, the curve lifts it everywhere: cluttered2 66 vs 44
+  grey inside the shadow, drill 61 vs 54, cluttered3 99 vs 98); Isaac's picture is a little
+  softer (denoiser); cluttered2's ground keeps a 19-level per-pixel difference. A new scene
+  (no Isaac goal picture on disk) has no curve: it flies with `--look raw` until one is fitted.
+
 **U5 — Baseline parity: mock vs MuJoCo, ViT-VS and ART-VS** (`tools/parity_mock_vs_mujoco.py`, `results/bridge/u5_parity.md`)
 - Do: fly `vitvs_dinov3`, `vitvs_dinov2`, `artvs` (cpu) on hollywood from three `near60` and
   two `narrow20` starts, 150 steps, on the copied `MockPlaneScene(texture=hollywood,
-  render_scale=1)` and on `MujocoScene`; same seeds. Compare landing (mm, deg) at step 150,
+  render_scale=1)` and on `MujocoScene` (in the `raw` look since U4b: the mock shows the
+  texture's own tone); same seeds. Compare landing (mm, deg) at step 150,
   the `cns_plateau` step, first-frame match count, twist-norm curve correlation.
 - Gate: landings within 3 mm / 0.3° on every start; ART-VS's coarse→tiled switch fires in both
   worlds (`artvs_switched` on the record; the step from the telemetry). A miss is a finding
@@ -731,7 +778,13 @@ objects give the same box to within half a millimetre, the meshes, units, axes a
 
 **What a MuJoCo result means.** The pictures differ from Isaac's (simpler lighting, no fancy
 materials), so a MuJoCo landing error is **not** an Isaac landing error and is never put in the
-same table. It is for trying ideas fast against the real competitors and the real scoring,
+same table. Since U4b (owner decision 2026-10-23) the MuJoCo pictures are made to *look* like
+Isaac's: a little more light, shadows drawn with four times finer detail, and for each scene a
+brightness curve copied from Isaac's own goal picture. The average brightness now lands within
+1-5 grey levels of Isaac's on all six scenes (it was 90-100 levels darker), also on a second
+view the curve never saw. What a curve cannot copy stays different: shiny highlights, see-through
+parts, soft corner darkening, and shadows on the dark wooden floor that are still too light.
+The old picture stays available ("raw") for the tests that compare against the copied mock. It is for trying ideas fast against the real competitors and the real scoring,
 catching bugs, teaching, and checking that the competitor code still behaves the same after a
 change.
 

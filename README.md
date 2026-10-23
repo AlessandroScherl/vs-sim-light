@@ -280,8 +280,9 @@ pre-scaled by vs-sim's scale rule, the lights the posters' stand-in. The goal is
 the objects' box (Isaac's `BBoxCache` rule) and checked against the frozen start file; on a
 miss the frozen goal wins and the residual is recorded (open decision D-4, `goal_rule`). A room
 holds up to ~3.6 GB of memory (cluttered2: nine 4096² textures, uploaded to both GL contexts)
-and takes ~10 s to build; its goal depth equals Isaac's own to micrometres, its picture does
-not (no PBR, no tone mapping; `results/bridge/u4_rooms_vs_isaac.png`). The protocol has no near
+and takes ~10 s to build; its goal depth equals Isaac's own to micrometres, its raw picture does
+not (no PBR, no tone mapping; `results/bridge/u4_rooms_vs_isaac.png`) - U4b's Isaac look, the
+default since, closes most of that (next section). The protocol has no near
 start set for the rooms, so `fly` (protocol sets only) flies them from `capped30` / `wide100`;
 the near smoke uses `check_baselines`' near start through `tools/u4_rooms.py smoke`.
 
@@ -310,6 +311,67 @@ while the Isaac evaluation runs). It accepts only the protocol's start sets. Eve
 carries `render_mode`, `vsbench_commit` (`+dirty` by the rule in `vsbench_commit_rule`) and
 `vssim_commit`, so a MuJoCo number is never pooled with an Isaac one. The world tests that
 render skip unless software GL is requested.
+
+## Isaac's look (port unit U4b)
+
+Owner decision 2026-10-23: the MuJoCo pictures should look like Isaac's. Since U4b every
+`MujocoScene` (and so every flight) draws in the **`isaac_fit_v1`** look by default; the old
+picture stays available as **`raw`** (`MujocoScene(name, look="raw")`, `fly run --look raw`),
+used by the gates that compare against the copied mock (U1's half-pixel gate). Only the colour
+picture changes: depth, poses, goals and starts are the same bytes in both looks.
+
+`isaac_fit_v1` (`vsbench/world/look.py`, numbers in `vsbench/world/configs/look_isaac_fit_v1.json`):
+- **the light**: the fill (ambient) share is 0.15, measured from Isaac's own shadows and
+  shaded sides (was 0.2), and the light is raised per scene by 1.175 (rooms, poster3), 1.065
+  (hollywood) or 1.0 (poster2) - as far as it goes before MuJoCo saturates the sun's term or
+  clips more than 0.1 % of the goal picture (Isaac's brightest pixel is ~250, it never clips);
+- **the shadows**: an 8192 shadow map over a square fitted to the scene (0.41 mm per texel in
+  a room, was 1.8 mm): smooth edges instead of stair steps. Isaac's sun is only 0.53° wide, so
+  its shadow edges are sharp too (1-2 px); sampling the sun with several lights would cost
+  2-3x per frame for little, and is not done;
+- **the tone curve**: one per scene and channel, fitted to Isaac's goal picture (exposure,
+  gamma, a floor and a Reinhard tone map; monotone; stored as a 256-entry table with its md5,
+  the curve id `isaac_fit_v1/<scene>`), applied to the RGB only.
+
+Every record says which look it was drawn with (`look`, `look_curve_id`, `look_curve_md5`,
+`look_record` with the light, the shadow map and the config's md5). The fit and its
+measurement (`tools/u4b_look.py`, record `results/bridge/u4b_look.json`, gates
+`tests/world/test_look.py`):
+
+| scene | mean grey raw → look (Isaac), goal | held-out near view | histogram distance raw → look, goal / held-out |
+| --- | --- | --- | --- |
+| hollywood | 91 → 182 (184) | 89 → 180 (181) | 92.8 → 5.7 / 91.9 → 5.6 |
+| poster2 | 97 → 190 (191) | 97 → 190 (191) | 93.9 → 4.6 / 94.9 → 4.8 |
+| poster3 | 84 → 181 (182) | 83 → 180 (181) | 98.1 → 2.7 / 98.4 → 2.5 |
+| industrial1_drill | 83 → 185 (185) | 84 → 185 (185) | 102.3 → 2.7 / 101.8 → 2.5 |
+| cluttered2 | 35 → 127 (132) | 35 → 127 (132) | 97.6 → 8.9 / 96.8 → 8.8 |
+| cluttered3 | 126 → 216 (217) | 125 → 216 (217) | 91.6 → 2.5 / 91.5 → 2.3 |
+
+(The histogram distance is the mean per-channel earth mover's distance in grey levels; Isaac
+against its own re-render scores 0.01-0.2. The held-out view is the check's near start, 3-8 mm
+from the goal, so it shows nearly the same content: it guards against over-fitting pixels,
+not against a different view.) Cost on llvmpipe at load ~24: +0.1-0.2 s per 1920 x 1080 frame
+(the curve 15-30 ms, the rest the larger shadow map), +200 MB memory. The U4 smoke
+(`sift_ransac`, 100 steps, near start `n_000`) re-flown in both looks: `industrial1_drill`
+16.39 mm (raw) → 0.56 mm (look), Isaac 0.17 mm at 200 steps; `cluttered2` 0.31 → 1.20 mm
+(Isaac 0.66); `cluttered3` 0.57 → 0.51 mm (Isaac 2.19) - context only, never pooled.
+
+What still differs: no specular highlights, no transparency, no ambient occlusion (MuJoCo's
+diffuse shading); Isaac's dark tones carry a sun-lit floor (its glossy ground reflecting the
+sky), which the curve applies everywhere, so shadows stay lighter than Isaac's on dark ground
+(cluttered2: 66 vs 44 grey inside the shadow; drill 61 vs 54, cluttered3 99 vs 98); Isaac's
+picture is slightly softer (its denoiser) and cluttered2's ground keeps a larger per-pixel
+difference (19 grey levels). `results/bridge/u4b_look_vs_isaac.png` (raw | look | Isaac) and
+`results/bridge/u4b_drill_shadow_crop.png` show it.
+
+```
+source tools/cpu_env.sh
+PYTHONPATH=. $VSBENCH_PY tools/u4b_look.py components && PYTHONPATH=. $VSBENCH_PY tools/u4b_look.py fit
+PYTHONPATH=. $VSBENCH_PY tools/u4b_look.py measure && PYTHONPATH=. $VSBENCH_PY tools/u4b_look.py shadows
+PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --look isaac_fit_v1 --out results/bridge/u4b/isaac_fit_v1 \
+    --record results/bridge/u4b_look.json --key smoke_isaac_fit_v1
+VSBENCH_WRITE_GATES=1 $VSBENCH_PY -m pytest tests/world/test_look.py -q
+```
 
 ## Methods on the benchmark loop, baselines in the demo (port units U6a, U6b)
 
@@ -375,6 +437,7 @@ vsbench/replay.py       python -m vsbench.replay <log> [--video out.mp4]
 vsbench/video.py        the four-panel debug video and the match sheet (imageio-ffmpeg, OpenCV fallback)
 vsbench/demo.py         python -m vsbench.demo
 vsbench/world/          the MuJoCo world behind vs-sim's Scene contract (mujoco_scene, build, camera, assets),
+                        look.py + configs/look_isaac_fit_v1.json (the Isaac look, U4b),
                         the bench driver fly.py, method_arm.py + configs/external_method.yaml (U6a)
 tests/                  step 1: test_reference, test_projection, test_depth, test_homography, test_determinism
                         step 2: test_se3, test_motion, test_interaction, test_flow_rendered, test_trajectory

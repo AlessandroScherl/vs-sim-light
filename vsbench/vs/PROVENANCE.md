@@ -75,7 +75,11 @@ files elsewhere in this repository appear as `../path`), `allow_dirty`, and `vss
 (the copy's `__version__`). It refuses a dirty tree unless `allow_dirty=True`; a driver here may
 pass it, and the record then says `allow_dirty: true` with the dirty paths. The bridge's
 drivers (U2) add `vssim_commit` (from `COPY_MANIFEST.json`) and `render_mode`, so a number is
-always traceable to the exact published-baseline code that produced it.
+always traceable to the exact published-baseline code that produced it. Since U4b they also
+add the **look** the MuJoCo world drew with (`look`: `isaac_fit_v1` by default or `raw`,
+`look_curve_id`, `look_curve_md5`, `look_record` with the config's md5), through
+`MujocoScene.goal_capture_record`, which the copied runner merges into every record (the
+copied `_goal_capture_fields`, unedited; the frozen-schema tests allow extra keys).
 
 ## What is flown here, what is copied but not wired
 
@@ -88,7 +92,11 @@ always traceable to the exact published-baseline code that produced it.
   `isaac_scene.scatter_items`, `scenes.load_layout` / `check_layout`, `assets.load_library` /
   `merge_ycb_library` and the placement rules; `MujocoScene` derives the goal with the copied
   `scenes.scene_view_goal_pose` and checks it with `starts.check_goal_match`; the `objmask`
-  arms get their goal mask from the copied `labels.object_mask_from_depth`.
+  arms get their goal mask from the copied `labels.object_mask_from_depth`. From U4b the
+  world's picture is Isaac's look by default (`vsbench/world/look.py`, outside the copy: a
+  fitted light, a finer shadow map and a per-scene tone curve on the RGB, never on depth); the
+  copied baselines see that picture exactly as they would see Isaac's - no copied file knows
+  about it. The copied `MockPlaneScene` is compared against the `raw` look only (U1).
 - **The two adapters (U6a, U6b), outside the copy:** `vsbench/world/method_arm.py` flies a
   vsbench method on the copied loop by subclassing the copied `Arm` (record `arm_kind:
   external`, label `external:...`, its own config template validated by the adapter - the

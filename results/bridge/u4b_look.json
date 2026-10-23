@@ -1576,7 +1576,7 @@
   },
   "smoke_table": {
     "isaac_check": "/home/alessandro/genvs_ws/vssim_out/check1/check.json",
-    "note": "sift_ransac, 100 steps, n_000) in both looks     beside Isaac's own flight of the same arm from the same start (check1, 200 steps): context     only - different renderers, never pooled (PORT_PLAN D-9).",
+    "note": "The U4 smoke (``tools/u4_rooms.py smoke``: sift_ransac, 100 steps, n_000) in both looks beside Isaac's own flight of the same arm from the same start (check1, 200 steps): context only - different renderers, never pooled (PORT_PLAN D-9).",
     "rows": {
       "cluttered2_sift_ransac": {
         "isaac_check1": {
@@ -1722,5 +1722,5 @@
     }
   },
   "unit": "U4b - match Isaac's look (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 09:31:23 +0200"
+  "written": "2026-10-23 09:33:35 +0200"
 }
