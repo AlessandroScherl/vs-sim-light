@@ -18,8 +18,8 @@ ART-VS, SIFT / ORB / AKAZE).
 ```bash
 git clone https://github.com/AlessandroScherl/vs-sim-light.git && cd vs-sim-light
 python -m venv .venv && source .venv/bin/activate
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-pip install -e ".[mujoco]" "transformers>=4.57" PyYAML
+pip install torch --index-url https://download.pytorch.org/whl/cpu   # the CPU wheel, before the next line
+pip install -e ".[mujoco,baselines]"     # baselines: transformers, for vitvs_dinov3
 ```
 
 **Get the assets.** The pictures and objects are not in the repository (third-party
@@ -107,6 +107,9 @@ to 0.45 mm in 150 steps. Several names fly side by side: `--method my_ibvs sift_
 | `industrial1_drill` | one drill lying on a concrete floor | `capped30`, `wide100` |
 | `cluttered2`, `cluttered3` | eight or seven YCB objects on a wooden table or a laminate floor | `capped30`, `wide100` |
 
+The STOP sign in `poster2` is upside down in the COCO photo itself, and that portrait photo
+is stretched onto the 0.8 x 0.6 m poster, as in the Isaac Sim benchmark.
+
 The start poses are frozen files (`vsbench/benchmark/starts/`), so every method flies from the
 same places. The pictures are tone-mapped to look like the Isaac Sim renders of the same scenes
 (`--look raw`: MuJoCo's plain picture).
@@ -142,7 +145,9 @@ field gives its path). `--telemetry` adds a per-step log, and
 
 ## Baselines included
 
-Copied unchanged from our Isaac Sim benchmark and run as published:
+Copied unchanged from our Isaac Sim benchmark and run as published. Here they run on the CPU
+with a software renderer and the Isaac look, so their numbers are not the same as Isaac Sim
+numbers and should not be pooled with them.
 
 - **ViT-VS** (`vitvs_dinov3`, `vitvs_dinov2`): Scherl et al., [arXiv 2503.04545](https://arxiv.org/abs/2503.04545)
 - **ART-VS** (`artvs`): [art-vs.github.io](https://art-vs.github.io/), [arXiv 2606.19089](https://arxiv.org/abs/2606.19089)
