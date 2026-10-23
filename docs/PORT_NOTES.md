@@ -344,7 +344,11 @@ picture changes: depth, poses, goals and starts are the same bytes in both looks
   the curve id `isaac_fit_v1/<scene>`), applied to the RGB only.
 
 Every record says which look it was drawn with (`look`, `look_curve_id`, `look_curve_md5`,
-`look_record` with the light, the shadow map and the config's md5). The fit and its
+`look_record` with the light, the shadow map and the config's md5). The config names the
+Isaac pictures it was fitted on as `$VSBENCH_ISAAC_GOALS/...` (default
+`~/genvs_ws/vssim_out/check1`, resolved by `vsbench.world.look.resolve_isaac_path`); records
+made before 2026-10-23 name the md5 of the same file with that root written out
+(`8d010bcd…`, `config_md5_expanded`; the curves did not change). The fit and its
 measurement (`tools/u4b_look.py`, record `results/bridge/u4b_look.json`, gates
 `tests/world/test_look.py`):
 

@@ -308,7 +308,7 @@
  },
  "curve_model": "per channel y = 255 * srgb_encode(v / (1 + v)), v = floor + exp(log_exposure) * x ** gamma, x = raw / 255; params = [floor, log_exposure, gamma]; applied as a 256-entry table (lut_md5) to the RGB only, never to depth",
  "curve_fit": "binned medians of Isaac's goal picture per grey level of the look-lit MuJoCo goal picture (bins with >= 20 pixels), weights sqrt(count), scipy.optimize.least_squares, bounds floor [0, 5], log_exposure [-5, 8], gamma [0.3, 6]",
- "isaac_root": "/home/alessandro/genvs_ws/vssim_out/check1",
+ "isaac_root": "$VSBENCH_ISAAC_GOALS",
  "scenes": {
   "hollywood": {
    "light_gain": 1.065,
@@ -348,9 +348,9 @@
     "lut_md5": "55fc9f90f44486674e21835b05e1fdb5"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/hollywood_goal.png",
     "goal_md5": "c190c4569ea539d2f05fb12e626e9f00",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/hollywood_sift_ransac_near_first.png",
     "held_out_md5": "f838d3ac15c4b8f7084b34d8177e7408"
    },
    "look_lit_goal_md5": "ffffec1f6b6f8933c7ac21a9c3fb70a2",
@@ -394,9 +394,9 @@
     "lut_md5": "acf274fc6bdb1af851b6ea7417d624ad"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/poster2_goal.png",
     "goal_md5": "9fda9fc02b45f5a4308d93f838515010",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/poster2_sift_ransac_near_first.png",
     "held_out_md5": "24c8549e0dbfe7f55c88c6bca5196b7a"
    },
    "look_lit_goal_md5": "8375b7ddfd6b8d5271b4480fb1ec7fec",
@@ -440,9 +440,9 @@
     "lut_md5": "8a7e5a6a4e1094b9c1f4bf54737498af"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/poster3_goal.png",
     "goal_md5": "1e6ad90b95f31c752b74361f4e928c6b",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/poster3_sift_ransac_near_first.png",
     "held_out_md5": "86c54e90f013ed0ef82b59fc559266fe"
    },
    "look_lit_goal_md5": "26a5c988a3df321a729dd0052a7c015d",
@@ -486,9 +486,9 @@
     "lut_md5": "61b0c65d277ec8fdca816545cadfcda7"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/industrial1_drill_goal.png",
     "goal_md5": "cbff2ee755a49c489851a1391b93c419",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/industrial1_drill_sift_ransac_near_first.png",
     "held_out_md5": "bbc55063253a38c3c494f4f2e3201ad9"
    },
    "look_lit_goal_md5": "65d4d2ac60d4919eff637e8eb60dfd3d",
@@ -532,9 +532,9 @@
     "lut_md5": "9cb6c8f8269f63ca905a16136e7d71ae"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/cluttered2_goal.png",
     "goal_md5": "70898fed67d810f6ab6c583d9a7461c1",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/cluttered2_sift_ransac_near_first.png",
     "held_out_md5": "d03bad10f3e0f10f937d68ab0a879817"
    },
    "look_lit_goal_md5": "c9b6f5ada9b5d121184cdb36d56b9795",
@@ -578,9 +578,9 @@
     "lut_md5": "48aa0abb9559f2bdd5d98e5b07014c1c"
    },
    "isaac_source": {
-    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_goal.png",
+    "goal": "$VSBENCH_ISAAC_GOALS/cluttered3_goal.png",
     "goal_md5": "f5ab1a653e7815023202dad5db1bde1f",
-    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_sift_ransac_near_first.png",
+    "held_out_not_fitted": "$VSBENCH_ISAAC_GOALS/cluttered3_sift_ransac_near_first.png",
     "held_out_md5": "89e5922af71ba8162309458d9cd2116e"
    },
    "look_lit_goal_md5": "1e4e6456398ab4c66189271b1fa60ec4",

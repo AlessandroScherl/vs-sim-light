@@ -2,7 +2,8 @@
 
 1. config  - every scene's curve: monotone per channel, its 256-entry table's md5 is the
              config's, the parameters reproduce the table; the Isaac pictures it was fitted on
-             (read only) still have the md5s the config names;
+             (read only, ``$VSBENCH_ISAAC_GOALS``) still have the md5s the config names - on a
+             machine without them that provenance check is not made and records ``None``;
 2. raw     - ``look="raw"`` draws U1/U4's picture bit for bit (hollywood's goal md5 = the M1
              flight's, industrial1_drill's = ``tools/u4_rooms.py measure``'s);
 3. RGB only - raw and look draw the same depth bytes (goal and a near pose; hollywood and
@@ -46,7 +47,7 @@ EMD_RATIO_MAX = 0.2
 RESULTS: dict = {}
 renders = pytest.mark.skipif(
     not software_gl_requested(),
-    reason="renders: needs VSBENCH_SOFTWARE_GL=1 (source tools/cpu_env.sh) so no GPU is touched")
+    reason="renders: needs software GL (the default; VSBENCH_ALLOW_GPU=1 turns it off) so no GPU is touched")
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -70,6 +71,10 @@ def _md5(a) -> str:
 
 # ----------------------------------------------------------------------- 1. config
 def test_config_curves_are_monotone_and_pinned():
+    """The curves are monotone and pinned by their table md5s. The provenance check (the Isaac
+    goal picture each curve was fitted on still has the config's md5) needs those pictures
+    under ``$VSBENCH_ISAAC_GOALS``; without them it is not made, and the gate JSON records
+    ``isaac_goal_md5_matches: None`` for the scene (not ``True``, not a failure)."""
     cfg = L.load_config("isaac_fit_v1")
     assert set(cfg["scenes"]) == set(SCENES)
     rows = {}
@@ -85,14 +90,19 @@ def test_config_curves_are_monotone_and_pinned():
         assert L.lut_md5(L.curve_lut(look.channel_params)) == look.curve_md5
         src = cfg["scenes"][s]["isaac_source"]
         on_disk = None
-        if Path(src["goal"]).exists():
-            on_disk = L.file_md5(src["goal"]) == src["goal_md5"]
-            assert on_disk, f"{src['goal']} is not the picture the curve was fitted on"
+        assert src["goal"].startswith("$VSBENCH_ISAAC_GOALS/"), src     # no personal path
+        goal = L.resolve_isaac_path(src["goal"])
+        if goal.exists():
+            on_disk = L.file_md5(goal) == src["goal_md5"]
+            assert on_disk, f"{goal} is not the picture the curve was fitted on"
         rows[s] = {"curve_md5": look.curve_md5, "params_rgb": look.channel_params,
                    "light_gain": look.gain, "lut_black": lut[0].tolist(), "lut_white": lut[255].tolist(),
                    "isaac_goal_md5_matches": on_disk}
     RESULTS["config"] = {"file": str(L.config_path("isaac_fit_v1").relative_to(REPO)),
                          "md5": L.file_md5(L.config_path("isaac_fit_v1")),
+                         # the same bytes with $VSBENCH_ISAAC_GOALS written out: the md5 the
+                         # records made before 2026-10-23 name (the curves are unchanged)
+                         "md5_root_written_out": L.config_md5_expanded("isaac_fit_v1"),
                          "ambient_share": cfg["lighting"]["ambient_share"], "scenes": rows}
 
 
@@ -147,7 +157,10 @@ def test_look_gate_against_isaac():
     if not RECORD.exists() or "measure" not in json.loads(RECORD.read_text()):
         pytest.skip("run tools/u4b_look.py measure first")
     m = json.loads(RECORD.read_text())["measure"]
-    assert m["look_config_md5"] == L.file_md5(L.config_path("isaac_fit_v1")), \
+    # the record names the config's md5; one made before 2026-10-23 names the md5 of the same
+    # bytes with $VSBENCH_ISAAC_GOALS written out (the only change since: no refit)
+    assert m["look_config_md5"] in (L.file_md5(L.config_path("isaac_fit_v1")),
+                                    L.config_md5_expanded("isaac_fit_v1")), \
         "the measure record was made with another config: re-run tools/u4b_look.py measure"
     rows = {}
     for s in SCENES:

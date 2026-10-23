@@ -12,7 +12,8 @@ texel), no curve. Used by the gates that compare against the copied mock (U1's p
 gates) and kept for anyone who needs the texture's own tone.
 
 ``isaac_fit_v1`` - read from ``vsbench/world/configs/look_isaac_fit_v1.json`` (written by
-``tools/u4b_look.py fit``; the Isaac source pictures' md5s are in it):
+``tools/u4b_look.py fit``; the Isaac source pictures' md5s are in it, their paths written as
+``$VSBENCH_ISAAC_GOALS/...`` and resolved by :func:`resolve_isaac_path`):
 
 * light: a fill (ambient) share ``a`` measured from Isaac's own shadows and shaded sides, and a
   per-scene gain ``G`` (the light raised as far as it goes without clipping more than the
@@ -35,6 +36,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -53,6 +55,31 @@ def config_path(name: str) -> Path:
 
 def file_md5(path) -> str:
     return hashlib.md5(Path(path).read_bytes()).hexdigest()
+
+
+#: the Isaac goal pictures a fit was made on (read only): the config writes their paths as
+#: ``$VSBENCH_ISAAC_GOALS/...`` (no personal absolute path in the repository)
+ISAAC_GOALS_VAR = "VSBENCH_ISAAC_GOALS"
+
+
+def isaac_goals_root() -> Path:
+    """``$VSBENCH_ISAAC_GOALS`` (default ``~/genvs_ws/vssim_out/check1``, vs-sim's check run)."""
+    return Path(os.environ.get(ISAAC_GOALS_VAR,
+                               str(Path.home() / "genvs_ws" / "vssim_out" / "check1")))
+
+
+def resolve_isaac_path(s: str) -> Path:
+    """A config path with ``$VSBENCH_ISAAC_GOALS`` resolved (other strings unchanged)."""
+    tok = f"${ISAAC_GOALS_VAR}"
+    return Path(str(s).replace(tok, str(isaac_goals_root()), 1)) if tok in str(s) else Path(s)
+
+
+def config_md5_expanded(name: str) -> str:
+    """The md5 of the config file with ``$VSBENCH_ISAAC_GOALS`` written out (as ``tools/u4b_look.py
+    fit`` wrote it before 2026-10-23): a record made then names this md5 for the same config."""
+    raw = config_path(name).read_bytes()
+    return hashlib.md5(raw.replace(f"${ISAAC_GOALS_VAR}".encode(),
+                                   str(isaac_goals_root()).encode())).hexdigest()
 
 
 # ------------------------------------------------------------------------- the curve

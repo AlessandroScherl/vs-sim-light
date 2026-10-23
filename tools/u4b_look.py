@@ -85,6 +85,15 @@ def _md5(path) -> str:
     return hashlib.md5(Path(path).read_bytes()).hexdigest()
 
 
+def _portable(p: Path) -> str:
+    """A path under :data:`ISAAC` as ``$VSBENCH_ISAAC_GOALS/...`` (the config names no
+    personal absolute path; ``vsbench.world.look.resolve_isaac_path`` reads it back)."""
+    try:
+        return "$VSBENCH_ISAAC_GOALS/" + str(Path(p).relative_to(ISAAC))
+    except ValueError:
+        return str(p)
+
+
 def _isaac(scene: str, view: str, root: Path = ISAAC):
     import numpy as np
     from PIL import Image
@@ -238,10 +247,10 @@ def cmd_fit(args) -> int:
         img, p = _isaac(s, "goal")
         if img is None:
             raise SystemExit(f"need {p} (read only)")
-        isaac[s], src[s] = img, {"goal": str(p), "goal_md5": _md5(p)}
+        isaac[s], src[s] = img, {"goal": _portable(p), "goal_md5": _md5(p)}
         hp = _isaac(s, "near")[1]
         if hp.exists():
-            src[s]["held_out_not_fitted"] = str(hp)
+            src[s]["held_out_not_fitted"] = _portable(hp)
             src[s]["held_out_md5"] = _md5(hp)
         cp = CACHE / f"comp_{s}.npz"
         if not cp.exists():
@@ -338,7 +347,7 @@ def cmd_fit(args) -> int:
                      "goal picture (bins with >= 20 pixels), weights sqrt(count), "
                      "scipy.optimize.least_squares, bounds floor [0, 5], log_exposure [-5, 8], "
                      "gamma [0.3, 6]",
-        "isaac_root": str(ISAAC),
+        "isaac_root": "$VSBENCH_ISAAC_GOALS",
         "scenes": scenes,
     }
     path = config_path(LOOK)

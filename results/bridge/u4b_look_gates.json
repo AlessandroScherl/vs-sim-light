@@ -2,7 +2,8 @@
   "config": {
     "ambient_share": 0.15,
     "file": "vsbench/world/configs/look_isaac_fit_v1.json",
-    "md5": "8d010bcddc6936d192fa6c699c671dd9",
+    "md5": "c043feaee745b248e454eb59d8b70d45",
+    "md5_root_written_out": "8d010bcddc6936d192fa6c699c671dd9",
     "scenes": {
       "cluttered2": {
         "curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
@@ -448,5 +449,5 @@
     }
   },
   "unit": "U4b - match Isaac's look (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 09:34:28 +0200"
+  "written": "2026-10-23 17:56:49 +0200"
 }
