@@ -776,6 +776,16 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   the copied mock - ART-VS never leaves its coarse phase from that start outside Isaac (poster3
   the reverse). So the near gate as written is **not all green, and every miss is the method,
   not the world** (`near_fail_diagnosis`). Cost 11.2 CPU-h, 3 h wall on two processes.
+- Gate, re-stated (final review, 2026-10-23). Old: "all-green on the zero-motion and near
+  rows". New: the identity row all green (24 / 24, pass) and, for the near row, `final <
+  start` stays the **recorded verdict** (`near_ok`, with `final_over_start` reported per cell,
+  no threshold; D-12 (a)) while the **port gate** is "every near miss is shared with Isaac's
+  check from the same start or diagnosed outside the world": **9 / 9, pass**
+  (`results/bridge/u9_check.json`: `port_gate`, `port_gate_explained`, `port_gate_pass`;
+  `near_all_green` stays `false`, as recorded).
+- Still open (after the Isaac evaluation): re-fly the hollywood / ART-VS near cell with
+  `--allow-gpu` (CUDA DINOv2, as Isaac ran it) to close the one untested suspect, CPU vs CUDA
+  tokens; never while the evaluation runs.
 
 **U10 — Docs** (`README.md` § "The benchmark and the baselines (copied from vs-sim)",
 `docs/BRIDGE.md`, `vsbench/vs/PROVENANCE.md`, the `results/bridge/*.md` reports): what it is,
@@ -826,6 +836,11 @@ Open — the recommendation is the working default until the owner rules:
   (b) a factor for "by a lot" (e.g. final < start / 2): stricter, a number the owner would set;
   (c) no verdict, report only (exactly vs-sim's script). Under (a) and (b) the U9 gate's "near
   all green" cannot hold for ViT-VS / ART-VS, because it does not hold in Isaac either.
+  Final review (2026-10-23): (a) stays the recorded verdict, `final_over_start` reported with no
+  threshold; the port is gated instead on "every near miss is shared with Isaac's check from
+  the same start or diagnosed outside the world" (9 / 9). The hollywood / ART-VS cell should be
+  re-flown on the GPU (`--allow-gpu`) after the Isaac evaluation, to close the CPU-vs-CUDA
+  suspect.
 - **D-10 (new) The Step-3 loop.** Keep `vsbench.episode.run_episode` as the Step 1–3 gate
   instrument beside the one benchmark loop (default), or retire it once `MethodArm` (U6a) flies
   every vsbench method through the benchmark loop. Cost of keeping: two loops in one repo, one

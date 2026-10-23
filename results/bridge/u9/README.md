@@ -85,6 +85,12 @@ start, hollywood and cluttered2 only) for the far row. Context only, never poole
     parity flights saw too (`near60/n_002` never switches on the mock nor on MuJoCo). One
     suspect is not tested: Isaac ran DINOv2 on CUDA, the twin on the CPU (the copied fast tier
     holds CPU tokens to 1e-5; the GPU stays off limits while the evaluation runs).
+- **The port gate** (final review, 2026-10-23): `near_ok` (final < start) stays the recorded
+  verdict, `final_over_start` reported per cell with no threshold (the nine misses: 1.16-7.39);
+  the port is gated on "every near miss is shared with Isaac's check from the same start or
+  diagnosed outside the world" - **9 / 9, pass** (`results/bridge/u9_check.json`, `port_gate*`).
+  Still to do after the Isaac evaluation: re-fly hollywood / ART-VS with `--allow-gpu` (CUDA
+  DINOv2) to close the CPU-vs-CUDA suspect.
 - **capped30, recorded**: SIFT lands 0.0-0.5 mm on five scenes and is lost on the drill
   (479 -> 2982 mm); ORB 1.0-4.0 mm on
   five, lost on the drill; ViT-VS 6.0 / 8.5 / 15.5 / 41.1 mm on hollywood / poster2 / poster3 /

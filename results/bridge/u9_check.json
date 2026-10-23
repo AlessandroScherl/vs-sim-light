@@ -10,6 +10,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 5.0565,
       "identity_ok": true,
       "isaac_near_final_mm": 99.23342906621188,
       "isaac_near_ok": false,
@@ -28,6 +29,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0836,
       "identity_ok": true,
       "isaac_near_final_mm": 1.7011665604588693,
       "isaac_near_ok": true,
@@ -46,6 +48,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0156,
       "identity_ok": true,
       "isaac_near_final_mm": 0.6617550628137486,
       "isaac_near_ok": true,
@@ -64,6 +67,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 7.3913,
       "identity_ok": true,
       "isaac_near_final_mm": 43.75414261982839,
       "isaac_near_ok": false,
@@ -82,6 +86,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.9673,
       "identity_ok": true,
       "isaac_near_final_mm": 2.234021658613581,
       "isaac_near_ok": true,
@@ -100,6 +105,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.3094,
       "identity_ok": true,
       "isaac_near_final_mm": 1.813605630765979,
       "isaac_near_ok": true,
@@ -118,6 +124,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.029,
       "identity_ok": true,
       "isaac_near_final_mm": 2.1856061488736294,
       "isaac_near_ok": true,
@@ -136,6 +143,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 5.5286,
       "identity_ok": true,
       "isaac_near_final_mm": 47.66996240170822,
       "isaac_near_ok": false,
@@ -154,6 +162,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 2.5918,
       "identity_ok": true,
       "isaac_near_final_mm": 1.6152262148414822,
       "isaac_near_ok": true,
@@ -172,6 +181,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0763,
       "identity_ok": true,
       "isaac_near_final_mm": 0.42687105242275186,
       "isaac_near_ok": true,
@@ -190,6 +200,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0012,
       "identity_ok": true,
       "isaac_near_final_mm": 0.1709971209624293,
       "isaac_near_ok": true,
@@ -208,6 +219,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.7417,
       "identity_ok": true,
       "isaac_near_final_mm": 3.961955949828275,
       "isaac_near_ok": true,
@@ -226,6 +238,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 4.5559,
       "identity_ok": true,
       "isaac_near_final_mm": 29.710378746358103,
       "isaac_near_ok": false,
@@ -244,6 +257,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0517,
       "identity_ok": true,
       "isaac_near_final_mm": 1.0112827596112357,
       "isaac_near_ok": true,
@@ -262,6 +276,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0202,
       "identity_ok": true,
       "isaac_near_final_mm": 0.1745843295572268,
       "isaac_near_ok": true,
@@ -280,6 +295,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 3.2285,
       "identity_ok": true,
       "isaac_near_final_mm": 19.802321802916634,
       "isaac_near_ok": false,
@@ -298,6 +314,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 1.2262,
       "identity_ok": true,
       "isaac_near_final_mm": 17.155285638961672,
       "isaac_near_ok": false,
@@ -316,6 +333,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0852,
       "identity_ok": true,
       "isaac_near_final_mm": 0.41487717835568977,
       "isaac_near_ok": true,
@@ -334,6 +352,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0038,
       "identity_ok": true,
       "isaac_near_final_mm": 0.14633783416844304,
       "isaac_near_ok": true,
@@ -352,6 +371,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 2.5208,
       "identity_ok": true,
       "isaac_near_final_mm": 14.889824735036829,
       "isaac_near_ok": false,
@@ -370,6 +390,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.2781,
       "identity_ok": true,
       "isaac_near_final_mm": 24.0531818232602,
       "isaac_near_ok": false,
@@ -388,6 +409,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0467,
       "identity_ok": true,
       "isaac_near_final_mm": 0.20994707858786343,
       "isaac_near_ok": true,
@@ -406,6 +428,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 0.0205,
       "identity_ok": true,
       "isaac_near_final_mm": 0.16465535038842014,
       "isaac_near_ok": true,
@@ -424,6 +447,7 @@
           "max_iter"
         ]
       ],
+      "final_over_start": 1.1561,
       "identity_ok": true,
       "isaac_near_final_mm": 8.839308803858659,
       "isaac_near_ok": false,
@@ -475,7 +499,10 @@
     "poster3/vitvs_dinov3": "as_in_isaac"
   },
   "near_rule": "near_ok = final_mm < start_mm after --near-steps steps, no error (vs-sim check_baselines docstring: 'it must land closer than it started'; vs-sim's script computes no near verdict, the twin reads that sentence literally; 'by a lot' is not quantified there and is reported here as final_over_start, not thresholded)",
+  "port_gate": "every near miss (near_ok False: final >= start) is shared with Isaac's own check from the same start, or diagnosed outside the world (reproduced bit for bit, and missed without the look and, on a poster, on the copied numpy mock)",
+  "port_gate_explained": "9/9",
+  "port_gate_pass": true,
   "source": "results/bridge/u9/summary.json, results/bridge/u9/diagnose.json",
   "unit": "U9 - the rig check twin (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 15:12:58 +0200"
+  "written": "2026-10-23 17:55:00 +0200"
 }

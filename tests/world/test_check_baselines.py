@@ -326,6 +326,10 @@ def test_the_records_are_the_entries_of_check_json():
 
 
 DIAGNOSE = U9 / "diagnose.json"
+#: The U9 port gate (final review, 2026-10-23; docs/PORT_PLAN.md U9 and D-12)
+PORT_GATE = ("every near miss (near_ok False: final >= start) is shared with Isaac's own check "
+             "from the same start, or diagnosed outside the world (reproduced bit for bit, "
+             "and missed without the look and, on a poster, on the copied numpy mock)")
 
 
 def near_diagnosis(row: dict, diag: dict) -> str | None:
@@ -369,10 +373,17 @@ def test_the_verdicts_and_the_gate():
             "near_all_green": summary["near_all_green"],
             "identity_fail": summary["identity_fail"], "near_fail": summary["near_fail"],
             "near_fail_diagnosis": misses, "near_rule": cb.NEAR_RULE,
+            # the port gate (final review, 2026-10-23; D-12): near_ok stays the recorded
+            # verdict (final < start, final_over_start reported, no threshold); the port is
+            # judged on whether every miss is explained
+            "port_gate": PORT_GATE,
+            "port_gate_explained": f"{sum(bool(v) for v in misses.values())}/{len(misses)}",
+            "port_gate_pass": bool(all(misses.values())),
             "cells": {f"{r['scene']}/{r['arm']}": {
                 "identity_ok": r["identity_ok"], "near_ok": r["near_ok"],
                 "near_start_mm": r["near_start_mm"], "near_final_mm": r["near_final_mm"],
                 "near_final_deg": r["near_final_deg"],
+                "final_over_start": r.get("final_over_start"),
                 "far": [(f["start_id"], f["start_mm"], f["final_mm"], f["final_deg"],
                          f["terminated"]) for f in r["far"]],
                 "isaac_near_final_mm": (r["isaac"] or {}).get("near_final_mm"),
