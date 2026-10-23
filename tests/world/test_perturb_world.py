@@ -107,6 +107,10 @@ def _open(name, look=None):
         pytest.fail(f"MuJoCo opened {scene.render_mode!r} ({gl!r}), not llvmpipe - refusing")
     g, d = scene.render_goal()
     scene.goal_md5s = (_md5(g), _md5(d))
+    RESULTS.setdefault("scenes", {})[name] = {
+        "render_mode": scene.render_mode, "gl_renderer": scene.renderer.gl_renderer,
+        "look": scene.look.name, "look_curve_id": scene.look.curve_id,
+        "goal_frame_md5": scene.goal_md5s[0], "goal_depth_md5": scene.goal_md5s[1]}
     return scene
 
 

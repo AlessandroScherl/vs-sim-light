@@ -275,6 +275,45 @@ def cmd_measure(args) -> int:
 
 
 # -------------------------------------------------------------------------- smoke
+ROW_KEYS = ("start_id", "start_translation_mm", "start_rotation_deg", "final_translation_mm",
+            "final_rotation_deg", "steps", "max_iter", "terminated_reason", "outcome",
+            "stop_step", "stop_translation_mm", "mean_n_matches", "first_frame_n_matches",
+            "sec_per_step", "render_mode", "gl_renderer", "look", "look_curve_id",
+            "goal_frame_md5", "vsbench_commit", "vssim_commit")
+#: the named swap's size-matched reads (the copied runner's keys, present only then)
+MATCHED_KEYS = ("start_translation_mm_matched", "final_translation_mm_matched",
+                "stop_translation_mm_matched", "success_matched")
+
+
+def summary_row(rec: dict, path: Path) -> dict:
+    """One smoke record's summary row (also rebuilt from the records by ``summary``)."""
+    row = {k: rec.get(k) for k in ROW_KEYS}
+    row.update({k: rec[k] for k in MATCHED_KEYS if k in rec})
+    row["success"] = rec.get("success")
+    row["perturbation"] = rec.get("perturbation")
+    row["world_compiles"] = [{k: e[k] for k in ("compile_s", "total_s", "rss_mb_after",
+                                                "peak_rss_mb", "unedited", "n_objects")}
+                             for e in rec.get("world_compiles", [])]
+    row["records"] = str(Path(path).resolve().relative_to(REPO))
+    return row
+
+
+def cmd_summary(args) -> int:
+    """Rebuild ``smoke_summary.json`` rows from the flat records (no flight); keeps each
+    row's ``wall_s``."""
+    out_root = Path(args.out).resolve()
+    summary = out_root / "smoke_summary.json"
+    doc = json.loads(summary.read_text())
+    rows = doc["smoke"]["episodes"]
+    for path in sorted(out_root.glob("*__*.jsonl")):
+        rec = json.loads(path.read_text().splitlines()[0])
+        row = summary_row(rec, path)
+        row["wall_s"] = (rows.get(path.stem) or {}).get("wall_s")
+        rows[path.stem] = row
+    _merge_record("smoke", {**doc["smoke"], "episodes": rows}, summary)
+    return 0
+
+
 def cmd_smoke(args) -> int:
     from vsbench.world import fly
 
@@ -336,22 +375,8 @@ def cmd_smoke(args) -> int:
                 sink.write(rec, None)
             wall = time.monotonic() - t0
             (out_root / f"{tag}.jsonl").write_text(json.dumps(rec) + "\n", encoding="utf-8")
-            row = {k: rec.get(k) for k in (
-                "start_id", "start_translation_mm", "start_rotation_deg", "final_translation_mm",
-                "final_rotation_deg", "steps", "max_iter", "terminated_reason", "outcome",
-                "stop_step", "stop_translation_mm", "mean_n_matches", "first_frame_n_matches",
-                "sec_per_step", "render_mode", "gl_renderer", "look", "look_curve_id",
-                "goal_frame_md5", "vsbench_commit", "vssim_commit")}
-            for k in ("final_reference_translation_mm", "final_depth_true_translation_mm"):
-                if k in rec:
-                    row[k] = rec[k]
-            row["success"] = rec.get("success")
-            row["perturbation"] = rec.get("perturbation")
-            row["world_compiles"] = [{k: e[k] for k in ("compile_s", "total_s", "rss_mb_after",
-                                                        "peak_rss_mb", "unedited", "n_objects")}
-                                     for e in rec["world_compiles"]]
+            row = summary_row(rec, out_root / f"{tag}.jsonl")
             row["wall_s"] = round(wall, 1)
-            row["records"] = str((out_root / f"{tag}.jsonl").relative_to(REPO))
             rows[tag] = row
             print(f"[u8] {tag}: {row['start_translation_mm']:.2f} -> {row['final_translation_mm']:.3f} mm, "
                   f"{row['final_rotation_deg']:.3f} deg, {row['terminated_reason']}, {row['steps']} steps, "
@@ -385,6 +410,9 @@ def main(argv=None) -> int:
     s.add_argument("--max-iter", type=int, default=100)
     s.add_argument("--out", default=str(OUT / "u8"))
     s.set_defaults(fn=cmd_smoke)
+    y = sub.add_parser("summary", help="rebuild smoke_summary.json from the records")
+    y.add_argument("--out", default=str(OUT / "u8"))
+    y.set_defaults(fn=cmd_summary)
     args = ap.parse_args(argv)
     return int(args.fn(args))
 

@@ -1,0 +1,1267 @@
+{
+  "named_swap": {
+    "other_small+ground": {
+      "compiles": [
+        {
+          "compile_s": 0.81,
+          "edits": [
+            "set_prim_visible /World/Obj_0 False",
+            "place /World/Swap_0 a2de48529b1549488940fa98a3a3bac6"
+          ],
+          "event": "compile",
+          "free_s": 0.231,
+          "hidden": [
+            "/World/Obj_0"
+          ],
+          "n": 1,
+          "n_objects": 2,
+          "peak_rss_mb": 2602.2,
+          "prims": [
+            "/World/Ground",
+            "/World/Swap_0"
+          ],
+          "rss_mb_after": 1750.9,
+          "rss_mb_before": 1746.2,
+          "stat_pinned": true,
+          "total_s": 1.041,
+          "unedited": false
+        },
+        {
+          "compile_s": 0.812,
+          "edits": [
+            "remove_prim /World/Swap_0",
+            "set_prim_visible /World/Obj_0 True"
+          ],
+          "event": "compile",
+          "free_s": 0.211,
+          "hidden": [],
+          "n": 2,
+          "n_objects": 2,
+          "peak_rss_mb": 2602.2,
+          "prims": [
+            "/World/Ground",
+            "/World/Obj_0"
+          ],
+          "rss_mb_after": 1713.8,
+          "rss_mb_before": 1714.0,
+          "stat_pinned": false,
+          "total_s": 1.023,
+          "unedited": true
+        }
+      ],
+      "draw": {
+        "ground_swap": {
+          "goal_texture": "/workspace/assets/cluttered2/ground.png",
+          "ground": "concrete",
+          "mode": "ground_swap",
+          "seed": 861302352,
+          "texture": "/workspace/assets/industrial1/ground.png"
+        },
+        "mode": "chain",
+        "parts": [
+          "swap_instance",
+          "ground_swap"
+        ],
+        "seed": 861302352,
+        "swap_instance": {
+          "floor_centre_xy": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17
+          ],
+          "goal_bbox": [
+            [
+              -0.1185999858857289,
+              -0.12000000110249347,
+              0.0
+            ],
+            [
+              0.11859998588572891,
+              0.1200000011024935,
+              0.06109376845812383
+            ]
+          ],
+          "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "goal_size_m": 0.24,
+          "live_bbox": [
+            [
+              -0.05361199475829357,
+              -0.07999999826696379,
+              -6.938893903907228e-18
+            ],
+            [
+              0.05361199475829357,
+              0.07999999826696381,
+              0.05898327292614419
+            ]
+          ],
+          "live_instance": "objv_0de890446936",
+          "live_name": "other_small",
+          "live_placement": {
+            "canonical": "library",
+            "native_extent_m": [
+              150.84085083007807,
+              225.08522317436865,
+              82.97664648586829
+            ],
+            "pre_rot_x_deg": 90.0,
+            "size_m": 0.16,
+            "upright_yaw_add_deg": 90.0,
+            "yaw_deg": 0.0,
+            "yaw_rule": "0"
+          },
+          "live_size_m": 0.16,
+          "mode": "swap_instance",
+          "prim_paths": [
+            "/World/Swap_0"
+          ],
+          "reference_position": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17,
+            0.28591402555179524
+          ],
+          "seed": 861302352,
+          "size_ratio": 0.6666666460997347,
+          "swapped": true
+        }
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "same": {
+      "draw": {
+        "floor_centre_xy": [
+          6.938893903907228e-18,
+          1.3877787807814457e-17
+        ],
+        "goal_bbox": [
+          [
+            -0.1185999858857289,
+            -0.12000000110249347,
+            0.0
+          ],
+          [
+            0.11859998588572891,
+            0.1200000011024935,
+            0.06109376845812383
+          ]
+        ],
+        "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+        "goal_size_m": 0.24,
+        "live_bbox": [
+          [
+            -0.1185999858857289,
+            -0.12000000110249347,
+            0.0
+          ],
+          [
+            0.11859998588572891,
+            0.1200000011024935,
+            0.06109376845812383
+          ]
+        ],
+        "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+        "live_name": "same",
+        "live_placement": null,
+        "live_size_m": 0.24,
+        "mode": "swap_instance",
+        "prim_paths": [],
+        "reference_position": [
+          6.938893903907228e-18,
+          1.3877787807814457e-17,
+          0.42887105155853544
+        ],
+        "seed": 861302352,
+        "size_ratio": 1.0,
+        "swapped": false
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "same_small": {
+      "compile": {
+        "compile_s": 0.81,
+        "edits": [
+          "set_prim_visible /World/Obj_0 False",
+          "place /World/Swap_0 a2de48529b1549488940fa98a3a3bac6"
+        ],
+        "event": "compile",
+        "free_s": 0.231,
+        "hidden": [
+          "/World/Obj_0"
+        ],
+        "n": 1,
+        "n_objects": 2,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Swap_0"
+        ],
+        "rss_mb_after": 1750.9,
+        "rss_mb_before": 1746.2,
+        "stat_pinned": true,
+        "total_s": 1.041,
+        "unedited": false
+      },
+      "depth": {
+        "all_vs_ray": {
+          "max_mm": 0.005443458413023627,
+          "median_mm": 1.5982668744030093e-05,
+          "n": 129600,
+          "p99_mm": 3.989018496741705e-05
+        },
+        "edited_vs_ray": {
+          "max_mm": 0.005443458413023627,
+          "median_mm": 1.8653279976188486e-05,
+          "n": 8389,
+          "p99_mm": 0.00013019808068115651
+        },
+        "frame_finite": true,
+        "frame_nonneg": true,
+        "ground_vs_plane": {
+          "max_mm": 1.5982668744030093e-05,
+          "median_mm": 1.5982668744030093e-05,
+          "n": 121211,
+          "p99_mm": 1.5982668744030093e-05
+        },
+        "miss_with_depth_0": true,
+        "n_changed_hit": 22461,
+        "n_grid": 129600,
+        "n_unchanged": 106053,
+        "n_unchanged_undilated": 107139,
+        "unchanged_identical_share": 1.0,
+        "unchanged_max_abs_m": 0.0,
+        "undilated_identical_share": 1.0,
+        "undilated_max_abs_m": 0.0
+      },
+      "draw": {
+        "floor_centre_xy": [
+          6.938893903907228e-18,
+          1.3877787807814457e-17
+        ],
+        "goal_bbox": [
+          [
+            -0.1185999858857289,
+            -0.12000000110249347,
+            0.0
+          ],
+          [
+            0.11859998588572891,
+            0.1200000011024935,
+            0.06109376845812383
+          ]
+        ],
+        "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+        "goal_size_m": 0.24,
+        "live_bbox": [
+          [
+            -0.07906665919827532,
+            -0.08000000269903239,
+            0.0
+          ],
+          [
+            0.07906665919827534,
+            0.0800000026990324,
+            0.0407291799720026
+          ]
+        ],
+        "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+        "live_name": "same_small",
+        "live_placement": {
+          "canonical": "library",
+          "native_extent_m": [
+            3.12639698669917,
+            3.163302584303904,
+            0.8052419744704142
+          ],
+          "pre_rot_x_deg": 90.0,
+          "size_m": 0.16,
+          "upright_yaw_add_deg": 90.0,
+          "yaw_deg": 0.0,
+          "yaw_rule": "0"
+        },
+        "live_size_m": 0.16,
+        "mode": "swap_instance",
+        "prim_paths": [
+          "/World/Swap_0"
+        ],
+        "reference_position": [
+          6.938893903907228e-18,
+          1.3877787807814457e-17,
+          0.28591404139167775
+        ],
+        "seed": 861302352,
+        "size_ratio": 0.6666666830336394,
+        "swapped": true
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    }
+  },
+  "poster": {
+    "compiles": [
+      {
+        "compile_s": 0.39,
+        "edits": [
+          "put_box /World/Occluder 0.0360 m"
+        ],
+        "event": "compile",
+        "free_s": 0.256,
+        "hidden": [],
+        "n": 1,
+        "n_objects": 3,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Poster",
+          "/World/Backdrop",
+          "/World/Occluder"
+        ],
+        "rss_mb_after": 1665.2,
+        "rss_mb_before": 1602.2,
+        "stat_pinned": true,
+        "total_s": 0.646,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.381,
+        "edits": [
+          "remove_prim /World/Occluder"
+        ],
+        "event": "compile",
+        "free_s": 0.218,
+        "hidden": [],
+        "n": 2,
+        "n_objects": 2,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Poster",
+          "/World/Backdrop"
+        ],
+        "rss_mb_after": 1665.2,
+        "rss_mb_before": 1665.5,
+        "stat_pinned": false,
+        "total_s": 0.599,
+        "unedited": true
+      }
+    ],
+    "modes": [
+      "light",
+      "occluder"
+    ],
+    "refused": [
+      "ground:",
+      "swap:"
+    ],
+    "restored": {
+      "cached_goal_md5": true,
+      "fresh_goal_depth_md5": true,
+      "fresh_goal_md5": true,
+      "unedited": true
+    }
+  },
+  "room": {
+    "chain": {
+      "calls": [
+        "object_pose",
+        "set_prim_visible",
+        "place_extra_objects",
+        "build_poster",
+        "build_poster",
+        "remove_prims",
+        "set_prim_visible"
+      ],
+      "draw": {
+        "ground_swap": {
+          "goal_texture": "/workspace/assets/industrial1/ground.png",
+          "ground": "wood",
+          "mode": "ground_swap",
+          "seed": 1127093488,
+          "texture": "/workspace/assets/cluttered2/ground.png"
+        },
+        "mode": "chain",
+        "parts": [
+          "swap_instance",
+          "ground_swap"
+        ],
+        "seed": 1127093488,
+        "swap_instance": {
+          "goal_instance": "handal_drill_25",
+          "live_instance": "ycb/006_mustard_bottle",
+          "mode": "swap_instance",
+          "prim_paths": [
+            "/World/Swap_0"
+          ],
+          "seed": 1127093488,
+          "swapped": true,
+          "xy": [
+            -0.004322174936532974,
+            0.03472788259387016
+          ]
+        }
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "combined": {
+      "draw": {
+        "distractors": {
+          "items": [
+            {
+              "instance_id": "ycb/028_skillet_lid",
+              "pixel": [
+                1173.1406713526133,
+                808.9148548785492
+              ],
+              "x": 0.07628575387638682,
+              "y": -0.06696318528874454,
+              "yaw_deg": 221.04273886087822
+            },
+            {
+              "instance_id": "ycb/033_spatula",
+              "pixel": [
+                512.7455755263541,
+                515.8771278026084
+              ],
+              "x": -0.17332655633365576,
+              "y": 0.04379751614046355,
+              "yaw_deg": 336.5382395349787
+            },
+            {
+              "instance_id": "ycb/065-c_cups",
+              "pixel": [
+                727.0360933632817,
+                794.5815794522895
+              ],
+              "x": -0.09233026857888692,
+              "y": -0.06154557692878361,
+              "yaw_deg": 300.79987364324
+            },
+            {
+              "instance_id": "ycb/071_nine_hole_peg_test",
+              "pixel": [
+                1038.2247942497625,
+                219.49201720192713
+              ],
+              "x": 0.025291032715530952,
+              "y": 0.15582344219058447,
+              "yaw_deg": 338.75154754251
+            }
+          ],
+          "mode": "distractors",
+          "n": 4,
+          "prim_paths": [
+            "/World/Distractor_0",
+            "/World/Distractor_1",
+            "/World/Distractor_2",
+            "/World/Distractor_3"
+          ],
+          "seed": 1127093488
+        },
+        "light": {
+          "light_intensity_scale": 0.3802412085390175,
+          "light_temperature_k": 5251.121789273651,
+          "mode": "light",
+          "seed": 1127093488
+        },
+        "mode": "combined",
+        "noise": {
+          "brightness": 0.03127302303001778,
+          "contrast": 0.9930295630502708,
+          "lambda_read": 2.08453297859845e-07,
+          "lambda_shot": 0.00045237792290864296,
+          "mode": "noise",
+          "seed": 1127093488,
+          "wb_gain": [
+            0.9781036849907909,
+            1.143974625331408,
+            0.9672508852004681
+          ]
+        },
+        "occluder": {
+          "centre": [
+            0.004118850572907763,
+            0.07491265242870736,
+            0.34011419183116504
+          ],
+          "distance_m": 0.19160029859956879,
+          "image_width_frac": 0.17743230115702097,
+          "mode": "occluder",
+          "pixel": [
+            1021.6352365060634,
+            244.60568272095452
+          ],
+          "prim_path": "/World/Occluder",
+          "seed": 1127093488,
+          "size_m": 0.046399549038087184
+        },
+        "seed": 1127093488
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "compiles": [
+      {
+        "compile_s": 0.574,
+        "edits": [
+          "put_box /World/Occluder 0.0464 m"
+        ],
+        "event": "compile",
+        "free_s": 0.213,
+        "hidden": [],
+        "n": 1,
+        "n_objects": 3,
+        "peak_rss_mb": 1194.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Occluder"
+        ],
+        "rss_mb_after": 1100.9,
+        "rss_mb_before": 1070.5,
+        "stat_pinned": true,
+        "total_s": 0.786,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.521,
+        "edits": [
+          "remove_prim /World/Occluder"
+        ],
+        "event": "compile",
+        "free_s": 0.217,
+        "hidden": [],
+        "n": 2,
+        "n_objects": 2,
+        "peak_rss_mb": 1408.8,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1165.2,
+        "rss_mb_before": 1125.6,
+        "stat_pinned": false,
+        "total_s": 0.738,
+        "unedited": true
+      },
+      {
+        "compile_s": 2.377,
+        "edits": [
+          "place /World/Distractor_0 ycb/028_skillet_lid",
+          "place /World/Distractor_1 ycb/033_spatula",
+          "place /World/Distractor_2 ycb/065-c_cups",
+          "place /World/Distractor_3 ycb/071_nine_hole_peg_test"
+        ],
+        "event": "compile",
+        "free_s": 0.187,
+        "hidden": [],
+        "n": 3,
+        "n_objects": 6,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Distractor_0",
+          "/World/Distractor_1",
+          "/World/Distractor_2",
+          "/World/Distractor_3"
+        ],
+        "rss_mb_after": 2370.6,
+        "rss_mb_before": 1437.2,
+        "stat_pinned": true,
+        "total_s": 2.565,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.497,
+        "edits": [
+          "remove_prim /World/Distractor_0",
+          "remove_prim /World/Distractor_1",
+          "remove_prim /World/Distractor_2",
+          "remove_prim /World/Distractor_3"
+        ],
+        "event": "compile",
+        "free_s": 0.324,
+        "hidden": [],
+        "n": 4,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1175.6,
+        "rss_mb_before": 2370.8,
+        "stat_pinned": false,
+        "total_s": 0.821,
+        "unedited": true
+      },
+      {
+        "compile_s": 0.949,
+        "edits": [
+          "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png"
+        ],
+        "event": "compile",
+        "free_s": 0.221,
+        "hidden": [],
+        "n": 5,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1504.7,
+        "rss_mb_before": 1231.8,
+        "stat_pinned": true,
+        "total_s": 1.17,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.461,
+        "edits": [
+          "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png (the scene's own)"
+        ],
+        "event": "compile",
+        "free_s": 0.256,
+        "hidden": [],
+        "n": 6,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1268.6,
+        "rss_mb_before": 1504.9,
+        "stat_pinned": false,
+        "total_s": 0.718,
+        "unedited": true
+      },
+      {
+        "compile_s": 0.845,
+        "edits": [
+          "set_prim_visible /World/Obj_0 False",
+          "place /World/Swap_0 ycb/006_mustard_bottle"
+        ],
+        "event": "compile",
+        "free_s": 0.193,
+        "hidden": [
+          "/World/Obj_0"
+        ],
+        "n": 7,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Swap_0"
+        ],
+        "rss_mb_after": 1567.3,
+        "rss_mb_before": 1342.9,
+        "stat_pinned": true,
+        "total_s": 1.039,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.488,
+        "edits": [
+          "remove_prim /World/Swap_0",
+          "set_prim_visible /World/Obj_0 True"
+        ],
+        "event": "compile",
+        "free_s": 0.232,
+        "hidden": [],
+        "n": 8,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1226.0,
+        "rss_mb_before": 1498.8,
+        "stat_pinned": false,
+        "total_s": 0.72,
+        "unedited": true
+      },
+      {
+        "compile_s": 1.276,
+        "edits": [
+          "set_prim_visible /World/Obj_0 False",
+          "place /World/Swap_0 ycb/006_mustard_bottle",
+          "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png"
+        ],
+        "event": "compile",
+        "free_s": 0.212,
+        "hidden": [
+          "/World/Obj_0"
+        ],
+        "n": 9,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Swap_0"
+        ],
+        "rss_mb_after": 1722.0,
+        "rss_mb_before": 1282.0,
+        "stat_pinned": true,
+        "total_s": 1.488,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.434,
+        "edits": [
+          "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png (the scene's own)",
+          "remove_prim /World/Swap_0",
+          "set_prim_visible /World/Obj_0 True"
+        ],
+        "event": "compile",
+        "free_s": 0.247,
+        "hidden": [],
+        "n": 10,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1210.2,
+        "rss_mb_before": 1722.2,
+        "stat_pinned": false,
+        "total_s": 0.681,
+        "unedited": true
+      },
+      {
+        "compile_s": 2.418,
+        "edits": [
+          "place /World/Distractor_0 ycb/028_skillet_lid",
+          "place /World/Distractor_1 ycb/033_spatula",
+          "place /World/Distractor_2 ycb/065-c_cups",
+          "place /World/Distractor_3 ycb/071_nine_hole_peg_test",
+          "put_box /World/Occluder 0.0464 m"
+        ],
+        "event": "compile",
+        "free_s": 0.178,
+        "hidden": [],
+        "n": 11,
+        "n_objects": 7,
+        "peak_rss_mb": 2508.7,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Distractor_0",
+          "/World/Distractor_1",
+          "/World/Distractor_2",
+          "/World/Distractor_3",
+          "/World/Occluder"
+        ],
+        "rss_mb_after": 2366.2,
+        "rss_mb_before": 1416.4,
+        "stat_pinned": true,
+        "total_s": 2.597,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.491,
+        "edits": [
+          "remove_prim /World/Occluder",
+          "remove_prim /World/Distractor_0",
+          "remove_prim /World/Distractor_1",
+          "remove_prim /World/Distractor_2",
+          "remove_prim /World/Distractor_3"
+        ],
+        "event": "compile",
+        "free_s": 0.291,
+        "hidden": [],
+        "n": 12,
+        "n_objects": 2,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1283.5,
+        "rss_mb_before": 2366.4,
+        "stat_pinned": false,
+        "total_s": 0.782,
+        "unedited": true
+      },
+      {
+        "compile_s": 0.96,
+        "edits": [
+          "put_box /World/Occluder 0.0452 m",
+          "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png"
+        ],
+        "event": "compile",
+        "free_s": 0.177,
+        "hidden": [],
+        "n": 13,
+        "n_objects": 3,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Occluder"
+        ],
+        "rss_mb_after": 1569.5,
+        "rss_mb_before": 1316.6,
+        "stat_pinned": true,
+        "total_s": 1.137,
+        "unedited": false
+      },
+      {
+        "compile_s": 0.487,
+        "edits": [
+          "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png (the scene's own)",
+          "remove_prim /World/Occluder"
+        ],
+        "event": "compile",
+        "free_s": 0.265,
+        "hidden": [],
+        "n": 14,
+        "n_objects": 2,
+        "peak_rss_mb": 2602.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1655.9,
+        "rss_mb_before": 1890.5,
+        "stat_pinned": false,
+        "total_s": 0.753,
+        "unedited": true
+      }
+    ],
+    "distractors": {
+      "compile": {
+        "compile_s": 2.377,
+        "edits": [
+          "place /World/Distractor_0 ycb/028_skillet_lid",
+          "place /World/Distractor_1 ycb/033_spatula",
+          "place /World/Distractor_2 ycb/065-c_cups",
+          "place /World/Distractor_3 ycb/071_nine_hole_peg_test"
+        ],
+        "event": "compile",
+        "free_s": 0.187,
+        "hidden": [],
+        "n": 3,
+        "n_objects": 6,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Distractor_0",
+          "/World/Distractor_1",
+          "/World/Distractor_2",
+          "/World/Distractor_3"
+        ],
+        "rss_mb_after": 2370.6,
+        "rss_mb_before": 1437.2,
+        "stat_pinned": true,
+        "total_s": 2.565,
+        "unedited": false
+      },
+      "depth": {
+        "all_vs_ray": {
+          "max_mm": 158.78503528942522,
+          "median_mm": 8.56600079757186e-06,
+          "n": 129600,
+          "p99_mm": 9.340331814156049e-05
+        },
+        "edited_vs_ray": {
+          "max_mm": 158.78503528942522,
+          "median_mm": 2.7417716097488665e-05,
+          "n": 16413,
+          "p99_mm": 0.00014999305145702003
+        },
+        "frame_finite": true,
+        "frame_nonneg": true,
+        "ground_vs_plane": {
+          "max_mm": 8.56600079757186e-06,
+          "median_mm": 8.56600079757186e-06,
+          "n": 100209,
+          "p99_mm": 8.56600079757186e-06
+        },
+        "miss_with_depth_0": true,
+        "n_changed_hit": 16413,
+        "n_grid": 129600,
+        "n_unchanged": 110776,
+        "n_unchanged_undilated": 113187,
+        "unchanged_identical_share": 1.0,
+        "unchanged_max_abs_m": 0.0,
+        "undilated_identical_share": 0.9999911650631256,
+        "undilated_max_abs_m": 0.002107471227645874
+      },
+      "draw": {
+        "items": [
+          {
+            "instance_id": "ycb/028_skillet_lid",
+            "pixel": [
+              1173.1406713526133,
+              808.9148548785492
+            ],
+            "x": 0.07628575387638682,
+            "y": -0.06696318528874454,
+            "yaw_deg": 221.04273886087822
+          },
+          {
+            "instance_id": "ycb/033_spatula",
+            "pixel": [
+              512.7455755263541,
+              515.8771278026084
+            ],
+            "x": -0.17332655633365576,
+            "y": 0.04379751614046355,
+            "yaw_deg": 336.5382395349787
+          },
+          {
+            "instance_id": "ycb/065-c_cups",
+            "pixel": [
+              727.0360933632817,
+              794.5815794522895
+            ],
+            "x": -0.09233026857888692,
+            "y": -0.06154557692878361,
+            "yaw_deg": 300.79987364324
+          },
+          {
+            "instance_id": "ycb/071_nine_hole_peg_test",
+            "pixel": [
+              1038.2247942497625,
+              219.49201720192713
+            ],
+            "x": 0.025291032715530952,
+            "y": 0.15582344219058447,
+            "yaw_deg": 338.75154754251
+          }
+        ],
+        "mode": "distractors",
+        "n": 4,
+        "prim_paths": [
+          "/World/Distractor_0",
+          "/World/Distractor_1",
+          "/World/Distractor_2",
+          "/World/Distractor_3"
+        ],
+        "seed": 1127093488
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "ground": {
+      "compile": {
+        "compile_s": 0.949,
+        "edits": [
+          "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png"
+        ],
+        "event": "compile",
+        "free_s": 0.221,
+        "hidden": [],
+        "n": 5,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0"
+        ],
+        "rss_mb_after": 1504.7,
+        "rss_mb_before": 1231.8,
+        "stat_pinned": true,
+        "total_s": 1.17,
+        "unedited": false
+      },
+      "depth_identical": true,
+      "draw": {
+        "goal_texture": "/workspace/assets/industrial1/ground.png",
+        "ground": "wood",
+        "mode": "ground_swap",
+        "seed": 1127093488,
+        "texture": "/workspace/assets/cluttered2/ground.png"
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "light": {
+      "draw": {
+        "light_intensity_scale": 0.3802412085390175,
+        "light_temperature_k": 5251.121789273651,
+        "mode": "light",
+        "seed": 1127093488
+      },
+      "factor_rgb": [
+        0.44749365078916514,
+        0.36740974580391145,
+        0.30931583807392493
+      ],
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "occluder": {
+      "compile": {
+        "compile_s": 0.574,
+        "edits": [
+          "put_box /World/Occluder 0.0464 m"
+        ],
+        "event": "compile",
+        "free_s": 0.213,
+        "hidden": [],
+        "n": 1,
+        "n_objects": 3,
+        "peak_rss_mb": 1194.2,
+        "prims": [
+          "/World/Ground",
+          "/World/Obj_0",
+          "/World/Occluder"
+        ],
+        "rss_mb_after": 1100.9,
+        "rss_mb_before": 1070.5,
+        "stat_pinned": true,
+        "total_s": 0.786,
+        "unedited": false
+      },
+      "depth": {
+        "all_vs_ray": {
+          "max_mm": 84.56510802872091,
+          "median_mm": 8.56600079757186e-06,
+          "n": 129600,
+          "p99_mm": 5.539816014255017e-05
+        },
+        "edited_vs_ray": {
+          "max_mm": 7.546204053299199e-05,
+          "median_mm": 1.7720780953744963e-06,
+          "n": 10104,
+          "p99_mm": 5.86610999220305e-05
+        },
+        "frame_finite": true,
+        "frame_nonneg": true,
+        "ground_vs_plane": {
+          "max_mm": 8.56600079757186e-06,
+          "median_mm": 8.56600079757186e-06,
+          "n": 109056,
+          "p99_mm": 8.56600079757186e-06
+        },
+        "miss_with_depth_0": true,
+        "n_changed_hit": 10104,
+        "n_grid": 129600,
+        "n_unchanged": 119088,
+        "n_unchanged_undilated": 119496,
+        "unchanged_identical_share": 1.0,
+        "unchanged_max_abs_m": 0.0,
+        "undilated_identical_share": 1.0,
+        "undilated_max_abs_m": 0.0
+      },
+      "draw": {
+        "centre": [
+          0.004118850572907763,
+          0.07491265242870736,
+          0.34011419183116504
+        ],
+        "distance_m": 0.19160029859956879,
+        "image_width_frac": 0.17743230115702097,
+        "mode": "occluder",
+        "pixel": [
+          1021.6352365060634,
+          244.60568272095452
+        ],
+        "prim_path": "/World/Occluder",
+        "seed": 1127093488,
+        "size_m": 0.046399549038087184
+      },
+      "face_depth_err_mm": 1.966227736183157e-06,
+      "face_width_px": 388,
+      "face_width_px_predicted": 387.6025776733592,
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "refusals": {
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    },
+    "runner": {
+      "final_translation_mm": 3.8890666529957856,
+      "perturbation": {
+        "ground_swap": {
+          "goal_texture": "/workspace/assets/industrial1/ground.png",
+          "ground": "wood",
+          "mode": "ground_swap",
+          "seed": 685550533,
+          "texture": "/workspace/assets/cluttered2/ground.png"
+        },
+        "mode": "chain",
+        "occluder": {
+          "centre": [
+            -0.010706169269778174,
+            0.01088989885745325,
+            0.3375303055584715
+          ],
+          "distance_m": 0.19418418487226233,
+          "image_width_frac": 0.17069530068847355,
+          "mode": "occluder",
+          "pixel": [
+            913.4167073997271,
+            712.3428055975118
+          ],
+          "prim_path": "/World/Occluder",
+          "seed": 685550533,
+          "size_m": 0.04523976229612939
+        },
+        "parts": [
+          "occluder",
+          "ground_swap"
+        ],
+        "seed": 685550533
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      },
+      "steps": 3
+    },
+    "swap_instance": {
+      "compile": {
+        "compile_s": 0.845,
+        "edits": [
+          "set_prim_visible /World/Obj_0 False",
+          "place /World/Swap_0 ycb/006_mustard_bottle"
+        ],
+        "event": "compile",
+        "free_s": 0.193,
+        "hidden": [
+          "/World/Obj_0"
+        ],
+        "n": 7,
+        "n_objects": 2,
+        "peak_rss_mb": 2465.5,
+        "prims": [
+          "/World/Ground",
+          "/World/Swap_0"
+        ],
+        "rss_mb_after": 1567.3,
+        "rss_mb_before": 1342.9,
+        "stat_pinned": true,
+        "total_s": 1.039,
+        "unedited": false
+      },
+      "depth": {
+        "all_vs_ray": {
+          "max_mm": 0.00046434633116376745,
+          "median_mm": 8.56600079757186e-06,
+          "n": 129600,
+          "p99_mm": 4.215513976002494e-05
+        },
+        "edited_vs_ray": {
+          "max_mm": 0.00046434633116376745,
+          "median_mm": 2.109278987583174e-05,
+          "n": 7416,
+          "p99_mm": 9.913479439294107e-05
+        },
+        "frame_finite": true,
+        "frame_nonneg": true,
+        "ground_vs_plane": {
+          "max_mm": 8.56600079757186e-06,
+          "median_mm": 8.56600079757186e-06,
+          "n": 122184,
+          "p99_mm": 8.56600079757186e-06
+        },
+        "miss_with_depth_0": true,
+        "n_changed_hit": 17815,
+        "n_grid": 129600,
+        "n_unchanged": 110982,
+        "n_unchanged_undilated": 111785,
+        "unchanged_identical_share": 1.0,
+        "unchanged_max_abs_m": 0.0,
+        "undilated_identical_share": 1.0,
+        "undilated_max_abs_m": 0.0
+      },
+      "draw": {
+        "goal_instance": "handal_drill_25",
+        "live_instance": "ycb/006_mustard_bottle",
+        "mode": "swap_instance",
+        "prim_paths": [
+          "/World/Swap_0"
+        ],
+        "seed": 1127093488,
+        "swapped": true,
+        "xy": [
+          -0.004322174936532974,
+          0.03472788259387016
+        ]
+      },
+      "restored": {
+        "cached_goal_md5": true,
+        "fresh_goal_depth_md5": true,
+        "fresh_goal_md5": true,
+        "unedited": true
+      }
+    }
+  },
+  "scenes": {
+    "hollywood": {
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_depth_md5": "d23d54774c4ae6962c2fddf574a6177a",
+      "goal_frame_md5": "6f892b0b3bc0c06fd52b4dd31ec03402",
+      "look": "isaac_fit_v1",
+      "look_curve_id": "isaac_fit_v1/hollywood",
+      "render_mode": "mujoco-llvmpipe"
+    },
+    "industrial1_drill": {
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_depth_md5": "7c6f56d6772d49b87e58c0ef8f25168c",
+      "goal_frame_md5": "df7b04e95d8d9b8daf9ace35e7c762d3",
+      "look": "isaac_fit_v1",
+      "look_curve_id": "isaac_fit_v1/industrial1_drill",
+      "render_mode": "mujoco-llvmpipe"
+    },
+    "inst_drill": {
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_depth_md5": "5e2fa40428782ce5624bc8cdb7742373",
+      "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+      "look": "raw",
+      "look_curve_id": null,
+      "render_mode": "mujoco-llvmpipe"
+    }
+  },
+  "unit": "U8 - the perturbation world verbs in MuJoCo (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 11:47:20 +0200"
+}
