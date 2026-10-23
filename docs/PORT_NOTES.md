@@ -632,3 +632,58 @@ start; compare curve medians over many starts.
 (36 DINOv2 tiles), ~0.7–1.3 s/step before; ViT-VS 0.85–1.8 s/step; SIFT 0.9–1.7 s/step; the mock
 world's 1920×1080 numpy warp ≈ 0.7 s a frame. The full U5 set: ~26 000 CPU-s, 2 h 43 min on
 two processes.
+
+## U9 — the rig check twin (2026-10-23)
+
+**What you can do.** vs-sim's Isaac rig check, on the MuJoCo world:
+
+```
+source tools/cpu_env.sh
+$VSBENCH_PY -m vsbench.world.check_baselines --scenes hollywood cluttered2 \
+    --arms sift_ransac vitvs_dinov3 artvs --near-steps 200 --far 1 --out results/my_check
+$VSBENCH_PY -m vsbench.world.check_baselines summary --runs results/my_check --out results/my_check
+#   vs-sim's flags: --far N --far-set --film --film-every --perturb --perturb-seed --budget ARM=N
+#   --outline-iou --telemetry --clean-film --arm-plugin MODULE (vsbench.world.method_arm flies
+#   the registered vsbench methods); the bridge's: --look --device (cpu) --samples
+#   --frames full|preview|none --threads --allow-gpu (never during the Isaac evaluation)
+```
+
+Per scene x arm: **identity** (the camera at the goal, the goal picture as the live frame:
+vs-sim's `ok`), **near** (the near sampler's first draw on the scene's goal, `n_000`, 7.76 mm /
+2.69 deg on every scene - the start Isaac's check flies), **far** (`--far N` starts of
+`--far-set`, to the cap). Writes vs-sim's `check.json` / `check.md`, the goal frame and the first
+live frame, plus `records.jsonl` (the full copied record of every episode) and a `bridge` block.
+
+**How it works.** No third copy of the check: `vsbench.world.check_baselines.reference()` loads
+the copied `vsbench/scripts/check_baselines.py` as a module (its `sys.path` additions undone
+after the load) and flies its `identity_check`, `episode_check`, `near_start`, `write_table`,
+`parse_budgets` and plugin hook; the protocol helpers, station guard and provenance are
+`vsbench.world.fly`'s. The only new logic is `main`'s scene loop on `MujocoScene` (one scene
+alive at a time, built, goal-checked against the far set's file, flown, closed) and the
+capture of each record (the reference module's `run_episode` is wrapped while the check runs;
+the file is not edited). A vs-sim fix to the check arrives with the next pin move. Needs a
+source checkout (the packaging excludes `vsbench/scripts`, as it excludes `tools/`).
+
+**The near verdict (builder default, PORT_PLAN D-12).** vs-sim's script prints the near
+landing but computes no verdict; its docstring says "it must land closer than it started, by a
+lot". The twin writes `near_ok = final < start` (the sentence read literally) and reports
+`final_over_start`; "by a lot" is not quantified there, so it is not thresholded here.
+
+**Result** (`results/bridge/u9/README.md`, gate `results/bridge/u9_check.json`): identity
+24 / 24 green; near 15 / 24 closer - SIFT and ORB on all six scenes, ViT-VS only on hollywood,
+ART-VS on poster3 and cluttered3. Eight of the nine misses are misses in Isaac's own check from
+the same start (the method, not the world); the ninth (ART-VS on hollywood, Isaac 1.6 mm, here
+20.1 mm) misses as well without the look and on the copied numpy mock: ART-VS never leaves its
+coarse phase from that start outside Isaac (the reverse happens on poster3). `tools/u9_diagnose.py`
+flies one cell in `isaac_fit_v1` / `raw` / the mock with per-step telemetry for such questions.
+
+**Cost.** 11.2 CPU-hours for the 24 cells with one `capped30` start each (3 h 03 min wall on two
+processes at load ~24); a scene process 45-72 min; peak RSS 2.2-2.4 GB (posters, drill room),
+4.4-4.8 GB (cluttered2 / cluttered3). Without `--far` a scene is ~15-25 min.
+
+**Records.** Every scene block and entry carries `render_mode` (`mujoco-llvmpipe`) and the GL
+renderer string; `check.json`'s `bridge` block the commits, the station env (torch 2 / 2, CUDA
+off, `LP_NUM_THREADS=2`), the look and CPU seconds. `summary` refuses to merge mixed renderers
+and puts Isaac's numbers (`$VSBENCH_ISAAC_CHECKS`, default `~/genvs_ws/vssim_out`: `check1` for
+identity / near, `check2` / `check3` for the far row; read only) beside each cell - context,
+never pooled (D-9).

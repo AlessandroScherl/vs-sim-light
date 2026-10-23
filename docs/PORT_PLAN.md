@@ -742,6 +742,24 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
 - Gate: all-green for `{sift_ransac, orb_ransac, vitvs_dinov3, artvs}` × six scenes on the
   zero-motion and near rows; the `capped30` row reported.
 - Cost: ≈ 2–3 h at nice 19 → background with `timeout`.
+- Built (2026-10-23): `python -m vsbench.world.check_baselines` flies the copied
+  `vsbench/scripts/check_baselines.py` as a library (`reference()`: its `identity_check`,
+  `episode_check`, `near_start`, `write_table`, thresholds and plugin hook - no third copy) on
+  `MujocoScene`, one scene alive at a time, with `vsbench.world.fly`'s protocol helpers, station
+  guard and provenance; vs-sim's flags plus `--look`, `--device`, `--samples`, `--frames`;
+  `records.jsonl` (each episode's full copied record), `render_mode` on every scene and entry, a
+  `bridge` block; `summary` merges per-scene runs, refuses mixed renderers, puts Isaac's own
+  check beside each cell. `tests/world/test_check_baselines.py` (fast driver tests on the copied
+  mock + the committed flight; gate `results/bridge/u9_check.json`), `tools/u9_diagnose.py`.
+- Measured (`results/bridge/u9/README.md`; near start `n_000` 7.76 mm / 2.69°, 200 steps; one
+  `capped30` start to the cap): **identity 24 / 24 green**. **Near 15 / 24 closer** under D-12
+  (a): SIFT / ORB all six (0.009–2.40 mm); ViT-VS hollywood only; ART-VS poster3, cluttered3.
+  Of the nine misses, eight miss in Isaac's own `check1` from the same start (ViT-VS poster2,
+  poster3, drill, cluttered2, cluttered3; ART-VS poster2, drill, cluttered2; similar
+  magnitudes); hollywood / ART-VS (Isaac 1.6 mm, here 20.1) misses also without the look and on
+  the copied mock - ART-VS never leaves its coarse phase from that start outside Isaac (poster3
+  the reverse). So the near gate as written is **not all green, and every miss is the method,
+  not the world** (`near_fail_diagnosis`). Cost 11.2 CPU-h, 3 h wall on two processes.
 
 **U10 — Docs** (`README.md` § "The benchmark and the baselines (copied from vs-sim)",
 `docs/BRIDGE.md`, `vsbench/vs/PROVENANCE.md`, the `results/bridge/*.md` reports): what it is,
@@ -786,6 +804,12 @@ Open — the recommendation is the working default until the owner rules:
   extrapolates outside its scene's colours (a re-textured floor ~20 grey levels off its own
   scene's curve, measured). (b) re-fit per perturbation: impossible without an Isaac picture
   of the perturbed world. (c) `raw` for perturbed flights: loses the U4b match everywhere.
+- **D-12 (new, U9) The near verdict of the rig check.** vs-sim's script computes none (its
+  docstring: "it must land closer than it started, by a lot"). (a) **final < start** (default,
+  built; the ratio reported): 15 / 24 on MuJoCo, the eight Isaac-shared misses included;
+  (b) a factor for "by a lot" (e.g. final < start / 2): stricter, a number the owner would set;
+  (c) no verdict, report only (exactly vs-sim's script). Under (a) and (b) the U9 gate's "near
+  all green" cannot hold for ViT-VS / ART-VS, because it does not hold in Isaac either.
 - **D-10 (new) The Step-3 loop.** Keep `vsbench.episode.run_episode` as the Step 1–3 gate
   instrument beside the one benchmark loop (default), or retire it once `MethodArm` (U6a) flies
   every vsbench method through the benchmark loop. Cost of keeping: two loops in one repo, one

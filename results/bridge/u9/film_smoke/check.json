@@ -1,0 +1,147 @@
+{
+ "scenes": {
+  "hollywood": {
+   "goal_distance_m": 0.4341815107823003,
+   "goal_md5": "6f892b0b3bc0c06fd52b4dd31ec03402",
+   "goal_settle_diffs": [
+    null
+   ],
+   "goal": {
+    "cam_pos": [
+     0.0,
+     0.0,
+     0.4341815107823003
+    ],
+    "cam_R_opt": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0
+     ]
+    ]
+   },
+   "arms": {
+    "sift_ransac": {
+     "label": "classical_sift/k24/ur/uniform/ransac-scene_default/cns_plateau",
+     "identity": {
+      "n_matches": 24,
+      "n_matched": 24,
+      "feature_error_norm": 0.0,
+      "v_norm_m_s": 0.0,
+      "w_norm_deg_s": 0.0,
+      "match_ms": 705.7984699495137,
+      "step_ms": 0.5512359784916043,
+      "zero_displacement_share": 1.0,
+      "max_displacement_px": 0.0,
+      "ok": true
+     },
+     "near": {
+      "start_id": "n_000",
+      "max_iter": 200,
+      "start_mm": 7.759368727876952,
+      "start_deg": 2.6881788804203115,
+      "final_mm": 0.009294943637452358,
+      "final_deg": 0.0035078237587526174,
+      "stop_step": null,
+      "stop_mm": null,
+      "stop_deg": null,
+      "stops": {},
+      "own_stop_rule": null,
+      "own_stop_step": null,
+      "own_stop_mm": null,
+      "own_stop_deg": null,
+      "steps": 200,
+      "terminated": "max_iter",
+      "outcome": "converged",
+      "success": {
+       "predicate_a": true,
+       "paper_3cm_3deg": true,
+       "cns_code_0p1d_10deg": true,
+       "abs_10mm_1deg": true,
+       "abs_20mm_2deg": true,
+       "abs_50mm_5deg": true,
+       "abs_100mm_10deg": true
+      },
+      "sec_per_step": 0.853927618630114,
+      "mean_n_matches": 23.88,
+      "prealign_deg": null,
+      "start_deg_after_prealign": null,
+      "goal_mask_share": null,
+      "perturbation": {
+       "mode": "none",
+       "seed": 1149321149
+      },
+      "fps": 1.171059441319181,
+      "match_fps": 1.583,
+      "match_ms_med": 629.2489,
+      "control_ms_med": 0.2867,
+      "gpu_util_mean_pct": null,
+      "gpu_util_max_pct": null,
+      "peak_vram_alloc_mb": null,
+      "vram_used_mb": null
+     },
+     "far": [],
+     "wall_s": 171.81983518600464,
+     "render_mode": "mujoco-llvmpipe",
+     "near_ok": true,
+     "final_over_start": 0.0012
+    }
+   },
+   "render_mode": "mujoco-llvmpipe",
+   "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+   "goal_depth_md5": "d23d54774c4ae6962c2fddf574a6177a",
+   "look": "isaac_fit_v1",
+   "look_curve_id": "isaac_fit_v1/hollywood",
+   "look_curve_md5": "55fc9f90f44486674e21835b05e1fdb5",
+   "goal_check": null
+  }
+ },
+ "arms": [
+  "sift_ransac"
+ ],
+ "near_steps": 200,
+ "far": 0,
+ "far_set": "capped30",
+ "perturb": "none",
+ "perturb_seed": 20260918,
+ "budgets": {},
+ "outline_iou": false,
+ "started_utc": "2026-10-23T13:02:25Z",
+ "bridge": {
+  "driver": "vsbench.world.check_baselines",
+  "reference": "vsbench/scripts/check_baselines.py (the copied vs-sim driver, loaded as a library: identity_check, episode_check, near_start, write_table, the plugin hook)",
+  "vsbench_commit": "e4b2f0c858200890e76663fdd0797a91fcf53335+dirty",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "bridge_env": {
+   "torch": "2.14.1+cpu",
+   "torch_threads": 2,
+   "torch_interop_threads": 2,
+   "cuda_available": false,
+   "nvidia_smi": "hidden",
+   "allow_gpu": false,
+   "CUDA_VISIBLE_DEVICES": "",
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LP_NUM_THREADS": "2"
+  },
+  "look": "isaac_fit_v1",
+  "device": "cpu",
+  "samples": 4,
+  "frames": "none",
+  "near_rule": "near_ok = final_mm < start_mm after --near-steps steps, no error (vs-sim check_baselines docstring: 'it must land closer than it started'; vs-sim's script computes no near verdict, the twin reads that sentence literally; 'by a lot' is not quantified there and is reported here as final_over_start, not thresholded)",
+  "identity_v_max_m_s": 0.0001,
+  "identity_w_max_deg_s": 0.01,
+  "cpu_s": 366.9,
+  "wall_s": 173.0
+ }
+}
