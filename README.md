@@ -109,8 +109,12 @@ to 0.45 mm in 150 steps. Several names fly side by side: `--method my_ibvs sift_
 
 The start poses are frozen files (`vsbench/benchmark/starts/`), so every method flies from the
 same places. The pictures are tone-mapped to look like the Isaac Sim renders of the same scenes
-(`--look raw`: MuJoCo's plain picture). Coming: a library of 317 converted objects (shoes,
-bottles, mugs, drills, ...) and perturbations (another floor, occluders, distractors, light, a swapped object).
+(`--look raw`: MuJoCo's plain picture).
+
+**Perturbations** (`--perturb`): `light`, `occluder`, `distractors`, `noise`, `combined`,
+`ground:<floor>` and `swap:<object>` (replace an object with one of the 317 converted library
+objects: shoes, bottles, mugs, drills, ...), chained with `+`, e.g.
+`--perturb swap:ycb/006_mustard_bottle+ground:concrete`. The goal view stays the unperturbed one.
 
 ## Debug visualizations
 
