@@ -1,0 +1,15 @@
+[check] industrial1_drill: goal d=0.442282 m, mujoco-llvmpipe (llvmpipe (LLVM 20.1.2, 256 bits)), look isaac_fit_v1, goal md5 df7b04e95d8d9b8daf9ace35e7c762d3
+[check] industrial1_drill x sift_ransac: identity OK (n=24, |v|=0.000000 m/s, |w|=0.0000 deg/s); near 7.76 -> 0.157 mm, 2.69 -> 0.022 deg [closer] | far 479->2982.0 mm [1133 s]
+[check] industrial1_drill x orb_ransac: identity OK (n=24, |v|=0.000000 m/s, |w|=0.0000 deg/s); near 7.76 -> 0.401 mm, 2.69 -> 0.033 deg [closer] | far 479->11397.2 mm [269 s]
+[check] industrial1_drill x vitvs_dinov3: identity OK (n=24, |v|=0.000000 m/s, |w|=0.0000 deg/s); near 7.76 -> 25.051 mm, 2.69 -> 2.883 deg [NOT CLOSER] | far 479->415.3 mm [815 s]
+[check] industrial1_drill x artvs: identity OK (n=24, |v|=0.000000 m/s, |w|=0.0000 deg/s); near 7.76 -> 35.351 mm, 2.69 -> 4.041 deg [NOT CLOSER] | far 479->97.8 mm [1948 s]
+| scene | arm | identity: matched / \|v\| m/s / \|w\| deg/s / zero-disp | near: start -> final (mm, deg) | stop step | near: method's own stop (mm, deg @step) | far: start -> final mm (cap) [own stop] |
+| --- | --- | --- | --- | --- | --- | --- |
+| industrial1_drill | sift_ransac | OK: 24 / 0.00e+00 / 0.00e+00 / 1.00 | 7.8 -> 0.157, 2.69 -> 0.022 | None | - | 479 -> 2982.0 |
+| industrial1_drill | orb_ransac | OK: 24 / 0.00e+00 / 0.00e+00 / 1.00 | 7.8 -> 0.401, 2.69 -> 0.033 | 172 | - | 479 -> 11397.2 |
+| industrial1_drill | vitvs_dinov3 | OK: 24 / 0.00e+00 / 0.00e+00 / 1.00 | 7.8 -> 25.051, 2.69 -> 2.883 | 110 | - | 479 -> 415.3 |
+| industrial1_drill | artvs | OK: 24 / 0.00e+00 / 0.00e+00 / 1.00 | 7.8 -> 35.351, 2.69 -> 4.041 | 69 | - | 479 -> 97.8 |
+	User time (seconds): 6830.88
+	System time (seconds): 548.34
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:09:29
+	Maximum resident set size (kbytes): 2384108
