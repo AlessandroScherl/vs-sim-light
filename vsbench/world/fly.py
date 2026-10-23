@@ -96,11 +96,15 @@ def station_guard(threads: int = 2, *, allow_gpu: bool = False) -> dict:
     on llvmpipe), and :func:`require_software_gl` refuses the scene afterwards if MuJoCo
     nevertheless opened a hardware context. ``allow_gpu`` (``--allow-gpu``, off by default;
     never while the Isaac evaluation runs) leaves both variables as exported and lifts both
-    refusals. The thread caps are ``setdefault`` (a smaller cap the shell set wins).
+    refusals. The thread caps are ``setdefault`` (a smaller cap the shell set wins). Software
+    GL is the default everywhere since 2026-10-23 (``vsbench.glenv``); ``allow_gpu`` also sets
+    ``VSBENCH_ALLOW_GPU=1`` by default, so an exported ``VSBENCH_SOFTWARE_GL=0`` still reaches
+    the GPU as before.
     """
     if allow_gpu:
         os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
         os.environ.setdefault("VSBENCH_SOFTWARE_GL", "1")
+        os.environ.setdefault("VSBENCH_ALLOW_GPU", "1")
     else:
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
         os.environ["VSBENCH_SOFTWARE_GL"] = "1"
