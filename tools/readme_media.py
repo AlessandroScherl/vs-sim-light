@@ -3,17 +3,21 @@
 
     source tools/cpu_env.sh
     PYTHONPATH=. $VSBENCH_PY tools/readme_media.py scenes   # scenes.png: the six goal views
-    PYTHONPATH=. $VSBENCH_PY tools/readme_media.py demo     # demo.gif, debug_view.jpg, demo.json
-    PYTHONPATH=. $VSBENCH_PY tools/readme_media.py gif      # re-encode demo.gif from saved frames
+    PYTHONPATH=. $VSBENCH_PY tools/readme_media.py demo     # demo.gif, debug.gif, demo.json
+    PYTHONPATH=. $VSBENCH_PY tools/readme_media.py gif      # re-encode both GIFs, no flight
 
 ``scenes`` renders each scene's goal picture in its own process (a room holds up to ~3.6 GB)
-and lays the six out in a 3 x 2 contact sheet. ``demo`` flies one published baseline
-(``sift_ransac``) on ``cluttered2`` from a start a few centimetres off the goal, through the
-copied benchmark loop, with two listeners: a GIF hook (the copied ``compose_match_frame``:
-goal | live camera, the matched points and an arrow from each to its target, plus a short
-caption with the true distance to the goal) and the copied ``DebugLog``, whose episode
-directory the copied debug view (``vsbench.vs.bench.debugview.render_still``) draws as
-``debug_view.jpg``. ``demo.json`` keeps the flight's numbers and commits.
+and lays the six out in a 3 x 2 contact sheet. ``demo`` flies one published baseline through
+the copied benchmark loop - by default the front page's showcase (2026-10-23): ``sift_ransac``
+on ``industrial1_drill`` from the frozen far start ``wide100`` / ``w3_069`` (``--start-set`` /
+``--start-id``; or a start generated off the goal: ``--offset-mm`` / ``--axis`` /
+``--angle-deg`` with ``--start-id generated``), optionally ``--mask objects|<png>`` (as
+``fly --mask``) - with two listeners: a GIF hook (the copied ``compose_match_frame``: goal |
+live camera, the matched points and an arrow from each to its target, a caption with the true
+distance to the goal; one frame every ``--every`` steps, said in the caption) and the copied
+``DebugLog``, whose episode directory the copied debug view is animated from into
+``debug.gif`` (``vsbench.world.gif.debug_gif``). ``demo.json`` keeps the flight's numbers and
+commits. ``gif`` re-encodes both from the work directory (frames, debug episode).
 """
 
 from __future__ import annotations
@@ -81,7 +85,7 @@ def cmd_scenes(args) -> int:
 
 
 # -------------------------------------------------------------------------- demo
-def demo_start(scene, offset_mm, axis, angle_deg) -> dict:
+def demo_start(scene, offset_mm, axis, angle_deg) -> dict:  # noqa: D401
     """A start ``offset_mm`` (goal camera frame: x right, y down, z forward) off the goal,
     turned by ``angle_deg`` about ``axis`` (goal camera frame), in a start file's shape."""
     from vsbench.vs import starts as startsmod
@@ -100,12 +104,19 @@ def demo_start(scene, offset_mm, axis, angle_deg) -> dict:
 
 
 class GifHook:
-    """``on_step``: one GIF frame every ``every`` steps - goal | live, matches, a caption."""
+    """``on_step``: one GIF frame every ``every`` steps - goal | live, matches, a caption;
+    a goal mask, if any, outlined in the goal half."""
 
-    def __init__(self, goal_rgb, *, title: str, every: int, width: int, goal_pose) -> None:
+    def __init__(self, goal_rgb, *, title: str, every: int, width: int, goal_pose,
+                 goal_mask=None) -> None:
         import cv2
 
         self.goal_bgr = cv2.cvtColor(np.ascontiguousarray(goal_rgb), cv2.COLOR_RGB2BGR)
+        if goal_mask is not None:
+            cs, _ = cv2.findContours(np.asarray(goal_mask, np.uint8), cv2.RETR_EXTERNAL,
+                                     cv2.CHAIN_APPROX_SIMPLE)
+            self.goal_bgr = self.goal_bgr.copy()
+            cv2.drawContours(self.goal_bgr, cs, -1, (0, 220, 255), 6)
         self.title, self.every, self.goal = title, int(every), goal_pose
         self.scale = width / 2 / goal_rgb.shape[1]
         self.frames: list[np.ndarray] = []
@@ -126,8 +137,8 @@ class GifHook:
             cv2.putText(img, text, (x0 + 6, 16), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
                         (255, 255, 255), 1, cv2.LINE_AA)
         bar = np.full((30, img.shape[1], 3), 24, np.uint8)
-        cv2.putText(bar, f"{self.title}   step {step_i:3d}   distance to goal {t_mm:5.1f} mm, "
-                         f"{r_deg:4.1f} deg", (8, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+        cv2.putText(bar, f"{self.title}  step {step_i:3d}  to goal {t_mm:6.1f} mm, "
+                         f"{r_deg:4.1f} deg", (8, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.47,
                     (235, 235, 235), 1, cv2.LINE_AA)
         return cv2.cvtColor(np.concatenate([bar, img], axis=0), cv2.COLOR_BGR2RGB)
 
@@ -143,16 +154,10 @@ class GifHook:
 
 
 def write_gif(frames, path: Path, *, fps: int, hold_s: float, colors: int) -> None:
-    """The frames as one looping GIF: one shared palette, the first and last frame held."""
-    from PIL import Image
+    """The frames as one looping GIF (``vsbench.world.gif.write_gif``)."""
+    from vsbench.world.gif import write_gif as _write
 
-    strip = Image.fromarray(np.concatenate(frames[:: max(1, len(frames) // 12)], axis=0))
-    pal = strip.quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
-    ims = [Image.fromarray(f).quantize(palette=pal, dither=Image.Dither.NONE) for f in frames]
-    dur = [int(1000 / fps)] * len(ims)
-    dur[0] = dur[-1] = int(1000 * hold_s)
-    ims[0].save(path, save_all=True, append_images=ims[1:], duration=dur, loop=0,
-                optimize=True)
+    _write(frames, path, fps=fps, hold_s=hold_s, colors=colors)
 
 
 def cmd_demo(args) -> int:
@@ -160,11 +165,12 @@ def cmd_demo(args) -> int:
 
     env = fly.station_guard(2)
     from vsbench.vs import benchmark
-    from vsbench.vs.bench import debugview
     from vsbench.vs.bench.debuglog import DebugLog
     from vsbench.vs.bench.runner import run_episode
     from vsbench.vs.scene import Pose, rotation_error_deg, translation_error_mm
     from vsbench.vs.scenes import load_scenes
+    from vsbench.world import masks
+    from vsbench.world.gif import debug_gif
     from vsbench.world.mujoco_scene import MujocoScene
 
     protocol = fly.load_protocol()
@@ -172,64 +178,100 @@ def cmd_demo(args) -> int:
     MEDIA.mkdir(parents=True, exist_ok=True)
     work = Path(args.work).resolve()
     work.mkdir(parents=True, exist_ok=True)
+    generated = args.start_id == "generated"
     with MujocoScene(args.scene, specs=specs) as scene:
         fly.require_software_gl(scene)
-        benchmark.check_scene_goal(scene, benchmark.load_starts(args.scene, "v2"))
-        goal_rgb, _ = scene.render_goal()
-        start = demo_start(scene, args.offset_mm, args.axis, args.angle_deg)
+        payload = benchmark.load_starts(args.scene, "v2")
+        benchmark.check_scene_goal(scene, payload)
+        goal_rgb, goal_depth = scene.render_goal()
+        if generated:
+            start = demo_start(scene, args.offset_mm, args.axis, args.angle_deg)
+            payload = None
+        else:
+            picked = [s for s in benchmark.select_starts(args.scene, args.start_set)
+                      if s["start_id"] == args.start_id]
+            if not picked:
+                raise SystemExit(f"{args.start_id} is not in {args.scene}/{args.start_set}")
+            start = picked[0]
         sp = Pose.from_start(start)
         t0 = translation_error_mm(sp.position, scene.goal_pose.position)
         r0 = rotation_error_deg(sp.rotation, scene.goal_pose.rotation)
-        print(f"[media] {args.scene} look {scene.look.name}: start {t0:.1f} mm / {r0:.2f} deg, "
-              f"goal {scene.working_distance:.3f} m", flush=True)
-        cfg = fly.arm_config(protocol, args.arm, max_iter=args.max_iter, device="cpu")
-        arm = fly.build(protocol, args.arm, cfg, intrinsics=scene.intrinsics,
+        gm = masks.resolve(args.mask, scene, goal_depth)
+        print(f"[media] {args.scene} look {scene.look.name}: start {start['start_id']} "
+              f"{t0:.1f} mm / {r0:.2f} deg, goal {scene.working_distance:.3f} m, mask {gm.mode}",
+              flush=True)
+        cell, over = masks.arm_cell(protocol, args.arm, gm)
+        cfg = fly.arm_config(protocol, cell, max_iter=args.max_iter, device="cpu",
+                             goal_mask="objects" if over else None)
+        arm = fly.build(protocol, cell, cfg, intrinsics=scene.intrinsics,
                         scene_name=args.scene, scene_spec=specs[args.scene])
-        hook = GifHook(goal_rgb, title=f"{args.arm} on {args.scene}", every=args.every,
-                       width=args.width, goal_pose=scene.goal_pose)
+        masks.attach_goal_mask(arm, gm)
+        title = f"{args.arm}{' + mask' if gm.mode != 'none' else ''}"
+        if args.every > 1:
+            title += f", every {_ordinal(args.every)} step"
+        hook = GifHook(goal_rgb, title=title, every=args.every, width=args.width,
+                       goal_pose=scene.goal_pose, goal_mask=gm.mask)
         ep_dir = work / "debug_episode"
         with DebugLog(ep_dir, arm_id=args.arm, clean=True) as dlog:
-            rec = run_episode(scene, arm, start, cfg, on_step=hook, debug_log=dlog)
+            rec = run_episode(scene, arm, start, cfg, on_step=hook, debug_log=dlog,
+                              starts_payload=payload)
+        gm.apply(rec)
         # the final pose, after the last move, without points
         rgb, _d, pose = scene.render()
         hook.frames.append(hook.frame(rgb, {}, rec["final_translation_mm"],
                                       rec["final_rotation_deg"], rec["steps"], points=False))
     gif = MEDIA / "demo.gif"
     np.savez_compressed(work / "gif_frames.npz", frames=np.stack(hook.frames))
-    write_gif(hook.frames, gif, fps=args.fps, hold_s=1.5, colors=args.colors)
-    still = debugview.render_still(ep_dir, which=args.debug_step, out_dir=MEDIA,
-                                   name="debug_view_full.png")
-    import cv2
+    if gm.mode == "file":
+        import cv2
 
-    img = cv2.imread(str(still))
-    cv2.imwrite(str(MEDIA / "debug_view.jpg"), cv2.resize(img, (1200, 750), interpolation=cv2.INTER_AREA),
-                [cv2.IMWRITE_JPEG_QUALITY, 85])
-    still.unlink()
+        cv2.imwrite(str(ep_dir / "goal_mask.png"), np.asarray(gm.mask, np.uint8) * 255)
+    write_gif(hook.frames, gif, fps=args.fps, hold_s=1.5, colors=args.colors)
+    dbg = debug_gif(ep_dir, MEDIA / "debug.gif", max_frames=args.debug_frames,
+                    width=args.debug_width, fps=args.debug_fps, colors=args.debug_colors)
     keep = ("start_translation_mm", "start_rotation_deg", "final_translation_mm",
-            "final_rotation_deg", "steps", "terminated_reason", "stop_step", "stop_translation_mm",
-            "sec_per_step", "mean_n_matches", "look", "look_curve_id", "render_mode", "success")
-    out = {"what": "the flight behind docs/media/demo.gif and debug_view.jpg (tools/readme_media.py demo)",
-           "scene": args.scene, "arm": args.arm, "start": {k: start[k] for k in ("start_id", "cam_pos", "cam_R_opt")},
-           "offset_mm": args.offset_mm, "axis": args.axis, "angle_deg": args.angle_deg,
+            "final_rotation_deg", "steps", "terminated_reason", "stop_mode", "stop_step",
+            "stop_translation_mm", "stop_rotation_deg", "sec_per_step", "mean_n_matches",
+            "look", "look_curve_id", "render_mode", "success", "arm", "goal_mask_mode",
+            "goal_mask_share", "goal_mask_source")
+    out = {"what": "the flight behind docs/media/demo.gif and debug.gif (tools/readme_media.py demo)",
+           "scene": args.scene, "arm": args.arm, "protocol_cell": cell, "mask": args.mask,
+           "start_set": None if generated else args.start_set,
+           "start": {k: start[k] for k in ("start_id", "cam_pos", "cam_R_opt")},
            "max_iter": args.max_iter, "gif_every": args.every, "gif_fps": args.fps,
-           "gif_colors": args.colors, "gif_frames": len(hook.frames),
-           "debug_step": args.debug_step, "vsbench_commit": fly.vsbench_commit(),
-           "vssim_commit": fly.vssim_commit(), "bridge_env": env,
-           "record": {k: rec.get(k) for k in keep}, "curve": hook.rows}
-    (MEDIA / "demo.json").write_text(json.dumps(out, indent=1) + "\n")
-    for p in (gif, MEDIA / "debug_view.jpg"):
+           "gif_colors": args.colors, "gif_frames": len(hook.frames), "debug_gif": dbg,
+           "vsbench_commit": fly.vsbench_commit(), "vssim_commit": fly.vssim_commit(),
+           "bridge_env": env, "record": {k: rec.get(k) for k in keep}, "curve": hook.rows}
+    if generated:
+        out.update(offset_mm=args.offset_mm, axis=args.axis, angle_deg=args.angle_deg)
+    (MEDIA / "demo.json").write_text(json.dumps(out, indent=1, default=str) + "\n")
+    (work / "demo_args.json").write_text(json.dumps(vars(args), default=str) + "\n")
+    for p in (gif, MEDIA / "debug.gif"):
         print(f"[media] {p} {p.stat().st_size / 1e6:.2f} MB", flush=True)
     print(f"[media] {rec['start_translation_mm']:.1f} -> {rec['final_translation_mm']:.2f} mm, "
-          f"{rec['steps']} steps, {rec['terminated_reason']}, {len(hook.frames)} GIF frames", flush=True)
+          f"{rec['final_rotation_deg']:.3f} deg, {rec['steps']} steps, {rec['terminated_reason']}, "
+          f"{len(hook.frames)} GIF frames, {dbg['frames']} debug frames", flush=True)
     return 0
 
 
+def _ordinal(n: int) -> str:
+    return f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+
+
 def cmd_gif(args) -> int:
-    """Re-encode demo.gif from the saved frames (no flight)."""
+    """Re-encode demo.gif from the saved frames and debug.gif from the saved debug episode
+    (no flight)."""
+    from vsbench.world.gif import debug_gif
+
     frames = list(np.load(Path(args.work) / "gif_frames.npz")["frames"])
     gif = MEDIA / "demo.gif"
     write_gif(frames, gif, fps=args.fps, hold_s=1.5, colors=args.colors)
     print(f"[media] {gif} {gif.stat().st_size / 1e6:.2f} MB, {len(frames)} frames", flush=True)
+    dbg = debug_gif(Path(args.work) / "debug_episode", MEDIA / "debug.gif",
+                    max_frames=args.debug_frames, width=args.debug_width, fps=args.debug_fps,
+                    colors=args.debug_colors)
+    print(f"[media] {dbg['path']} {dbg['bytes'] / 1e6:.2f} MB, {dbg['frames']} frames "
+          f"(every {dbg['every']} of {dbg['logged_steps']} steps)", flush=True)
     return 0
 
 
@@ -243,24 +285,30 @@ def main(argv=None) -> int:
     t.add_argument("--tile", required=True)
     t.set_defaults(fn=cmd_tile)
     d = sub.add_parser("demo")
-    d.add_argument("--scene", default="cluttered2")
+    d.add_argument("--scene", default="industrial1_drill")
     d.add_argument("--arm", default="sift_ransac")
+    d.add_argument("--start-set", default="wide100")
+    d.add_argument("--start-id", default="w3_069",
+                   help="a frozen start of --start-set, or 'generated' (--offset-mm/--axis/--angle-deg)")
     d.add_argument("--offset-mm", type=float, nargs=3, default=[50.0, -40.0, -90.0])
     d.add_argument("--axis", type=float, nargs=3, default=[0.2, -0.1, 1.0])
     d.add_argument("--angle-deg", type=float, default=15.0)
-    d.add_argument("--max-iter", type=int, default=160)
-    d.add_argument("--every", type=int, default=3, help="one GIF frame every N steps")
-    d.add_argument("--fps", type=int, default=12)
-    d.add_argument("--colors", type=int, default=96)
-    d.add_argument("--width", type=int, default=640)
-    d.add_argument("--debug-step", default="40", help="the debug view's step (or landing/final)")
+    d.add_argument("--mask", default="none", help="none | objects | <png> (as fly --mask)")
+    d.add_argument("--max-iter", type=int, default=600)
+    d.add_argument("--every", type=int, default=4, help="one GIF frame every N steps")
     d.add_argument("--work", default=str(REPO / "results" / "_tmp" / "readme_media"))
     d.set_defaults(fn=cmd_demo)
-    g = sub.add_parser("gif", help="re-encode demo.gif from the last demo's saved frames")
-    g.add_argument("--fps", type=int, default=12)
-    g.add_argument("--colors", type=int, default=96)
+    g = sub.add_parser("gif", help="re-encode both GIFs from the last demo's work directory")
     g.add_argument("--work", default=str(REPO / "results" / "_tmp" / "readme_media"))
     g.set_defaults(fn=cmd_gif)
+    for q in (d, g):
+        q.add_argument("--fps", type=int, default=12)
+        q.add_argument("--colors", type=int, default=96)
+        q.add_argument("--width", type=int, default=640)
+        q.add_argument("--debug-frames", type=int, default=80, help="at most this many debug frames")
+        q.add_argument("--debug-width", type=int, default=800)
+        q.add_argument("--debug-fps", type=float, default=8.0)
+        q.add_argument("--debug-colors", type=int, default=128)
     args = ap.parse_args(argv)
     return int(args.fn(args))
 
