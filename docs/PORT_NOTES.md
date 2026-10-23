@@ -795,10 +795,11 @@ the method's success rate (the U9 far smoke, `w1_034`, diverged). **Chosen:** `w
 the mask, the farthest start that converged; `tools/readme_media.py demo` re-flew it with the
 same result (0.295 mm, `docs/media/demo.json`; flown from a tree with the README and the tool
 uncommitted, `vsbench_commit` `20f0a60…+dirty`). **The mask did not help here:** the drill
-covers 11 % of the goal picture, the concrete floor still gives `sift_ransac` matches that
-RANSAC keeps, and at the farthest start the mask leaves too few (4 on frame 1, below the law's
-minimum): the masked flights landed 0.2-0.9 mm where the unmasked ones landed 0.09-0.19 mm, and
-the masked `w3_095` never started.
+covers 11 % of the goal picture; the masked flights landed 0.2-0.9 mm where the unmasked ones
+from the same starts landed 0.09-0.19 mm, and at the farthest start the mask left too few
+matches (4 on frame 1, mean 0.0 over the flight: the copied law commands nothing below its
+minimum), so the masked `w3_095` never started. Why the floor's matches help the unmasked arm
+was not investigated.
 
 **Media:** `demo.gif` 1.41 MB (640 x 210, 152 frames: every 4th step + the final pose, 12 fps,
 96 colours), `debug.gif` 2.33 MB (800 x 500, 78 frames: every 8th step + the stop + the final
