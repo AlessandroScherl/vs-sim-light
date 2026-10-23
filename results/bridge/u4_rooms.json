@@ -33,6 +33,39 @@
       "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
       "wall_s": 160.1
     },
+    "cluttered2_vitvs_dinov3": {
+      "final_rotation_deg": 2.973864900153261,
+      "final_translation_mm": 65.12352080097548,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_mask_share": null,
+      "max_iter": 100,
+      "mean_n_matches": 24.0,
+      "outcome": "converged_wrong_pose",
+      "records": "results/bridge/u4/cluttered2_vitvs_dinov3.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.4016156028700062,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.75936872787686,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": false,
+        "abs_20mm_2deg": false,
+        "abs_50mm_5deg": false,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": false,
+        "predicate_a": false
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "7c030d21c0034a61e88d6c17e9e8d9feb35ff83d",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 141.6
+    },
     "cluttered3_sift_ransac": {
       "final_rotation_deg": 0.10387442905382865,
       "final_translation_mm": 0.5707407412876078,
@@ -101,5 +134,5 @@
     }
   },
   "unit": "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 02:02:50 +0200"
+  "written": "2026-10-23 02:09:25 +0200"
 }
