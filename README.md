@@ -86,6 +86,12 @@ gates with their numbers.
 
 ## Closing the loop (step 3)
 
+`vsbench.episode.run_episode` is vsbench's own Step-3 loop: a **test instrument** for the
+Step 1-3 gates (replay, frame hashes, video), which stops on the true pose. It is **not the
+benchmark loop**: that is the copied vs-sim loop `vsbench.vs.bench.runner.run_episode`, flown
+by `python -m vsbench.world.fly` (below; `docs/PORT_PLAN.md` section 2.5; whether to retire
+the Step-3 loop later is the owner's open decision D-10).
+
 A method sees images, gets depth only in the form it asked for and the intrinsics, and
 returns a camera-frame twist; `run_episode` renders, moves the camera with `FreeCamera`
 and logs everything into one `.npz` that replays into a video.
@@ -286,6 +292,45 @@ carries `render_mode`, `vsbench_commit` (`+dirty` by the rule in `vsbench_commit
 `vssim_commit`, so a MuJoCo number is never pooled with an Isaac one. The world tests that
 render skip unless software GL is requested.
 
+## Methods on the benchmark loop, baselines in the demo (port units U6a, U6b)
+
+Two thin adapters, no baseline code in either (`docs/PORT_PLAN.md` section 2.5).
+
+**A vsbench method on the benchmark loop** (`vsbench/world/method_arm.py`, U6a). `MethodArm`
+subclasses the copied `Arm` and overrides `step`: the copied loop flies any registered,
+non-privileged vsbench method with the benchmark's scene, starts, period (1/60 s), records,
+success rules, telemetry and films. Its config is the template
+`vsbench/world/configs/external_method.yaml`; the record says `arm_kind: external` and the
+label `external:<method>@<params hash>/<stop>`, so a method cell can never be read as a
+published baseline. The scored stop is `cns_plateau` when the method reports `kp_cur` /
+`kp_des`, otherwise the cell falls back to `cap_only` **loudly** (a warning, a stderr line,
+`stop_mode: cap_only`, the label, and `stop_fallback` on the record). The method gets frames,
+depth in the form it asked for and the intrinsics, nothing else; a privileged method is
+refused, and a test poisons every truth read of the loop and shows the commands do not move.
+
+```
+source tools/cpu_env.sh
+$VSBENCH_PY -m vsbench.world.fly run --scene hollywood --method sift_ibvs \
+    --start-set near60 --limit 1 --out results/bridge/u6a --telemetry      # --param gain=0.8 ...
+```
+
+**The copied arms in the demo** (`vsbench/methods/vssim_arms.py`, U6b). `vitvs_dinov3`,
+`vitvs_dinov2`, `artvs`, `sift_ransac`, `orb_ransac` and `akaze_ransac` are registered vsbench
+methods: each builds the protocol cell of the same name with the copied `build_arm` (only
+`matcher.device`, default `cpu`, is stated; weights from `$HF_HOME` / `$TORCH_HOME`), so
+
+```
+source tools/cpu_env.sh
+$VSBENCH_PY -m vsbench.demo --method vitvs_dinov3          # the ten demo starts, a video
+$VSBENCH_PY -m vsbench.check --method sift_ransac          # the three setup checks (--max-steps N)
+```
+
+The demo's world rule differs from the benchmark's: vsbench's Step-3 loop integrates with
+`exp_se3` at its own `dt` (0.04 s) on the 640 x 480 gate camera and stops on the true pose;
+the benchmark integrates at the arm's 1/60 s with the copied two-step rule on the D435i and
+records its stops. Numbers from the two loops are never pooled. A copied arm cannot be flown
+through `MethodArm` (`--method vitvs_dinov3` is refused: fly it with `--arms`).
+
 ## Layout
 
 ```
@@ -302,12 +347,16 @@ vsbench/gates.py        marker detection, ORB matching, corner tracking shared b
 vsbench/smoke.py        python -m vsbench.smoke
 vsbench/scenes.py       make_scene(name), the poster and marker target poses, the marker points
 vsbench/methods/        base.py (VSMethod protocol, info keys, normalise_output), the registry,
-                        oracle_pbvs.py, true_point_ibvs.py (privileged), feature_ibvs.py (sift_ibvs, orb_ibvs)
-vsbench/episode.py      EpisodeConfig, run_episode, EpisodeLog (a Trajectory with errors, hashes, matches), the ten demo starts
+                        oracle_pbvs.py, true_point_ibvs.py (privileged), feature_ibvs.py (sift_ibvs, orb_ibvs),
+                        vssim_arms.py (the copied vs-sim arms as methods, U6b)
+vsbench/episode.py      EpisodeConfig, run_episode, EpisodeLog (a Trajectory with errors, hashes, matches), the ten demo
+                        starts - the Step-3 test loop, not the benchmark loop (that is vsbench/vs/bench/runner.py)
 vsbench/checks.py       zero_at_target, hold_at_target, restoring_direction; vsbench/check.py: python -m vsbench.check
 vsbench/replay.py       python -m vsbench.replay <log> [--video out.mp4]
 vsbench/video.py        the four-panel debug video and the match sheet (imageio-ffmpeg, OpenCV fallback)
 vsbench/demo.py         python -m vsbench.demo
+vsbench/world/          the MuJoCo world behind vs-sim's Scene contract (mujoco_scene, build, camera, assets),
+                        the bench driver fly.py, method_arm.py + configs/external_method.yaml (U6a)
 tests/                  step 1: test_reference, test_projection, test_depth, test_homography, test_determinism
                         step 2: test_se3, test_motion, test_interaction, test_flow_rendered, test_trajectory
                         step 3: test_contract, test_leak, test_oracle, test_checks, test_true_point_ibvs,
