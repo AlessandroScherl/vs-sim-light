@@ -1,4 +1,414 @@
 {
+  "isaac_comparison": {
+    "isaac_source": "/home/alessandro/genvs_ws/vssim_out/check1",
+    "observed": [
+      "geometry: every object at the same pixel place, size and orientation; the ground texture in the same orientation and position (plank seams, rust marks line up); the goal depth equals Isaac's to micrometres (tests/world/test_scene_rooms.py)",
+      "brightness: Isaac is much brighter - its exposure and tone curve lift dark textures most (cluttered2's dark wood x4, industrial1 x2.2, cluttered3 x1.7 on the ground); MuJoCo shows each texture at its own tone (ground mean grey = the texture's mean), the plan's tone fit",
+      "shadows: same direction and similar length; MuJoCo's are hard-edged and jagged (shadow-map aliasing, a few px at 0.44 m, visible along the drill), Isaac's soft (0.53 deg sun); MuJoCo's dark-shadow share of the ground is higher (0.07 vs 0.02 on cluttered2)",
+      "materials: Isaac shows specular highlights (the bowl's inside, the pitcher, the drill's plastic) and soft ambient occlusion; MuJoCo is diffuse only (no PBR, no normal maps)"
+    ],
+    "rooms": {
+      "cluttered2": {
+        "ground": {
+          "isaac": {
+            "mean_grey": 130.8,
+            "mean_rgb": [
+              162.5,
+              121.2,
+              108.7
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 32.2,
+            "mean_rgb": [
+              61.0,
+              25.1,
+              10.5
+            ]
+          }
+        },
+        "ground_brightness_ratio_isaac_over_mujoco": 4.059,
+        "ground_shadow_share": {
+          "isaac": 0.0245,
+          "mujoco": 0.0728
+        },
+        "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_goal.png",
+        "mask_from": "Isaac's goal depth (object_mask_from_depth, 5 mm above z = 0); the MuJoCo goal depth gives the same mask (IoU >= 0.99, tests/world/test_scene_rooms.py)",
+        "mujoco_png": "results/bridge/u4_cluttered2_goal.png",
+        "objects": {
+          "isaac": {
+            "mean_grey": 164.3,
+            "mean_rgb": [
+              182.5,
+              158.6,
+              151.9
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 85.1,
+            "mean_rgb": [
+              103.2,
+              81.0,
+              71.2
+            ]
+          }
+        }
+      },
+      "cluttered3": {
+        "ground": {
+          "isaac": {
+            "mean_grey": 219.1,
+            "mean_rgb": [
+              232.5,
+              221.5,
+              203.2
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 127.1,
+            "mean_rgb": [
+              154.6,
+              127.7,
+              99.1
+            ]
+          }
+        },
+        "ground_brightness_ratio_isaac_over_mujoco": 1.723,
+        "ground_shadow_share": {
+          "isaac": 0.0182,
+          "mujoco": 0.0229
+        },
+        "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_goal.png",
+        "mask_from": "Isaac's goal depth (object_mask_from_depth, 5 mm above z = 0); the MuJoCo goal depth gives the same mask (IoU >= 0.99, tests/world/test_scene_rooms.py)",
+        "mujoco_png": "results/bridge/u4_cluttered3_goal.png",
+        "objects": {
+          "isaac": {
+            "mean_grey": 164.8,
+            "mean_rgb": [
+              200.4,
+              160.5,
+              133.4
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 83.6,
+            "mean_rgb": [
+              114.7,
+              80.0,
+              56.2
+            ]
+          }
+        }
+      },
+      "industrial1_drill": {
+        "ground": {
+          "isaac": {
+            "mean_grey": 191.5,
+            "mean_rgb": [
+              198.3,
+              191.0,
+              185.2
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 86.8,
+            "mean_rgb": [
+              94.5,
+              86.0,
+              79.9
+            ]
+          }
+        },
+        "ground_brightness_ratio_isaac_over_mujoco": 2.206,
+        "ground_shadow_share": {
+          "isaac": 0.0288,
+          "mujoco": 0.0424
+        },
+        "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_goal.png",
+        "mask_from": "Isaac's goal depth (object_mask_from_depth, 5 mm above z = 0); the MuJoCo goal depth gives the same mask (IoU >= 0.99, tests/world/test_scene_rooms.py)",
+        "mujoco_png": "results/bridge/u4_industrial1_drill_goal.png",
+        "objects": {
+          "isaac": {
+            "mean_grey": 136.8,
+            "mean_rgb": [
+              155.0,
+              127.3,
+              128.0
+            ]
+          },
+          "mujoco": {
+            "mean_grey": 53.8,
+            "mean_rgb": [
+              73.2,
+              43.9,
+              44.4
+            ]
+          }
+        }
+      }
+    },
+    "sheet": "results/bridge/u4_rooms_vs_isaac.png"
+  },
+  "measure": {
+    "how": "each room in a fresh process (tools/u4_rooms.py _one): fly.station_guard, MujocoScene, the goal capture, 3 redraws; RSS from /proc/self/status (steady) and getrusage (peak)",
+    "rooms": {
+      "cluttered2": {
+        "build_s": 7.115,
+        "compile_s": 6.88,
+        "frame_s": 0.413,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_capture_s": 0.491,
+        "goal_depth_md5": "15c11a9ef3493714655659e57fe4c414",
+        "goal_distance_m": 1.1689734192405727,
+        "goal_files": [
+          {
+            "ddist_mm": 2.220446049250313e-13,
+            "distance_m": 1.168973419240573,
+            "dpos_mm": 2.2377260456559047e-13,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "goal_frame_md5": "471fe7bd52701a49d61e27a7d3d9669c",
+        "goal_used": "derived",
+        "ground": {
+          "build": "one Plane, the texture shown once (row 0 at world +Y)",
+          "size_m": 2.4,
+          "texture": "/workspace/assets/cluttered2/ground.png",
+          "texture_host_path": "/home/alessandro/genvs_ws/assets/cluttered2/ground.png",
+          "texture_wh": [
+            4096,
+            4096
+          ],
+          "tile_period_m": 2.4,
+          "uv_tiles": 1.0,
+          "z_m": 0.0
+        },
+        "init_s": 14.023,
+        "lighting": {
+          "ambient": 0.2,
+          "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+          "sun_cast_shadow": true,
+          "sun_direction": [
+            0.25,
+            -0.433012702,
+            -0.866025404
+          ],
+          "sun_intensity": 0.923760431
+        },
+        "n_faces": 131072,
+        "n_objects": 8,
+        "preview": "results/bridge/u4_cluttered2_goal.png",
+        "preview_scale": 0.5,
+        "render_mode": "mujoco-llvmpipe",
+        "room": "cluttered2",
+        "rss_baseline_mb": 325.7,
+        "rss_peak_mb": 3586.8,
+        "rss_steady_mb": 3237.5,
+        "texture_rgb_mb": 432.0,
+        "textures": [
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ]
+        ]
+      },
+      "cluttered3": {
+        "build_s": 5.615,
+        "compile_s": 5.626,
+        "frame_s": 0.31,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_capture_s": 0.421,
+        "goal_depth_md5": "7fdcf41fc5f429e3fd71cdd4cfd9227a",
+        "goal_distance_m": 1.2853190575513067,
+        "goal_files": [
+          {
+            "ddist_mm": 0.0,
+            "distance_m": 1.2853190575513067,
+            "dpos_mm": 6.206335383118183e-14,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "goal_frame_md5": "af1f61b7d2d3c2f58e1f324061b97f8d",
+        "goal_used": "derived",
+        "ground": {
+          "build": "one Plane, the texture shown once (row 0 at world +Y)",
+          "size_m": 2.4,
+          "texture": "/workspace/assets/cluttered3/ground.png",
+          "texture_host_path": "/home/alessandro/genvs_ws/assets/cluttered3/ground.png",
+          "texture_wh": [
+            4096,
+            4096
+          ],
+          "tile_period_m": 2.4,
+          "uv_tiles": 1.0,
+          "z_m": 0.0
+        },
+        "init_s": 11.261,
+        "lighting": {
+          "ambient": 0.2,
+          "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+          "sun_cast_shadow": true,
+          "sun_direction": [
+            0.25,
+            -0.433012702,
+            -0.866025404
+          ],
+          "sun_intensity": 0.923760431
+        },
+        "n_faces": 114688,
+        "n_objects": 7,
+        "preview": "results/bridge/u4_cluttered3_goal.png",
+        "preview_scale": 0.5,
+        "render_mode": "mujoco-llvmpipe",
+        "room": "cluttered3",
+        "rss_baseline_mb": 325.7,
+        "rss_peak_mb": 3257.9,
+        "rss_steady_mb": 2953.9,
+        "texture_rgb_mb": 384.0,
+        "textures": [
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ],
+          [
+            4096,
+            4096
+          ]
+        ]
+      },
+      "industrial1_drill": {
+        "build_s": 0.206,
+        "compile_s": 0.907,
+        "frame_s": 0.3,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_capture_s": 0.301,
+        "goal_depth_md5": "7c6f56d6772d49b87e58c0ef8f25168c",
+        "goal_distance_m": 0.4422820341962209,
+        "goal_files": [
+          {
+            "ddist_mm": 2.2370993946196904e-11,
+            "distance_m": 0.4422820341962433,
+            "dpos_mm": 3.086422270461639e-11,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "goal_frame_md5": "c350e2218d9920b9b3faf94cd5df5fde",
+        "goal_used": "derived",
+        "ground": {
+          "build": "one Plane, the texture shown once (row 0 at world +Y)",
+          "size_m": 2.4,
+          "texture": "/workspace/assets/industrial1/ground.png",
+          "texture_host_path": "/home/alessandro/genvs_ws/assets/industrial1/ground.png",
+          "texture_wh": [
+            1024,
+            1024
+          ],
+          "tile_period_m": 2.4,
+          "uv_tiles": 1.0,
+          "z_m": 0.0
+        },
+        "init_s": 1.135,
+        "lighting": {
+          "ambient": 0.2,
+          "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+          "sun_cast_shadow": true,
+          "sun_direction": [
+            0.25,
+            -0.433012702,
+            -0.866025404
+          ],
+          "sun_intensity": 0.923760431
+        },
+        "n_faces": 29100,
+        "n_objects": 1,
+        "preview": "results/bridge/u4_industrial1_drill_goal.png",
+        "preview_scale": 0.5,
+        "render_mode": "mujoco-llvmpipe",
+        "room": "industrial1_drill",
+        "rss_baseline_mb": 325.8,
+        "rss_peak_mb": 900.1,
+        "rss_steady_mb": 830.4,
+        "texture_rgb_mb": 15.0,
+        "textures": [
+          [
+            2048,
+            2048
+          ],
+          [
+            1024,
+            1024
+          ]
+        ]
+      }
+    },
+    "texture_downscale": null,
+    "texture_note": "no texture is downscaled for render: every object texture as cached (<= 4096^2), every ground as stored"
+  },
   "smoke": {
     "cluttered2_sift_ransac": {
       "final_rotation_deg": 0.09879583116991908,
@@ -134,5 +544,5 @@
     }
   },
   "unit": "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 02:09:25 +0200"
+  "written": "2026-10-23 02:14:06 +0200"
 }

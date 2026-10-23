@@ -1,0 +1,512 @@
+{
+  "isaac_goal_depth": {
+    "cluttered2": {
+      "gate": "median <= 1 mm, p99 <= 3 mm over every pixel; object-mask IoU >= 0.95, centroid <= 2 px",
+      "isaac_file": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_goal_depth.npy",
+      "max_mm": 19.330620765686035,
+      "median_mm": 0.00011920928955078125,
+      "n": 2073600,
+      "objmask_centroid_px": 0.004004024684657654,
+      "objmask_iou": 0.9999902393315895,
+      "objmask_share_isaac": 0.04940731095679012,
+      "objmask_share_mujoco": 0.049407793209876545,
+      "p90_mm": 0.00011920928955078125,
+      "p99_mm": 0.0005960464477539062,
+      "signed_mean_mm_ground": -0.00012037038914862244,
+      "valid_share": 1.0
+    },
+    "cluttered3": {
+      "gate": "median <= 1 mm, p99 <= 3 mm over every pixel; object-mask IoU >= 0.95, centroid <= 2 px",
+      "isaac_file": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_goal_depth.npy",
+      "max_mm": 158.57195854187012,
+      "median_mm": 0.0,
+      "n": 2073600,
+      "objmask_centroid_px": 0.005684314400747228,
+      "objmask_iou": 0.9999482126904802,
+      "objmask_share_isaac": 0.03724826388888889,
+      "objmask_share_mujoco": 0.03724729938271605,
+      "p90_mm": 0.0,
+      "p99_mm": 0.0007152557373046875,
+      "signed_mean_mm_ground": 1.3582385651302898e-06,
+      "valid_share": 1.0
+    },
+    "industrial1_drill": {
+      "gate": "median <= 1 mm, p99 <= 3 mm over every pixel; object-mask IoU >= 0.95, centroid <= 2 px",
+      "isaac_file": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_goal_depth.npy",
+      "max_mm": 86.79777383804321,
+      "median_mm": 5.9604644775390625e-05,
+      "n": 2073600,
+      "objmask_centroid_px": 0.16954988513238767,
+      "objmask_iou": 0.9937448128248809,
+      "objmask_share_isaac": 0.11039978780864197,
+      "objmask_share_mujoco": 0.10971402391975309,
+      "p90_mm": 5.9604644775390625e-05,
+      "p99_mm": 0.0008344650268554688,
+      "signed_mean_mm_ground": 0.0005412201072139775,
+      "valid_share": 1.0
+    }
+  },
+  "objmask_arm": {
+    "arm": "vitvs_dinov3_objmask",
+    "cuda": false,
+    "goal_mask_mode": "objects",
+    "label": "mutual_nn_seeded_subsample@dinov3_vits16/k24/objmask/ur/uniform/cns_plateau"
+  },
+  "rooms": {
+    "cluttered2": {
+      "build_s": 4.829,
+      "compile_s": 6.307,
+      "depth": {
+        "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
+        "stride_px": 4,
+        "views": [
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 4.116979801516152e-05,
+              "median_mm": 4.116979801516152e-05,
+              "n": 122708,
+              "p99_mm": 4.116979801516152e-05
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.4113603830337524,
+            "n_grid": 129600,
+            "n_ground": 122708,
+            "n_object": 6892,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.006215239211515566,
+              "median_mm": 6.81875984565039e-05,
+              "n": 6892,
+              "p99_mm": 0.0005310050287965501
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "goal"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.0002684399000862925,
+              "median_mm": 0.00010080341072971066,
+              "n": 122605,
+              "p99_mm": 0.00021313423707702823
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.4050744771957397,
+            "n_grid": 129600,
+            "n_ground": 122605,
+            "n_object": 6995,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.019869569230168693,
+              "median_mm": 6.844241640102666e-05,
+              "n": 6995,
+              "p99_mm": 0.0005737983523479422
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "near n_000"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00027081945774831695,
+              "median_mm": 4.681121335003979e-05,
+              "n": 124055,
+              "p99_mm": 0.00017727541802514657
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.5666527152061462,
+            "n_grid": 129600,
+            "n_ground": 124055,
+            "n_object": 5545,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.002514658639540812,
+              "median_mm": 9.04889718711388e-05,
+              "n": 5545,
+              "p99_mm": 0.0006798747902703193
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "narrow start_00"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00041707596332152264,
+              "median_mm": 0.00022070433058907213,
+              "n": 123617,
+              "p99_mm": 0.00034774553160588084
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.5305126905441284,
+            "n_grid": 129600,
+            "n_ground": 123617,
+            "n_object": 5983,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.0070302296750757165,
+              "median_mm": 0.00013201036641596886,
+              "n": 5983,
+              "p99_mm": 0.0005147475492428556
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "narrow start_01"
+          }
+        ]
+      },
+      "determinism": {
+        "goal_depth_md5": "15c11a9ef3493714655659e57fe4c414",
+        "goal_frame_md5": "471fe7bd52701a49d61e27a7d3d9669c",
+        "rebuild_same_goal": true,
+        "redraw_same_bytes": true,
+        "same_goal_md5_as_tools_u4_rooms_measure": true
+      },
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal": {
+        "bbox_max": [
+          0.7249816913204783,
+          0.5252489544062101,
+          0.24238700496297766
+        ],
+        "bbox_min": [
+          -0.6311705772128833,
+          -0.22220484754583827,
+          -0.04501649607629918
+        ],
+        "distance_m": 1.1689734192405727,
+        "files": [
+          {
+            "ddist_mm": 2.220446049250313e-13,
+            "distance_m": 1.168973419240573,
+            "dpos_mm": 2.2377260456559047e-13,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "used": "derived"
+      },
+      "near_start": {
+        "pos_err_mm": 7.75936872787686,
+        "rot_err_deg": 2.6881788804203115,
+        "seed": 20260902,
+        "start_id": "n_000"
+      },
+      "objmask_share": 0.049407793209876545,
+      "render_mode": "mujoco-llvmpipe"
+    },
+    "cluttered3": {
+      "build_s": 4.178,
+      "compile_s": 4.796,
+      "depth": {
+        "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
+        "stride_px": 4,
+        "views": [
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 2.0839316494658533e-05,
+              "median_mm": 2.0839316494658533e-05,
+              "n": 124328,
+              "p99_mm": 2.0839316494658533e-05
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.4498910903930664,
+            "n_grid": 129600,
+            "n_ground": 124328,
+            "n_object": 5272,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.0068350349344825645,
+              "median_mm": 7.656439238168389e-05,
+              "n": 5272,
+              "p99_mm": 0.00043065091678284856
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "goal"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00035435376166681465,
+              "median_mm": 0.00013654225961001742,
+              "n": 124254,
+              "p99_mm": 0.00026633771748718615
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 1.4436516761779785,
+            "n_grid": 129600,
+            "n_ground": 124254,
+            "n_object": 5346,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 0.0046035467633487315,
+              "median_mm": 0.0001311448055707487,
+              "n": 5346,
+              "p99_mm": 0.0004585935797218892
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "near n_000"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00036767705147155993,
+              "median_mm": 0.00013170208768009672,
+              "n": 121672,
+              "p99_mm": 0.0002703582139607084
+            },
+            "hit_in_clip": true,
+            "hit_share": 0.9692081404320988,
+            "median_depth_m": 1.6204378008842468,
+            "n_grid": 129600,
+            "n_ground": 121672,
+            "n_object": 3963,
+            "n_ray_miss": 3965,
+            "objects_vs_ray": {
+              "max_mm": 0.020644892673837845,
+              "median_mm": 6.862831103404687e-05,
+              "n": 3963,
+              "p99_mm": 0.0007658532151344496
+            },
+            "ray_miss_with_depth_0": 3965,
+            "view": "narrow start_00"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.0005318631972617283,
+              "median_mm": 0.00031309993553385596,
+              "n": 123954,
+              "p99_mm": 0.00046135215565401566
+            },
+            "hit_in_clip": true,
+            "hit_share": 0.9884008487654321,
+            "median_depth_m": 1.5800153017044067,
+            "n_grid": 129600,
+            "n_ground": 123954,
+            "n_object": 4165,
+            "n_ray_miss": 1481,
+            "objects_vs_ray": {
+              "max_mm": 0.2810588024473315,
+              "median_mm": 0.00021658742177521617,
+              "n": 4165,
+              "p99_mm": 0.0007959443864535834
+            },
+            "ray_miss_with_depth_0": 1481,
+            "view": "narrow start_01"
+          }
+        ]
+      },
+      "determinism": {
+        "goal_depth_md5": "7fdcf41fc5f429e3fd71cdd4cfd9227a",
+        "goal_frame_md5": "af1f61b7d2d3c2f58e1f324061b97f8d",
+        "rebuild_same_goal": true,
+        "redraw_same_bytes": true,
+        "same_goal_md5_as_tools_u4_rooms_measure": true
+      },
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal": {
+        "bbox_max": [
+          0.4300538845563558,
+          0.47743366777261254,
+          0.1645720536810762
+        ],
+        "bbox_min": [
+          -0.5836422235542452,
+          -0.36132552378464355,
+          -0.049855018492680994
+        ],
+        "distance_m": 1.2853190575513067,
+        "files": [
+          {
+            "ddist_mm": 0.0,
+            "distance_m": 1.2853190575513067,
+            "dpos_mm": 6.206335383118183e-14,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "used": "derived"
+      },
+      "near_start": {
+        "pos_err_mm": 7.759368727876856,
+        "rot_err_deg": 2.6881788804203115,
+        "seed": 20260902,
+        "start_id": "n_000"
+      },
+      "objmask_share": 0.03724729938271605,
+      "render_mode": "mujoco-llvmpipe"
+    },
+    "industrial1_drill": {
+      "build_s": 0.219,
+      "compile_s": 0.838,
+      "depth": {
+        "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
+        "stride_px": 4,
+        "views": [
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 8.56600079757186e-06,
+              "median_mm": 8.56600079757186e-06,
+              "n": 115261,
+              "p99_mm": 8.56600079757186e-06
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 0.5317144989967346,
+            "n_grid": 129600,
+            "n_ground": 115261,
+            "n_object": 14339,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 84.56510802872091,
+              "median_mm": 2.205847504654912e-05,
+              "n": 14339,
+              "p99_mm": 1.9725497868710142
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "goal"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.0001732368726248268,
+              "median_mm": 8.473405366249409e-05,
+              "n": 114867,
+              "p99_mm": 0.00014594513622512292
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 0.524871289730072,
+            "n_grid": 129600,
+            "n_ground": 114867,
+            "n_object": 14733,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 87.76596161703343,
+              "median_mm": 5.443973960517212e-05,
+              "n": 14733,
+              "p99_mm": 0.14926125843174812
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "near n_000"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00023673978721827638,
+              "median_mm": 0.00010633349833977235,
+              "n": 118091,
+              "p99_mm": 0.00018446097959090587
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 0.5886080265045166,
+            "n_grid": 129600,
+            "n_ground": 118091,
+            "n_object": 11509,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 86.33366408542965,
+              "median_mm": 8.919523730721579e-05,
+              "n": 11509,
+              "p99_mm": 1.0943472770040887
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "narrow start_00"
+          },
+          {
+            "frame_finite": true,
+            "frame_nonneg": true,
+            "ground_vs_plane": {
+              "max_mm": 0.00016185910411969928,
+              "median_mm": 4.2948076650617395e-05,
+              "n": 117438,
+              "p99_mm": 0.0001210328377554415
+            },
+            "hit_in_clip": true,
+            "hit_share": 1.0,
+            "median_depth_m": 0.574955940246582,
+            "n_grid": 129600,
+            "n_ground": 117438,
+            "n_object": 12162,
+            "n_ray_miss": 0,
+            "objects_vs_ray": {
+              "max_mm": 89.70622751979829,
+              "median_mm": 2.8907247151543913e-05,
+              "n": 12162,
+              "p99_mm": 0.9349496793820088
+            },
+            "ray_miss_with_depth_0": 0,
+            "view": "narrow start_01"
+          }
+        ]
+      },
+      "determinism": {
+        "goal_depth_md5": "7c6f56d6772d49b87e58c0ef8f25168c",
+        "goal_frame_md5": "c350e2218d9920b9b3faf94cd5df5fde",
+        "rebuild_same_goal": true,
+        "redraw_same_bytes": true,
+        "same_goal_md5_as_tools_u4_rooms_measure": true
+      },
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal": {
+        "bbox_max": [
+          0.12211053259587726,
+          0.17898943406997603,
+          0.08943245623451285
+        ],
+        "bbox_min": [
+          -0.1306623757349827,
+          -0.1096300485894203,
+          -0.015303227165115112
+        ],
+        "distance_m": 0.4422820341962209,
+        "files": [
+          {
+            "ddist_mm": 2.2370993946196904e-11,
+            "distance_m": 0.4422820341962433,
+            "dpos_mm": 3.086422270461639e-11,
+            "drot_deg": 0.0,
+            "file": "v2",
+            "pass": true,
+            "refusal": null
+          }
+        ],
+        "used": "derived"
+      },
+      "near_start": {
+        "pos_err_mm": 7.759368727876952,
+        "rot_err_deg": 2.6881788804203115,
+        "seed": 20260902,
+        "start_id": "n_000"
+      },
+      "objmask_share": 0.10971402391975309,
+      "render_mode": "mujoco-llvmpipe"
+    }
+  },
+  "unit": "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 02:13:46 +0200"
+}

@@ -238,7 +238,7 @@ def test_room_gates(room):
     gc.collect()
     other = None
     if MEASURE.exists():
-        rec = json.loads(MEASURE.read_text()).get("rooms", {}).get(room)
+        rec = json.loads(MEASURE.read_text()).get("measure", {}).get("rooms", {}).get(room)
         if rec:
             other = rec.get("goal_frame_md5") == md5_goal
     row["determinism"] = {"redraw_same_bytes": same, "rebuild_same_goal": rebuilt_same,

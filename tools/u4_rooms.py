@@ -154,6 +154,20 @@ def cmd_measure(args) -> int:
 
 
 # -------------------------------------------------------------------------- isaac
+#: what the side-by-side sheet shows (read by eye on 2026-10-23; the numbers are per room)
+OBSERVED = [
+    "geometry: every object at the same pixel place, size and orientation; the ground texture "
+    "in the same orientation and position (plank seams, rust marks line up); the goal depth "
+    "equals Isaac's to micrometres (tests/world/test_scene_rooms.py)",
+    "brightness: Isaac is much brighter - its exposure and tone curve lift dark textures most "
+    "(cluttered2's dark wood x4, industrial1 x2.2, cluttered3 x1.7 on the ground); MuJoCo shows "
+    "each texture at its own tone (ground mean grey = the texture's mean), the plan's tone fit",
+    "shadows: same direction and similar length; MuJoCo's are hard-edged and jagged (shadow-map "
+    "aliasing, a few px at 0.44 m, visible along the drill), Isaac's soft (0.53 deg sun); "
+    "MuJoCo's dark-shadow share of the ground is higher (0.07 vs 0.02 on cluttered2)",
+    "materials: Isaac shows specular highlights (the bowl's inside, the pitcher, the drill's "
+    "plastic) and soft ambient occlusion; MuJoCo is diffuse only (no PBR, no normal maps)",
+]
 def cmd_isaac(args) -> int:
     import numpy as np
     from PIL import Image, ImageDraw
@@ -210,7 +224,7 @@ def cmd_isaac(args) -> int:
     sheet.save(out, optimize=True)
     print(json.dumps(rows, indent=1))
     _merge_record("isaac_comparison", {"sheet": str(out.relative_to(REPO)), "rooms": rows,
-                                       "isaac_source": str(ISAAC_GOALS)})
+                                       "isaac_source": str(ISAAC_GOALS), "observed": OBSERVED})
     return 0
 
 
