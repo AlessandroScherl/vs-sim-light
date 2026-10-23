@@ -702,3 +702,9 @@ off, `LP_NUM_THREADS=2`), the look and CPU seconds. `summary` refuses to merge m
 and puts Isaac's numbers (`$VSBENCH_ISAAC_CHECKS`, default `~/genvs_ws/vssim_out`: `check1` for
 identity / near, `check2` / `check3` for the far row; read only) beside each cell - context,
 never pooled (D-9).
+
+---
+
+## History rewrite (2026-10-23)
+
+The history was rewritten once to erase two unrelated PDFs and an unreferenced video; every commit ID changed. Records written before that cite the old IDs: [`docs/COMMIT_MAP.md`](COMMIT_MAP.md) translates them.
