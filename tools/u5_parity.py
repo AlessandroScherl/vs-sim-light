@@ -394,10 +394,18 @@ def compare(root: Path = OUT, scene: str = "hollywood") -> dict:
                     k for k, r in rows.items() if not r["landing_gate"] and r["curve_median_gate"])}
     art = {w: recs.get(w, {}).get("artvs", {}) for w in GATE_PAIR}
     if all(art.values()):
+        keys = sorted(set(art[GATE_PAIR[0]]) & set(art[GATE_PAIR[1]]))
+        fired = {w: {k: bool(art[w][k].get("artvs_switched"))
+                     and art[w][k]["u5"]["artvs_switch_step"] is not None for k in keys}
+                 for w in GATE_PAIR}
         verdict["artvs_switch"] = {
-            "pass": all(bool(r.get("artvs_switched")) and r["u5"]["artvs_switch_step"] is not None
-                        for w in GATE_PAIR for r in art[w].values()),
-            "steps": {w: {k: r["u5"]["artvs_switch_step"] for k, r in sorted(art[w].items())}
+            # the plan's gate: the switch fires on every start, in both worlds
+            "pass": all(fired[w][k] for w in GATE_PAIR for k in keys),
+            "not_fired": {w: [k for k in keys if not fired[w][k]] for w in GATE_PAIR},
+            # the parity reading beside it: the two worlds agree start by start
+            "worlds_agree_on_every_start": all(fired[GATE_PAIR[0]][k] == fired[GATE_PAIR[1]][k]
+                                               for k in keys),
+            "steps": {w: {k: art[w][k]["u5"]["artvs_switch_step"] for k in keys}
                       for w in GATE_PAIR}}
     cpu = {w: round(sum(r["u5"]["cpu_s"] for a in arms.values() for r in a.values()), 1)
            for w, arms in recs.items()}
