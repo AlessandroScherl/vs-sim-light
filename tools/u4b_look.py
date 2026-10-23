@@ -567,6 +567,39 @@ def cmd_shadows(args) -> int:
     return 0
 
 
+def cmd_smoke_table(args) -> int:
+    """The U4 smoke (``tools/u4_rooms.py smoke``: sift_ransac, 100 steps, n_000) in both looks
+    beside Isaac's own flight of the same arm from the same start (check1, 200 steps): context
+    only - different renderers, never pooled (PORT_PLAN D-9)."""
+    rec = json.loads(RECORD.read_text())
+    check = json.loads((ISAAC / "check.json").read_text())
+    rows = {}
+    for room in ROOMS:
+        tag = f"{room}_sift_ransac"
+        row = {}
+        for key, lk in (("smoke_raw", "raw"), (f"smoke_{LOOK}", LOOK)):
+            r = rec.get(key, {}).get(tag)
+            if r:
+                row[lk] = {k: r.get(k) for k in ("start_id", "start_translation_mm", "final_translation_mm",
+                                                  "final_rotation_deg", "steps", "stop_step",
+                                                  "mean_n_matches", "first_frame_n_matches",
+                                                  "sec_per_step", "look", "look_curve_md5",
+                                                  "render_mode", "gl_renderer", "vsbench_commit")}
+                row[lk]["predicate_a"] = (r.get("success") or {}).get("predicate_a")
+        n = check["scenes"][room]["arms"]["sift_ransac"]["near"]
+        row["isaac_check1"] = {k: n.get(k) for k in ("start_id", "start_mm", "final_mm", "final_deg",
+                                                      "steps", "stop_step", "mean_n_matches")}
+        row["isaac_check1"]["predicate_a"] = (n.get("success") or {}).get("predicate_a")
+        row["isaac_check1"]["render_mode"] = "rtx (Isaac, 2026-09-17)"
+        rows[tag] = row
+        print(f"[u4b] {tag}: raw {row['raw']['final_translation_mm']:.3f} mm | {LOOK} "
+              f"{row[LOOK]['final_translation_mm']:.3f} mm (100 steps) | Isaac {n['final_mm']:.3f} mm "
+              f"({n['steps']} steps)")
+    _merge_record("smoke_table", {"rows": rows, "note": cmd_smoke_table.__doc__.split(":", 1)[1].strip()
+                                  .replace("\n", " "), "isaac_check": str(ISAAC / "check.json")})
+    return 0
+
+
 def _near_pose(scene: str):
     from vsbench.vs import starts as startsmod
     from vsbench.vs.scene import Pose
@@ -597,6 +630,8 @@ def main(argv=None) -> int:
     m = sub.add_parser("measure")
     m.add_argument("--scenes", nargs="+", default=list(SCENES))
     m.set_defaults(fn=cmd_measure)
+    st = sub.add_parser("smoke_table")
+    st.set_defaults(fn=cmd_smoke_table)
     sh = sub.add_parser("shadows")
     sh.set_defaults(fn=cmd_shadows)
     om = sub.add_parser("_measure")
