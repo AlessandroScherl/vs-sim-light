@@ -438,4 +438,18 @@ def test_u6a_gate():
     GATES["u6a_flight"]["predicate_a"] = rec["success"]["predicate_a"]
     GATES["u6a_flight"]["gate"] = ("final < 5 mm and < start; copied frozen schema; "
                                    "arm_kind external; cns_plateau scored (points reported)")
+    replay = REPO / "results" / "bridge" / "u6a_cns_replay.json"
+    if replay.exists():                      # tools/u6a_cns_replay.py on the flight's telemetry
+        r = json.loads(replay.read_text())
+        assert r["record_stop_step"] is None and r["replay_fired_step"] is None
+        assert r["longest_hold_s"] < r["waiting_time_s"]
+        GATES["u6a_flight"]["cns_plateau_note"] = (
+            f"cns_plateau never fired: replaying the flight's telemetry through the copied "
+            f"CnsPlateau fires nowhere either; the CNS error falls exponentially "
+            f"({r['cns_error_at_step']['1']:.3g} at step 1, {r['cns_error_at_step']['600']:.3g} "
+            f"at 600; sift_ibvs gain 1 at 1/60 s shrinks it by e^-0.8 = 0.45 per 0.8 s, below the "
+            f"rule's 0.9 new-minimum ratio), so after arming at step {r['armed_step (error < 0.01)']} "
+            f"a new minimum restarted the hold {r['new_minimum_restarts_after_arming']} times and "
+            f"the longest hold was {r['longest_hold_s']} s of the {r['waiting_time_s']} s needed - "
+            "the rule's behaviour on a still-descending error, not an adapter fault")
     print(json.dumps(GATES["u6a_flight"], indent=1))

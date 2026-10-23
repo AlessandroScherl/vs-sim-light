@@ -1,0 +1,31 @@
+{
+ "telemetry": "results/bridge/u6a/hollywood_external_sift_ibvs/2026-10-23_hollywood_external_sift_ibvs/telemetry.jsonl.gz",
+ "steps": 600,
+ "record_stop_step": null,
+ "replay_fired_step": null,
+ "cns_error_at_step": {
+  "1": 0.044178985765874354,
+  "50": 0.019472435400262833,
+  "100": 0.008532012761100546,
+  "200": 0.0015889372847950746,
+  "300": 0.0002919825529890086,
+  "400": 5.5743942697803037e-05,
+  "500": 1.3235160300798054e-05,
+  "600": 3.9944454329421944e-06
+ },
+ "armed_step (error < 0.01)": 91,
+ "new_minimum_restarts_after_arming": 68,
+ "longest_hold_s": 0.1667,
+ "waiting_time_s": 0.8,
+ "min_reset_ratio": 0.9,
+ "t_mm_at_step": {
+  "1": 5.577,
+  "50": 2.516,
+  "100": 1.107,
+  "200": 0.207,
+  "300": 0.041,
+  "400": 0.008,
+  "500": 0.002,
+  "600": 0.001
+ }
+}

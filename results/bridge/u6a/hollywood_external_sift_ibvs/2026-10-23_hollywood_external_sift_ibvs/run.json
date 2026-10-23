@@ -1,0 +1,124 @@
+{
+  "allow_dirty": true,
+  "allow_no_git": false,
+  "arm_build_s": 0.014,
+  "bridge_driver": "vsbench.world.fly --method",
+  "bridge_env": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "LP_NUM_THREADS": "2",
+    "VSBENCH_SOFTWARE_GL": "1",
+    "allow_gpu": false,
+    "cuda_available": false,
+    "nvidia_smi": "hidden",
+    "torch": "2.14.1+cpu",
+    "torch_interop_threads": 2,
+    "torch_threads": 2
+  },
+  "config_schema": "vsbench-external-method-1",
+  "cuda_matmul_allow_tf32": false,
+  "cuda_version": null,
+  "cudnn_allow_tf32": true,
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": false,
+  "cudnn_version": null,
+  "finished_utc": "2026-10-23T00:10:08Z",
+  "git_available": true,
+  "git_commit": "73b96f07132069d4e141bfc6affd30811ae243fc",
+  "git_dirty": false,
+  "git_dirty_paths": [],
+  "goal_capture_keep": "last",
+  "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+  "goal_render_warmup": 1,
+  "goal_render_warmup_protocol": 8,
+  "goal_render_warmup_reason": "1 capture, not the protocol's 8: the 8 settle RTX render history; MuJoCo frames are deterministic (two draws of one pose are the same bytes)",
+  "goal_settle_series": {
+    "capture_retries": [
+      0
+    ],
+    "depth_md5": [
+      "d23d54774c4ae6962c2fddf574a6177a"
+    ],
+    "diff_prev": [
+      null
+    ],
+    "keep": "last",
+    "kept_index": 0,
+    "n_captures": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "rgb_md5": [
+      "04938e905ddffd06dd816a45b24804c7"
+    ],
+    "rgb_mean": [
+      90.993851
+    ]
+  },
+  "gpu": null,
+  "gpu_driver": null,
+  "hostname": "4090",
+  "matcher_tie_order": null,
+  "name": "hollywood_external_sift_ibvs",
+  "python_version": "3.12.3",
+  "render_mode": "mujoco-llvmpipe",
+  "run_dir": "/home/alessandro/genvs_ws/vs_sim_light-u6/results/bridge/u6a/hollywood_external_sift_ibvs/2026-10-23_hollywood_external_sift_ibvs",
+  "scene_meta": {
+    "backdrop": {
+      "gray": 0.5,
+      "size_m": 4.0,
+      "z_m": -0.02
+    },
+    "goal_distance_m": 0.4341815107823003,
+    "kind": "poster",
+    "lighting": {
+      "ambient": 0.2,
+      "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+      "sun_cast_shadow": true,
+      "sun_direction": [
+        0.25,
+        -0.433012702,
+        -0.866025404
+      ],
+      "sun_intensity": 0.923760431
+    },
+    "plate_m": [
+      0.8,
+      0.6
+    ],
+    "render_camera": {
+      "convention": "isaac_half_pixel",
+      "cx": 959.5,
+      "cy": 539.5,
+      "depth": "optical z (distance_to_image_plane)",
+      "depth_noise": null,
+      "far_m": 10.0,
+      "fx": 1406.748094934653,
+      "fy": 1406.748094934653,
+      "height": 1080,
+      "near_m": 0.05,
+      "width": 1920
+    },
+    "render_mode": "mujoco-llvmpipe",
+    "renderer": {
+      "MUJOCO_EGL_DEVICE_ID": "1",
+      "MUJOCO_GL": "egl",
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "mujoco": "3.13.0",
+      "variant": "mujoco-egl"
+    },
+    "samples": 4,
+    "texture": "/workspace/assets/hollywood/resized.png",
+    "texture_host_path": "/home/alessandro/genvs_ws/assets/hollywood/resized.png",
+    "texture_wh": [
+      1500,
+      1125
+    ]
+  },
+  "seed": 20260902,
+  "timestamp_utc": "2026-10-23T00:01:27Z",
+  "torch_num_interop_threads": 2,
+  "torch_num_threads": 2,
+  "torch_version": "2.14.1+cpu",
+  "vsbench_commit": "73b96f07132069d4e141bfc6affd30811ae243fc",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vssim_version": "0.1.0"
+}

@@ -1,0 +1,89 @@
+{
+  "arm_plugin_hook": {
+    "desc": {
+      "class": "SiftIBVS",
+      "commit": "7212ea92f7269e6de266ecd0e3680af4b03b295e+dirty",
+      "config_source": "vsbench/world/configs/external_method.yaml",
+      "label_prefix": "external:",
+      "module": "vsbench.methods.feature_ibvs"
+    },
+    "ids": [
+      "orb_ibvs",
+      "sift_ibvs"
+    ],
+    "kind": "external",
+    "name": "external:sift_ibvs@0ba9e23f/cns_plateau",
+    "src": {
+      "sift_ibvs": "plugin",
+      "sift_ransac": "protocol"
+    }
+  },
+  "cap_only_fallback": {
+    "declare=False": {
+      "label": "external:probe_no_points@5ba6f7a5/cap_only",
+      "stderr_line": "[method_arm] STOP FALLBACK: probe_no_points: the method declares reports_points = False, so the scored stop 'cns_plateau' (it reads the method's points) cannot run - this cell flies 'cap_only'; the record says stop_mode 'cap_only', label 'external:probe_no_points@5ba6f7a5/cap_only', and stop_fallback",
+      "stop_fallback": {
+        "configured": "cns_plateau",
+        "ran": "cap_only",
+        "reason": "the method declares reports_points = False"
+      },
+      "stop_mode": "cap_only"
+    },
+    "declare=None": {
+      "label": "external:probe_no_points@e23a81bf/cap_only",
+      "stderr_line": "[method_arm] STOP FALLBACK: probe_no_points: the method reported no kp_cur / kp_des on step 1, so the scored stop 'cns_plateau' (it reads the method's points) cannot run - this cell flies 'cap_only'; the record says stop_mode 'cap_only', label 'external:probe_no_points@e23a81bf/cap_only', and stop_fallback",
+      "stop_fallback": {
+        "configured": "cns_plateau",
+        "ran": "cap_only",
+        "reason": "the method reported no kp_cur / kp_des on step 1"
+      },
+      "stop_mode": "cap_only"
+    }
+  },
+  "gt_blind_tripwire": {
+    "commands_bit_identical": true,
+    "final_translation_mm_clean": 4.893226162809356,
+    "final_translation_mm_poisoned_record": 1813.8735965304472,
+    "frames_read_only": true,
+    "gt_correspondence_calls_poisoned": 8,
+    "observe_truth_calls": 0,
+    "poisoned": [
+      "render() pose",
+      "scene.pose",
+      "gt_correspondence",
+      "perturbation.reference_pose",
+      "perturbation.depth_true_pose"
+    ],
+    "steps": 8,
+    "world": "copied MockPlaneScene, hollywood texture, render_scale 0.25"
+  },
+  "u6a_flight": {
+    "arm": "external:sift_ibvs@0ba9e23f/cns_plateau",
+    "arm_kind": "external",
+    "cns_plateau_note": "cns_plateau never fired: replaying the flight's telemetry through the copied CnsPlateau fires nowhere either; the CNS error falls exponentially (0.0442 at step 1, 3.99e-06 at 600; sift_ibvs gain 1 at 1/60 s shrinks it by e^-0.8 = 0.45 per 0.8 s, below the rule's 0.9 new-minimum ratio), so after arming at step 91 a new minimum restarted the hold 68 times and the longest hold was 0.1667 s of the 0.8 s needed - the rule's behaviour on a still-descending error, not an adapter fault",
+    "final_rotation_deg": 0.00021471006833007137,
+    "final_translation_mm": 0.0013286190477750349,
+    "first_frame_n_matches": 1447,
+    "gate": "final < 5 mm and < start; copied frozen schema; arm_kind external; cns_plateau scored (points reported)",
+    "matcher_variant": "external",
+    "max_iter": 600,
+    "mean_n_matches": 1716.6083333333333,
+    "outcome": "converged",
+    "predicate_a": true,
+    "render_mode": "mujoco-llvmpipe",
+    "sec_per_step": 0.8506909509917022,
+    "start_id": "n_000",
+    "start_rotation_deg": 2.978710881074216,
+    "start_translation_mm": 5.577243773131696,
+    "steps": 600,
+    "stop_mode": "cns_plateau",
+    "stop_rotation_deg": null,
+    "stop_step": null,
+    "stop_translation_mm": null,
+    "terminated_reason": "max_iter",
+    "vsbench_commit": "73b96f07132069d4e141bfc6affd30811ae243fc",
+    "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650"
+  },
+  "unit": "U6a - MethodArm: a vsbench method flown by the copied benchmark loop",
+  "written": "2026-10-23 02:31:11 +0200"
+}
