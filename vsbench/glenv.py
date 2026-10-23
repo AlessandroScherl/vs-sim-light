@@ -17,6 +17,10 @@ import os
 import sys
 
 MESA_VENDOR_JSON = "/usr/share/glvnd/egl_vendor.d/50_mesa.json"
+#: Mesa's software Vulkan driver (lavapipe); the only ICD the loader may see under software GL
+LAVAPIPE_ICD_JSON = "/usr/share/vulkan/icd.d/lvp_icd.json"
+#: what the Vulkan loader is pointed at when lavapipe is missing: no file, so no device
+NO_VULKAN_ICD = "/nonexistent/vsbench-software-gl-no-vulkan-device.json"
 
 
 def software_gl_requested() -> bool:
@@ -65,6 +69,9 @@ def force_software_gl() -> dict[str, str]:
     setdef("EGL_PLATFORM", "surfaceless")
     if os.path.exists(MESA_VENDOR_JSON):
         setdef("__EGL_VENDOR_LIBRARY_FILENAMES", MESA_VENDOR_JSON)
+    icd = LAVAPIPE_ICD_JSON if os.path.exists(LAVAPIPE_ICD_JSON) else NO_VULKAN_ICD
+    setdef("VK_DRIVER_FILES", icd)      # Vulkan loader >= 1.3.234
+    setdef("VK_ICD_FILENAMES", icd)     # older loaders
     idx = software_egl_device_index()
     if idx is not None:
         setdef("MUJOCO_EGL_DEVICE_ID", str(idx))

@@ -52,6 +52,57 @@ CPU_VARIANTS = {
 }
 
 
+#: the variants that draw on the CPU once ``VSBENCH_SOFTWARE_GL=1`` (Mesa llvmpipe through EGL
+#: or OSMesa, PyBullet's TinyRenderer, Open3D's Filament on llvmpipe with Vulkan pinned to
+#: lavapipe by ``vsbench.glenv.force_software_gl``). Every other variant can open a hardware
+#: context (``open3d-gpu``, ``pybullet-egl``, ``mujoco-glfw`` through the display's GLX
+#: vendor) and is refused under software GL unless ``VSBENCH_ALLOW_GPU=1``.
+SOFTWARE_VARIANTS = ("mujoco-egl", "mujoco-osmesa", "pybullet-tiny", "open3d-cpu")
+
+
+def gpu_allowed() -> bool:
+    """``VSBENCH_ALLOW_GPU=1``: the one explicit way past the GPU refusal (never during the
+    station's Isaac evaluation)."""
+    return os.environ.get("VSBENCH_ALLOW_GPU", "").strip().lower() in ("1", "true", "yes")
+
+
+def gpu_refusal(name: str) -> str | None:
+    """Why ``name`` may not run here, or None: under software GL only
+    :data:`SOFTWARE_VARIANTS` run, unless ``VSBENCH_ALLOW_GPU=1``."""
+    from vsbench.glenv import software_gl_requested
+
+    if name in SOFTWARE_VARIANTS or not software_gl_requested() or gpu_allowed():
+        return None
+    return (f"backend {name!r} can open a GPU context and VSBENCH_SOFTWARE_GL=1 is set: refused "
+            f"(software variants: {', '.join(SOFTWARE_VARIANTS)}; VSBENCH_ALLOW_GPU=1 lifts this, "
+            f"never while the Isaac evaluation runs)")
+
+
+def select_backends(raw: str = "") -> list[str]:
+    """The variants a gate run is parametrised over.
+
+    ``raw`` (``--backends`` / ``VSBENCH_BACKENDS``, comma separated) names them explicitly;
+    an unknown name is a ``KeyError``, a GPU-capable one under software GL a ``PermissionError``
+    (:func:`gpu_refusal`). Empty: this platform's CPU order, installed packages only, and under
+    software GL only :data:`SOFTWARE_VARIANTS`.
+    """
+    from vsbench.glenv import software_gl_requested
+
+    if raw.strip():
+        names = [n.strip() for n in raw.split(",") if n.strip()]
+        unknown = [n for n in names if n not in BACKENDS]
+        if unknown:
+            raise KeyError(f"unknown backends {unknown}; known {sorted(BACKENDS)}")
+        refused = [gpu_refusal(n) for n in names if gpu_refusal(n)]
+        if refused:
+            raise PermissionError("; ".join(refused))
+        return names
+    names = [n for n in default_order() if package_installed(n)]
+    if software_gl_requested() and not gpu_allowed():
+        names = [n for n in names if n in SOFTWARE_VARIANTS]
+    return names
+
+
 def default_order() -> list[str]:
     for k, v in CPU_VARIANTS.items():
         if sys.platform.startswith(k):
@@ -71,6 +122,9 @@ def available_backends() -> list[str]:
 def make_renderer(name: str, scene: SceneSpec, cam: CameraModel, **extra) -> Renderer:
     if name not in BACKENDS:
         raise KeyError(f"unknown backend {name!r}; known: {sorted(BACKENDS)}")
+    refusal = gpu_refusal(name)
+    if refusal:
+        raise PermissionError(refusal)
     from vsbench.glenv import force_software_gl, software_gl_requested
 
     if software_gl_requested():
@@ -105,6 +159,9 @@ def probe_backend(name: str, timeout: float = 180.0) -> tuple[bool, str]:
     """Try the variant in a fresh process: (ok, reason-or-info)."""
     if name in _probe_cache:
         return _probe_cache[name]
+    refusal = gpu_refusal(name)
+    if refusal:
+        return False, refusal          # never spawned, never cached (the env may change)
     if not package_installed(name):
         res = (False, f"package {BACKENDS[name][3]!r} not installed")
     else:

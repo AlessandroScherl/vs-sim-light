@@ -15,6 +15,10 @@
 export CUDA_VISIBLE_DEVICES=""            # no GPU, ever
 export VSBENCH_SOFTWARE_GL=1              # Mesa llvmpipe for MuJoCo (mujoco-egl; no libOSMesa here)
 export MUJOCO_GL=egl
+# Vulkan: Mesa's lavapipe only (Open3D 0.20's Filament opens a Vulkan context at start-up and
+# would select the RTX 4090; vsbench.glenv.force_software_gl forces the same in-process)
+export VK_DRIVER_FILES=/usr/share/vulkan/icd.d/lvp_icd.json VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/lvp_icd.json
+unset VSBENCH_ALLOW_GPU                    # the one way past the GPU refusals stays off here
 export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 NUMEXPR_NUM_THREADS=2
 export TORCH_NUM_THREADS=2                # the bridge calls torch.set_num_threads(2) too
 export LP_NUM_THREADS=2                   # Mesa llvmpipe's rasteriser threads (default: one per CPU)

@@ -655,6 +655,21 @@ Risks (technical, with the mitigation in the plan):
   tiles) was therefore most likely drawn on the GPU; the record does not say. Fixed on `port/vssim`:
   `MujocoRenderer` now forces software GL itself when it is requested. Any branch cut before
   the fix (e.g. `port/u7-library`) still has the bypass until it merges `port/vssim`.
+- *The third GPU route: the gate harness's backend selection* (found 2026-10-23, fixed at the
+  start of U4b): `pytest tests/world` without `--backends` parametrised vsbench's gates
+  (`tests/conftest.py::pytest_generate_tests`, e.g. `test_vssim_arm_methods.py`) over every
+  installed variant, and Open3D 0.20's Filament engine — `open3d-cpu` included — opens a
+  Vulkan context at start-up that selected the RTX 4090 ("Selected physical device 'NVIDIA
+  GeForce RTX 4090'", brief, nothing left on the GPU). Fixed: under `VSBENCH_SOFTWARE_GL=1`
+  the default set is `vsbench.render.base.SOFTWARE_VARIANTS` only (`mujoco-egl`,
+  `mujoco-osmesa`, `pybullet-tiny`, `open3d-cpu`); naming any other variant is a usage error,
+  and `make_renderer` / `probe_backend` refuse it too (so `tools/run_gates.py`'s
+  all-backends default and `vsbench.smoke` are covered), unless `VSBENCH_ALLOW_GPU=1`;
+  `force_software_gl` (and `tools/cpu_env.sh`) pin the Vulkan loader to Mesa's lavapipe
+  (`VK_DRIVER_FILES` / `VK_ICD_FILENAMES`; a non-existent file when lavapipe is missing), so
+  `open3d-cpu` now logs "Selected physical device 'llvmpipe'" and maps no NVIDIA library.
+  Test: `tests/test_gpu_guard.py` (no rendering; a child process enumerates Vulkan devices
+  and finds only a CPU one).
 - *Faithfulness erosion*: the only defence is mechanical — the manifest, the ≤ 6 patch list,
   the drift test in the fast tier, and the fence "nothing hand-written under `vsbench/vs/`".
   A seventh patch is a question for the owner, not a commit.
