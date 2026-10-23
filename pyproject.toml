@@ -34,7 +34,8 @@ exclude = ["vsbench.tests*", "vsbench.scripts*", "vsbench.experiments*"]
 [tool.setuptools.package-data]
 # the vs-sim copy's data root is vsbench/ (layout B, docs/PORT_PLAN.md section 2): the camera,
 # scenes, protocol, arm configs, layouts, the frozen starts (+ md5 sidecars) and the library
-vsbench = ["configs/**/*", "benchmark/**/*", "assets/asset_library_v2.json"]
+vsbench = ["configs/**/*", "benchmark/**/*", "assets/asset_library_v2.json",
+           "world/configs/*.yaml"]   # the external-method template (U6a), hand-written
 "vsbench.vs" = ["COPY_MANIFEST.json", "PROVENANCE.md"]
 
 [tool.pytest.ini_options]

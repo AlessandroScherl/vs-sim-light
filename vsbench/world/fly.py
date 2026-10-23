@@ -32,7 +32,13 @@ What the bridge adds, and nothing else:
   resolved config; ``max_iter`` on the record); ``--film`` writes the copied
   ``FilmWriter``'s match film. Start sets: the protocol's only, as vs-sim's driver.
 
-``--method`` (a vsbench method through ``MethodArm``) is port unit U6a, not here.
+``--method <name> [...]`` (port unit U6a) flies a registered vsbench method through
+``vsbench.world.method_arm.MethodArm`` on the same loop, scene, starts and record path: the
+config is ``vsbench/world/configs/external_method.yaml`` (``--param key=value`` for the
+method's constructor), the record says ``arm_kind: external`` and the label
+``external:<method>@<params>/<stop>``, the run sidecar is the copied one
+(``method_arm.open_method_run``). Refused: a privileged method (it reads the true pose) and a
+method that is a copied protocol cell (``vitvs_dinov3`` & co. fly with ``--arms``).
 """
 
 from __future__ import annotations
@@ -290,6 +296,9 @@ def cmd_run(args) -> int:
     from vsbench.world.mujoco_scene import MujocoScene
 
     protocol = load_protocol(args.protocol)
+    if not args.arms and not args.method:
+        raise SystemExit("nothing to fly: give --arms and/or --method")
+    check_methods(protocol, args.method)
     specs, _ = load_scenes()
     if args.start_set not in protocol["start_sets"]:     # vs-sim's fly.py: the protocol's sets only
         raise SystemExit(f"start set {args.start_set!r} is not in the protocol "
@@ -357,7 +366,80 @@ def cmd_run(args) -> int:
             close = getattr(arm, "close", None)
             if close is not None:
                 close()
+        if args.method:
+            fly_method_cells(args, scene, picked, payload, provenance, env, goal_rgb,
+                             goal_capture, out_root)
     return 0
+
+
+# ------------------------------------------------------------------- --method (U6a)
+def check_methods(protocol: dict, names) -> None:
+    """Refuse, before anything is built: an unknown or privileged method, and one that is a
+    copied protocol cell (flying it through ``MethodArm`` would wrap a published arm twice)."""
+    from vsbench.methods import available_methods, method_class
+
+    proto = {e["id"] for e in protocol["arms"]}
+    for name in names:
+        if name in proto:
+            raise SystemExit(f"--method {name!r} is a protocol arm: fly it with --arms {name}")
+        if name not in available_methods():
+            raise SystemExit(f"--method {name!r} is not a registered vsbench method "
+                             f"(have {', '.join(available_methods())})")
+        if bool(getattr(method_class(name), "privileged", False)):
+            raise SystemExit(f"--method {name!r} is privileged (it reads the true pose): a "
+                             "truth instrument never flies the benchmark loop")
+
+
+def fly_method_cells(args, scene, picked, payload, provenance, env, goal_rgb, goal_capture,
+                     out_root) -> None:
+    """``--method``: each method cell as ``cmd_run`` flies an arm cell, through ``MethodArm``."""
+    from vsbench.vs.bench.runner import run_episode
+    from vsbench.world.method_arm import build_method_arm, open_method_run
+
+    params = {}
+    if args.param:
+        from vsbench.check import parse_params
+
+        params = parse_params(args.param)
+    for name in args.method:
+        t_build = time.monotonic()
+        arm, cfg = build_method_arm(name, params, intrinsics=scene.intrinsics,
+                                    max_iter=args.max_iter,
+                                    telemetry_extended=args.telemetry_extended)
+        build_s = time.monotonic() - t_build
+        tag = f"{args.scene}_external_{name}"
+        extra = {**goal_capture, **provenance, "bridge_env": env, "scene_meta": scene.meta,
+                 "arm_build_s": round(build_s, 3), "bridge_driver": "vsbench.world.fly --method"}
+        with open_method_run(tag, cfg, out_root / tag, telemetry=args.telemetry,
+                             allow_dirty=True, extra=extra) as sink:
+            for i, start in enumerate(picked, 1):
+                steps: list | None = [] if args.telemetry else None
+                film_dir = (sink.path / "film" / start["start_id"]) if args.film else None
+                hook = _Film(film_dir, scene, goal_rgb, title=f"external:{name} (MuJoCo)",
+                             every=args.film_every, scale=args.film_scale)
+                rec = run_episode(scene, arm, start, cfg, telemetry=steps,
+                                  starts_payload=payload, on_step=hook)
+                film = hook.close()
+                rec["cell_id"] = tag
+                rec.update(provenance)
+                rec["render_mode"] = scene.render_mode
+                rec["first_frame_n_matches"] = hook.first_n_matches
+                rec["arm_build_s"] = round(build_s, 3)
+                if film is not None:
+                    rec["film"] = str(Path(film).relative_to(out_root))
+                sink.write(rec, steps)
+                print(f"[fly] {tag} {i}/{len(picked)} {start['start_id']}: "
+                      f"{rec['start_translation_mm']:.2f} -> {rec['final_translation_mm']:.3f} mm, "
+                      f"{rec['final_rotation_deg']:.3f} deg, {rec['terminated_reason']}, "
+                      f"{rec['steps']} steps, stop {rec['stop_mode']} at {rec['stop_step']}, "
+                      f"{rec['sec_per_step']:.3f} s/step, frame-1 matches {hook.first_n_matches}, "
+                      f"predicate_a {rec['success'].get('predicate_a')}", flush=True)
+        (out_root / f"{tag}.jsonl").write_text(
+            "".join(json.dumps(r) + "\n" for r in sink.records), encoding="utf-8")
+        seen = {r.get("goal_frame_md5") for r in sink.records}
+        if seen != {goal_capture["goal_frame_md5"]}:
+            raise RuntimeError(f"{tag}: the cells do not share one goal picture: {seen}")
+        arm.close()
 
 
 # ------------------------------------------------------------------------ summary
@@ -405,7 +487,11 @@ def main(argv=None) -> int:
 
     r = sub.add_parser("run", help="fly one scene x N arms on the MuJoCo world (CPU)")
     r.add_argument("--scene", required=True)
-    r.add_argument("--arms", nargs="+", required=True, help="protocol arm ids")
+    r.add_argument("--arms", nargs="+", default=[], help="protocol arm ids")
+    r.add_argument("--method", nargs="+", default=[],
+                   help="registered vsbench methods, flown through MethodArm (U6a)")
+    r.add_argument("--param", action="append", default=[],
+                   help="--method constructor argument key=value, repeatable")
     r.add_argument("--start-set", default="capped30")
     r.add_argument("--limit", type=int, default=None)
     r.add_argument("--start-ids", nargs="*", default=None)
