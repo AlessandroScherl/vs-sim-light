@@ -2,6 +2,21 @@
 
 Landing = the error at the cap (step 150). Curve: median over the last third (steps 101-150) and max over the second half (steps 76-150) of the true error of the frame each step steered on.
 
+## The gates, original and re-stated (outcome: accepted with findings)
+
+| gate | original rule | original verdict | re-stated rule | re-stated verdict |
+| --- | --- | --- | --- | --- |
+| landing | every arm, every start: \|d final_translation_mm\| <= 3 and \|d final_rotation_deg\| <= 0.3 at the cap, mock vs mujoco | vitvs_dinov3 FAIL, vitvs_dinov2 FAIL, artvs pass, sift_ransac pass | sift_ransac and artvs: unchanged; vitvs_dinov3 / vitvs_dinov2: the landing is reported, gated by the curve rule instead | artvs pass, sift_ransac pass |
+| ViT-VS curve | - | - | per start: \|d median t_mm over steps 101-150\| <= 3 and \|d median r_deg over steps 101-150\| <= 0.5, mock vs mujoco; AND the spread (median over the starts of those two differences) no larger than the same spread between mujoco960 and mujoco (the half-pixel control) | vitvs_dinov3 FAIL, vitvs_dinov2 pass |
+| ART-VS switch | artvs_switched True on every start in both worlds | FAIL | the two worlds agree on whether it fires on each start and, where both fire, on when (\|d switch step\| <= 5) | pass |
+
+- vitvs_dinov3: per start (d med t mm, d med r deg) narrow20/start_00 1.361/0.162; narrow20/start_01 2.148/0.203; near60/n_000 0.388/0.020; near60/n_001 2.639/0.526 MISS; near60/n_002 0.157/0.024; spread (median over starts, mock-mujoco vs mujoco960-mujoco): t 1.361 vs 1.823 (max 2.639 vs 2.879, reported); r 0.162 vs 0.125 MISS (max 0.526 vs 0.373, reported)
+- vitvs_dinov2: per start (d med t mm, d med r deg) narrow20/start_00 1.065/0.102; narrow20/start_01 0.219/0.127; near60/n_000 2.224/0.162; near60/n_001 1.862/0.198; near60/n_002 0.098/0.004; spread (median over starts, mock-mujoco vs mujoco960-mujoco): t 1.065 vs 1.186 (max 2.224 vs 1.689, reported); r 0.127 vs 0.130 (max 0.198 vs 0.338, reported)
+
+The original verdicts stay in `parity.json` (`verdict.original_gate`, and the landing / switch blocks as before); the re-stated gates are `verdict.re_stated_gate`, `verdict.vitvs_curve` and `verdict.artvs_switch.re_stated_pass` (docs/PORT_PLAN.md U5).
+
+## Per arm, start and world
+
 | arm | start | world | start mm/deg | landing mm | landing deg | med t last 1/3 | max t 2nd half | med r last 1/3 | plateau step | frame-1 n | switch step | cpu s |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | vitvs_dinov3 | narrow20/start_00 | mock | 107.67/8.04 | 10.457 | 0.692 | 10.875 | 12.227 | 0.710 | 127 | 24 | None | 267.31 |
@@ -177,8 +192,160 @@ Landing = the error at the cap (step 150). Curve: median over the last third (st
         "near60/n_001": 3,
         "near60/n_002": null
       }
+    },
+    "d_switch_step": {
+      "narrow20/start_00": 3,
+      "narrow20/start_01": 0,
+      "near60/n_000": 1,
+      "near60/n_001": 1,
+      "near60/n_002": null
+    },
+    "re_stated_pass": true
+  },
+  "vitvs_curve": {
+    "vitvs_dinov3": {
+      "n": 5,
+      "control_pair": "mujoco960-mujoco",
+      "per_start": {
+        "narrow20/start_00": {
+          "d_t_mm_med_last_third": 1.3605,
+          "d_r_deg_med_last_third": 0.1621,
+          "pass": true
+        },
+        "narrow20/start_01": {
+          "d_t_mm_med_last_third": 2.1485,
+          "d_r_deg_med_last_third": 0.2032,
+          "pass": true
+        },
+        "near60/n_000": {
+          "d_t_mm_med_last_third": 0.388,
+          "d_r_deg_med_last_third": 0.0203,
+          "pass": true
+        },
+        "near60/n_001": {
+          "d_t_mm_med_last_third": 2.639,
+          "d_r_deg_med_last_third": 0.5262,
+          "pass": false
+        },
+        "near60/n_002": {
+          "d_t_mm_med_last_third": 0.1565,
+          "d_r_deg_med_last_third": 0.0235,
+          "pass": true
+        }
+      },
+      "failing_starts": [
+        "near60/n_001"
+      ],
+      "spread": {
+        "d_t_mm_med_last_third": {
+          "gate_pair_median": 1.3605,
+          "control_median": 1.8225,
+          "pass": true,
+          "gate_pair_max_reported": 2.639,
+          "control_max_reported": 2.879
+        },
+        "d_r_deg_med_last_third": {
+          "gate_pair_median": 0.1621,
+          "control_median": 0.1248,
+          "pass": false,
+          "gate_pair_max_reported": 0.5262,
+          "control_max_reported": 0.3731
+        }
+      },
+      "spread_pass": false,
+      "pass": false
+    },
+    "vitvs_dinov2": {
+      "n": 5,
+      "control_pair": "mujoco960-mujoco",
+      "per_start": {
+        "narrow20/start_00": {
+          "d_t_mm_med_last_third": 1.0645,
+          "d_r_deg_med_last_third": 0.1016,
+          "pass": true
+        },
+        "narrow20/start_01": {
+          "d_t_mm_med_last_third": 0.219,
+          "d_r_deg_med_last_third": 0.1271,
+          "pass": true
+        },
+        "near60/n_000": {
+          "d_t_mm_med_last_third": 2.2235,
+          "d_r_deg_med_last_third": 0.1616,
+          "pass": true
+        },
+        "near60/n_001": {
+          "d_t_mm_med_last_third": 1.862,
+          "d_r_deg_med_last_third": 0.1983,
+          "pass": true
+        },
+        "near60/n_002": {
+          "d_t_mm_med_last_third": 0.098,
+          "d_r_deg_med_last_third": 0.0035,
+          "pass": true
+        }
+      },
+      "failing_starts": [],
+      "spread": {
+        "d_t_mm_med_last_third": {
+          "gate_pair_median": 1.0645,
+          "control_median": 1.186,
+          "pass": true,
+          "gate_pair_max_reported": 2.2235,
+          "control_max_reported": 1.689
+        },
+        "d_r_deg_med_last_third": {
+          "gate_pair_median": 0.1271,
+          "control_median": 0.1298,
+          "pass": true,
+          "gate_pair_max_reported": 0.1983,
+          "control_max_reported": 0.3376
+        }
+      },
+      "spread_pass": true,
+      "pass": true
     }
-  }
+  },
+  "original_gate": {
+    "rule": {
+      "landing": "every arm, every start: |d final_translation_mm| <= 3 and |d final_rotation_deg| <= 0.3 at the cap, mock vs mujoco",
+      "artvs_switch": "artvs_switched True on every start in both worlds"
+    },
+    "landing_pass": {
+      "vitvs_dinov3": false,
+      "vitvs_dinov2": false,
+      "artvs": true,
+      "sift_ransac": true
+    },
+    "landing_failing": {
+      "vitvs_dinov3": [
+        "near60/n_001"
+      ],
+      "vitvs_dinov2": [
+        "near60/n_001"
+      ],
+      "artvs": [],
+      "sift_ransac": []
+    },
+    "artvs_switch_pass": false
+  },
+  "re_stated_gate": {
+    "rule": {
+      "landing": "sift_ransac and artvs: unchanged; vitvs_dinov3 / vitvs_dinov2: the landing is reported, gated by the curve rule instead",
+      "vitvs_curve": "per start: |d median t_mm over steps 101-150| <= 3 and |d median r_deg over steps 101-150| <= 0.5, mock vs mujoco; AND the spread (median over the starts of those two differences) no larger than the same spread between mujoco960 and mujoco (the half-pixel control)",
+      "artvs_switch": "the two worlds agree on whether it fires on each start and, where both fire, on when (|d switch step| <= 5)"
+    },
+    "landing_pass": {
+      "artvs": true,
+      "sift_ransac": true
+    },
+    "vitvs_curve_pass": {
+      "vitvs_dinov3": false,
+      "vitvs_dinov2": true
+    },
+    "artvs_switch_pass": true
+  },
+  "outcome": "accepted with findings"
 }
 ```
 

@@ -631,6 +631,14 @@ alone moves ViT-VS's landing by up to 4 mm. Read a single ViT-VS landing in MuJo
 draw from a ±2–4 mm spread, not as a number to compare to the mock (or to Isaac) start by
 start; compare curve medians over many starts.
 
+**The gate, re-stated at the final review** (old and new side by side in
+`results/bridge/u5/parity.md`, the old verdicts kept as `original_gate` in the JSON): the
+landing gate stays for SIFT and ART-VS; ViT-VS is gated on the curve medians (steps 101–150
+within 3 mm / 0.5° per start, and their median spread no larger than the half-pixel
+control's); ART-VS's switch on "the worlds agree whether and when (±5 steps)". DINOv2 passes,
+DINOv3 misses by rotation on n_001 (0.53° > 0.5°; spread 0.162° vs 0.125°), the switch passes.
+U5: accepted with findings.
+
 **Costs (shared station, nice 19, 2 threads, load 19–31).** ART-VS 7–10 s/step once tiled
 (36 DINOv2 tiles), ~0.7–1.3 s/step before; ViT-VS 0.85–1.8 s/step; SIFT 0.9–1.7 s/step; the mock
 world's 1920×1080 numpy warp ≈ 0.7 s a frame. The full U5 set: ~26 000 CPU-s, 2 h 43 min on

@@ -3261,6 +3261,13 @@
   },
   "verdict": {
     "artvs_switch": {
+      "d_switch_step": {
+        "narrow20/start_00": 3,
+        "narrow20/start_01": 0,
+        "near60/n_000": 1,
+        "near60/n_001": 1,
+        "near60/n_002": null
+      },
       "not_fired": {
         "mock": [
           "near60/n_002"
@@ -3270,6 +3277,7 @@
         ]
       },
       "pass": false,
+      "re_stated_pass": true,
       "steps": {
         "mock": {
           "narrow20/start_00": 17,
@@ -3318,6 +3326,150 @@
         "failing_but_curve_medians_agree": [],
         "n": 5,
         "pass": false
+      }
+    },
+    "original_gate": {
+      "artvs_switch_pass": false,
+      "landing_failing": {
+        "artvs": [],
+        "sift_ransac": [],
+        "vitvs_dinov2": [
+          "near60/n_001"
+        ],
+        "vitvs_dinov3": [
+          "near60/n_001"
+        ]
+      },
+      "landing_pass": {
+        "artvs": true,
+        "sift_ransac": true,
+        "vitvs_dinov2": false,
+        "vitvs_dinov3": false
+      },
+      "rule": {
+        "artvs_switch": "artvs_switched True on every start in both worlds",
+        "landing": "every arm, every start: |d final_translation_mm| <= 3 and |d final_rotation_deg| <= 0.3 at the cap, mock vs mujoco"
+      }
+    },
+    "outcome": "accepted with findings",
+    "re_stated_gate": {
+      "artvs_switch_pass": true,
+      "landing_pass": {
+        "artvs": true,
+        "sift_ransac": true
+      },
+      "rule": {
+        "artvs_switch": "the two worlds agree on whether it fires on each start and, where both fire, on when (|d switch step| <= 5)",
+        "landing": "sift_ransac and artvs: unchanged; vitvs_dinov3 / vitvs_dinov2: the landing is reported, gated by the curve rule instead",
+        "vitvs_curve": "per start: |d median t_mm over steps 101-150| <= 3 and |d median r_deg over steps 101-150| <= 0.5, mock vs mujoco; AND the spread (median over the starts of those two differences) no larger than the same spread between mujoco960 and mujoco (the half-pixel control)"
+      },
+      "vitvs_curve_pass": {
+        "vitvs_dinov2": true,
+        "vitvs_dinov3": false
+      }
+    },
+    "vitvs_curve": {
+      "vitvs_dinov2": {
+        "control_pair": "mujoco960-mujoco",
+        "failing_starts": [],
+        "n": 5,
+        "pass": true,
+        "per_start": {
+          "narrow20/start_00": {
+            "d_r_deg_med_last_third": 0.1016,
+            "d_t_mm_med_last_third": 1.0645,
+            "pass": true
+          },
+          "narrow20/start_01": {
+            "d_r_deg_med_last_third": 0.1271,
+            "d_t_mm_med_last_third": 0.219,
+            "pass": true
+          },
+          "near60/n_000": {
+            "d_r_deg_med_last_third": 0.1616,
+            "d_t_mm_med_last_third": 2.2235,
+            "pass": true
+          },
+          "near60/n_001": {
+            "d_r_deg_med_last_third": 0.1983,
+            "d_t_mm_med_last_third": 1.862,
+            "pass": true
+          },
+          "near60/n_002": {
+            "d_r_deg_med_last_third": 0.0035,
+            "d_t_mm_med_last_third": 0.098,
+            "pass": true
+          }
+        },
+        "spread": {
+          "d_r_deg_med_last_third": {
+            "control_max_reported": 0.3376,
+            "control_median": 0.1298,
+            "gate_pair_max_reported": 0.1983,
+            "gate_pair_median": 0.1271,
+            "pass": true
+          },
+          "d_t_mm_med_last_third": {
+            "control_max_reported": 1.689,
+            "control_median": 1.186,
+            "gate_pair_max_reported": 2.2235,
+            "gate_pair_median": 1.0645,
+            "pass": true
+          }
+        },
+        "spread_pass": true
+      },
+      "vitvs_dinov3": {
+        "control_pair": "mujoco960-mujoco",
+        "failing_starts": [
+          "near60/n_001"
+        ],
+        "n": 5,
+        "pass": false,
+        "per_start": {
+          "narrow20/start_00": {
+            "d_r_deg_med_last_third": 0.1621,
+            "d_t_mm_med_last_third": 1.3605,
+            "pass": true
+          },
+          "narrow20/start_01": {
+            "d_r_deg_med_last_third": 0.2032,
+            "d_t_mm_med_last_third": 2.1485,
+            "pass": true
+          },
+          "near60/n_000": {
+            "d_r_deg_med_last_third": 0.0203,
+            "d_t_mm_med_last_third": 0.388,
+            "pass": true
+          },
+          "near60/n_001": {
+            "d_r_deg_med_last_third": 0.5262,
+            "d_t_mm_med_last_third": 2.639,
+            "pass": false
+          },
+          "near60/n_002": {
+            "d_r_deg_med_last_third": 0.0235,
+            "d_t_mm_med_last_third": 0.1565,
+            "pass": true
+          }
+        },
+        "spread": {
+          "d_r_deg_med_last_third": {
+            "control_max_reported": 0.3731,
+            "control_median": 0.1248,
+            "gate_pair_max_reported": 0.5262,
+            "gate_pair_median": 0.1621,
+            "pass": false
+          },
+          "d_t_mm_med_last_third": {
+            "control_max_reported": 2.879,
+            "control_median": 1.8225,
+            "gate_pair_max_reported": 2.639,
+            "gate_pair_median": 1.3605,
+            "pass": true
+          }
+        },
+        "spread_pass": false
       }
     }
   },

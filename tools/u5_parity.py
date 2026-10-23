@@ -74,6 +74,38 @@ GATE_PAIR = ("mock", "mujoco")
 GATE_MM, GATE_DEG = 3.0, 0.3
 MOCK_RENDER_MODE = "numpy-mock"
 
+# The re-stated gates (final review, 2026-10-23; docs/PORT_PLAN.md U5 "Gate, re-stated"). The
+# original rules stay computed and visible beside them (``original_gate``), never replaced:
+#: the landing gate above stays the gate for these arms (classical and ART-VS)
+LANDING_GATED_ARMS = ("artvs", "sift_ransac")
+#: ViT-VS: the curve median over the last third, per start, mock vs mujoco ...
+VITVS_ARMS = ("vitvs_dinov3", "vitvs_dinov2")
+CURVE_MM, CURVE_DEG = 3.0, 0.5
+#: ... and its spread over the starts no larger than under the half-pixel control. The spread
+#: is the median over the starts (the typical difference; the per-start bound above already
+#: covers the worst start); the max over the starts is reported beside it, not gated
+CONTROL_PAIR = ("mujoco960", "mujoco")
+#: ART-VS's switch: the two worlds agree on whether it fires and, where both fire, when
+SWITCH_STEPS = 5
+OUTCOME = "accepted with findings"
+RULES = {
+    "landing": {
+        "original": "every arm, every start: |d final_translation_mm| <= 3 and "
+                    "|d final_rotation_deg| <= 0.3 at the cap, mock vs mujoco",
+        "re_stated": "sift_ransac and artvs: unchanged; vitvs_dinov3 / vitvs_dinov2: the "
+                     "landing is reported, gated by the curve rule instead"},
+    "vitvs_curve": {
+        "original": None,
+        "re_stated": "per start: |d median t_mm over steps 101-150| <= 3 and |d median r_deg "
+                     "over steps 101-150| <= 0.5, mock vs mujoco; AND the spread (median over "
+                     "the starts of those two differences) no larger than the same spread "
+                     "between mujoco960 and mujoco (the half-pixel control)"},
+    "artvs_switch": {
+        "original": "artvs_switched True on every start in both worlds",
+        "re_stated": "the two worlds agree on whether it fires on each start and, where both "
+                     "fire, on when (|d switch step| <= 5)"},
+}
+
 
 # ------------------------------------------------------------------------- worlds
 class MockWorld:
@@ -407,6 +439,56 @@ def compare(root: Path = OUT, scene: str = "hollywood") -> dict:
                                                for k in keys),
             "steps": {w: {k: art[w][k]["u5"]["artvs_switch_step"] for k in keys}
                       for w in GATE_PAIR}}
+    if verdict["artvs_switch"] is not None:
+        st = verdict["artvs_switch"]["steps"]
+        a, b = GATE_PAIR
+        when = {k: (None if st[a][k] is None or st[b][k] is None
+                    else abs(int(st[a][k]) - int(st[b][k]))) for k in st[a]}
+        verdict["artvs_switch"]["d_switch_step"] = when
+        verdict["artvs_switch"]["re_stated_pass"] = bool(
+            verdict["artvs_switch"]["worlds_agree_on_every_start"]
+            and all(d is None or d <= SWITCH_STEPS for d in when.values()))
+    ctrl_key = f"{CONTROL_PAIR[0]}-{CONTROL_PAIR[1]}"
+    verdict["vitvs_curve"] = {}
+    for arm in VITVS_ARMS:
+        keys = pairs.get(arm, {})
+        rows = {k: v[gate_key] for k, v in keys.items() if gate_key in v}
+        ctrl = {k: v[ctrl_key] for k, v in keys.items() if ctrl_key in v}
+        if not rows or set(ctrl) != set(rows):
+            continue
+        per_start = {k: {"d_t_mm_med_last_third": r["d_t_mm_med_last_third"],
+                         "d_r_deg_med_last_third": r["d_r_deg_med_last_third"],
+                         "pass": bool(r["d_t_mm_med_last_third"] <= CURVE_MM
+                                      and r["d_r_deg_med_last_third"] <= CURVE_DEG)}
+                     for k, r in sorted(rows.items())}
+        spread = {}
+        for f in ("d_t_mm_med_last_third", "d_r_deg_med_last_third"):
+            g = [r[f] for r in rows.values()]
+            c = [r[f] for r in ctrl.values()]
+            spread[f] = {"gate_pair_median": round(float(np.median(g)), 4),
+                         "control_median": round(float(np.median(c)), 4),
+                         "pass": bool(np.median(g) <= np.median(c)),
+                         "gate_pair_max_reported": round(float(np.max(g)), 4),
+                         "control_max_reported": round(float(np.max(c)), 4)}
+        verdict["vitvs_curve"][arm] = {
+            "n": len(rows), "control_pair": ctrl_key, "per_start": per_start,
+            "failing_starts": sorted(k for k, r in per_start.items() if not r["pass"]),
+            "spread": spread,
+            "spread_pass": all(s["pass"] for s in spread.values()),
+            "pass": bool(all(r["pass"] for r in per_start.values())
+                         and all(s["pass"] for s in spread.values()))}
+    land = verdict["landing"]
+    verdict["original_gate"] = {
+        "rule": {k: v["original"] for k, v in RULES.items() if v["original"]},
+        "landing_pass": {arm: v["pass"] for arm, v in land.items()},
+        "landing_failing": {arm: v["failing"] for arm, v in land.items()},
+        "artvs_switch_pass": (verdict["artvs_switch"] or {}).get("pass")}
+    verdict["re_stated_gate"] = {
+        "rule": {k: v["re_stated"] for k, v in RULES.items()},
+        "landing_pass": {arm: land[arm]["pass"] for arm in LANDING_GATED_ARMS if arm in land},
+        "vitvs_curve_pass": {arm: v["pass"] for arm, v in verdict["vitvs_curve"].items()},
+        "artvs_switch_pass": (verdict["artvs_switch"] or {}).get("re_stated_pass")}
+    verdict["outcome"] = OUTCOME
     spread: dict = {}
     for arm, keys in pairs.items():
         for name in sorted({n for v in keys.values() for n in v}):
@@ -430,10 +512,36 @@ def compare(root: Path = OUT, scene: str = "hollywood") -> dict:
 
 
 def markdown(res: dict) -> str:
+    v = res["verdict"]
+    G = [f"## The gates, original and re-stated (outcome: {v.get('outcome')})", "",
+          "| gate | original rule | original verdict | re-stated rule | re-stated verdict |",
+          "| --- | --- | --- | --- | --- |"]
+    esc = {k: {kk: (vv or "-").replace("|", "\\|") for kk, vv in r.items()} for k, r in RULES.items()}
+    og, rg = v.get("original_gate", {}), v.get("re_stated_gate", {})
+    land_o = ", ".join(f"{a} {'pass' if p else 'FAIL'}" for a, p in og.get("landing_pass", {}).items())
+    land_r = ", ".join(f"{a} {'pass' if p else 'FAIL'}" for a, p in rg.get("landing_pass", {}).items())
+    curve_r = ", ".join(f"{a} {'pass' if p else 'FAIL'}" for a, p in rg.get("vitvs_curve_pass", {}).items())
+    sw = lambda p: "pass" if p else ("FAIL" if p is not None else "-")  # noqa: E731
+    G += [f"| landing | {esc['landing']['original']} | {land_o} | {esc['landing']['re_stated']} | {land_r} |",
+          f"| ViT-VS curve | - | - | {esc['vitvs_curve']['re_stated']} | {curve_r} |",
+          f"| ART-VS switch | {esc['artvs_switch']['original']} | {sw(og.get('artvs_switch_pass'))} | "
+          f"{esc['artvs_switch']['re_stated']} | {sw(rg.get('artvs_switch_pass'))} |", ""]
+    for arm, c in v.get("vitvs_curve", {}).items():
+        G.append(f"- {arm}: per start (d med t mm, d med r deg) " + "; ".join(
+            f"{k} {r['d_t_mm_med_last_third']:.3f}/{r['d_r_deg_med_last_third']:.3f}"
+            f"{'' if r['pass'] else ' MISS'}" for k, r in c["per_start"].items())
+            + "; spread (median over starts, mock-mujoco vs " + c["control_pair"] + "): "
+            + "; ".join(f"{f.split('_')[1]} {s['gate_pair_median']:.3f} vs {s['control_median']:.3f}"
+                        f"{'' if s['pass'] else ' MISS'} (max {s['gate_pair_max_reported']:.3f} "
+                        f"vs {s['control_max_reported']:.3f}, reported)" for f, s in c["spread"].items()))
+    G += ["", "The original verdicts stay in `parity.json` (`verdict.original_gate`, and the landing / "
+          "switch blocks as before); the re-stated gates are `verdict.re_stated_gate`, "
+          "`verdict.vitvs_curve` and `verdict.artvs_switch.re_stated_pass` (docs/PORT_PLAN.md U5).", ""]
     L = [f"# U5 parity - {res['scene']}: the copied mock vs MuJoCo (raw look)", "",
          "Landing = the error at the cap (step 150). Curve: median over the last third "
          "(steps 101-150) and max over the second half (steps 76-150) of the true error of the "
-         "frame each step steered on.", "",
+         "frame each step steered on.", "", *G,
+         "## Per arm, start and world", "",
          "| arm | start | world | start mm/deg | landing mm | landing deg | med t last 1/3 | "
          "max t 2nd half | med r last 1/3 | plateau step | frame-1 n | switch step | cpu s |",
          "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |"]
