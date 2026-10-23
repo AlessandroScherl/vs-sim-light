@@ -37,3 +37,5 @@ results/bridge/**/telemetry.jsonl.gz
 # ... except the M1 truth-seam gate's two small telemetry files (tests/world/test_fly_smoke.py reads them)
 !results/bridge/m1_telemetry/**/telemetry.jsonl.gz
 results/bridge/**/film/**/*.jpg
+# the default output of `python -m vsbench fly` (README)
+runs/
