@@ -1,0 +1,1859 @@
+{
+  "artvs_mujoco960": "not flown: stopped after 8 minutes to spare the shared CPU (~1.5 h at ~8 s/step); ART-VS passed the landing gate",
+  "artvs_switch": {
+    "finding": "near60/n_002: the switch fires in neither world - ART-VS's coarse stage drifts out (5.99 -> 8.88 mm mock, 9.67 mm MuJoCo), so its error proxy never reaches 0.20 x; the worlds agree start by start (fired on the other four, steps 2-17 vs 3-17)",
+    "not_fired": {
+      "mock": [
+        "near60/n_002"
+      ],
+      "mujoco": [
+        "near60/n_002"
+      ]
+    },
+    "pass": false,
+    "steps": {
+      "mock": {
+        "narrow20/start_00": 17,
+        "narrow20/start_01": 17,
+        "near60/n_000": 4,
+        "near60/n_001": 2,
+        "near60/n_002": null
+      },
+      "mujoco": {
+        "narrow20/start_00": 14,
+        "narrow20/start_01": 17,
+        "near60/n_000": 5,
+        "near60/n_001": 3,
+        "near60/n_002": null
+      }
+    },
+    "worlds_agree_on_every_start": true
+  },
+  "cpu_s_per_world": {
+    "mock": 11257.1,
+    "mujoco": 10432.8,
+    "mujoco960": 4342.6
+  },
+  "gl_renderers": [
+    "llvmpipe (LLVM 20.1.2, 256 bits)"
+  ],
+  "landing_artvs": {
+    "gate": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and |final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, every start; ART-VS's artvs_switched True on every start in both worlds",
+    "misses": {},
+    "pass": true,
+    "starts": {
+      "narrow20/start_00": {
+        "landing_deg": {
+          "mock": 0.3797,
+          "mujoco": 0.4441
+        },
+        "landing_mm": {
+          "mock": 5.1814,
+          "mujoco": 5.5329
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0644,
+            "d_final_translation_mm": 0.3514,
+            "d_r_deg_med_last_third": 0.0508,
+            "d_t_mm_max_second_half": 2.593,
+            "d_t_mm_med_last_third": 0.3555,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.1874,
+            "landing_pose_distance_mm": 1.471,
+            "t_curve_corr": 0.9972,
+            "twist_norm_corr_v_xyz": 0.9153,
+            "twist_norm_corr_w": 0.8249
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.4782,
+          "mujoco": 0.4274
+        },
+        "t_mm_max_second_half": {
+          "mock": 11.961,
+          "mujoco": 9.368
+        },
+        "t_mm_med_last_third": {
+          "mock": 6.1285,
+          "mujoco": 5.773
+        }
+      },
+      "narrow20/start_01": {
+        "landing_deg": {
+          "mock": 0.4991,
+          "mujoco": 0.5776
+        },
+        "landing_mm": {
+          "mock": 5.7216,
+          "mujoco": 6.1737
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0785,
+            "d_final_translation_mm": 0.4522,
+            "d_r_deg_med_last_third": 0.1273,
+            "d_t_mm_max_second_half": 0.763,
+            "d_t_mm_med_last_third": 0.873,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0918,
+            "landing_pose_distance_mm": 0.7119,
+            "t_curve_corr": 0.9994,
+            "twist_norm_corr_v_xyz": 0.8962,
+            "twist_norm_corr_w": 0.7464
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.5612,
+          "mujoco": 0.6885
+        },
+        "t_mm_max_second_half": {
+          "mock": 11.718,
+          "mujoco": 12.481
+        },
+        "t_mm_med_last_third": {
+          "mock": 6.4085,
+          "mujoco": 7.2815
+        }
+      },
+      "near60/n_000": {
+        "landing_deg": {
+          "mock": 0.1591,
+          "mujoco": 0.1145
+        },
+        "landing_mm": {
+          "mock": 1.3395,
+          "mujoco": 1.7354
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              138,
+              138
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0446,
+            "d_final_translation_mm": 0.3959,
+            "d_r_deg_med_last_third": 0.0466,
+            "d_t_mm_max_second_half": 0.417,
+            "d_t_mm_med_last_third": 0.4755,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0587,
+            "landing_pose_distance_mm": 0.4737,
+            "t_curve_corr": 0.8146,
+            "twist_norm_corr_v_xyz": 0.794,
+            "twist_norm_corr_w": 0.876
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.1966,
+          "mujoco": 0.15
+        },
+        "t_mm_max_second_half": {
+          "mock": 1.501,
+          "mujoco": 1.918
+        },
+        "t_mm_med_last_third": {
+          "mock": 1.264,
+          "mujoco": 1.7395
+        }
+      },
+      "near60/n_001": {
+        "landing_deg": {
+          "mock": 0.1036,
+          "mujoco": 0.1334
+        },
+        "landing_mm": {
+          "mock": 2.1028,
+          "mujoco": 2.0769
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              132,
+              134
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0298,
+            "d_final_translation_mm": 0.026,
+            "d_r_deg_med_last_third": 0.0247,
+            "d_t_mm_max_second_half": 0.463,
+            "d_t_mm_med_last_third": 0.0565,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0435,
+            "landing_pose_distance_mm": 0.4279,
+            "t_curve_corr": 0.3523,
+            "twist_norm_corr_v_xyz": 0.473,
+            "twist_norm_corr_w": 0.7506
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.1132,
+          "mujoco": 0.1379
+        },
+        "t_mm_max_second_half": {
+          "mock": 2.747,
+          "mujoco": 2.284
+        },
+        "t_mm_med_last_third": {
+          "mock": 2.0485,
+          "mujoco": 2.105
+        }
+      },
+      "near60/n_002": {
+        "landing_deg": {
+          "mock": 1.2655,
+          "mujoco": 1.3024
+        },
+        "landing_mm": {
+          "mock": 8.8781,
+          "mujoco": 9.6685
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              50,
+              50
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0369,
+            "d_final_translation_mm": 0.7904,
+            "d_r_deg_med_last_third": 0.0603,
+            "d_t_mm_max_second_half": 0.891,
+            "d_t_mm_med_last_third": 1.224,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.1362,
+            "landing_pose_distance_mm": 1.1512,
+            "t_curve_corr": 0.9846,
+            "twist_norm_corr_v_xyz": 0.333,
+            "twist_norm_corr_w": 0.3069
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 1.2413,
+          "mujoco": 1.3016
+        },
+        "t_mm_max_second_half": {
+          "mock": 8.777,
+          "mujoco": 9.668
+        },
+        "t_mm_med_last_third": {
+          "mock": 8.373,
+          "mujoco": 9.597
+        }
+      }
+    }
+  },
+  "landing_sift_ransac": {
+    "gate": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and |final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, every start; ART-VS's artvs_switched True on every start in both worlds",
+    "misses": {},
+    "pass": true,
+    "starts": {
+      "narrow20/start_00": {
+        "landing_deg": {
+          "mock": 0.041,
+          "mujoco": 0.0299,
+          "mujoco960": 0.0404
+        },
+        "landing_mm": {
+          "mock": 0.5802,
+          "mujoco": 0.5656,
+          "mujoco960": 0.592
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0111,
+            "d_final_translation_mm": 0.0146,
+            "d_r_deg_med_last_third": 0.0079,
+            "d_t_mm_max_second_half": 0.008,
+            "d_t_mm_med_last_third": 0.0045,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0152,
+            "landing_pose_distance_mm": 0.1203,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9998,
+            "twist_norm_corr_w": 0.9988
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0006,
+            "d_final_translation_mm": 0.0118,
+            "d_r_deg_med_last_third": 0.0027,
+            "d_t_mm_max_second_half": 0.018,
+            "d_t_mm_med_last_third": 0.0105,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0027,
+            "landing_pose_distance_mm": 0.0253,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9998,
+            "twist_norm_corr_w": 0.9988
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0104,
+            "d_final_translation_mm": 0.0264,
+            "d_r_deg_med_last_third": 0.0106,
+            "d_t_mm_max_second_half": 0.026,
+            "d_t_mm_med_last_third": 0.015,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0159,
+            "landing_pose_distance_mm": 0.1284,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9998,
+            "twist_norm_corr_w": 0.9986
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.0963,
+          "mujoco": 0.0884,
+          "mujoco960": 0.099
+        },
+        "t_mm_max_second_half": {
+          "mock": 7.267,
+          "mujoco": 7.259,
+          "mujoco960": 7.285
+        },
+        "t_mm_med_last_third": {
+          "mock": 1.327,
+          "mujoco": 1.3225,
+          "mujoco960": 1.3375
+        }
+      },
+      "narrow20/start_01": {
+        "landing_deg": {
+          "mock": 0.0363,
+          "mujoco": 0.018,
+          "mujoco960": 0.0377
+        },
+        "landing_mm": {
+          "mock": 0.5002,
+          "mujoco": 0.4488,
+          "mujoco960": 0.5355
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0183,
+            "d_final_translation_mm": 0.0514,
+            "d_r_deg_med_last_third": 0.0056,
+            "d_t_mm_max_second_half": 0.009,
+            "d_t_mm_med_last_third": 0.032,
+            "first_frame_n_matches": [
+              22,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0216,
+            "landing_pose_distance_mm": 0.166,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9995,
+            "twist_norm_corr_w": 0.9986
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0014,
+            "d_final_translation_mm": 0.0353,
+            "d_r_deg_med_last_third": 0.0022,
+            "d_t_mm_max_second_half": 0.008,
+            "d_t_mm_med_last_third": 0.022,
+            "first_frame_n_matches": [
+              22,
+              22
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.002,
+            "landing_pose_distance_mm": 0.0373,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9995,
+            "twist_norm_corr_w": 0.9986
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0197,
+            "d_final_translation_mm": 0.0867,
+            "d_r_deg_med_last_third": 0.0078,
+            "d_t_mm_max_second_half": 0.001,
+            "d_t_mm_med_last_third": 0.054,
+            "first_frame_n_matches": [
+              22,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0225,
+            "landing_pose_distance_mm": 0.1775,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9996,
+            "twist_norm_corr_w": 0.9989
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.0824,
+          "mujoco": 0.0768,
+          "mujoco960": 0.0846
+        },
+        "t_mm_max_second_half": {
+          "mock": 6.181,
+          "mujoco": 6.172,
+          "mujoco960": 6.173
+        },
+        "t_mm_med_last_third": {
+          "mock": 1.133,
+          "mujoco": 1.101,
+          "mujoco960": 1.155
+        }
+      },
+      "near60/n_000": {
+        "landing_deg": {
+          "mock": 0.0178,
+          "mujoco": 0.0221,
+          "mujoco960": 0.018
+        },
+        "landing_mm": {
+          "mock": 0.0548,
+          "mujoco": 0.1136,
+          "mujoco960": 0.0878
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0042,
+            "d_final_translation_mm": 0.0588,
+            "d_r_deg_med_last_third": 0.0032,
+            "d_t_mm_max_second_half": 0.007,
+            "d_t_mm_med_last_third": 0.0225,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0104,
+            "landing_pose_distance_mm": 0.0782,
+            "t_curve_corr": 0.9999,
+            "twist_norm_corr_v_xyz": 0.9993,
+            "twist_norm_corr_w": 1.0
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0002,
+            "d_final_translation_mm": 0.033,
+            "d_r_deg_med_last_third": 0.0,
+            "d_t_mm_max_second_half": 0.003,
+            "d_t_mm_med_last_third": 0.0075,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.005,
+            "landing_pose_distance_mm": 0.0393,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9994,
+            "twist_norm_corr_w": 1.0
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.004,
+            "d_final_translation_mm": 0.0258,
+            "d_r_deg_med_last_third": 0.0032,
+            "d_t_mm_max_second_half": 0.004,
+            "d_t_mm_med_last_third": 0.015,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0063,
+            "landing_pose_distance_mm": 0.0478,
+            "t_curve_corr": 1.0,
+            "twist_norm_corr_v_xyz": 0.9991,
+            "twist_norm_corr_w": 0.9999
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.0436,
+          "mujoco": 0.0468,
+          "mujoco960": 0.0436
+        },
+        "t_mm_max_second_half": {
+          "mock": 0.448,
+          "mujoco": 0.455,
+          "mujoco960": 0.451
+        },
+        "t_mm_med_last_third": {
+          "mock": 0.0805,
+          "mujoco": 0.103,
+          "mujoco960": 0.088
+        }
+      },
+      "near60/n_001": {
+        "landing_deg": {
+          "mock": 0.0126,
+          "mujoco": 0.0113,
+          "mujoco960": 0.0083
+        },
+        "landing_mm": {
+          "mock": 0.031,
+          "mujoco": 0.0655,
+          "mujoco960": 0.0656
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0013,
+            "d_final_translation_mm": 0.0345,
+            "d_r_deg_med_last_third": 0.0007,
+            "d_t_mm_max_second_half": 0.003,
+            "d_t_mm_med_last_third": 0.0205,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0041,
+            "landing_pose_distance_mm": 0.0346,
+            "t_curve_corr": 0.9998,
+            "twist_norm_corr_v_xyz": 0.9949,
+            "twist_norm_corr_w": 0.9998
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0043,
+            "d_final_translation_mm": 0.0346,
+            "d_r_deg_med_last_third": 0.0041,
+            "d_t_mm_max_second_half": 0.032,
+            "d_t_mm_med_last_third": 0.004,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0058,
+            "landing_pose_distance_mm": 0.0452,
+            "t_curve_corr": 0.9998,
+            "twist_norm_corr_v_xyz": 0.9929,
+            "twist_norm_corr_w": 0.9997
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.003,
+            "d_final_translation_mm": 0.0001,
+            "d_r_deg_med_last_third": 0.0034,
+            "d_t_mm_max_second_half": 0.035,
+            "d_t_mm_med_last_third": 0.0245,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0052,
+            "landing_pose_distance_mm": 0.0403,
+            "t_curve_corr": 0.9998,
+            "twist_norm_corr_v_xyz": 0.9886,
+            "twist_norm_corr_w": 0.9995
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.0318,
+          "mujoco": 0.0311,
+          "mujoco960": 0.0277
+        },
+        "t_mm_max_second_half": {
+          "mock": 0.292,
+          "mujoco": 0.289,
+          "mujoco960": 0.324
+        },
+        "t_mm_med_last_third": {
+          "mock": 0.093,
+          "mujoco": 0.1135,
+          "mujoco960": 0.089
+        }
+      },
+      "near60/n_002": {
+        "landing_deg": {
+          "mock": 0.0153,
+          "mujoco": 0.0209,
+          "mujoco960": 0.0097
+        },
+        "landing_mm": {
+          "mock": 0.0998,
+          "mujoco": 0.1498,
+          "mujoco960": 0.0531
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0056,
+            "d_final_translation_mm": 0.05,
+            "d_r_deg_med_last_third": 0.0013,
+            "d_t_mm_max_second_half": 0.023,
+            "d_t_mm_med_last_third": 0.028,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0063,
+            "landing_pose_distance_mm": 0.0501,
+            "t_curve_corr": 0.9999,
+            "twist_norm_corr_v_xyz": 0.9997,
+            "twist_norm_corr_w": 0.9999
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0056,
+            "d_final_translation_mm": 0.0467,
+            "d_r_deg_med_last_third": 0.0079,
+            "d_t_mm_max_second_half": 0.007,
+            "d_t_mm_med_last_third": 0.0705,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0067,
+            "landing_pose_distance_mm": 0.0527,
+            "t_curve_corr": 0.9998,
+            "twist_norm_corr_v_xyz": 0.9997,
+            "twist_norm_corr_w": 0.9999
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              null,
+              null
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0112,
+            "d_final_translation_mm": 0.0967,
+            "d_r_deg_med_last_third": 0.0092,
+            "d_t_mm_max_second_half": 0.03,
+            "d_t_mm_med_last_third": 0.0985,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0129,
+            "landing_pose_distance_mm": 0.1009,
+            "t_curve_corr": 0.9998,
+            "twist_norm_corr_v_xyz": 0.9998,
+            "twist_norm_corr_w": 0.9999
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.0287,
+          "mujoco": 0.03,
+          "mujoco960": 0.0208
+        },
+        "t_mm_max_second_half": {
+          "mock": 0.486,
+          "mujoco": 0.509,
+          "mujoco960": 0.479
+        },
+        "t_mm_med_last_third": {
+          "mock": 0.164,
+          "mujoco": 0.192,
+          "mujoco960": 0.0935
+        }
+      }
+    }
+  },
+  "landing_vitvs_dinov2": {
+    "gate": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and |final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, every start; ART-VS's artvs_switched True on every start in both worlds",
+    "misses": {
+      "near60/n_001": {
+        "curve_medians_agree": true,
+        "d_final_rotation_deg": 0.4396,
+        "d_final_translation_mm": 3.8011,
+        "finding": "the wobble: the medians of steps 101-150 agree (1.44 vs 3.30 mm, 0.33 vs 0.53 deg: d 1.86 mm / 0.20 deg); MuJoCo's curve wanders 2.57-5.33 mm in steps 76-150 and the cap caught its top (5.33 mm vs the mock's 1.53 mm)"
+      }
+    },
+    "pass": false,
+    "starts": {
+      "narrow20/start_00": {
+        "landing_deg": {
+          "mock": 0.3256,
+          "mujoco": 0.5333,
+          "mujoco960": 0.4024
+        },
+        "landing_mm": {
+          "mock": 6.9694,
+          "mujoco": 7.1078,
+          "mujoco960": 7.2274
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              126,
+              128
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2077,
+            "d_final_translation_mm": 0.1383,
+            "d_r_deg_med_last_third": 0.1016,
+            "d_t_mm_max_second_half": 3.696,
+            "d_t_mm_med_last_third": 1.0645,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.6478,
+            "landing_pose_distance_mm": 5.4141,
+            "t_curve_corr": 0.998,
+            "twist_norm_corr_v_xyz": 0.9458,
+            "twist_norm_corr_w": 0.8267
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              126,
+              125
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0768,
+            "d_final_translation_mm": 0.258,
+            "d_r_deg_med_last_third": 0.0607,
+            "d_t_mm_max_second_half": 2.313,
+            "d_t_mm_med_last_third": 0.6245,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.1901,
+            "landing_pose_distance_mm": 1.9927,
+            "t_curve_corr": 0.9991,
+            "twist_norm_corr_v_xyz": 0.9247,
+            "twist_norm_corr_w": 0.7966
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              125,
+              128
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1309,
+            "d_final_translation_mm": 0.1197,
+            "d_r_deg_med_last_third": 0.1623,
+            "d_t_mm_max_second_half": 1.383,
+            "d_t_mm_med_last_third": 1.689,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.5711,
+            "landing_pose_distance_mm": 4.59,
+            "t_curve_corr": 0.9992,
+            "twist_norm_corr_v_xyz": 0.9317,
+            "twist_norm_corr_w": 0.8174
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.4602,
+          "mujoco": 0.3586,
+          "mujoco960": 0.5209
+        },
+        "t_mm_max_second_half": {
+          "mock": 12.597,
+          "mujoco": 8.901,
+          "mujoco960": 10.284
+        },
+        "t_mm_med_last_third": {
+          "mock": 8.0415,
+          "mujoco": 6.977,
+          "mujoco960": 8.666
+        }
+      },
+      "narrow20/start_01": {
+        "landing_deg": {
+          "mock": 0.9351,
+          "mujoco": 0.8048,
+          "mujoco960": 0.7435
+        },
+        "landing_mm": {
+          "mock": 9.7634,
+          "mujoco": 9.5754,
+          "mujoco960": 8.4589
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              123,
+              124
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1302,
+            "d_final_translation_mm": 0.188,
+            "d_r_deg_med_last_third": 0.1271,
+            "d_t_mm_max_second_half": 1.355,
+            "d_t_mm_med_last_third": 0.219,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3308,
+            "landing_pose_distance_mm": 2.3702,
+            "t_curve_corr": 0.9991,
+            "twist_norm_corr_v_xyz": 0.8924,
+            "twist_norm_corr_w": 0.7296
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              123,
+              126
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1916,
+            "d_final_translation_mm": 1.3045,
+            "d_r_deg_med_last_third": 0.0027,
+            "d_t_mm_max_second_half": 1.927,
+            "d_t_mm_med_last_third": 0.0045,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.2009,
+            "landing_pose_distance_mm": 1.4008,
+            "t_curve_corr": 0.9978,
+            "twist_norm_corr_v_xyz": 0.8696,
+            "twist_norm_corr_w": 0.6974
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              126,
+              124
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0614,
+            "d_final_translation_mm": 1.1165,
+            "d_r_deg_med_last_third": 0.1298,
+            "d_t_mm_max_second_half": 0.572,
+            "d_t_mm_med_last_third": 0.2145,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.2652,
+            "landing_pose_distance_mm": 2.1073,
+            "t_curve_corr": 0.9988,
+            "twist_norm_corr_v_xyz": 0.8654,
+            "twist_norm_corr_w": 0.6796
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 1.0133,
+          "mujoco": 0.8862,
+          "mujoco960": 1.016
+        },
+        "t_mm_max_second_half": {
+          "mock": 13.212,
+          "mujoco": 14.567,
+          "mujoco960": 15.139
+        },
+        "t_mm_med_last_third": {
+          "mock": 10.485,
+          "mujoco": 10.266,
+          "mujoco960": 10.4805
+        }
+      },
+      "near60/n_000": {
+        "landing_deg": {
+          "mock": 0.4914,
+          "mujoco": 0.297,
+          "mujoco960": 0.6152
+        },
+        "landing_mm": {
+          "mock": 5.1169,
+          "mujoco": 2.774,
+          "mujoco960": 4.1913
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              122,
+              117
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1944,
+            "d_final_translation_mm": 2.3428,
+            "d_r_deg_med_last_third": 0.1616,
+            "d_t_mm_max_second_half": 1.171,
+            "d_t_mm_med_last_third": 2.2235,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3293,
+            "landing_pose_distance_mm": 2.6216,
+            "t_curve_corr": -0.1309,
+            "twist_norm_corr_v_xyz": 0.4146,
+            "twist_norm_corr_w": 0.5396
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              122,
+              120
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1238,
+            "d_final_translation_mm": 0.9256,
+            "d_r_deg_med_last_third": 0.176,
+            "d_t_mm_max_second_half": 0.847,
+            "d_t_mm_med_last_third": 1.0375,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.2852,
+            "landing_pose_distance_mm": 2.4515,
+            "t_curve_corr": 0.4798,
+            "twist_norm_corr_v_xyz": 0.327,
+            "twist_norm_corr_w": 0.4862
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              120,
+              117
+            ],
+            "curve_median_gate": false,
+            "d_final_rotation_deg": 0.3182,
+            "d_final_translation_mm": 1.4172,
+            "d_r_deg_med_last_third": 0.3376,
+            "d_t_mm_max_second_half": 0.324,
+            "d_t_mm_med_last_third": 1.186,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 0.4068,
+            "landing_pose_distance_mm": 3.0103,
+            "t_curve_corr": 0.5519,
+            "twist_norm_corr_v_xyz": 0.3699,
+            "twist_norm_corr_w": 0.5601
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.4832,
+          "mujoco": 0.3216,
+          "mujoco960": 0.6592
+        },
+        "t_mm_max_second_half": {
+          "mock": 5.286,
+          "mujoco": 4.115,
+          "mujoco960": 4.439
+        },
+        "t_mm_med_last_third": {
+          "mock": 4.9985,
+          "mujoco": 2.775,
+          "mujoco960": 3.961
+        }
+      },
+      "near60/n_001": {
+        "landing_deg": {
+          "mock": 0.3089,
+          "mujoco": 0.7484,
+          "mujoco960": 0.5003
+        },
+        "landing_mm": {
+          "mock": 1.5327,
+          "mujoco": 5.3338,
+          "mujoco960": 5.473
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              120,
+              115
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.4396,
+            "d_final_translation_mm": 3.8011,
+            "d_r_deg_med_last_third": 0.1983,
+            "d_t_mm_max_second_half": 2.589,
+            "d_t_mm_med_last_third": 1.862,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 0.6825,
+            "landing_pose_distance_mm": 5.4637,
+            "t_curve_corr": -0.2331,
+            "twist_norm_corr_v_xyz": 0.2618,
+            "twist_norm_corr_w": 0.3058
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              120,
+              115
+            ],
+            "curve_median_gate": false,
+            "d_final_rotation_deg": 0.1915,
+            "d_final_translation_mm": 3.9403,
+            "d_r_deg_med_last_third": 0.0843,
+            "d_t_mm_max_second_half": 3.212,
+            "d_t_mm_med_last_third": 3.366,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 0.582,
+            "landing_pose_distance_mm": 4.8234,
+            "t_curve_corr": -0.3795,
+            "twist_norm_corr_v_xyz": 0.3281,
+            "twist_norm_corr_w": 0.3856
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              115,
+              115
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2481,
+            "d_final_translation_mm": 0.1392,
+            "d_r_deg_med_last_third": 0.114,
+            "d_t_mm_max_second_half": 0.623,
+            "d_t_mm_med_last_third": 1.504,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3619,
+            "landing_pose_distance_mm": 2.7752,
+            "t_curve_corr": 0.573,
+            "twist_norm_corr_v_xyz": 0.3442,
+            "twist_norm_corr_w": 0.3691
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.3329,
+          "mujoco": 0.5312,
+          "mujoco960": 0.4172
+        },
+        "t_mm_max_second_half": {
+          "mock": 2.745,
+          "mujoco": 5.334,
+          "mujoco960": 5.957
+        },
+        "t_mm_med_last_third": {
+          "mock": 1.4385,
+          "mujoco": 3.3005,
+          "mujoco960": 4.8045
+        }
+      },
+      "near60/n_002": {
+        "landing_deg": {
+          "mock": 0.8806,
+          "mujoco": 0.89,
+          "mujoco960": 0.8992
+        },
+        "landing_mm": {
+          "mock": 8.6371,
+          "mujoco": 8.4278,
+          "mujoco960": 8.6719
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              70,
+              69
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0093,
+            "d_final_translation_mm": 0.2093,
+            "d_r_deg_med_last_third": 0.0035,
+            "d_t_mm_max_second_half": 0.297,
+            "d_t_mm_med_last_third": 0.098,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.1344,
+            "landing_pose_distance_mm": 1.0154,
+            "t_curve_corr": 0.8653,
+            "twist_norm_corr_v_xyz": 0.371,
+            "twist_norm_corr_w": 0.4401
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              70,
+              67
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0186,
+            "d_final_translation_mm": 0.0348,
+            "d_r_deg_med_last_third": 0.0119,
+            "d_t_mm_max_second_half": 0.015,
+            "d_t_mm_med_last_third": 0.12,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0948,
+            "landing_pose_distance_mm": 0.7496,
+            "t_curve_corr": 0.8581,
+            "twist_norm_corr_v_xyz": 0.1885,
+            "twist_norm_corr_w": 0.2336
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              67,
+              69
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0093,
+            "d_final_translation_mm": 0.2442,
+            "d_r_deg_med_last_third": 0.0154,
+            "d_t_mm_max_second_half": 0.312,
+            "d_t_mm_med_last_third": 0.022,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.0439,
+            "landing_pose_distance_mm": 0.5514,
+            "t_curve_corr": 0.9563,
+            "twist_norm_corr_v_xyz": 0.1877,
+            "twist_norm_corr_w": 0.2842
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.881,
+          "mujoco": 0.8845,
+          "mujoco960": 0.8691
+        },
+        "t_mm_max_second_half": {
+          "mock": 8.729,
+          "mujoco": 8.432,
+          "mujoco960": 8.744
+        },
+        "t_mm_med_last_third": {
+          "mock": 8.43,
+          "mujoco": 8.332,
+          "mujoco960": 8.31
+        }
+      }
+    }
+  },
+  "landing_vitvs_dinov3": {
+    "gate": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and |final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, every start; ART-VS's artvs_switched True on every start in both worlds",
+    "misses": {
+      "near60/n_001": {
+        "curve_medians_agree": false,
+        "d_final_rotation_deg": 0.654,
+        "d_final_translation_mm": 3.8855,
+        "finding": "not only the wobble: the two worlds settle on different token-quantised floors (steps 76-150: mock 2.87-5.01 mm, MuJoCo 5.78-8.25 mm; median of steps 101-150 4.10 vs 6.74 mm, 0.21 vs 0.73 deg - the rotation medians differ by 0.53 deg > 0.3)"
+      }
+    },
+    "pass": false,
+    "starts": {
+      "narrow20/start_00": {
+        "landing_deg": {
+          "mock": 0.6922,
+          "mujoco": 0.7077,
+          "mujoco960": 0.9798
+        },
+        "landing_mm": {
+          "mock": 10.4573,
+          "mujoco": 9.7842,
+          "mujoco960": 12.4082
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              127,
+              131
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0155,
+            "d_final_translation_mm": 0.6731,
+            "d_r_deg_med_last_third": 0.1621,
+            "d_t_mm_max_second_half": 0.651,
+            "d_t_mm_med_last_third": 1.3605,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.5843,
+            "landing_pose_distance_mm": 4.5985,
+            "t_curve_corr": 0.9964,
+            "twist_norm_corr_v_xyz": 0.9238,
+            "twist_norm_corr_w": 0.7773
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              127,
+              125
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2876,
+            "d_final_translation_mm": 1.9509,
+            "d_r_deg_med_last_third": 0.211,
+            "d_t_mm_max_second_half": 0.58,
+            "d_t_mm_med_last_third": 1.447,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.4742,
+            "landing_pose_distance_mm": 3.8034,
+            "t_curve_corr": 0.9979,
+            "twist_norm_corr_v_xyz": 0.9113,
+            "twist_norm_corr_w": 0.7551
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              125,
+              131
+            ],
+            "curve_median_gate": false,
+            "d_final_rotation_deg": 0.2721,
+            "d_final_translation_mm": 2.624,
+            "d_r_deg_med_last_third": 0.3731,
+            "d_t_mm_max_second_half": 1.231,
+            "d_t_mm_med_last_third": 2.8075,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.4343,
+            "landing_pose_distance_mm": 3.6756,
+            "t_curve_corr": 0.9982,
+            "twist_norm_corr_v_xyz": 0.9043,
+            "twist_norm_corr_w": 0.741
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.7104,
+          "mujoco": 0.5483,
+          "mujoco960": 0.9214
+        },
+        "t_mm_max_second_half": {
+          "mock": 12.227,
+          "mujoco": 11.576,
+          "mujoco960": 12.807
+        },
+        "t_mm_med_last_third": {
+          "mock": 10.875,
+          "mujoco": 9.5145,
+          "mujoco960": 12.322
+        }
+      },
+      "narrow20/start_01": {
+        "landing_deg": {
+          "mock": 0.9942,
+          "mujoco": 0.7617,
+          "mujoco960": 0.7011
+        },
+        "landing_mm": {
+          "mock": 12.6656,
+          "mujoco": 10.3716,
+          "mujoco960": 9.9544
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              121,
+              131
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2325,
+            "d_final_translation_mm": 2.294,
+            "d_r_deg_med_last_third": 0.2032,
+            "d_t_mm_max_second_half": 2.345,
+            "d_t_mm_med_last_third": 2.1485,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.4308,
+            "landing_pose_distance_mm": 3.6985,
+            "t_curve_corr": 0.9963,
+            "twist_norm_corr_v_xyz": 0.8243,
+            "twist_norm_corr_w": 0.6198
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              121,
+              124
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2932,
+            "d_final_translation_mm": 2.7112,
+            "d_r_deg_med_last_third": 0.2435,
+            "d_t_mm_max_second_half": 1.235,
+            "d_t_mm_med_last_third": 2.34,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3884,
+            "landing_pose_distance_mm": 3.251,
+            "t_curve_corr": 0.9993,
+            "twist_norm_corr_v_xyz": 0.8419,
+            "twist_norm_corr_w": 0.6246
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              124,
+              131
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0607,
+            "d_final_translation_mm": 0.4171,
+            "d_r_deg_med_last_third": 0.0403,
+            "d_t_mm_max_second_half": 3.58,
+            "d_t_mm_med_last_third": 0.1915,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.2842,
+            "landing_pose_distance_mm": 2.5796,
+            "t_curve_corr": 0.9973,
+            "twist_norm_corr_v_xyz": 0.8296,
+            "twist_norm_corr_w": 0.6029
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 1.006,
+          "mujoco": 0.8028,
+          "mujoco960": 0.7625
+        },
+        "t_mm_max_second_half": {
+          "mock": 15.171,
+          "mujoco": 17.516,
+          "mujoco960": 13.936
+        },
+        "t_mm_med_last_third": {
+          "mock": 12.9395,
+          "mujoco": 10.791,
+          "mujoco960": 10.5995
+        }
+      },
+      "near60/n_000": {
+        "landing_deg": {
+          "mock": 0.4249,
+          "mujoco": 0.396,
+          "mujoco960": 0.6037
+        },
+        "landing_mm": {
+          "mock": 4.5276,
+          "mujoco": 5.1176,
+          "mujoco960": 4.122
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              121,
+              119
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0289,
+            "d_final_translation_mm": 0.59,
+            "d_r_deg_med_last_third": 0.0203,
+            "d_t_mm_max_second_half": 0.81,
+            "d_t_mm_med_last_third": 0.388,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.1989,
+            "landing_pose_distance_mm": 1.306,
+            "t_curve_corr": 0.3621,
+            "twist_norm_corr_v_xyz": 0.2815,
+            "twist_norm_corr_w": 0.4012
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              121,
+              128
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.1788,
+            "d_final_translation_mm": 0.4056,
+            "d_r_deg_med_last_third": 0.0751,
+            "d_t_mm_max_second_half": 2.041,
+            "d_t_mm_med_last_third": 0.328,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.204,
+            "landing_pose_distance_mm": 1.2695,
+            "t_curve_corr": -0.0677,
+            "twist_norm_corr_v_xyz": 0.3715,
+            "twist_norm_corr_w": 0.5241
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              128,
+              119
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2077,
+            "d_final_translation_mm": 0.9956,
+            "d_r_deg_med_last_third": 0.0954,
+            "d_t_mm_max_second_half": 1.231,
+            "d_t_mm_med_last_third": 0.716,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3065,
+            "landing_pose_distance_mm": 2.5557,
+            "t_curve_corr": 0.4428,
+            "twist_norm_corr_v_xyz": 0.3709,
+            "twist_norm_corr_w": 0.4944
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.4461,
+          "mujoco": 0.4258,
+          "mujoco960": 0.5212
+        },
+        "t_mm_max_second_half": {
+          "mock": 6.223,
+          "mujoco": 5.413,
+          "mujoco960": 4.182
+        },
+        "t_mm_med_last_third": {
+          "mock": 3.991,
+          "mujoco": 4.379,
+          "mujoco960": 3.663
+        }
+      },
+      "near60/n_001": {
+        "landing_deg": {
+          "mock": 0.2194,
+          "mujoco": 0.8734,
+          "mujoco960": 0.4822
+        },
+        "landing_mm": {
+          "mock": 4.2762,
+          "mujoco": 8.1617,
+          "mujoco960": 4.1277
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              117,
+              124
+            ],
+            "curve_median_gate": false,
+            "d_final_rotation_deg": 0.654,
+            "d_final_translation_mm": 3.8855,
+            "d_r_deg_med_last_third": 0.5262,
+            "d_t_mm_max_second_half": 3.247,
+            "d_t_mm_med_last_third": 2.639,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 1.0686,
+            "landing_pose_distance_mm": 8.488,
+            "t_curve_corr": 0.385,
+            "twist_norm_corr_v_xyz": 0.362,
+            "twist_norm_corr_w": 0.3992
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              117,
+              117
+            ],
+            "curve_median_gate": false,
+            "d_final_rotation_deg": 0.2628,
+            "d_final_translation_mm": 0.1484,
+            "d_r_deg_med_last_third": 0.4014,
+            "d_t_mm_max_second_half": 0.869,
+            "d_t_mm_med_last_third": 0.8165,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.6259,
+            "landing_pose_distance_mm": 5.2175,
+            "t_curve_corr": 0.3459,
+            "twist_norm_corr_v_xyz": 0.2487,
+            "twist_norm_corr_w": 0.3486
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              117,
+              124
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.3912,
+            "d_final_translation_mm": 4.034,
+            "d_r_deg_med_last_third": 0.1248,
+            "d_t_mm_max_second_half": 2.378,
+            "d_t_mm_med_last_third": 1.8225,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 0.5367,
+            "landing_pose_distance_mm": 4.199,
+            "t_curve_corr": 0.858,
+            "twist_norm_corr_v_xyz": 0.3578,
+            "twist_norm_corr_w": 0.4298
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.2068,
+          "mujoco": 0.733,
+          "mujoco960": 0.6082
+        },
+        "t_mm_max_second_half": {
+          "mock": 5.007,
+          "mujoco": 8.254,
+          "mujoco960": 5.876
+        },
+        "t_mm_med_last_third": {
+          "mock": 4.096,
+          "mujoco": 6.735,
+          "mujoco960": 4.9125
+        }
+      },
+      "near60/n_002": {
+        "landing_deg": {
+          "mock": 0.8256,
+          "mujoco": 0.9031,
+          "mujoco960": 0.6195
+        },
+        "landing_mm": {
+          "mock": 7.9296,
+          "mujoco": 8.5689,
+          "mujoco960": 4.9881
+        },
+        "pairs": {
+          "mock-mujoco": {
+            "cns_plateau_step": [
+              62,
+              69
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.0774,
+            "d_final_translation_mm": 0.6393,
+            "d_r_deg_med_last_third": 0.0235,
+            "d_t_mm_max_second_half": 0.15,
+            "d_t_mm_med_last_third": 0.1565,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.3041,
+            "landing_pose_distance_mm": 2.7087,
+            "t_curve_corr": 0.7315,
+            "twist_norm_corr_v_xyz": 0.2637,
+            "twist_norm_corr_w": 0.3429
+          },
+          "mock-mujoco960": {
+            "cns_plateau_step": [
+              62,
+              60
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2062,
+            "d_final_translation_mm": 2.9414,
+            "d_r_deg_med_last_third": 0.1946,
+            "d_t_mm_max_second_half": 2.582,
+            "d_t_mm_med_last_third": 2.7225,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": true,
+            "landing_pose_angle_deg": 0.4607,
+            "landing_pose_distance_mm": 4.2852,
+            "t_curve_corr": -0.4005,
+            "twist_norm_corr_v_xyz": 0.1274,
+            "twist_norm_corr_w": 0.145
+          },
+          "mujoco960-mujoco": {
+            "cns_plateau_step": [
+              60,
+              69
+            ],
+            "curve_median_gate": true,
+            "d_final_rotation_deg": 0.2836,
+            "d_final_translation_mm": 3.5808,
+            "d_r_deg_med_last_third": 0.2181,
+            "d_t_mm_max_second_half": 2.732,
+            "d_t_mm_med_last_third": 2.879,
+            "first_frame_n_matches": [
+              24,
+              24
+            ],
+            "landing_gate": false,
+            "landing_pose_angle_deg": 0.6644,
+            "landing_pose_distance_mm": 5.9782,
+            "t_curve_corr": -0.793,
+            "twist_norm_corr_v_xyz": 0.1135,
+            "twist_norm_corr_w": 0.1629
+          }
+        },
+        "r_deg_med_last_third": {
+          "mock": 0.8741,
+          "mujoco": 0.8976,
+          "mujoco960": 0.6795
+        },
+        "t_mm_max_second_half": {
+          "mock": 8.506,
+          "mujoco": 8.656,
+          "mujoco960": 5.924
+        },
+        "t_mm_med_last_third": {
+          "mock": 8.0315,
+          "mujoco": 8.188,
+          "mujoco960": 5.309
+        }
+      }
+    }
+  },
+  "spread_per_arm_and_world_pair": {
+    "artvs": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.0785,
+        "max_d_final_translation_mm": 0.7904,
+        "max_d_r_deg_med_last_third": 0.1273,
+        "max_d_t_mm_med_last_third": 1.224,
+        "median_d_final_rotation_deg": 0.0446,
+        "median_d_final_translation_mm": 0.3959,
+        "median_d_r_deg_med_last_third": 0.0508,
+        "median_d_t_mm_med_last_third": 0.4755,
+        "n": 5
+      }
+    },
+    "sift_ransac": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.0183,
+        "max_d_final_translation_mm": 0.0588,
+        "max_d_r_deg_med_last_third": 0.0079,
+        "max_d_t_mm_med_last_third": 0.032,
+        "median_d_final_rotation_deg": 0.0056,
+        "median_d_final_translation_mm": 0.05,
+        "median_d_r_deg_med_last_third": 0.0032,
+        "median_d_t_mm_med_last_third": 0.0225,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.0056,
+        "max_d_final_translation_mm": 0.0467,
+        "max_d_r_deg_med_last_third": 0.0079,
+        "max_d_t_mm_med_last_third": 0.0705,
+        "median_d_final_rotation_deg": 0.0014,
+        "median_d_final_translation_mm": 0.0346,
+        "median_d_r_deg_med_last_third": 0.0027,
+        "median_d_t_mm_med_last_third": 0.0105,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.0197,
+        "max_d_final_translation_mm": 0.0967,
+        "max_d_r_deg_med_last_third": 0.0106,
+        "max_d_t_mm_med_last_third": 0.0985,
+        "median_d_final_rotation_deg": 0.0104,
+        "median_d_final_translation_mm": 0.0264,
+        "median_d_r_deg_med_last_third": 0.0078,
+        "median_d_t_mm_med_last_third": 0.0245,
+        "n": 5
+      }
+    },
+    "vitvs_dinov2": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.4396,
+        "max_d_final_translation_mm": 3.8011,
+        "max_d_r_deg_med_last_third": 0.1983,
+        "max_d_t_mm_med_last_third": 2.2235,
+        "median_d_final_rotation_deg": 0.1944,
+        "median_d_final_translation_mm": 0.2093,
+        "median_d_r_deg_med_last_third": 0.1271,
+        "median_d_t_mm_med_last_third": 1.0645,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.1916,
+        "max_d_final_translation_mm": 3.9403,
+        "max_d_r_deg_med_last_third": 0.176,
+        "max_d_t_mm_med_last_third": 3.366,
+        "median_d_final_rotation_deg": 0.1238,
+        "median_d_final_translation_mm": 0.9256,
+        "median_d_r_deg_med_last_third": 0.0607,
+        "median_d_t_mm_med_last_third": 0.6245,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.3182,
+        "max_d_final_translation_mm": 1.4172,
+        "max_d_r_deg_med_last_third": 0.3376,
+        "max_d_t_mm_med_last_third": 1.689,
+        "median_d_final_rotation_deg": 0.1309,
+        "median_d_final_translation_mm": 0.2442,
+        "median_d_r_deg_med_last_third": 0.1298,
+        "median_d_t_mm_med_last_third": 1.186,
+        "n": 5
+      }
+    },
+    "vitvs_dinov3": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.654,
+        "max_d_final_translation_mm": 3.8855,
+        "max_d_r_deg_med_last_third": 0.5262,
+        "max_d_t_mm_med_last_third": 2.639,
+        "median_d_final_rotation_deg": 0.0774,
+        "median_d_final_translation_mm": 0.6731,
+        "median_d_r_deg_med_last_third": 0.1621,
+        "median_d_t_mm_med_last_third": 1.3605,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.2932,
+        "max_d_final_translation_mm": 2.9414,
+        "max_d_r_deg_med_last_third": 0.4014,
+        "max_d_t_mm_med_last_third": 2.7225,
+        "median_d_final_rotation_deg": 0.2628,
+        "median_d_final_translation_mm": 1.9509,
+        "median_d_r_deg_med_last_third": 0.211,
+        "median_d_t_mm_med_last_third": 1.447,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.3912,
+        "max_d_final_translation_mm": 4.034,
+        "max_d_r_deg_med_last_third": 0.3731,
+        "max_d_t_mm_med_last_third": 2.879,
+        "median_d_final_rotation_deg": 0.2721,
+        "median_d_final_translation_mm": 2.624,
+        "median_d_r_deg_med_last_third": 0.1248,
+        "median_d_t_mm_med_last_third": 1.8225,
+        "n": 5
+      }
+    }
+  },
+  "unit": "U5 - baseline parity: the copied numpy mock vs the MuJoCo world (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 12:59:49 +0200"
+}

@@ -1,0 +1,38 @@
+_schema: vssim-config-1
+_source: 'arms/vitvs_dinov3.yaml + protocol.yaml[vitvs_dinov3] + bridge {"episode":
+  {"max_iter": 150}, "matcher": {"device": "cpu"}}'
+controller:
+  dt: 0.016666666666666666
+  ema_alpha: 0.0
+  gain: 2.0
+  solve_unrounded: true
+  weighting:
+    per_axis: false
+    use_margin: false
+    use_trust: false
+episode:
+  divergence_abort: true
+  max_iter: 150
+  record_stops:
+  - velocity_quiet
+  - dec_plateau
+  telemetry_extended: false
+matcher:
+  backbone_name: dinov3_vits16
+  device: cpu
+  num_landmarks: 24
+  threshold: 1.0
+  tie_order: stable
+  variant: mutual_nn_seeded_subsample
+scoring:
+  success_rule:
+  - predicate_a
+  - paper_3cm_3deg
+  - cns_code_0p1d_10deg
+  - abs_10mm_1deg
+  - abs_20mm_2deg
+  - abs_50mm_5deg
+  - abs_100mm_10deg
+seed: 20260902
+stop:
+  rule: cns_plateau

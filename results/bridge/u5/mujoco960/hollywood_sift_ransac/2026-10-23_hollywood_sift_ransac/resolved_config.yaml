@@ -1,0 +1,36 @@
+_schema: vssim-config-1
+_source: 'arms/classical.yaml + protocol.yaml[sift_ransac] + bridge {"episode": {"max_iter":
+  150}}'
+controller:
+  dt: 0.016666666666666666
+  ema_alpha: 0.0
+  gain: 2.0
+  solve_unrounded: true
+  weighting:
+    per_axis: false
+    use_margin: false
+    use_trust: false
+episode:
+  divergence_abort: true
+  max_iter: 150
+  record_stops:
+  - velocity_quiet
+  - dec_plateau
+  telemetry_extended: false
+matcher:
+  num_landmarks: 24
+  ransac: scene_default
+  ransac_thresh_px: 3.0
+  variant: classical_sift
+scoring:
+  success_rule:
+  - predicate_a
+  - paper_3cm_3deg
+  - cns_code_0p1d_10deg
+  - abs_10mm_1deg
+  - abs_20mm_2deg
+  - abs_50mm_5deg
+  - abs_100mm_10deg
+seed: 20260902
+stop:
+  rule: cns_plateau
