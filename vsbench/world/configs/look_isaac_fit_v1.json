@@ -1,0 +1,590 @@
+{
+ "look": "isaac_fit_v1",
+ "version": 1,
+ "decided": "owner, 2026-10-23: fit one brightness/tone curve per scene to the Isaac goal pictures already on disk, raise the light, use a finer, softer shadow map",
+ "fitted": "2026-10-23 09:10:21 +0200",
+ "fitted_by": "tools/u4b_look.py components + fit",
+ "fitted_at_vsbench_commit": "7f43ba2842f9408392f07d5ef6c11700affbfa51",
+ "lighting": {
+  "ambient_share": 0.15,
+  "shadowsize": 8192,
+  "shadowclip_margin": 1.02,
+  "ambient": "ambient_share * light_gain (MuJoCo's headlight ambient)",
+  "sun": "the U1 sun direction (Isaac's distant light, rotateXYZ(-30, 0, 30)) at (1 - ambient_share) * light_gain / cos(incidence), casting shadows",
+  "shadowclip": "half-side of the square holding all geometry seen from the sun, times shadowclip_margin (vsbench.world.look.shadowclip_for)",
+  "fill_share_fit": {
+   "grid": [
+    0.05,
+    0.075,
+    0.1,
+    0.125,
+    0.15,
+    0.175,
+    0.2,
+    0.225,
+    0.25,
+    0.275,
+    0.3,
+    0.325,
+    0.35,
+    0.375,
+    0.4
+   ],
+   "rule": "least mean dim-pixel MAE over the three rooms (dim: the sun's term < 0.5 of the texture, texture > 8), curves refitted per a",
+   "table": {
+    "0.05": {
+     "industrial1_drill": {
+      "dim_mae": 17.933,
+      "all_mae": 7.754,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 24.819,
+      "all_mae": 18.969,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 24.545,
+      "all_mae": 4.061,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 22.432
+    },
+    "0.075": {
+     "industrial1_drill": {
+      "dim_mae": 17.465,
+      "all_mae": 7.742,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 25.401,
+      "all_mae": 19.041,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 21.421,
+      "all_mae": 4.323,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 21.429
+    },
+    "0.1": {
+     "industrial1_drill": {
+      "dim_mae": 17.213,
+      "all_mae": 7.774,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 30.51,
+      "all_mae": 18.975,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 20.263,
+      "all_mae": 4.249,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 22.662
+    },
+    "0.125": {
+     "industrial1_drill": {
+      "dim_mae": 17.471,
+      "all_mae": 7.846,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 31.211,
+      "all_mae": 18.978,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 19.654,
+      "all_mae": 4.174,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 22.779
+    },
+    "0.15": {
+     "industrial1_drill": {
+      "dim_mae": 18.267,
+      "all_mae": 7.962,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 26.699,
+      "all_mae": 19.265,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 19.309,
+      "all_mae": 4.097,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 21.425
+    },
+    "0.175": {
+     "industrial1_drill": {
+      "dim_mae": 19.494,
+      "all_mae": 8.111,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 30.183,
+      "all_mae": 19.233,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 18.632,
+      "all_mae": 4.09,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 22.77
+    },
+    "0.2": {
+     "industrial1_drill": {
+      "dim_mae": 21.313,
+      "all_mae": 8.28,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 35.013,
+      "all_mae": 19.067,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 18.456,
+      "all_mae": 4.034,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 24.927
+    },
+    "0.225": {
+     "industrial1_drill": {
+      "dim_mae": 23.235,
+      "all_mae": 8.465,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 37.846,
+      "all_mae": 19.061,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 18.582,
+      "all_mae": 3.968,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 26.554
+    },
+    "0.25": {
+     "industrial1_drill": {
+      "dim_mae": 25.423,
+      "all_mae": 8.661,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 40.295,
+      "all_mae": 19.109,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 19.12,
+      "all_mae": 3.929,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 28.279
+    },
+    "0.275": {
+     "industrial1_drill": {
+      "dim_mae": 27.876,
+      "all_mae": 8.873,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 43.288,
+      "all_mae": 19.156,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 18.766,
+      "all_mae": 3.905,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 29.977
+    },
+    "0.3": {
+     "industrial1_drill": {
+      "dim_mae": 30.294,
+      "all_mae": 9.091,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 45.79,
+      "all_mae": 19.233,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 19.042,
+      "all_mae": 3.912,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 31.709
+    },
+    "0.325": {
+     "industrial1_drill": {
+      "dim_mae": 32.555,
+      "all_mae": 9.322,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 48.489,
+      "all_mae": 19.308,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 19.561,
+      "all_mae": 3.95,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 33.535
+    },
+    "0.35": {
+     "industrial1_drill": {
+      "dim_mae": 34.584,
+      "all_mae": 9.572,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 52.912,
+      "all_mae": 19.279,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 20.292,
+      "all_mae": 4.021,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 35.929
+    },
+    "0.375": {
+     "industrial1_drill": {
+      "dim_mae": 36.833,
+      "all_mae": 9.814,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 56.325,
+      "all_mae": 19.293,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 21.255,
+      "all_mae": 4.121,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 38.138
+    },
+    "0.4": {
+     "industrial1_drill": {
+      "dim_mae": 39.878,
+      "all_mae": 10.008,
+      "dim_share": 0.0432
+     },
+     "cluttered2": {
+      "dim_mae": 58.969,
+      "all_mae": 19.331,
+      "dim_share": 0.0365
+     },
+     "cluttered3": {
+      "dim_mae": 22.487,
+      "all_mae": 4.249,
+      "dim_share": 0.0278
+     },
+     "mean_dim_mae": 40.445
+    }
+   }
+  },
+  "gain_rule": "largest gain (step 0.005) with <= 0.1% of the goal picture clipped (synthesised), capped at 1 / (1 - a) = 1.1765 where MuJoCo saturates the sun's diffuse term"
+ },
+ "curve_model": "per channel y = 255 * srgb_encode(v / (1 + v)), v = floor + exp(log_exposure) * x ** gamma, x = raw / 255; params = [floor, log_exposure, gamma]; applied as a 256-entry table (lut_md5) to the RGB only, never to depth",
+ "curve_fit": "binned medians of Isaac's goal picture per grey level of the look-lit MuJoCo goal picture (bins with >= 20 pixels), weights sqrt(count), scipy.optimize.least_squares, bounds floor [0, 5], log_exposure [-5, 8], gamma [0.3, 6]",
+ "isaac_root": "/home/alessandro/genvs_ws/vssim_out/check1",
+ "scenes": {
+  "hollywood": {
+   "light_gain": 1.065,
+   "goal_clipped_share_raw_lit": 0.000984,
+   "gain_limited_by": "the clip budget (0.1% of the goal picture)",
+   "curve": {
+    "R": {
+     "params": [
+      0.1785634672639508,
+      2.4818343777436063,
+      2.349577891258335
+     ],
+     "bins": 216,
+     "weighted_rms_bin_residual": 7.615165653962007,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      0.17802251040519487,
+      2.4797043928982667,
+      2.3461995642832463
+     ],
+     "bins": 216,
+     "weighted_rms_bin_residual": 7.6454306954182085,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      0.17821667830962995,
+      2.4821518592614664,
+      2.346838748652408
+     ],
+     "bins": 216,
+     "weighted_rms_bin_residual": 7.623281127862528,
+     "monotone": true
+    },
+    "lut_md5": "55fc9f90f44486674e21835b05e1fdb5"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_goal.png",
+    "goal_md5": "c190c4569ea539d2f05fb12e626e9f00",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_sift_ransac_near_first.png",
+    "held_out_md5": "f838d3ac15c4b8f7084b34d8177e7408"
+   },
+   "look_lit_goal_md5": "ffffec1f6b6f8933c7ac21a9c3fb70a2",
+   "shadowclip_m": 2.786691823720255
+  },
+  "poster2": {
+   "light_gain": 1.0,
+   "goal_clipped_share_raw_lit": 0.012367,
+   "gain_limited_by": "no raise: already at gain 1 more than the clip budget of the goal picture is the texture's own white (255)",
+   "curve": {
+    "R": {
+     "params": [
+      0.3097591468158105,
+      3.3635109429641386,
+      3.3111939280817664
+     ],
+     "bins": 243,
+     "weighted_rms_bin_residual": 5.691604953332019,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      0.43161974078407345,
+      3.61175151403142,
+      3.8689835166127744
+     ],
+     "bins": 234,
+     "weighted_rms_bin_residual": 5.320151829503114,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      0.47366863590314495,
+      3.4758480668257015,
+      3.780234059525954
+     ],
+     "bins": 230,
+     "weighted_rms_bin_residual": 5.567993896811599,
+     "monotone": true
+    },
+    "lut_md5": "acf274fc6bdb1af851b6ea7417d624ad"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_goal.png",
+    "goal_md5": "9fda9fc02b45f5a4308d93f838515010",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_sift_ransac_near_first.png",
+    "held_out_md5": "24c8549e0dbfe7f55c88c6bca5196b7a"
+   },
+   "look_lit_goal_md5": "8375b7ddfd6b8d5271b4480fb1ec7fec",
+   "shadowclip_m": 2.786691823720255
+  },
+  "poster3": {
+   "light_gain": 1.175,
+   "goal_clipped_share_raw_lit": 0.0,
+   "gain_limited_by": "the sun's term saturating at 1 (the grid's last step below 1 / (1 - a))",
+   "curve": {
+    "R": {
+     "params": [
+      0.16654601337019792,
+      2.369666689576966,
+      2.5946020976230817
+     ],
+     "bins": 189,
+     "weighted_rms_bin_residual": 0.7327570524195832,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      0.16691859251521587,
+      2.3859041523216407,
+      2.6008308740106543
+     ],
+     "bins": 179,
+     "weighted_rms_bin_residual": 0.7585452005465722,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      0.145843430550327,
+      2.4399488927983857,
+      2.498312046618238
+     ],
+     "bins": 164,
+     "weighted_rms_bin_residual": 1.408178756066157,
+     "monotone": true
+    },
+    "lut_md5": "8a7e5a6a4e1094b9c1f4bf54737498af"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_goal.png",
+    "goal_md5": "1e6ad90b95f31c752b74361f4e928c6b",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_sift_ransac_near_first.png",
+    "held_out_md5": "86c54e90f013ed0ef82b59fc559266fe"
+   },
+   "look_lit_goal_md5": "26a5c988a3df321a729dd0052a7c015d",
+   "shadowclip_m": 2.786691823720255
+  },
+  "industrial1_drill": {
+   "light_gain": 1.175,
+   "goal_clipped_share_raw_lit": 5.7e-05,
+   "gain_limited_by": "the sun's term saturating at 1 (the grid's last step below 1 / (1 - a))",
+   "curve": {
+    "R": {
+     "params": [
+      0.021903500263680035,
+      2.0239057327140366,
+      2.0804042005677186
+     ],
+     "bins": 245,
+     "weighted_rms_bin_residual": 3.054799188519616,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      2.5815596856190595e-22,
+      1.726801921214454,
+      1.7102429650146125
+     ],
+     "bins": 191,
+     "weighted_rms_bin_residual": 5.196826651377782,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      8.284618248489928e-18,
+      1.544840063396872,
+      1.5289301327514835
+     ],
+     "bins": 197,
+     "weighted_rms_bin_residual": 6.476223246848622,
+     "monotone": true
+    },
+    "lut_md5": "61b0c65d277ec8fdca816545cadfcda7"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_goal.png",
+    "goal_md5": "cbff2ee755a49c489851a1391b93c419",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_sift_ransac_near_first.png",
+    "held_out_md5": "bbc55063253a38c3c494f4f2e3201ad9"
+   },
+   "look_lit_goal_md5": "65d4d2ac60d4919eff637e8eb60dfd3d",
+   "shadowclip_m": 1.672015094232153
+  },
+  "cluttered2": {
+   "light_gain": 1.175,
+   "goal_clipped_share_raw_lit": 0.000201,
+   "gain_limited_by": "the sun's term saturating at 1 (the grid's last step below 1 / (1 - a))",
+   "curve": {
+    "R": {
+     "params": [
+      0.0079929571055772,
+      1.557277638191238,
+      1.641297240223515
+     ],
+     "bins": 255,
+     "weighted_rms_bin_residual": 5.204720757842004,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      2.205433514191888e-17,
+      0.5855257221605024,
+      0.9546887045997234
+     ],
+     "bins": 247,
+     "weighted_rms_bin_residual": 9.735892305821361,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      0.015260805772838178,
+      0.4164986424222939,
+      0.7702675824096917
+     ],
+     "bins": 241,
+     "weighted_rms_bin_residual": 12.876947732102078,
+     "monotone": true
+    },
+    "lut_md5": "9cb6c8f8269f63ca905a16136e7d71ae"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_goal.png",
+    "goal_md5": "70898fed67d810f6ab6c583d9a7461c1",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_sift_ransac_near_first.png",
+    "held_out_md5": "d03bad10f3e0f10f937d68ab0a879817"
+   },
+   "look_lit_goal_md5": "c9b6f5ada9b5d121184cdb36d56b9795",
+   "shadowclip_m": 1.672015094232153
+  },
+  "cluttered3": {
+   "light_gain": 1.175,
+   "goal_clipped_share_raw_lit": 0.000285,
+   "gain_limited_by": "the sun's term saturating at 1 (the grid's last step below 1 / (1 - a))",
+   "curve": {
+    "R": {
+     "params": [
+      0.2150460251223036,
+      2.294180580013796,
+      2.363277740002733
+     ],
+     "bins": 251,
+     "weighted_rms_bin_residual": 4.257677628015987,
+     "monotone": true
+    },
+    "G": {
+     "params": [
+      0.03494048212641573,
+      1.9150577580178767,
+      1.6610340769833314
+     ],
+     "bins": 246,
+     "weighted_rms_bin_residual": 4.807672139518406,
+     "monotone": true
+    },
+    "B": {
+     "params": [
+      0.024361699421458268,
+      1.8521258945543062,
+      1.824936931877214
+     ],
+     "bins": 240,
+     "weighted_rms_bin_residual": 3.328843128236507,
+     "monotone": true
+    },
+    "lut_md5": "48aa0abb9559f2bdd5d98e5b07014c1c"
+   },
+   "isaac_source": {
+    "goal": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_goal.png",
+    "goal_md5": "f5ab1a653e7815023202dad5db1bde1f",
+    "held_out_not_fitted": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_sift_ransac_near_first.png",
+    "held_out_md5": "89e5922af71ba8162309458d9cd2116e"
+   },
+   "look_lit_goal_md5": "1e4e6456398ab4c66189271b1fa60ec4",
+   "shadowclip_m": 1.672015094232153
+  }
+ }
+}
