@@ -787,10 +787,12 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   `--allow-gpu` (CUDA DINOv2, as Isaac ran it) to close the one untested suspect, CPU vs CUDA
   tokens; never while the evaluation runs.
 
-**U10 — Docs** (`README.md` § "The benchmark and the baselines (copied from vs-sim)",
-`docs/BRIDGE.md`, `vsbench/vs/PROVENANCE.md`, the `results/bridge/*.md` reports): what it is,
-what it is not (§6), the environment, the cache, the pin and the drift procedure, the owner's
-decisions. The owner-facing HTML view is the parent agent's call (workspace rule 7).
+**U10 — Docs** (`README.md`, `docs/PORT_NOTES.md`, `vsbench/vs/PROVENANCE.md`, the
+`results/bridge/*.md` reports) *(done, 2026-10-23)*: what it is, what it is not (§6), the
+environment, the cache, the pin and the drift procedure, the owner's decisions. The developer
+notes are `docs/PORT_NOTES.md` (the plan once named a `docs/BRIDGE.md`; it was never made); the
+README is the short user-facing page. The owner-facing HTML view is the parent agent's call
+(workspace rule 7).
 
 **Standing procedure (not a unit) — pulling a vs-sim fix**: §2.4 item 3; always a whole-pin
 move, always `pytest tests/vs` green, always named in the commit message.
