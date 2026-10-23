@@ -1,0 +1,355 @@
+{
+  "allow_dirty": true,
+  "allow_no_git": false,
+  "arm_build_s": 0.001,
+  "bridge_driver": "tools/u4_rooms.py smoke",
+  "bridge_env": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "LP_NUM_THREADS": "2",
+    "VSBENCH_SOFTWARE_GL": "1",
+    "allow_gpu": false,
+    "cuda_available": false,
+    "nvidia_smi": "hidden",
+    "torch": "2.14.1+cpu",
+    "torch_interop_threads": 2,
+    "torch_threads": 2
+  },
+  "cuda_matmul_allow_tf32": false,
+  "cuda_version": null,
+  "cudnn_allow_tf32": true,
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": false,
+  "cudnn_version": null,
+  "finished_utc": "2026-10-23T00:02:50Z",
+  "git_available": true,
+  "git_commit": "adf655ceb0a5d6e2c805e71b878789a9c8b69699",
+  "git_dirty": true,
+  "git_dirty_paths": [
+    "../results/bridge/u4/"
+  ],
+  "goal_capture_keep": "last",
+  "goal_frame_md5": "af1f61b7d2d3c2f58e1f324061b97f8d",
+  "goal_render_warmup": 1,
+  "goal_render_warmup_protocol": 8,
+  "goal_render_warmup_reason": "1 capture, not the protocol's 8: the 8 settle RTX render history; MuJoCo frames are deterministic (two draws of one pose are the same bytes)",
+  "goal_settle_series": {
+    "capture_retries": [
+      0
+    ],
+    "depth_md5": [
+      "7fdcf41fc5f429e3fd71cdd4cfd9227a"
+    ],
+    "diff_prev": [
+      null
+    ],
+    "keep": "last",
+    "kept_index": 0,
+    "n_captures": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "rgb_md5": [
+      "af1f61b7d2d3c2f58e1f324061b97f8d"
+    ],
+    "rgb_mean": [
+      125.512487
+    ]
+  },
+  "gpu": null,
+  "gpu_driver": null,
+  "hostname": "4090",
+  "matcher_tie_order": "stable (module default; the config does not state it)",
+  "name": "cluttered3_sift_ransac",
+  "python_version": "3.12.3",
+  "render_mode": "mujoco-llvmpipe",
+  "run_dir": "/home/alessandro/genvs_ws/vs_sim_light/results/bridge/u4/cluttered3_sift_ransac/2026-10-22_cluttered3_sift_ransac",
+  "scene_meta": {
+    "bbox_usd_rule": {
+      "max": [
+        0.4300538845563558,
+        0.47743366777261254,
+        0.1645720536810762
+      ],
+      "min": [
+        -0.5836422235542452,
+        -0.36132552378464355,
+        -0.049855018492680994
+      ]
+    },
+    "build_s": 3.792,
+    "compile_s": 5.518,
+    "goal_check": {
+      "all_pass": true,
+      "d4": "D-4 (a) default: the frozen goal wins on a miss, the residual is recorded",
+      "derived": {
+        "bbox_max": [
+          0.4300538845563558,
+          0.47743366777261254,
+          0.1645720536810762
+        ],
+        "bbox_min": [
+          -0.5836422235542452,
+          -0.36132552378464355,
+          -0.049855018492680994
+        ],
+        "cam_R_opt": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ],
+        "cam_pos": [
+          -0.07679416949894471,
+          0.05805407199398449,
+          1.449891111232383
+        ],
+        "distance_m": 1.2853190575513067,
+        "rule": "scene_view_goal_pose(cam, scene_bbox(placed, 'usd'), goal block)"
+      },
+      "files": [
+        {
+          "ddist_mm": 0.0,
+          "distance_m": 1.2853190575513067,
+          "dpos_mm": 6.206335383118183e-14,
+          "drot_deg": 0.0,
+          "file": "v2",
+          "pass": true,
+          "refusal": null
+        }
+      ],
+      "goal_rule": "frozen_on_miss",
+      "tolerance": {
+        "dist_m": 0.001,
+        "pos_m": 0.0005,
+        "rot_deg": 0.05
+      },
+      "used": "derived"
+    },
+    "goal_distance_m": 1.2853190575513067,
+    "ground": {
+      "build": "one Plane, the texture shown once (row 0 at world +Y)",
+      "size_m": 2.4,
+      "texture": "/workspace/assets/cluttered3/ground.png",
+      "texture_host_path": "/home/alessandro/genvs_ws/assets/cluttered3/ground.png",
+      "texture_wh": [
+        4096,
+        4096
+      ],
+      "tile_period_m": 2.4,
+      "uv_tiles": 1.0,
+      "z_m": 0.0
+    },
+    "kind": "multi_object",
+    "layout_file": "configs/layouts/cluttered3.json",
+    "lighting": {
+      "ambient": 0.2,
+      "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+      "sun_cast_shadow": true,
+      "sun_direction": [
+        0.25,
+        -0.433012702,
+        -0.866025404
+      ],
+      "sun_intensity": 0.923760431
+    },
+    "lost": "PBR (roughness 0.6 ground, object materials), normal maps, MDL; diffuse texture + MuJoCo's own shading only (PORT_PLAN section 5)",
+    "object_cache": "/home/alessandro/genvs_ws/vsbench_assets/objects",
+    "objects": [
+      {
+        "faces": 16384,
+        "instance_id": "ycb/003_cracker_box",
+        "pos": [
+          -0.1474657952785492,
+          0.22881057858467102,
+          0.0957525297999382
+        ],
+        "quat_wxyz": [
+          0.9159950017929077,
+          -0.008084085769951344,
+          -0.020265299826860428,
+          -0.40059590339660645
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8411
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/004_sugar_box",
+        "pos": [
+          0.26744726300239563,
+          0.2346847653388977,
+          0.06379891186952591
+        ],
+        "quat_wxyz": [
+          0.8618665933609009,
+          0.014804537408053875,
+          -0.011975822038948536,
+          0.5067776441574097
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8393
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/005_tomato_soup_can",
+        "pos": [
+          -0.5154359478724563,
+          0.12288566359278627,
+          -0.05014599859714508
+        ],
+        "quat_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8560
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/008_pudding_box",
+        "pos": [
+          0.26353898644447327,
+          -0.2879345417022705,
+          0.0004000011831521988
+        ],
+        "quat_wxyz": [
+          0.5255056023597717,
+          -0.5326540470123291,
+          -0.47197943925857544,
+          0.46621787548065186
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8442
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/010_potted_meat_can",
+        "pos": [
+          -0.12681199610233307,
+          -0.09066364169120789,
+          0.05133667588233948
+        ],
+        "quat_wxyz": [
+          0.9155564308166504,
+          -0.005652361549437046,
+          0.02217170223593712,
+          -0.4015381634235382
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8516
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/011_banana",
+        "pos": [
+          0.1658112108707428,
+          0.0390290729701519,
+          0.028279416263103485
+        ],
+        "quat_wxyz": [
+          0.6684718132019043,
+          0.35117167234420776,
+          0.543971061706543,
+          0.3659501373767853
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8368
+      },
+      {
+        "faces": 16384,
+        "instance_id": "ycb/024_bowl",
+        "pos": [
+          -0.4383057951927185,
+          0.37518900632858276,
+          0.00014716759324073792
+        ],
+        "quat_wxyz": [
+          0.5608980655670166,
+          -0.5651299357414246,
+          0.4275314509868622,
+          -0.42806383967399597
+        ],
+        "scale": 1.0,
+        "source": "layout",
+        "texture_wh": [
+          4096,
+          4096
+        ],
+        "vertices": 8412
+      }
+    ],
+    "render_camera": {
+      "convention": "isaac_half_pixel",
+      "cx": 959.5,
+      "cy": 539.5,
+      "depth": "optical z (distance_to_image_plane)",
+      "depth_noise": null,
+      "far_m": 10.0,
+      "fx": 1406.748094934653,
+      "fy": 1406.748094934653,
+      "height": 1080,
+      "near_m": 0.05,
+      "width": 1920
+    },
+    "render_mode": "mujoco-llvmpipe",
+    "renderer": {
+      "MUJOCO_EGL_DEVICE_ID": "1",
+      "MUJOCO_GL": "egl",
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "mujoco": "3.13.0",
+      "variant": "mujoco-egl"
+    },
+    "samples": 4
+  },
+  "seed": 20260902,
+  "start_source": "check_baselines near_start: starts.sample_near(goal, n=1)[0], seed 20260902 (no protocol near set for the rooms)",
+  "timestamp_utc": "2026-10-22T23:59:56Z",
+  "torch_num_interop_threads": 2,
+  "torch_num_threads": 2,
+  "torch_version": "2.14.1+cpu",
+  "vsbench_commit": "adf655ceb0a5d6e2c805e71b878789a9c8b69699",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vssim_version": "0.1.0"
+}
