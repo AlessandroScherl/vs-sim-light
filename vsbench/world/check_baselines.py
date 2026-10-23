@@ -47,6 +47,12 @@ What the bridge adds, and nothing else:
 * ``--frames full | preview | none``: ``full`` writes vs-sim's goal frame, goal depth and
   first live frame; ``preview`` (what is committed) quarter-size PNGs and the depth's md5 only.
 
+``--mask none|objects|<file.png>`` (2026-10-23, ``vsbench.world.masks``, as ``fly run``): every
+protocol arm flies its masked cell (identity, near and far alike: the identity step's reset,
+which the copied check makes without a mask, gets the same mask); each arm entry carries
+``goal_mask`` (mode, source, share) and every record the mask fields. Refused with
+``--arm-plugin`` (the copied plugin builder has no mask seam).
+
 ``summary`` merges one or more ``check.json`` (one per scene process), refuses a mix of
 renderers (PORT_PLAN D-9), and writes ``summary.json`` + ``README.md`` with Isaac's own
 ``check_baselines`` numbers beside each cell, read from ``$VSBENCH_ISAAC_CHECKS`` (default
@@ -227,6 +233,9 @@ def build_parser() -> argparse.ArgumentParser:
                     help="an importable module stating ARM_IDS, build() and describe() "
                          "(vsbench.world.method_arm flies the registered vsbench methods)")
     # the bridge's
+    ap.add_argument("--mask", default="none",
+                    help="none | objects | <file.png>: filter every arm's matches with a goal "
+                         "mask (vsbench.world.masks; as fly run --mask)")
     ap.add_argument("--look", default=None, choices=["isaac_fit_v1", "raw"],
                     help="the picture (vsbench.world.look; default isaac_fit_v1)")
     ap.add_argument("--device", default="cpu", help="matcher.device for encoder arms")
@@ -248,6 +257,11 @@ def validate_args(args, ref, protocol):
 
     if args.clean_film and not args.telemetry:
         raise SystemExit("--clean-film needs --telemetry (the debug viewer needs both)")
+    from vsbench.world import masks
+
+    if masks.parse(getattr(args, "mask", "none"))[0] != "none" and args.arm_plugin:
+        raise SystemExit("--mask with --arm-plugin: the copied plugin builder has no goal-mask "
+                         "seam; fly the methods with `python -m vsbench fly --mask`")
     if args.far_set not in benchmark.START_SETS:
         raise SystemExit(f"--far-set {args.far_set!r} is not one of {sorted(benchmark.START_SETS)}")
     budgets = ref.parse_budgets(args.budget)
@@ -285,6 +299,7 @@ def run(args) -> int:
                      "far": args.far, "far_set": args.far_set,
                      "perturb": args.perturb, "perturb_seed": args.perturb_seed,
                      "budgets": budgets, "outline_iou": bool(args.outline_iou),
+                     **({"mask": args.mask} if args.mask != "none" else {}),
                      "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     if args.telemetry or args.clean_film:
         results.update(telemetry=bool(args.telemetry), clean_film=bool(args.clean_film))
@@ -304,6 +319,9 @@ def run(args) -> int:
     records_path.write_text("", encoding="utf-8")
     rows = []
     t_run = time.monotonic()
+    from vsbench.world import masks
+
+    scene_gm = [masks.GoalMask("none")]      # the current scene's --mask, resolved on its goal
 
     def flush():
         results["bridge"]["cpu_s"] = _cpu_s()
@@ -314,6 +332,7 @@ def run(args) -> int:
         if rec is None:
             return
         rec = dict(rec, check_row=row, check_arm=arm_id, check_scene=scene.name, **provenance)
+        scene_gm[0].apply(rec)
         rec["render_mode"] = scene.render_mode
         with records_path.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(rec, default=_jsonable) + "\n")
@@ -329,6 +348,8 @@ def run(args) -> int:
                 scene.reset(scene.goal_pose)
                 rgb, depth, _ = scene.render()            # the cached goal frame
                 _write_goal_frames(out, name, rgb, depth, args.frames)
+                scene_gm[0] = gm = masks.resolve(args.mask, scene, depth)
+                args._gm = gm
                 g = scene.goal_pose
                 capture = scene.goal_capture_record()
                 results["scenes"][name] = {
@@ -342,6 +363,10 @@ def run(args) -> int:
                     "look_curve_id": capture.get("look_curve_id"),
                     "look_curve_md5": capture.get("look_curve_md5"),
                     "goal_check": getattr(scene, "goal_check", None)}
+                if gm.mode != "none":
+                    results["scenes"][name]["goal_mask"] = {
+                        "mode": gm.mode, "source": gm.source, "share": gm.share,
+                        "mask_md5": gm.mask_md5, "resized_from": gm.resized_from}
                 print(f"[check] {name}: goal d={scene.working_distance:.6f} m, "
                       f"{scene.render_mode} ({results['scenes'][name]['gl_renderer']}), look "
                       f"{capture.get('look')}, goal md5 {scene.goal_frame_md5}", flush=True)
@@ -377,16 +402,27 @@ def _check_arm(args, ref, fly, protocol, scene, spec, arm_id, sources, plugin, b
             arm, cfg, described = ref.build_plugin_arm(plugin, arm_id, intrinsics=scene.intrinsics,
                                                        scene_name=name, scene_spec=spec)
         else:
-            cfg = fly.arm_config(protocol, arm_id, device=args.device)
-            arm = fly.build(protocol, arm_id, cfg, intrinsics=scene.intrinsics, scene_name=name,
+            from vsbench.world import masks
+
+            gm = getattr(args, "_gm", None) or masks.GoalMask("none")
+            cell, mask_over = masks.arm_cell(protocol, arm_id, gm)
+            cfg = fly.arm_config(protocol, cell, device=args.device,
+                                 goal_mask="objects" if mask_over else None)
+            arm = fly.build(protocol, cell, cfg, intrinsics=scene.intrinsics, scene_name=name,
                             scene_spec=spec)
+            masks.attach_goal_mask(arm, gm)
+            if gm.mode != "none":
+                described = {"protocol_cell": cell, "goal_mask": gm.mode,
+                             "goal_mask_source": gm.source}
     except Exception as exc:  # noqa: BLE001 - one broken arm must not end the night
         print(f"[check] {name} x {arm_id}: BUILD FAILED: {exc!r}", flush=True)
         results["scenes"][name]["arms"][arm_id] = {"build_error": repr(exc),
                                                    "render_mode": scene.render_mode}
         return (name, arm_id, None, None, None)
     entry: dict = {"label": arm.name}
-    if described is not None:
+    if described is not None and "goal_mask" in described:
+        entry["goal_mask"] = described
+    elif described is not None:
         entry["plugin"] = described
     roi_prompt = (getattr(arm, "record_fields", dict)() or {}).get("roi_prompt")
     if roi_prompt is not None:

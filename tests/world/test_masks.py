@@ -376,3 +376,15 @@ def test_driver_file_mask_on_a_poster(tmp_path):
                         str(tmp_path / "p")], cwd=REPO, env=_env(), capture_output=True,
                        text=True, timeout=900)
     assert q.returncode != 0 and "ground plane" in q.stderr
+
+
+def test_check_baselines_takes_the_flag():
+    from vsbench.world import check_baselines as cb
+
+    args = cb.build_parser().parse_args(["--scenes", "hollywood", "--arms", "sift_ransac",
+                                         "--out", "x", "--mask", "objects"])
+    assert args.mask == "objects"
+    bad = cb.build_parser().parse_args(["--scenes", "hollywood", "--out", "x", "--mask",
+                                        "objects", "--arm-plugin", "vsbench.world.method_arm"])
+    with pytest.raises(SystemExit, match="arm-plugin"):
+        cb.validate_args(bad, cb.reference(), fly.load_protocol())
