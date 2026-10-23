@@ -591,6 +591,18 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   grey inside the shadow, drill 61 vs 54, cluttered3 99 vs 98); Isaac's picture is a little
   softer (denoiser); cluttered2's ground keeps a 19-level per-pixel difference. A new scene
   (no Isaac goal picture on disk) has no curve: it flies with `--look raw` until one is fitted.
+- Held out at a far pose, report only (final review, 2026-10-23; `tools/u4b_look.py
+  capped_first`, `results/bridge/u4b_look.json` → `capped30_first_frame`, sheet
+  `results/bridge/u4b_capped30_first_frame.jpg`; no gate): Isaac's first live frame of the
+  capped30 start `w1_034` exists only as frame 1 of vs-sim's check3 films (half scale, JPEG then
+  H.264, matched points and arrows drawn), so both sides are compared at half scale outside a
+  dilated mask of the overlay colours (91–96 % of the pixels). hollywood: mean grey MuJoCo look
+  185.4 vs Isaac 179.1 (raw 91.2), histogram distance 18.8 (raw 87.9); cluttered2: 119.4 vs
+  122.0 (raw 31.3), histogram distance 20.6 (raw 90.7). The film's own artefact floor (its goal half vs
+  Isaac's goal PNG, same statistic) is 0.5 / 1.9 grey levels. So at a far pose the look keeps
+  most of its gain over raw but sits at about 0.2× raw's distance, not the 0.06–0.09× of the held-out near view;
+  part of it is what the camera sees beyond the scene: off the table Isaac shows light grey
+  where MuJoCo shows its dark background (cluttered2: the left edge of the MuJoCo half of the sheet).
 
 **U5 — Baseline parity: mock vs MuJoCo, ViT-VS and ART-VS** (`tools/u5_parity.py`, `results/bridge/u5/parity.md`, `results/bridge/u5_parity.json`) *(accepted with findings, 2026-10-23)*
 - Do: fly `vitvs_dinov3`, `vitvs_dinov2`, `artvs` (cpu) on hollywood from three `near60` and

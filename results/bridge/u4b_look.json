@@ -1,4 +1,147 @@
 {
+  "capped30_first_frame": {
+    "gate": null,
+    "note": "U4b held out at a far pose, REPORT ONLY (no gate): Isaac's first live frame of the capped30 start w1_034 (hollywood, cluttered2; the only capped30 first frames on disk are frame 1 of vs-sim's check3 films, read only) against MuJoCo raw and isaac_fit_v1 at the same pose. The film frame is half scale, JPEG then H.264, with the matched points and arrows drawn on it: both sides are compared at half scale (INTER_AREA, as the film) outside a dilated mask of the overlay colours. The film-artefact floor is the same statistic between the film's goal half and Isaac's goal PNG of the same run (also half scale, masked).",
+    "scenes": {
+      "cluttered2": {
+        "compared_px_share": 0.9111,
+        "film_artefact_floor": {
+          "hist_emd_mean": 1.903,
+          "mean_grey_diff": -1.09,
+          "pixel_mae": 5.307,
+          "vs": "$VSBENCH_ISAAC_GOALS/../check3/cluttered2_goal.png"
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "isaac_film": "$VSBENCH_ISAAC_GOALS/../check3/films/cluttered2_sift_ransac_w1_034/episode.mp4",
+        "isaac_film_md5": "6c343e9a70d677d520ed50f53eb1ff4c",
+        "isaac_fit_v1": {
+          "hist_emd_mean": 20.614,
+          "hist_emd_rgb": [
+            14.814,
+            22.365,
+            24.663
+          ],
+          "mean_grey": {
+            "isaac": 121.96,
+            "mujoco": 119.44
+          },
+          "mean_grey_diff": -2.52,
+          "mean_rgb": {
+            "isaac": [
+              156.76,
+              110.8,
+              98.32
+            ],
+            "mujoco": [
+              150.12,
+              108.9,
+              99.29
+            ]
+          },
+          "pixel_mae": 35.171
+        },
+        "raw": {
+          "hist_emd_mean": 90.661,
+          "hist_emd_rgb": [
+            99.686,
+            86.0,
+            86.297
+          ],
+          "mean_grey": {
+            "isaac": 121.96,
+            "mujoco": 31.3
+          },
+          "mean_grey_diff": -90.66,
+          "mean_rgb": {
+            "isaac": [
+              156.76,
+              110.8,
+              98.32
+            ],
+            "mujoco": [
+              57.08,
+              24.8,
+              12.02
+            ]
+          },
+          "pixel_mae": 90.662
+        },
+        "render_mode": "mujoco-llvmpipe",
+        "start_deg": 81.75,
+        "start_id": "w1_034",
+        "start_mm": 479.47
+      },
+      "hollywood": {
+        "compared_px_share": 0.9552,
+        "film_artefact_floor": {
+          "hist_emd_mean": 0.469,
+          "mean_grey_diff": -0.41,
+          "pixel_mae": 1.791,
+          "vs": "$VSBENCH_ISAAC_GOALS/../check3/hollywood_goal.png"
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "isaac_film": "$VSBENCH_ISAAC_GOALS/../check3/films/hollywood_sift_ransac_w1_034/episode.mp4",
+        "isaac_film_md5": "84e0daf8e0b50ea991d03f015957de32",
+        "isaac_fit_v1": {
+          "hist_emd_mean": 18.784,
+          "hist_emd_rgb": [
+            18.508,
+            18.68,
+            19.164
+          ],
+          "mean_grey": {
+            "isaac": 179.08,
+            "mujoco": 185.39
+          },
+          "mean_grey_diff": 6.31,
+          "mean_rgb": {
+            "isaac": [
+              179.79,
+              179.01,
+              178.43
+            ],
+            "mujoco": [
+              185.39,
+              185.38,
+              185.39
+            ]
+          },
+          "pixel_mae": 21.512
+        },
+        "raw": {
+          "hist_emd_mean": 87.926,
+          "hist_emd_rgb": [
+            88.644,
+            87.858,
+            87.276
+          ],
+          "mean_grey": {
+            "isaac": 179.08,
+            "mujoco": 91.15
+          },
+          "mean_grey_diff": -87.93,
+          "mean_rgb": {
+            "isaac": [
+              179.79,
+              179.01,
+              178.43
+            ],
+            "mujoco": [
+              91.15,
+              91.15,
+              91.15
+            ]
+          },
+          "pixel_mae": 87.936
+        },
+        "render_mode": "mujoco-llvmpipe",
+        "start_deg": 83.38,
+        "start_id": "w1_034",
+        "start_mm": 479.47
+      }
+    },
+    "vsbench_commit": "c1f91a8ace228a4272d9386a7a20d52453ac1b7a+dirty"
+  },
   "measure": {
     "how": "each scene x look in a fresh process (tools/u4b_look.py _measure): MujocoScene, the goal capture, the near start's frame, 4 redraws of that frame (renderer + curve timed; the curve alone timed too); statistics against Isaac's pictures (read only)",
     "isaac_repeats": [
@@ -1722,5 +1865,5 @@
     }
   },
   "unit": "U4b - match Isaac's look (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 09:33:35 +0200"
+  "written": "2026-10-23 17:59:36 +0200"
 }

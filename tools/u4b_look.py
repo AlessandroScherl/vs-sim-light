@@ -607,6 +607,124 @@ def cmd_smoke_table(args) -> int:
     return 0
 
 
+#: U4b held out, report only (final review, 2026-10-23): Isaac's first live frame of a capped30
+#: start exists only inside its check3 films (``check_baselines --film``, read only)
+CAPPED_SCENES = ("hollywood", "cluttered2")
+CAPPED_START = "w1_034"
+CAPPED_FILM = "{scene}_sift_ransac_" + CAPPED_START
+#: the film's overlay colours (``vsbench/vs/bench/films.py``, BGR there): goal targets green,
+#: matched points red, arrows orange - as RGB
+OVERLAY_RGB = ((80, 200, 80), (230, 0, 0), (255, 160, 60))
+
+
+def cmd_one_capped(args) -> int:
+    import numpy as np
+
+    from vsbench.vs import benchmark
+    from vsbench.vs.scene import Pose
+    from vsbench.world import fly
+    from vsbench.world.mujoco_scene import MujocoScene
+
+    fly.station_guard(2)
+    start = next(s for s in benchmark.select_starts(args.scene, "capped30")
+                 if s["start_id"] == CAPPED_START)
+    with MujocoScene(args.scene, look=args.look) as sc:
+        fly.require_software_gl(sc)
+        sc.reset(Pose.from_start(start))
+        rgb, _depth, _ = sc.render()
+        CACHE.mkdir(parents=True, exist_ok=True)
+        path = CACHE / f"capped_{args.scene}_{args.look}.npz"
+        np.savez_compressed(path, live=rgb)
+        out = {"scene": args.scene, "look": args.look, "path": str(path), "start_id": CAPPED_START,
+               "start_mm": round(float(start["pos_err_m"]) * 1e3, 2),
+               "start_deg": round(float(start["rot_err_deg"]), 2),
+               "gl_renderer": sc.renderer.gl_renderer, "render_mode": sc.render_mode}
+    print("U4B " + json.dumps(out, default=str), flush=True)
+    return 0
+
+
+def _film_first_frame(path: Path):
+    """Frame 1 of an Isaac film (read only): (caption-free goal half, live half), RGB, half
+    scale - the copied ``compose_match_frame`` layout: a 34-row caption bar, goal | live."""
+    import imageio_ffmpeg
+    import numpy as np
+
+    r = imageio_ffmpeg.read_frames(str(path))
+    meta = next(r)
+    w, h = meta["size"]
+    f = np.frombuffer(next(r), np.uint8).reshape(h, w, 3).copy()
+    r.close()
+    body = f[34:]
+    return body[:, : w // 2], body[:, w // 2:]
+
+
+def _overlay_mask(img, dilate: int = 3):
+    """Pixels near the film's overlay colours (H.264 smears them; dilated)."""
+    import cv2
+    import numpy as np
+
+    x = img.astype(np.float64)
+    near = np.zeros(img.shape[:2], bool)
+    for c in OVERLAY_RGB:
+        near |= np.linalg.norm(x - np.asarray(c, float), axis=2) < 80.0
+    k = np.ones((2 * dilate + 1, 2 * dilate + 1), np.uint8)
+    return cv2.dilate(near.astype(np.uint8), k).astype(bool)
+
+
+def cmd_capped_first(args) -> int:
+    """U4b held out at a far pose, REPORT ONLY (no gate): Isaac's first live frame of the
+    capped30 start w1_034 (hollywood, cluttered2; the only capped30 first frames on disk are
+    frame 1 of vs-sim's check3 films, read only) against MuJoCo raw and isaac_fit_v1 at the same
+    pose. The film frame is half scale, JPEG then H.264, with the matched points and arrows
+    drawn on it: both sides are compared at half scale (INTER_AREA, as the film) outside a
+    dilated mask of the overlay colours. The film-artefact floor is the same statistic between
+    the film's goal half and Isaac's goal PNG of the same run (also half scale, masked)."""
+    import cv2
+    import numpy as np
+
+    from vsbench.world.fly import vsbench_commit
+
+    commit = vsbench_commit()
+    root = ISAAC.parent / "check3"
+    rows = {}
+    for s in CAPPED_SCENES:
+        film = root / "films" / CAPPED_FILM.format(scene=s) / "episode.mp4"
+        if not film.exists():
+            rows[s] = {"isaac": None, "note": f"no Isaac film at {film}"}
+            continue
+        goal_half, live_half = _film_first_frame(film)
+        mask = ~_overlay_mask(live_half)
+        runs = {lk: _child(["_capped", s, lk]) for lk in ("raw", LOOK)}
+        half = (live_half.shape[1], live_half.shape[0])
+        row = {"isaac_film": str(film).replace(str(ISAAC.parent), "$VSBENCH_ISAAC_GOALS/.."),
+               "isaac_film_md5": _md5(film), "start_id": CAPPED_START,
+               "start_mm": runs["raw"]["start_mm"], "start_deg": runs["raw"]["start_deg"],
+               "gl_renderer": runs[LOOK]["gl_renderer"], "render_mode": runs[LOOK]["render_mode"],
+               "compared_px_share": round(float(mask.mean()), 4)}
+        for lk, r in runs.items():
+            m = cv2.resize(np.load(r["path"])["live"], half, interpolation=cv2.INTER_AREA)
+            row[lk] = picture_stats(m, live_half, mask)
+        iso, ip = _isaac(s, "goal", root)
+        if iso is not None:
+            gm = ~_overlay_mask(goal_half)
+            g = cv2.resize(iso, (goal_half.shape[1], goal_half.shape[0]), interpolation=cv2.INTER_AREA)
+            st = picture_stats(goal_half, g, gm)
+            row["film_artefact_floor"] = {"vs": str(ip).replace(str(ISAAC.parent), "$VSBENCH_ISAAC_GOALS/.."),
+                                          "mean_grey_diff": st["mean_grey_diff"],
+                                          "hist_emd_mean": st["hist_emd_mean"],
+                                          "pixel_mae": st["pixel_mae"]}
+        rows[s] = row
+        print(f"[u4b] capped30 {s} {CAPPED_START}: mean grey raw {row['raw']['mean_grey']['mujoco']:.1f} "
+              f"look {row[LOOK]['mean_grey']['mujoco']:.1f} isaac {row['raw']['mean_grey']['isaac']:.1f} | "
+              f"hist EMD raw {row['raw']['hist_emd_mean']:.1f} look {row[LOOK]['hist_emd_mean']:.1f} | "
+              f"film floor EMD {row.get('film_artefact_floor', {}).get('hist_emd_mean')} "
+              f"({row['compared_px_share'] * 100:.1f} % of the pixels compared)", flush=True)
+    _merge_record("capped30_first_frame", {
+        "scenes": rows, "vsbench_commit": commit, "gate": None,
+        "note": " ".join(cmd_capped_first.__doc__.split())})
+    return 0
+
+
 def _near_pose(scene: str):
     from vsbench.vs import starts as startsmod
     from vsbench.vs.scene import Pose
@@ -634,6 +752,12 @@ def main(argv=None) -> int:
     lt.add_argument("--a", type=float, required=True)
     lt.add_argument("--G", type=float, required=True)
     lt.set_defaults(fn=cmd_one_lit)
+    cf = sub.add_parser("capped_first", help="report only: Isaac's first capped30 frame vs MuJoCo")
+    cf.set_defaults(fn=cmd_capped_first)
+    oc = sub.add_parser("_capped")
+    oc.add_argument("scene")
+    oc.add_argument("look")
+    oc.set_defaults(fn=cmd_one_capped)
     m = sub.add_parser("measure")
     m.add_argument("--scenes", nargs="+", default=list(SCENES))
     m.set_defaults(fn=cmd_measure)
