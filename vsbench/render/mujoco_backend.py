@@ -33,11 +33,17 @@ _DEPTH_CTX_SHADOWSIZE = 64
 
 class MujocoRenderer:
     def __init__(self, scene: SceneSpec, cam: CameraModel, gl: str = "egl", samples: int = 4,
-                 shadowsize: int = 4096, shadowclip_m: float | None = None):
+                 shadowsize: int = 4096, shadowclip_m: float | None = None,
+                 stat_extent: float | None = None, stat_center=None):
         """``shadowsize``: the shadow map's side in texels. ``shadowclip_m``: half the side,
         in metres, of the square a directional light's shadow map covers (centred on the
         light's line through the world origin); ``None`` keeps MuJoCo's default
-        (``vis.map.shadowclip = 1``, i.e. one ``stat.extent``)."""
+        (``vis.map.shadowclip = 1``, i.e. one ``stat.extent``). ``stat_extent`` /
+        ``stat_center``: pin MuJoCo's model statistics (``<statistic extent= center=>``)
+        instead of letting the compiler derive them from the geometry - the clipping planes
+        and the shadow clip are stored relative to ``stat.extent``, so a scene edited by the
+        perturbation verbs (``vsbench.world.perturb_world``) keeps its unedited scene's
+        values and draws its unchanged pixels exactly as before; ``None`` = MuJoCo's own."""
         want = gl.lower()
         have = os.environ.get("MUJOCO_GL", "").lower()
         if "mujoco" in sys.modules and have and have != want:
@@ -100,6 +106,10 @@ class MujocoRenderer:
         # with integer indices at pixel centres.
         c.principal_pixel = (W / 2.0 - cam.cx - 0.5, H / 2.0 - cam.cy - 0.5)
 
+        if stat_extent is not None:
+            spec.stat.extent = float(stat_extent)
+        if stat_center is not None:
+            spec.stat.center = tuple(float(c) for c in stat_center)
         self.model = spec.compile()
         model = self.model
         model.vis.map.znear = cam.near / model.stat.extent

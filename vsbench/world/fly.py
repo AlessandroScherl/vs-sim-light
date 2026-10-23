@@ -36,6 +36,13 @@ What the bridge adds, and nothing else:
   resolved config; ``max_iter`` on the record); ``--film`` writes the copied
   ``FilmWriter``'s match film. Start sets: the protocol's only, as vs-sim's driver.
 
+``--perturb <mode>`` / ``--perturb-seed`` (port unit U8; vs-sim's ``fly.py run`` flags, same
+default seed 20260918): the copied ``vsbench.vs.bench.perturb.build(mode, seed, spec)`` handed
+to every episode, applied after the goal capture; the world verbs are
+``vsbench.world.perturb_world``'s (an edit recompiles the MuJoCo model; the scene's look and
+goal picture stay the unedited ones). A perturbed record adds ``perturb_mode``,
+``perturb_seed`` and ``world_compiles`` (the episode's recompiles: seconds, RSS).
+
 ``--method <name> [...]`` (port unit U6a) flies a registered vsbench method through
 ``vsbench.world.method_arm.MethodArm`` on the same loop, scene, starts and record path: the
 config is ``vsbench/world/configs/external_method.yaml`` (``--param key=value`` for the
@@ -318,6 +325,11 @@ def cmd_run(args) -> int:
                   "vsbench_commit_rule": VSBENCH_COMMIT_RULE}
     out_root.mkdir(parents=True, exist_ok=True)
     summary_rows = []
+    from vsbench.vs.bench import perturb as perturbmod
+
+    pert = perturbmod.build(args.perturb or "none", seed=int(args.perturb_seed),
+                            spec=specs[args.scene])
+    args._pert = pert
     with MujocoScene(args.scene, samples=args.samples, specs=specs, look=args.look) as scene:
         require_software_gl(scene, allow_gpu=args.allow_gpu)   # before the first frame
         benchmark.check_scene_goal(scene, payload)
@@ -345,10 +357,12 @@ def cmd_run(args) -> int:
                     film_dir = (sink.path / "film" / start["start_id"]) if args.film else None
                     hook = _Film(film_dir, scene, goal_rgb, title=f"{arm_id} (MuJoCo)",
                                  every=args.film_every, scale=args.film_scale)
+                    n_ev = len(scene.world_log)
                     rec = run_episode(scene, arm, start, cfg, telemetry=steps,
-                                      starts_payload=payload, on_step=hook)
+                                      starts_payload=payload, on_step=hook, perturbation=pert)
                     film = hook.close()
                     rec["cell_id"] = tag
+                    _perturb_fields(rec, args, scene, n_ev)
                     rec.update(provenance)
                     rec["render_mode"] = scene.render_mode
                     rec["first_frame_n_matches"] = hook.first_n_matches
@@ -375,6 +389,16 @@ def cmd_run(args) -> int:
             fly_method_cells(args, scene, picked, payload, provenance, env, goal_rgb,
                              goal_capture, out_root)
     return 0
+
+
+def _perturb_fields(rec: dict, args, scene, n_ev: int) -> None:
+    """``--perturb``'s record fields (U8): the mode, the seed, the episode's recompiles -
+    only when a perturbation is flown, so an unperturbed record is what it always was."""
+    if (args.perturb or "none") == "none":
+        return
+    rec["perturb_mode"] = args.perturb or "none"
+    rec["perturb_seed"] = int(args.perturb_seed)
+    rec["world_compiles"] = scene.world_log[n_ev:]
 
 
 # ------------------------------------------------------------------- --method (U6a)
@@ -422,10 +446,12 @@ def fly_method_cells(args, scene, picked, payload, provenance, env, goal_rgb, go
                 film_dir = (sink.path / "film" / start["start_id"]) if args.film else None
                 hook = _Film(film_dir, scene, goal_rgb, title=f"external:{name} (MuJoCo)",
                              every=args.film_every, scale=args.film_scale)
+                n_ev = len(scene.world_log)
                 rec = run_episode(scene, arm, start, cfg, telemetry=steps,
-                                  starts_payload=payload, on_step=hook)
+                                  starts_payload=payload, on_step=hook, perturbation=args._pert)
                 film = hook.close()
                 rec["cell_id"] = tag
+                _perturb_fields(rec, args, scene, n_ev)
                 rec.update(provenance)
                 rec["render_mode"] = scene.render_mode
                 rec["first_frame_n_matches"] = hook.first_n_matches
@@ -514,6 +540,11 @@ def main(argv=None) -> int:
     r.add_argument("--samples", type=int, default=4, help="MuJoCo multisampling (colour only)")
     r.add_argument("--look", default=None, choices=["isaac_fit_v1", "raw"],
                    help="the picture: isaac_fit_v1 (default) or raw (vsbench.world.look)")
+    r.add_argument("--perturb", default="none",
+                   help="none | light | distractors | occluder | noise | combined | ground:<name> | "
+                        "swap:<id> | swap:@<name> | a+b (vsbench.vs.bench.perturb; U8), applied "
+                        "after every episode's goal capture")
+    r.add_argument("--perturb-seed", type=int, default=20260918)
     r.add_argument("--threads", type=int, default=2)
     r.add_argument("--allow-gpu", action="store_true",
                    help="lift the GPU refusals (never while the Isaac evaluation runs)")
