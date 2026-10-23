@@ -52,28 +52,28 @@ CPU_VARIANTS = {
 }
 
 
-#: the variants that draw on the CPU once ``VSBENCH_SOFTWARE_GL=1`` (Mesa llvmpipe through EGL
-#: or OSMesa, PyBullet's TinyRenderer, Open3D's Filament on llvmpipe with Vulkan pinned to
-#: lavapipe by ``vsbench.glenv.force_software_gl``). Every other variant can open a hardware
-#: context (``open3d-gpu``, ``pybullet-egl``, ``mujoco-glfw`` through the display's GLX
-#: vendor) and is refused under software GL unless ``VSBENCH_ALLOW_GPU=1``.
+#: the variants that draw on the CPU under software GL (Mesa llvmpipe through EGL or OSMesa,
+#: PyBullet's TinyRenderer, Open3D's Filament on llvmpipe with Vulkan pinned to lavapipe by
+#: ``vsbench.glenv.force_software_gl``). Every other variant can open a hardware context
+#: (``open3d-gpu``, ``pybullet-egl``, ``mujoco-glfw`` through the display's GLX vendor) and is
+#: refused unless ``VSBENCH_ALLOW_GPU=1`` (software GL is the default since 2026-10-23).
 SOFTWARE_VARIANTS = ("mujoco-egl", "mujoco-osmesa", "pybullet-tiny", "open3d-cpu")
 
 
 def gpu_allowed() -> bool:
     """``VSBENCH_ALLOW_GPU=1``: the one explicit way past the GPU refusal (never during the
-    station's Isaac evaluation)."""
-    return os.environ.get("VSBENCH_ALLOW_GPU", "").strip().lower() in ("1", "true", "yes")
+    station's Isaac evaluation). Lives in :mod:`vsbench.glenv`."""
+    from vsbench.glenv import gpu_allowed as allowed
+
+    return allowed()
 
 
 def gpu_refusal(name: str) -> str | None:
-    """Why ``name`` may not run here, or None: under software GL only
-    :data:`SOFTWARE_VARIANTS` run, unless ``VSBENCH_ALLOW_GPU=1``."""
-    from vsbench.glenv import software_gl_requested
-
-    if name in SOFTWARE_VARIANTS or not software_gl_requested() or gpu_allowed():
+    """Why ``name`` may not run here, or None: only :data:`SOFTWARE_VARIANTS` run, unless
+    ``VSBENCH_ALLOW_GPU=1`` (opt-in; software GL is the default)."""
+    if name in SOFTWARE_VARIANTS or gpu_allowed():
         return None
-    return (f"backend {name!r} can open a GPU context and VSBENCH_SOFTWARE_GL=1 is set: refused "
+    return (f"backend {name!r} can open a GPU context and software GL is the default: refused "
             f"(software variants: {', '.join(SOFTWARE_VARIANTS)}; VSBENCH_ALLOW_GPU=1 lifts this, "
             f"never while the Isaac evaluation runs)")
 
@@ -82,9 +82,9 @@ def select_backends(raw: str = "") -> list[str]:
     """The variants a gate run is parametrised over.
 
     ``raw`` (``--backends`` / ``VSBENCH_BACKENDS``, comma separated) names them explicitly;
-    an unknown name is a ``KeyError``, a GPU-capable one under software GL a ``PermissionError``
-    (:func:`gpu_refusal`). Empty: this platform's CPU order, installed packages only, and under
-    software GL only :data:`SOFTWARE_VARIANTS`.
+    an unknown name is a ``KeyError``, a GPU-capable one a ``PermissionError`` unless
+    ``VSBENCH_ALLOW_GPU=1`` (:func:`gpu_refusal`). Empty: this platform's CPU order, installed
+    packages only, and under software GL (the default) only :data:`SOFTWARE_VARIANTS`.
     """
     from vsbench.glenv import software_gl_requested
 
@@ -125,10 +125,9 @@ def make_renderer(name: str, scene: SceneSpec, cam: CameraModel, **extra) -> Ren
     refusal = gpu_refusal(name)
     if refusal:
         raise PermissionError(refusal)
-    from vsbench.glenv import force_software_gl, software_gl_requested
+    from vsbench.glenv import ensure_software_gl
 
-    if software_gl_requested():
-        force_software_gl()
+    ensure_software_gl()            # the default; only VSBENCH_ALLOW_GPU=1 skips it
     module, cls, kwargs, pkg = BACKENDS[name]
     if importlib.util.find_spec(pkg) is None:
         raise ImportError(f"backend {name!r} needs the {pkg!r} package: pip install vsbench[{pkg}]")

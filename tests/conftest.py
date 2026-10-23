@@ -4,9 +4,10 @@ Selection: ``VSBENCH_BACKENDS=mujoco-egl,pybullet-tiny pytest`` or ``pytest --ba
 With neither, every CPU variant whose package is installed is tried, and a variant that
 cannot open a context in a fresh process is skipped with the reason.
 
-Under ``VSBENCH_SOFTWARE_GL=1`` (``tools/cpu_env.sh``) the default set holds only the software
-variants (``vsbench.render.base.SOFTWARE_VARIANTS``), naming a GPU-capable one is a usage
-error unless ``VSBENCH_ALLOW_GPU=1``, and ``force_software_gl`` runs at import, so even a test
+Software GL is the default (``vsbench.glenv``; ``tools/cpu_env.sh`` sets it explicitly): the
+default set holds only the software variants (``vsbench.render.base.SOFTWARE_VARIANTS``),
+naming a GPU-capable one is a usage error unless ``VSBENCH_ALLOW_GPU=1``, and
+``force_software_gl`` runs at import, so even a test
 that imports a GL or Vulkan library itself gets Mesa (llvmpipe / lavapipe), never the GPU. Run one variant per
 pytest process when comparing MuJoCo and Open3D: both own a GL context.
 """

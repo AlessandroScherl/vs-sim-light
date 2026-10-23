@@ -45,17 +45,23 @@ class MujocoRenderer:
         perturbation verbs (``vsbench.world.perturb_world``) keeps its unedited scene's
         values and draws its unchanged pixels exactly as before; ``None`` = MuJoCo's own."""
         want = gl.lower()
+        # software GL is the default (vsbench.glenv): a caller that builds this class directly,
+        # past make_renderer (tools/convert_objects.py's contact sheet does), gets the same
+        # refusal of the GPU-capable context and the same Mesa pinning
+        from vsbench.render.base import gpu_refusal
+
+        refusal = gpu_refusal(f"mujoco-{want}")
+        if refusal:
+            raise PermissionError(refusal)
         have = os.environ.get("MUJOCO_GL", "").lower()
         if "mujoco" in sys.modules and have and have != want:
             raise RuntimeError(f"mujoco already imported with MUJOCO_GL={have!r}; one GL backend per process")
         os.environ["MUJOCO_GL"] = want
-        # VSBENCH_SOFTWARE_GL is honoured here too, not only in make_renderer: a caller that
-        # builds this class directly (tools/convert_objects.py's contact sheet did) would
-        # otherwise let glvnd hand MuJoCo's EGL the first device, the GPU on the station
-        from vsbench.glenv import force_software_gl, software_gl_requested
+        # without the pinning glvnd would hand MuJoCo's EGL the first device, the GPU here
+        from vsbench.glenv import ensure_software_gl
 
-        if software_gl_requested() and want == "egl":
-            force_software_gl()
+        if want == "egl":
+            ensure_software_gl()
         import mujoco
 
         self._mj = mujoco

@@ -22,14 +22,17 @@ Metrics beyond the true pose error and perturbations come later.
 ```
 pip install -e ".[all,dev]"          # or one of [mujoco] [pybullet] [open3d]
 python -m vsbench.smoke              # first backend that works here; writes smoke.png
-python -m vsbench.smoke --backend mujoco-glfw     # a laptop with a display
+VSBENCH_ALLOW_GPU=1 python -m vsbench.smoke --backend mujoco-glfw     # a laptop with a display (opt-in)
 ```
 
 On a Linux machine without a display or GPU, MuJoCo needs one of: the `libosmesa6`
 package (`MUJOCO_GL=osmesa`, `--backend mujoco-osmesa`) or Mesa's EGL (`libegl1` and
-`libgl1-mesa-dri`, usually present) with `VSBENCH_SOFTWARE_GL=1 --backend mujoco-egl`.
-PyBullet's TinyRenderer and Open3D's CPU mode need nothing else. `VSBENCH_SOFTWARE_GL=1`
-forces Mesa's llvmpipe for every backend, so a machine with a GPU never touches it.
+`libgl1-mesa-dri`, usually present) with `--backend mujoco-egl`.
+PyBullet's TinyRenderer and Open3D's CPU mode need nothing else. **Software GL is the
+default** (since 2026-10-23, `vsbench/glenv.py`): Mesa's llvmpipe is forced for every
+backend and the GPU-capable variants (`mujoco-glfw`, `pybullet-egl`, `open3d-gpu`) are
+refused, so a machine with a GPU never touches it; `VSBENCH_ALLOW_GPU=1` is the one opt-in
+(`VSBENCH_SOFTWARE_GL=1`, still set by `tools/cpu_env.sh`, is now the default made explicit).
 
 ### Result of the bake-off (station, 2026-09-18)
 

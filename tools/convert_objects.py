@@ -444,7 +444,9 @@ def _render_tile(p, W: int, H: int, text_lines, renderer_cls, scene_mod, cam_mod
     r = renderer_cls(spec, cam_i, gl="egl", samples=4)
     try:
         gl_renderer = str(getattr(r, "gl_renderer", "unknown"))
-        if os.environ.get("VSBENCH_SOFTWARE_GL") and "llvmpipe" not in gl_renderer.lower():
+        from vsbench.glenv import software_gl_requested
+
+        if software_gl_requested() and "llvmpipe" not in gl_renderer.lower():
             raise RuntimeError(f"software GL requested but MuJoCo renders on {gl_renderer!r} - "
                                "refused (no GPU on the station while the eval runs)")
         rgb, _ = r.render(look_at(eye, c))
@@ -474,6 +476,9 @@ def _wrap(t: str, n: int) -> list[str]:
 
 
 def cmd_sheet(args) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     os.environ.setdefault("MUJOCO_GL", "egl")
     from PIL import Image
 

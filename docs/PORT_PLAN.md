@@ -847,6 +847,22 @@ Risks (technical, with the mitigation in the plan):
   `open3d-cpu` now logs "Selected physical device 'llvmpipe'" and maps no NVIDIA library.
   Test: `tests/test_gpu_guard.py` (no rendering; a child process enumerates Vulkan devices
   and finds only a CPU one).
+- *The last GPU route: software GL was opt-in* (final review, 2026-10-23): every guard above
+  keyed on `VSBENCH_SOFTWARE_GL=1`, so a shell that had not sourced `tools/cpu_env.sh` and
+  built a world or a renderer directly (`MujocoScene`, `make_renderer`, the Step 1–3 entry
+  points) got glvnd's first EGL device, the GPU. Fixed: **software GL is the default**
+  (`vsbench.glenv.software_gl_requested` is true unless `VSBENCH_ALLOW_GPU=1`;
+  `VSBENCH_SOFTWARE_GL=0` alone no longer opens the GPU); `MujocoScene.__init__`,
+  `MujocoRenderer`, `make_renderer`, `vsbench.{demo,check,smoke,render_once,replay}`,
+  `tools/{run_gates,bench_*,quality_sheet,lighting_check,fly_axes}.py` and
+  `tools/convert_objects.py sheet` call `ensure_software_gl()` first, and the GPU-capable
+  variants (`mujoco-glfw`, `pybullet-egl`, `open3d-gpu`) are refused without the opt-in.
+  `tools/run_gates.py` defaults to the variants this process may open. Test:
+  `tests/test_gpu_guard.py::test_the_default_is_software_gl_in_a_clean_process` (a child with
+  none of the switches set builds `MujocoScene("poster2")` and a `mujoco-egl` renderer on
+  llvmpipe; it checks the decisions before any context exists, and the parent lays a Mesa
+  safety net in case the guard were broken). The Step 1–3 chains
+  (`tools/step_chains/`) now say `VSBENCH_ALLOW_GPU=1` on each GPU row.
 - *Faithfulness erosion*: the only defence is mechanical — the manifest, the ≤ 6 patch list,
   the drift test in the fast tier, and the fence "nothing hand-written under `vsbench/vs/`".
   A seventh patch is a question for the owner, not a commit.

@@ -152,7 +152,15 @@ class MujocoScene(WorldVerbs):
                  goal_rule: str = "frozen_on_miss", cache=None, look=None) -> None:
         import time
 
-        from vsbench.render.base import make_renderer
+        from vsbench.glenv import ensure_software_gl
+        from vsbench.render.base import gpu_refusal, make_renderer
+
+        # software GL is the default (vsbench.glenv): decided and pinned before anything below
+        # can import a GL library; a GPU-capable context only with VSBENCH_ALLOW_GPU=1
+        refusal = gpu_refusal(f"mujoco-{gl}")
+        if refusal:
+            raise PermissionError(refusal)
+        ensure_software_gl()
         from vsbench.vs.camera import CameraConfig
         from vsbench.vs.scene import Pose
         from vsbench.vs.scenes import load_scenes, poster_goal_pose

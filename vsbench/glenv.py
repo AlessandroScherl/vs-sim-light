@@ -1,9 +1,12 @@
-"""Force Mesa software OpenGL (llvmpipe) on Linux so no backend touches a GPU.
+"""Mesa software OpenGL (llvmpipe) on Linux by default, so no backend touches a GPU.
 
-Set ``VSBENCH_SOFTWARE_GL=1`` and ``vsbench.render.make_renderer`` calls
-``force_software_gl()`` before any GL library is imported. It restricts glvnd to the Mesa
+**Software GL is the default** (2026-10-23): ``software_gl_requested()`` is true unless the
+caller opted into the GPU with ``VSBENCH_ALLOW_GPU=1`` (and did not also ask for software GL
+with ``VSBENCH_SOFTWARE_GL=1``). ``VSBENCH_SOFTWARE_GL=0`` alone does not open the GPU any
+more. ``vsbench.render.make_renderer``, ``MujocoScene`` and the Step 1-3 entry points call
+``ensure_software_gl()`` before any GL library is imported. It restricts glvnd to the Mesa
 EGL vendor library, asks Mesa for the software rasteriser, and points MuJoCo's EGL
-backend at the ``EGL_MESA_device_software`` device. Once software GL is requested these
+backend at the ``EGL_MESA_device_software`` device. Once software GL is in force these
 values are **forced** (an exported ``__EGL_VENDOR_LIBRARY_FILENAMES`` naming NVIDIA's vendor
 library, or a ``MUJOCO_EGL_DEVICE_ID`` naming a GPU device, would otherwise open a hardware
 context on the shared station); ``force_software_gl`` returns what it set and what it
@@ -23,8 +26,25 @@ LAVAPIPE_ICD_JSON = "/usr/share/vulkan/icd.d/lvp_icd.json"
 NO_VULKAN_ICD = "/nonexistent/vsbench-software-gl-no-vulkan-device.json"
 
 
+def _truthy(key: str) -> bool:
+    return os.environ.get(key, "").strip().lower() in ("1", "true", "yes", "on")
+
+
+def gpu_allowed() -> bool:
+    """``VSBENCH_ALLOW_GPU=1``: the one explicit way to a GPU context (never during the
+    station's Isaac evaluation)."""
+    return _truthy("VSBENCH_ALLOW_GPU")
+
+
 def software_gl_requested() -> bool:
-    return os.environ.get("VSBENCH_SOFTWARE_GL", "").strip().lower() not in ("", "0", "false", "no")
+    """True unless the GPU was opted into: ``VSBENCH_SOFTWARE_GL=1`` always means software;
+    otherwise software unless ``VSBENCH_ALLOW_GPU=1``."""
+    return _truthy("VSBENCH_SOFTWARE_GL") or not gpu_allowed()
+
+
+def ensure_software_gl() -> dict[str, str]:
+    """``force_software_gl()`` unless the GPU was opted into; what it set (or ``{}``)."""
+    return force_software_gl() if software_gl_requested() else {}
 
 
 def software_egl_device_index() -> int | None:

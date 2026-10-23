@@ -38,6 +38,9 @@ def pick_backend() -> str:
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--backend", default=None, help=f"one of {', '.join(BACKENDS)}")
     ap.add_argument("--width", type=int, default=640)

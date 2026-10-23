@@ -18,7 +18,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from vsbench.render.base import BACKENDS, package_installed, probe_backend  # noqa: E402
+from vsbench.render.base import (  # noqa: E402
+    BACKENDS,
+    gpu_refusal,
+    package_installed,
+    probe_backend,
+)
 from vsbench.sysinfo import system_record  # noqa: E402
 
 GATES = ["projection", "depth", "homography", "determinism"]
@@ -47,8 +52,12 @@ def run_gate(backend: str, gate: str, tmp: Path) -> dict:
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser()
-    ap.add_argument("--backends", nargs="+", default=list(BACKENDS))
+    # every variant this process may open: the software ones, all with VSBENCH_ALLOW_GPU=1
+    ap.add_argument("--backends", nargs="+", default=[b for b in BACKENDS if not gpu_refusal(b)])
     ap.add_argument("--out-dir", default=str(ROOT / "results"))
     ap.add_argument("--label", default=None, help="record label and file suffix (single backend only)")
     a = ap.parse_args(argv)
