@@ -58,7 +58,7 @@ load DINOv2 through `torch.hub`, which downloads it on first use (read from the 
 A method is one class (two attributes, four methods) with a `@register` line. It sees the goal
 picture, the live picture, depth if it asks for it, and the camera intrinsics - never the true
 pose - and returns a camera velocity. [`examples/my_method.py`](examples/my_method.py) is a
-complete one (ORB matches and the classic point IBVS law, about 70 lines). Its skeleton:
+complete one (ORB matches and the classic point IBVS law, about 80 lines). Its skeleton:
 
 ```python
 import numpy as np

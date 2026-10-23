@@ -248,11 +248,9 @@ def test_a_file_mask_filters_a_methods_matches(tmp_path, which):
     gm.apply(rec)
     pts = np.concatenate(hook.goal_pts)
     assert len(pts) > 8 and mask_matches(pts, None, gm.mask).all()
-    assert arm.method.goal_mask is not None if which == "my_ibvs" else True
     assert rec["external_method_takes_goal_mask"] is True and rec["goal_mask_mode"] == "file"
-    # the mask is the method's copy, read-only
-    if which == "my_ibvs":
-        assert not arm.method.goal_mask.flags.writeable
+    if which == "my_ibvs":                  # the method's copy of the mask is read-only
+        assert arm.method.goal_mask is not None and not arm.method.goal_mask.flags.writeable
 
 
 def test_a_method_without_mask_support(tmp_path):
