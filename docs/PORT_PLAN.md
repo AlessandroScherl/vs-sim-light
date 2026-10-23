@@ -603,6 +603,39 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   about the renderer, written down, never tuned away.
 - Cost: ART-VS tiled phase ≈ 1.5 s/step → 150 steps ≈ 4–5 min per start; ≈ 1 h in the
   background with `timeout 2h`.
+- As built (2026-10-23): `tools/u5_parity.py fly|compare`, `tests/world/test_parity.py`,
+  records `results/bridge/u5/<world>/`, table `results/bridge/u5/parity.{md,json}`, gate
+  `results/bridge/u5_parity.json`. Starts `near60` n_000–n_002 and `narrow20` start_00–01, 150
+  steps, `sift_ransac` added as the control. Three worlds: `mock` (the copied
+  `MockPlaneScene` named `hollywood`, so the landmark draw seeds pair), `mujoco` (raw look,
+  Isaac's principal point) and `mujoco960` (the same scene drawn at the mock's (960, 540), U1's
+  control renderer; flown for the ViT arms and SIFT, **not ART-VS** — stopped after 8 min to
+  spare the shared CPU at ~8 s/step). ART-VS's switch step is read from the arm's
+  `TiledMatcher.tiled` latch on `on_step`. Every MuJoCo record: GL `llvmpipe (LLVM 20.1.2)`.
+- Measured, mock vs mujoco (the gate): **`sift_ransac` PASS** (landings 0.03–0.58 mm in all
+  three worlds, |Δ| ≤ 0.06 mm / 0.02°); **`artvs` landing PASS** (|Δ| ≤ 0.79 mm / 0.08°);
+  **`vitvs_dinov2` FAIL on n_001** (1.53 vs 5.33 mm, Δ 3.80 mm / 0.44° — the wobble: the medians
+  of steps 101–150 agree, 1.44 vs 3.30 mm and 0.33 vs 0.53°; MuJoCo's curve wanders 2.57–5.33 mm
+  and the cap caught its top); **`vitvs_dinov3` FAIL on n_001** (4.28 vs 8.16 mm, Δ 3.89 mm /
+  0.65° — not only the wobble: steps 76–150 span 2.87–5.01 mm in the mock and 5.78–8.25 mm in
+  MuJoCo, rotation medians 0.21 vs 0.73°); the other four starts of both pass. **ART-VS switch:
+  the plan's gate FAILS on n_002 in both worlds** (it never latches: the coarse stage drifts
+  out, 5.99 → 8.88 / 9.67 mm, so the error proxy never falls below 0.20×); on the other four
+  starts it fires in both (steps 2–17 vs 3–17), so the worlds agree start by start.
+- What explains it: the pure half pixel (`mujoco960` vs `mujoco`, same tone and filtering)
+  moves the ViT-VS landings as much as the whole mock-vs-MuJoCo difference (DINOv3: median
+  2.62 mm, max 4.03 mm; on n_001 it is the half pixel that separates them — `mock` vs
+  `mujoco960` is 0.15 mm there; DINOv2: max 1.42 mm), and on n_002 the half pixel alone moves
+  DINOv3 by 3.58 mm where tone + half pixel moved it 0.64 mm. So neither difference is a bias
+  that explains the misses: ViT-VS's token-quantised floor (one DINOv3 token = 60 × 34 px of the
+  1920 × 1080 picture; ±2–4 mm) jumps on sub-pixel picture changes. SIFT (sub-pixel keypoints, RANSAC homography) sees neither
+  difference (≤ 0.1 mm); ART-VS's tiled phase (36 tiles of a 1344 square, one token = 20 × 11 px)
+  sits in between (≤ 0.8 mm). Nothing tuned: the gate test names the three misses as findings
+  (`KNOWN_LANDING_MISSES`, `KNOWN_SWITCH_MISSES`) and fails on any other.
+- CPU: 26 000 CPU-s (mock 11 300, mujoco 10 400, mujoco960 4 300, + the stopped ART-VS job),
+  2 h 43 min wall on two nice-19 processes at load 19–31; ART-VS 7–10 s/step in the tiled phase
+  (not 1.5), ViT-VS 0.85–1.8 s/step, SIFT 0.9–1.7 s/step (the mock's 1920×1080 numpy warp
+  ≈ 0.7 s a frame). poster2 / poster3 not flown (a gate failed; the owner's call).
 
 **U6a ∥ U5 — `MethodArm`: vsbench methods fly the benchmark loop** (`vsbench/world/method_arm.py`, `vsbench/world/configs/external_method.yaml`, `tests/world/test_method_arm.py`)
 - Do: §2.5 first adapter; `fly.py --method sift_ibvs`.
@@ -871,6 +904,17 @@ was, down to the depth of every pixel, and the scene comes back bit for bit afte
 "Isaac look" of each scene stays as it was fitted on the clean scene: a new floor is seen
 through the same "camera" - which makes a floor whose colours the scene never had come out a
 little off (about 20 grey levels).
+
+**Do the competitors behave the same in the simple copied world and in MuJoCo? (U5)** We flew
+each competitor from the same five starting positions in both. The classical SIFT method lands
+in the same place to a tenth of a millimetre, ART-VS to under a millimetre. ViT-VS lands within
+3 mm on four starts of five but not on the fifth (4–5 mm apart). The test that tells why: the
+same MuJoCo picture moved by half a pixel (nothing else changed) moves ViT-VS's landing by up
+to 4 mm on its own. So ViT-VS does not see a "different world" - it reacts strongly to any tiny
+change of the picture, because it matches whole squares of the picture (each about 60 pixels wide)
+and its resting point jitters by a few millimetres. ART-VS's switch to its fine mode happened at the same
+moment in both worlds, except on one start where it never happened in either world (the
+camera drifted away first). The gate was not loosened; the misses are written down.
 
 **How the evaluation stays safe.** Everything runs with the graphics card hidden, MuJoCo drawing
 on the CPU, PyTorch's CPU-only build, lowest CPU priority and at most two threads; nothing opens

@@ -597,3 +597,38 @@ from the size-matched pose, `@other_small` lost (no SIFT matches on another dril
 **Tests and tools.** `tests/world/test_perturb_world.py` (the copied `test_perturb` contract
 on the real world: industrial1_drill, inst_drill, hollywood; gate JSON
 `results/bridge/u8_perturb_gates.json`), `tools/u8_perturb.py measure | smoke | summary`.
+
+---
+
+## U5 — the baselines in the copied mock and in MuJoCo (2026-10-23)
+
+**What it is.** The same arm, start, landmark draw and loop, flown in two worlds: the copied
+numpy `MockPlaneScene` (an exact inverse warp of the poster texture, no light) and
+`MujocoScene(look="raw")`; plus a third, `mujoco960`, the MuJoCo scene drawn with the mock's
+principal point (960, 540) instead of Isaac's (959.5, 539.5), which separates the half pixel
+from the tone/filtering differences.
+
+```
+source tools/cpu_env.sh
+PYTHONPATH=. $VSBENCH_PY tools/u5_parity.py fly --world mock --arms vitvs_dinov3   # or mujoco, mujoco960
+PYTHONPATH=. $VSBENCH_PY tools/u5_parity.py compare      # results/bridge/u5/parity.{md,json}
+VSBENCH_WRITE_GATES=1 $VSBENCH_PY -m pytest tests/world/test_parity.py   # results/bridge/u5_parity.json
+```
+
+Defaults: hollywood, `near60` n_000–n_002 + `narrow20` start_00–01, 150 steps. Each record
+carries a `u5` block (world, principal point drawn / reported, GL renderer, final pose, CPU
+seconds, ART-VS's switch step, a compact per-step curve). No telemetry file is kept (~100 kB a
+start); the curve is enough for the comparison.
+
+**Result.** `sift_ransac` lands the same in all three worlds to ≤ 0.1 mm; ART-VS to ≤ 0.8 mm.
+ViT-VS (both backbones) misses the 3 mm / 0.3° landing gate on one start (n_001), DINOv2 only
+by its wobble, DINOv3 by settling on a different floor; ART-VS's switch does not fire on n_002
+in either world. The half-pixel control shows these are not a renderer bias: half a pixel
+alone moves ViT-VS's landing by up to 4 mm. Read a single ViT-VS landing in MuJoCo as one
+draw from a ±2–4 mm spread, not as a number to compare to the mock (or to Isaac) start by
+start; compare curve medians over many starts.
+
+**Costs (shared station, nice 19, 2 threads, load 19–31).** ART-VS 7–10 s/step once tiled
+(36 DINOv2 tiles), ~0.7–1.3 s/step before; ViT-VS 0.85–1.8 s/step; SIFT 0.9–1.7 s/step; the mock
+world's 1920×1080 numpy warp ≈ 0.7 s a frame. The full U5 set: ~26 000 CPU-s, 2 h 43 min on
+two processes.
