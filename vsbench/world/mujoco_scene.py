@@ -19,7 +19,12 @@ What it mirrors from the reference world ``vsbench.vs.isaac_scene.IsaacScene``:
 
 What it adds: ``render_mode`` (``mujoco-llvmpipe`` on the CPU, ``mujoco-<gl>-gpu``
 otherwise), carried into every record through ``goal_capture_record`` so no MuJoCo number
-can be read as an RTX one (D-9), and ``meta`` (how the scene was built).
+can be read as an RTX one (D-9), ``meta`` (how the scene was built), and the **look**
+(U4b, ``vsbench.world.look``): ``isaac_fit_v1`` by default - the fitted light, the scene-fitted
+8192 shadow map and the scene's tone curve on every RGB frame (the goal frame included, depth
+never) - or ``look="raw"``, the U1/U4 picture bit for bit, for the gates that compare against
+the copied mock. ``goal_capture_record`` puts the look's name, curve id and md5 on every
+record.
 
 The rooms (U4): ``vsbench.world.build.build_scene`` places the converted objects by the
 frozen layout; the goal is ``IsaacScene.build_eval_scene``'s - the copied
@@ -137,13 +142,14 @@ class MujocoScene:
 
     def __init__(self, name: str, *, gl: str = "egl", samples: int = 4, specs: dict | None = None,
                  reortho_every: int = REORTHO_EVERY, verbose: bool = False,
-                 goal_rule: str = "frozen_on_miss", cache=None) -> None:
+                 goal_rule: str = "frozen_on_miss", cache=None, look=None) -> None:
         import time
 
         from vsbench.render.base import make_renderer
         from vsbench.vs.camera import CameraConfig
         from vsbench.vs.scene import Pose
         from vsbench.vs.scenes import load_scenes, poster_goal_pose
+        from vsbench.world.look import resolve_look
 
         if goal_rule not in GOAL_RULES:
             raise ValueError(f"goal_rule {goal_rule!r} not in {GOAL_RULES}")
@@ -160,10 +166,13 @@ class MujocoScene:
         built = buildmod.build_scene(self.spec, **kw)
         meta = built.meta
         self.placed = built.placed
-        self.scene_spec = built.scene_spec
+        self.look = resolve_look(look, name)
+        self.built_spec = built.scene_spec
+        self.scene_spec = self.look.scene_spec(built.scene_spec)
+        self.renderer_kwargs = self.look.renderer_kwargs(self.scene_spec)
         t_compile = time.monotonic()
         self.renderer = make_renderer(f"mujoco-{gl}", self.scene_spec, self.render_camera,
-                                      samples=int(samples))
+                                      samples=int(samples), **self.renderer_kwargs)
         self.compile_s = round(time.monotonic() - t_compile, 3)
         self.render_mode = render_mode_from(gl, getattr(self.renderer, "gl_renderer", None))
         self.goal_check: dict | None = None
@@ -182,7 +191,10 @@ class MujocoScene:
         self.goal_frame_md5: str | None = None
         self.n_renders = 0
         self._verbose = bool(verbose)
+        self.look_record = self.look.record(self.scene_spec, self.renderer_kwargs)
+        self.look_record["gl_renderer"] = getattr(self.renderer, "gl_renderer", None)
         self.meta = {**meta, "render_mode": self.render_mode, "samples": int(samples),
+                     "look": self.look_record,
                      "render_camera": describe(self.render_camera),
                      "renderer": getattr(self.renderer, "info", dict)(),
                      "goal_distance_m": self._distance, "compile_s": self.compile_s}
@@ -243,6 +255,7 @@ class MujocoScene:
 
         self.n_renders += 1
         rgb, depth = self.renderer.render(pose_to_T(pose))
+        rgb = self.look.apply(np.ascontiguousarray(rgb))     # the tone curve: RGB only
         return np.ascontiguousarray(rgb), np.ascontiguousarray(depth, dtype=np.float32)
 
     def render_goal(self) -> tuple[np.ndarray, np.ndarray]:
@@ -258,14 +271,16 @@ class MujocoScene:
                                 "rgb_mean": [round(float(rgb.astype(np.float64).mean()), 6)],
                                 "diff_prev": [None], "rgb_md5": [md5],
                                 "depth_md5": [hashlib.md5(depth.tobytes()).hexdigest()],
-                                "capture_retries": [0], "render_mode": self.render_mode}
+                                "capture_retries": [0], "render_mode": self.render_mode,
+                                "look": self.look.name}
             if self._verbose:
                 print(f"[mujoco_scene] {self.name}: goal captured once, md5 {md5}", flush=True)
         return self._goal_frame
 
     def goal_capture_record(self) -> dict:
         """What a record says about the goal frame (``IsaacScene``'s four fields) plus
-        ``render_mode``, so every record flown on this world names its renderer."""
+        ``render_mode`` and the look (name, curve id, curve md5, the whole look record), so
+        every record flown on this world names its renderer and its look."""
         from vsbench.vs.scenes import goal_capture_settings
 
         protocol_warmup, _keep = goal_capture_settings()
@@ -274,7 +289,9 @@ class MujocoScene:
                 "goal_render_warmup_reason": WARMUP_REASON,
                 "goal_capture_keep": "last",
                 "goal_settle_series": self.goal_settle, "goal_frame_md5": self.goal_frame_md5,
-                "render_mode": self.render_mode}
+                "render_mode": self.render_mode, "look": self.look.name,
+                "look_curve_id": self.look.curve_id, "look_curve_md5": self.look.curve_md5,
+                "look_record": self.look_record}
 
     # ------------------------------------------------------------ the truth
     def gt_correspondence(self, pts_goal_px, cur_pose, goal_pose=None):

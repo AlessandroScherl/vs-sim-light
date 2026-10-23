@@ -63,12 +63,14 @@ def _write_results(tmp_path_factory):
     print(f"[gates] wrote {out}")
 
 
-def _scene(name):
+def _scene(name, look=None):
+    """``look=None``: the world's default (``isaac_fit_v1`` since U4b); the gates that compare
+    pictures against the copied mock ask for ``raw`` (the texture's own tone, U1's picture)."""
     from vsbench.world.mujoco_scene import MujocoScene
 
     if not software_gl_requested():      # belt and braces beside the module mark
         pytest.skip("MujocoScene renders: needs VSBENCH_SOFTWARE_GL=1")
-    scene = MujocoScene(name)
+    scene = MujocoScene(name, look=look)
     if scene.render_mode != "mujoco-llvmpipe":
         scene.close()
         pytest.fail(f"MuJoCo opened {scene.render_mode!r}, not llvmpipe - refusing to render")
@@ -274,7 +276,7 @@ def test_half_pixel_convention_against_the_copied_mock():
     from vsbench.vs.scene import MockPlaneScene, Pose, pose_to_T
 
     rows = []
-    with _scene("hollywood") as scene:
+    with _scene("hollywood", look="raw") as scene:
         tex = scene.scene_spec.objects[0].material.texture
         mock = MockPlaneScene(texture=np.array(tex), render_scale=1)
         rc = scene.render_camera

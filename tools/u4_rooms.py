@@ -9,6 +9,11 @@ the smoke flights - the parts of the unit that are not in ``tests/world/test_sce
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py isaac     # results/bridge/u4_rooms_vs_isaac.png
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --arms sift_ransac --max-iter 100
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --rooms cluttered2 --arms vitvs_dinov3
+    PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --look raw --out results/bridge/u4b/raw \
+        --record results/bridge/u4b_look.json --key smoke_raw            # U4b's re-fly
+
+``smoke --look`` picks the picture (``vsbench.world.look``; default the world's default,
+``isaac_fit_v1`` since U4b; U4's own smoke of 2026-10-23 was flown before U4b, i.e. ``raw``).
 
 Everything lands in ``results/bridge/u4_rooms.json`` (one key per subcommand) and the
 smoke's records under ``results/bridge/u4/`` (the copied ``open_run`` run directory plus a
@@ -49,14 +54,15 @@ ISAAC_GOALS = Path(os.environ.get("VSBENCH_ISAAC_GOALS",
 PREVIEW_SCALE = 0.5
 
 
-def _merge_record(key: str, value) -> None:
-    rec = json.loads(RECORD.read_text()) if RECORD.exists() else {}
+def _merge_record(key: str, value, record: Path = RECORD,
+                  unit: str = "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)") -> None:
+    rec = json.loads(record.read_text()) if record.exists() else {}
     rec[key] = value
-    rec["unit"] = "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)"
+    rec.setdefault("unit", unit)
     rec["written"] = time.strftime("%Y-%m-%d %H:%M:%S %z")
-    RECORD.parent.mkdir(parents=True, exist_ok=True)
-    RECORD.write_text(json.dumps(rec, indent=2, sort_keys=True) + "\n")
-    print(f"[u4] wrote {RECORD} [{key}]")
+    record.parent.mkdir(parents=True, exist_ok=True)
+    record.write_text(json.dumps(rec, indent=2, sort_keys=True) + "\n")
+    print(f"[u4] wrote {record} [{key}]")
 
 
 def _vm(field: str) -> float:
@@ -250,13 +256,14 @@ def cmd_smoke(args) -> int:
 
     protocol = fly.load_protocol()
     specs, _ = load_scenes()
-    out_root = (OUT / "u4").resolve()
+    out_root = Path(args.out).resolve()
+    record = Path(args.record).resolve()
     provenance = {"vsbench_commit": fly.vsbench_commit(ignore=out_root),
                   "vssim_commit": fly.vssim_commit(), "vsbench_commit_rule": fly.VSBENCH_COMMIT_RULE}
     out_root.mkdir(parents=True, exist_ok=True)
-    rows = json.loads(RECORD.read_text()).get("smoke", {}) if RECORD.exists() else {}
+    rows = json.loads(record.read_text()).get(args.key, {}) if record.exists() else {}
     for room in args.rooms:
-        with MujocoScene(room, specs=specs) as scene:
+        with MujocoScene(room, specs=specs, look=args.look) as scene:
             fly.require_software_gl(scene)
             payload = benchmark.load_starts(room, "v2")
             benchmark.check_scene_goal(scene, payload)
@@ -264,7 +271,8 @@ def cmd_smoke(args) -> int:
             goal_capture = scene.goal_capture_record()
             start = near_start(scene)
             sp = Pose.from_start(start)
-            print(f"[u4] {room}: {scene.render_mode} ({scene.renderer.gl_renderer}), goal "
+            print(f"[u4] {room}: {scene.render_mode} ({scene.renderer.gl_renderer}), look "
+                  f"{scene.look.name} {scene.look.curve_id} {scene.look.curve_md5}, goal "
                   f"{scene.working_distance:.6f} m, start {start['start_id']} "
                   f"{translation_error_mm(sp.position, scene.goal_pose.position):.2f} mm / "
                   f"{rotation_error_deg(sp.rotation, scene.goal_pose.rotation):.2f} deg", flush=True)
@@ -298,10 +306,12 @@ def cmd_smoke(args) -> int:
                     "final_rotation_deg", "steps", "max_iter", "terminated_reason", "outcome",
                     "stop_step", "stop_translation_mm", "stop_rotation_deg", "mean_n_matches",
                     "first_frame_n_matches", "sec_per_step", "goal_mask_share", "render_mode",
-                    "gl_renderer", "vsbench_commit", "vssim_commit")}
+                    "gl_renderer", "look", "look_curve_id", "look_curve_md5", "goal_frame_md5",
+                    "vsbench_commit", "vssim_commit")}
                 row["success"] = rec.get("success")
                 row["wall_s"] = round(wall, 1)
                 row["records"] = str((out_root / f"{tag}.jsonl").relative_to(REPO))
+                row["max_iter_flown"] = int(args.max_iter)
                 rows[tag] = row
                 print(f"[u4] {tag}: {row['start_translation_mm']:.2f} -> {row['final_translation_mm']:.3f} mm, "
                       f"{row['final_rotation_deg']:.3f} deg, {row['terminated_reason']}, {row['steps']} steps, "
@@ -310,7 +320,9 @@ def cmd_smoke(args) -> int:
                 close = getattr(arm, "close", None)
                 if close is not None:
                     close()
-    _merge_record("smoke", rows)
+    unit = ("U4b - match Isaac's look (docs/PORT_PLAN.md section 7)" if record.name.startswith("u4b")
+            else "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)")
+    _merge_record(args.key, rows, record, unit)
     return 0
 
 
@@ -330,6 +342,10 @@ def main(argv=None) -> int:
     s.add_argument("--rooms", nargs="+", default=list(ROOMS))
     s.add_argument("--arms", nargs="+", default=["sift_ransac"])
     s.add_argument("--max-iter", type=int, default=100)
+    s.add_argument("--look", default=None, help="vsbench.world.look name (default: the world's)")
+    s.add_argument("--out", default=str(OUT / "u4"), help="records directory")
+    s.add_argument("--record", default=str(RECORD), help="the JSON the rows are merged into")
+    s.add_argument("--key", default="smoke", help="the record's key")
     s.set_defaults(fn=cmd_smoke)
     args = ap.parse_args(argv)
     return int(args.fn(args))

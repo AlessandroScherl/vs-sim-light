@@ -18,8 +18,10 @@ Per room (``industrial1_drill``, ``cluttered2``, ``cluttered3``), on one build:
               runner's call): share in (0.02, 0.6); ``vitvs_dinov3_objmask`` builds and
               asks for that mask (``goal_mask_mode == "objects"``), checked once;
 4. determinism - one pose drawn twice is the same bytes; the scene rebuilt (after
-              ``close``) draws the same goal bytes; and, when ``tools/u4_rooms.py measure``
-              has run, the same goal md5 as that other process;
+              ``close``) draws the same goal bytes; and the same goal md5 as the other
+              process that measured this room in the same look (``tools/u4_rooms.py measure``
+              for ``raw``, ``tools/u4b_look.py measure`` for both looks) - drawn in the
+              world's default look (``isaac_fit_v1`` since U4b; depth is the same in both);
 5. Isaac    - when Isaac's own goal depth of the room is on disk (read only; the station's
               ``~/genvs_ws/vssim_out/check1/<room>_goal_depth.npy``, ``$VSBENCH_ISAAC_GOALS``):
               per pixel |MuJoCo - Isaac| median <= 1 mm and p99 <= 3 mm, the object mask's
@@ -57,6 +59,7 @@ pytestmark = pytest.mark.skipif(
 REPO = Path(__file__).resolve().parents[2]
 OUT = REPO / "results" / "bridge" / "u4_room_gates.json"
 MEASURE = REPO / "results" / "bridge" / "u4_rooms.json"
+MEASURE_U4B = REPO / "results" / "bridge" / "u4b_look.json"
 ROOMS = ("industrial1_drill", "cluttered2", "cluttered3")
 ISAAC_GOALS = Path(os.environ.get("VSBENCH_ISAAC_GOALS",
                                   str(Path.home() / "genvs_ws" / "vssim_out" / "check1")))
@@ -181,6 +184,9 @@ def test_room_gates(room):
         row["build_s"] = scene.meta["build_s"]
         row["gl_renderer"] = scene.renderer.gl_renderer
         row["render_mode"] = scene.render_mode
+        look_name = scene.look.name
+        row["look"] = {"look": look_name, "curve_id": scene.look.curve_id,
+                       "curve_md5": scene.look.curve_md5}
         # 1. the goal
         gc_ = scene.goal_check
         assert gc_ is not None and gc_["files"], "a room must have a pinned start file"
@@ -237,13 +243,17 @@ def test_room_gates(room):
     del scene2
     gc.collect()
     other = None
-    if MEASURE.exists():
+    if look_name == "raw" and MEASURE.exists():          # U4's measure predates the looks: raw
         rec = json.loads(MEASURE.read_text()).get("measure", {}).get("rooms", {}).get(room)
         if rec:
             other = rec.get("goal_frame_md5") == md5_goal
+    if other is None and MEASURE_U4B.exists():
+        rec = json.loads(MEASURE_U4B.read_text()).get("measure", {}).get("scenes", {}).get(room)
+        if rec and look_name in rec.get("goal_frame_md5", {}):
+            other = rec["goal_frame_md5"][look_name] == md5_goal
     row["determinism"] = {"redraw_same_bytes": same, "rebuild_same_goal": rebuilt_same,
                           "goal_frame_md5": md5_goal, "goal_depth_md5": md5_goal_depth,
-                          "same_goal_md5_as_tools_u4_rooms_measure": other}
+                          "same_goal_md5_as_the_measure_record": other}
     RESULTS.setdefault("rooms", {})[room] = row
     print(json.dumps(row, indent=1)[:4000])
     for v in dviews:

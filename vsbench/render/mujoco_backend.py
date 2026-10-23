@@ -27,10 +27,17 @@ _CV_TO_GL = np.diag([1.0, -1.0, -1.0])  # optical (y down, z forward) -> MuJoCo 
 # MuJoCo user-mesh texcoords already put v = 0 at the top row of the picture, like ours:
 # no flip (checked by the homography gate; OBJ files are flipped by MuJoCo itself).
 _FLIP_V = False
+#: the depth context's shadow map side (never drawn; MuJoCo allocates one per context)
+_DEPTH_CTX_SHADOWSIZE = 64
 
 
 class MujocoRenderer:
-    def __init__(self, scene: SceneSpec, cam: CameraModel, gl: str = "egl", samples: int = 4):
+    def __init__(self, scene: SceneSpec, cam: CameraModel, gl: str = "egl", samples: int = 4,
+                 shadowsize: int = 4096, shadowclip_m: float | None = None):
+        """``shadowsize``: the shadow map's side in texels. ``shadowclip_m``: half the side,
+        in metres, of the square a directional light's shadow map covers (centred on the
+        light's line through the world origin); ``None`` keeps MuJoCo's default
+        (``vis.map.shadowclip = 1``, i.e. one ``stat.extent``)."""
         want = gl.lower()
         have = os.environ.get("MUJOCO_GL", "").lower()
         if "mujoco" in sys.modules and have and have != want:
@@ -57,7 +64,7 @@ class MujocoRenderer:
         g.offwidth = max(int(cam.width), 640)
         g.offheight = max(int(cam.height), 480)
         spec.visual.quality.offsamples = int(samples)
-        spec.visual.quality.shadowsize = 4096
+        spec.visual.quality.shadowsize = int(shadowsize)
         hl = spec.visual.headlight
         hl.active = 1
         hl.ambient = (scene.ambient,) * 3
@@ -97,6 +104,8 @@ class MujocoRenderer:
         model = self.model
         model.vis.map.znear = cam.near / model.stat.extent
         model.vis.map.zfar = cam.far / model.stat.extent
+        if shadowclip_m is not None:
+            model.vis.map.shadowclip = float(shadowclip_m) / model.stat.extent
         self.data = mujoco.MjData(model)
         self._cam_id = model.camera("vsbench_cam").id
         self._mocap_id = model.body("vsbench_cam_body").mocapid[0]
@@ -114,8 +123,12 @@ class MujocoRenderer:
             # not multisampled: a multisampled depth buffer resolves to one sample off
             # the pixel centre (3.9 mm at the 99th percentile on a 60 degree plane), and
             # NVIDIA keeps sample positions even for MuJoCo's segmentation pass.
+            # (its shadow map is never drawn - the depth pass is a segmentation render - so
+            # it gets the smallest one instead of a second shadowsize^2 texture in RAM)
             model.vis.quality.offsamples = 0
+            model.vis.quality.shadowsize = _DEPTH_CTX_SHADOWSIZE
             self._ctx_depth = mujoco.MjrContext(model, mujoco.mjtFontScale.mjFONTSCALE_150)
+            model.vis.quality.shadowsize = int(shadowsize)
             self._ctx_depth.readDepthMap = mujoco.mjtDepthMap.mjDEPTH_ZEROFAR
             mujoco.mjr_setBuffer(mujoco.mjtFramebuffer.mjFB_OFFSCREEN, self._ctx_depth)
             model.vis.quality.offsamples = self._samples

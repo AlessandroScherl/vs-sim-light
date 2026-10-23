@@ -165,6 +165,14 @@ def test_driver_smoke(tmp_path):
     assert env["torch_threads"] == 2 and env["torch_interop_threads"] == 2, env
     assert env["CUDA_VISIBLE_DEVICES"] == "" and env["VSBENCH_SOFTWARE_GL"] == "1"
     assert meta["scene_meta"]["renderer"]["gl_renderer"].startswith("llvmpipe")
+    # U4b: the record names its look (the default: isaac_fit_v1, hollywood's curve)
+    from vsbench.world.look import load_look
+
+    want = load_look("isaac_fit_v1", "hollywood")
+    assert rec["look"] == "isaac_fit_v1" and rec["look_curve_id"] == "isaac_fit_v1/hollywood"
+    assert rec["look_curve_md5"] == want.curve_md5
+    assert rec["look_record"]["look_config_md5"] == want.config_md5
+    assert rec["look_record"]["gl_renderer"].startswith("llvmpipe")
 
 
 def _child(code: str, env_over: dict, timeout=600):

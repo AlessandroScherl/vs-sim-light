@@ -28,6 +28,10 @@ What the bridge adds, and nothing else:
   ``nvidia-smi`` the copied loop polls for its hardware columns is shadowed by a stub
   (on this shared machine it would report the Isaac evaluation's GPU as this run's), so
   ``vram_used_mb`` / ``gpu_util_*`` read ``None``, the truth for a CPU run;
+* ``--look`` (port unit U4b, ``vsbench.world.look``): the picture the scene draws -
+  ``isaac_fit_v1`` (default: the fitted light, shadow map and per-scene tone curve) or
+  ``raw`` (the U1/U4 picture); every record carries ``look``, ``look_curve_id``,
+  ``look_curve_md5`` and ``look_record`` (from ``goal_capture_record``);
 * ``--max-iter``, ``--device`` and ``--telemetry-extended`` overrides (stated in the
   resolved config; ``max_iter`` on the record); ``--film`` writes the copied
   ``FilmWriter``'s match film. Start sets: the protocol's only, as vs-sim's driver.
@@ -314,12 +318,13 @@ def cmd_run(args) -> int:
                   "vsbench_commit_rule": VSBENCH_COMMIT_RULE}
     out_root.mkdir(parents=True, exist_ok=True)
     summary_rows = []
-    with MujocoScene(args.scene, samples=args.samples, specs=specs) as scene:
+    with MujocoScene(args.scene, samples=args.samples, specs=specs, look=args.look) as scene:
         require_software_gl(scene, allow_gpu=args.allow_gpu)   # before the first frame
         benchmark.check_scene_goal(scene, payload)
         goal_rgb, _goal_depth = scene.render_goal()        # once, served to every arm
         goal_capture = scene.goal_capture_record()
-        print(f"[fly] {args.scene}: {scene.render_mode}, goal {scene.working_distance:.6f} m "
+        print(f"[fly] {args.scene}: {scene.render_mode}, look {scene.look.name} "
+              f"({scene.look.curve_id}, {scene.look.curve_md5}), goal {scene.working_distance:.6f} m "
               f"(file {payload['goal']['distance_m']:.6f}), goal md5 {goal_capture['goal_frame_md5']}, "
               f"{len(picked)} start(s) of {args.start_set}", flush=True)
         for arm_id in args.arms:
@@ -507,6 +512,8 @@ def main(argv=None) -> int:
     r.add_argument("--film-every", type=int, default=2)
     r.add_argument("--film-scale", type=float, default=0.25)
     r.add_argument("--samples", type=int, default=4, help="MuJoCo multisampling (colour only)")
+    r.add_argument("--look", default=None, choices=["isaac_fit_v1", "raw"],
+                   help="the picture: isaac_fit_v1 (default) or raw (vsbench.world.look)")
     r.add_argument("--threads", type=int, default=2)
     r.add_argument("--allow-gpu", action="store_true",
                    help="lift the GPU refusals (never while the Isaac evaluation runs)")
