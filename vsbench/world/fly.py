@@ -50,6 +50,19 @@ method's constructor), the record says ``arm_kind: external`` and the label
 ``external:<method>@<params>/<stop>``, the run sidecar is the copied one
 (``method_arm.open_method_run``). Refused: a privileged method (it reads the true pose) and a
 method that is a copied protocol cell (``vitvs_dinov3`` & co. fly with ``--arms``).
+
+``--mask none|objects|<file.png>`` (2026-10-23, ``vsbench.world.masks``): filter the matches
+with a mask on the goal picture. ``objects`` flies a copied arm's ``objmask`` cell (the
+protocol's ``<arm>_objmask`` when it has one, else the arm plus ``matcher.goal_mask:
+objects``); a file flies the same seam with the file's mask (``goal_mask_mode: file``, label
+token ``filemask-<md5[:8]>``, ``goal_mask_source: file:<name>:<md5>``); a ``--method`` gets it
+through ``set_target(..., goal_mask=...)``. The cell tag gains ``_objmask`` /
+``_filemask_<md5[:8]>``; an unmasked record is unchanged.
+
+``--debug-gif`` (2026-10-23): the copied ``DebugLog`` on every episode (``debug/<start_id>/``
+in the run directory: its telemetry, clean film, goal picture and mask) and the copied debug
+view animated into ``film/<start_id>/debug.gif`` (``vsbench.world.gif.debug_gif``; the
+record's ``debug_gif`` field); it turns ``--telemetry`` on.
 """
 
 from __future__ import annotations
@@ -236,11 +249,14 @@ def arm_entry(protocol: dict, arm_id: str) -> dict:
 
 
 def arm_config(protocol: dict, arm_id: str, *, max_iter: int | None = None,
-               device: str | None = None, telemetry_extended: bool = False) -> dict:
+               device: str | None = None, telemetry_extended: bool = False,
+               goal_mask: str | None = None) -> dict:
     """The cell's config: its arm file deep-merged with the protocol's deltas (as vs-sim's
     ``fly.py`` does), then the bridge's overrides (``--max-iter``, ``--device``,
     ``--telemetry-extended``), then resolved by the copied loader. None of them is part of a
-    cell's derived label."""
+    cell's derived label - except ``goal_mask`` (``--mask``: ``matcher.goal_mask: objects`` on
+    a cell the protocol has no ``_objmask`` twin of), which the copied label states as
+    ``objmask``."""
     from vsbench.vs.bench import config as cfgmod
     from vsbench.vs.camera import REPO_ROOT
 
@@ -254,6 +270,8 @@ def arm_config(protocol: dict, arm_id: str, *, max_iter: int | None = None,
         over.setdefault("episode", {})["telemetry_extended"] = True
     if device is not None and cfg["matcher"]["variant"] in cfgmod.DEVICE_VARIANTS:
         over["matcher"] = {"device": device}
+    if goal_mask is not None:
+        over.setdefault("matcher", {})["goal_mask"] = str(goal_mask)
     cfg = _merge(cfg, over)
     src = f"arms/{entry['base']} + protocol.yaml[{arm_id}]"
     if over:
@@ -308,12 +326,16 @@ def cmd_run(args) -> int:
     from vsbench.vs import benchmark
     from vsbench.vs.bench.runner import open_run, run_episode
     from vsbench.vs.scenes import load_scenes
+    from vsbench.world import masks
     from vsbench.world.mujoco_scene import MujocoScene
 
     protocol = load_protocol(args.protocol)
     if not args.arms and not args.method:
         raise SystemExit("nothing to fly: give --arms and/or --method")
     check_methods(protocol, args.method)
+    mask_mode, _ = masks.parse(args.mask)
+    if mask_mode != "none":
+        check_mask_methods(args.method)
     specs, _ = load_scenes()
     if args.start_set not in protocol["start_sets"]:     # vs-sim's fly.py: the protocol's sets only
         raise SystemExit(f"start set {args.start_set!r} is not in the protocol "
@@ -339,33 +361,50 @@ def cmd_run(args) -> int:
         benchmark.check_scene_goal(scene, payload)
         goal_rgb, _goal_depth = scene.render_goal()        # once, served to every arm
         goal_capture = scene.goal_capture_record()
+        gm = masks.resolve(args.mask, scene, _goal_depth)   # known at goal time only
+        args._gm = gm
+        if gm.mode != "none":
+            print(f"[fly] --mask {args.mask}: {gm.source}, keeps {100 * gm.share:.1f}% of the "
+                  f"goal picture" + (f" (resized from {gm.resized_from[0]}x{gm.resized_from[1]}, "
+                                      "nearest neighbour)" if gm.resized_from else ""), flush=True)
         print(f"[fly] {args.scene}: {scene.render_mode}, look {scene.look.name} "
               f"({scene.look.curve_id}, {scene.look.curve_md5}), goal {scene.working_distance:.6f} m "
               f"(file {payload['goal']['distance_m']:.6f}), goal md5 {goal_capture['goal_frame_md5']}, "
               f"{len(picked)} start(s) of {args.start_set}", flush=True)
         for arm_id in args.arms:
-            cfg = arm_config(protocol, arm_id, max_iter=args.max_iter, device=args.device,
-                             telemetry_extended=args.telemetry_extended)
+            cell, mask_over = masks.arm_cell(protocol, arm_id, gm)
+            cfg = arm_config(protocol, cell, max_iter=args.max_iter, device=args.device,
+                             telemetry_extended=args.telemetry_extended,
+                             goal_mask="objects" if mask_over else None)
             t_build = time.monotonic()
-            arm = build(protocol, arm_id, cfg, intrinsics=scene.intrinsics,
+            arm = build(protocol, cell, cfg, intrinsics=scene.intrinsics,
                         scene_name=args.scene, scene_spec=specs[args.scene])
+            masks.attach_goal_mask(arm, gm)
             build_s = time.monotonic() - t_build
-            tag = f"{args.scene}_{arm_id}"
+            tag = f"{args.scene}_{arm_id}{gm.tag}"
             extra = {**goal_capture, **provenance, "bridge_env": env,
                      "scene_meta": scene.meta, "arm_build_s": round(build_s, 3),
-                     "bridge_driver": "vsbench.world.fly"}
+                     "bridge_driver": "vsbench.world.fly", **_mask_extra(gm, cell)}
             with open_run(tag, cfg, out_root=out_root / tag, telemetry=args.telemetry,
                           allow_dirty=True, extra=extra) as sink:
                 for i, start in enumerate(picked, 1):
                     steps: list | None = [] if args.telemetry else None
                     film_dir = (sink.path / "film" / start["start_id"]) if args.film else None
-                    hook = _Film(film_dir, scene, goal_rgb, title=f"{arm_id} (MuJoCo)",
+                    hook = _Film(film_dir, scene, goal_rgb, title=f"{arm_id}{gm.tag} (MuJoCo)",
                                  every=args.film_every, scale=args.film_scale)
                     n_ev = len(scene.world_log)
-                    rec = run_episode(scene, arm, start, cfg, telemetry=steps,
-                                      starts_payload=payload, on_step=hook, perturbation=pert)
+                    dlog = _debug_log(args, sink, start, arm_id)
+                    try:
+                        rec = run_episode(scene, arm, start, cfg, telemetry=steps,
+                                          starts_payload=payload, on_step=hook,
+                                          perturbation=pert, debug_log=dlog)
+                    finally:
+                        if dlog is not None:
+                            dlog.close()
                     film = hook.close()
                     rec["cell_id"] = tag
+                    gm.apply(rec)
+                    _debug_gif(args, rec, dlog, sink, start, out_root)
                     _perturb_fields(rec, args, scene, n_ev)
                     rec.update(provenance)
                     rec["render_mode"] = scene.render_mode
@@ -405,6 +444,78 @@ def _perturb_fields(rec: dict, args, scene, n_ev: int) -> None:
     rec["world_compiles"] = scene.world_log[n_ev:]
 
 
+# ------------------------------------------------------------- --mask, --debug-gif
+def _mask_extra(gm, cell) -> dict:
+    """``run.json``'s ``bridge_goal_mask`` block (masked cells only)."""
+    if gm.mode == "none":
+        return {}
+    block = {"mode": gm.mode, "source": gm.source, "share": gm.share, "mask_md5": gm.mask_md5,
+             "label_token": gm.token}
+    if cell is not None:
+        block["protocol_cell"] = cell
+    if gm.mode == "file":
+        block.update(file=gm.file, file_md5=gm.file_md5, resized_from=gm.resized_from,
+                     note="config matcher.goal_mask 'objects' only switches the matcher's "
+                          "goal-mask seam on; the mask handed to it is the file's "
+                          "(goal_mask_mode 'file'), never the depth outline")
+    return {"bridge_goal_mask": block}
+
+
+def check_mask_methods(names) -> None:
+    """``--mask`` on a ``--method`` that takes no goal mask is refused before anything is
+    built (the label would say masked over an unmasked flight)."""
+    from vsbench.methods import method_class, takes_goal_mask
+
+    for name in names:
+        cls = method_class(name)
+        if not takes_goal_mask(cls):
+            raise SystemExit(f"--mask on --method {name!r}: its set_target takes no goal_mask "
+                             "(add `goal_mask=None` to it; vsbench.methods.mask_matches filters "
+                             "the matches) - or fly it without --mask")
+
+
+def _debug_log(args, sink, start, arm_id: str):
+    """The copied ``DebugLog`` for one episode under ``--debug-gif`` (else ``None``)."""
+    if not getattr(args, "debug_gif", False):
+        return None
+    from vsbench.vs.bench.debuglog import DebugLog
+
+    return DebugLog(sink.path / "debug" / start["start_id"], arm_id=arm_id, clean=True)
+
+
+def _debug_gif(args, rec: dict, dlog, sink, start, out_root: Path) -> None:
+    """``film/<start_id>/debug.gif`` from the episode's debug log; the record says where."""
+    if dlog is None:
+        return
+    from vsbench.world.gif import debug_gif
+
+    gm = args._gm
+    if gm.mode == "file":
+        # the copied recorder drew the depth outline (it knows no file mask): say so, and draw
+        # the file's mask, the one the method was handed
+        import cv2
+        import numpy as np
+
+        cv2.imwrite(str(dlog.dir / "goal_mask.png"), np.asarray(gm.mask, np.uint8) * 255)
+        (dlog.dir / "goal_mask_source.json").write_text(json.dumps(
+            {"goal_mask_source": gm.source, "note": "goal_mask.png replaced by the file mask "
+             "after the flight; the meta line's mask_source is the copied recorder's default"},
+            indent=1) + "\n")
+    out = sink.path / "film" / start["start_id"] / "debug.gif"
+    try:
+        info = debug_gif(dlog.dir, out, every=args.debug_gif_every,
+                         max_frames=args.debug_gif_frames,
+                         goal_mask=gm.mask if gm.mode == "file" else None)
+    except Exception as exc:  # noqa: BLE001 - a drawing fault must not lose the record
+        rec["debug_gif_error"] = repr(exc)[:500]
+        print(f"[fly] debug.gif failed: {exc!r}", flush=True)
+        return
+    rec["debug_gif"] = str(out.relative_to(out_root))
+    rec["debug_gif_every"] = info["every"]
+    print(f"[fly] {rec['debug_gif']}: {info['frames']} frames (every {info['every']} of "
+          f"{info['logged_steps']} steps), {info['bytes'] / 1e6:.2f} MB", flush=True)
+
+
 # ------------------------------------------------------------------- --method (U6a)
 def check_methods(protocol: dict, names) -> None:
     """Refuse, before anything is built: an unknown or privileged method, and one that is a
@@ -434,27 +545,43 @@ def fly_method_cells(args, scene, picked, payload, provenance, env, goal_rgb, go
         from vsbench.check import parse_params
 
         params = parse_params(args.param)
+    from vsbench.world import masks
+
+    gm = args._gm
     for name in args.method:
         t_build = time.monotonic()
         arm, cfg = build_method_arm(name, params, intrinsics=scene.intrinsics,
                                     max_iter=args.max_iter,
-                                    telemetry_extended=args.telemetry_extended)
+                                    telemetry_extended=args.telemetry_extended,
+                                    goal_mask_mode=gm.mode, mask_token=gm.token,
+                                    mask_source=gm.source)
+        masks.attach_goal_mask(arm, gm)
         build_s = time.monotonic() - t_build
-        tag = f"{args.scene}_external_{name}"
+        tag = f"{args.scene}_external_{name}{gm.tag}"
         extra = {**goal_capture, **provenance, "bridge_env": env, "scene_meta": scene.meta,
-                 "arm_build_s": round(build_s, 3), "bridge_driver": "vsbench.world.fly --method"}
+                 "arm_build_s": round(build_s, 3), "bridge_driver": "vsbench.world.fly --method",
+                 **_mask_extra(gm, None)}
         with open_method_run(tag, cfg, out_root / tag, telemetry=args.telemetry,
                              allow_dirty=True, extra=extra) as sink:
             for i, start in enumerate(picked, 1):
                 steps: list | None = [] if args.telemetry else None
                 film_dir = (sink.path / "film" / start["start_id"]) if args.film else None
-                hook = _Film(film_dir, scene, goal_rgb, title=f"external:{name} (MuJoCo)",
+                hook = _Film(film_dir, scene, goal_rgb,
+                             title=f"external:{name}{gm.tag} (MuJoCo)",
                              every=args.film_every, scale=args.film_scale)
                 n_ev = len(scene.world_log)
-                rec = run_episode(scene, arm, start, cfg, telemetry=steps,
-                                  starts_payload=payload, on_step=hook, perturbation=args._pert)
+                dlog = _debug_log(args, sink, start, f"external_{name}")
+                try:
+                    rec = run_episode(scene, arm, start, cfg, telemetry=steps,
+                                      starts_payload=payload, on_step=hook,
+                                      perturbation=args._pert, debug_log=dlog)
+                finally:
+                    if dlog is not None:
+                        dlog.close()
                 film = hook.close()
                 rec["cell_id"] = tag
+                gm.apply(rec)
+                _debug_gif(args, rec, dlog, sink, start, out_root)
                 _perturb_fields(rec, args, scene, n_ev)
                 rec.update(provenance)
                 rec["render_mode"] = scene.render_mode
@@ -541,6 +668,16 @@ def main(argv=None) -> int:
     r.add_argument("--film", action="store_true", help="the copied FilmWriter's match film")
     r.add_argument("--film-every", type=int, default=2)
     r.add_argument("--film-scale", type=float, default=0.25)
+    r.add_argument("--mask", default="none",
+                   help="filter the matches with a mask on the goal picture: none (default), "
+                        "objects (the goal's objects, from the goal depth; the copied objmask "
+                        "cell) or a .png file (grey > 127 = keep; vsbench.world.masks)")
+    r.add_argument("--debug-gif", action="store_true",
+                   help="the copied debug view animated per episode: film/<start>/debug.gif "
+                        "(implies --telemetry)")
+    r.add_argument("--debug-gif-every", type=int, default=None,
+                   help="one debug frame every N steps (default: at most --debug-gif-frames)")
+    r.add_argument("--debug-gif-frames", type=int, default=90)
     r.add_argument("--samples", type=int, default=4, help="MuJoCo multisampling (colour only)")
     r.add_argument("--look", default=None, choices=["isaac_fit_v1", "raw"],
                    help="the picture: isaac_fit_v1 (default) or raw (vsbench.world.look)")
@@ -560,7 +697,7 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_summary)
 
     args = ap.parse_args(argv)
-    if getattr(args, "telemetry_extended", False):
+    if getattr(args, "telemetry_extended", False) or getattr(args, "debug_gif", False):
         args.telemetry = True
     return int(args.fn(args))
 
