@@ -39,3 +39,5 @@ results/bridge/**/telemetry.jsonl.gz
 results/bridge/**/film/**/*.jpg
 # the default output of `python -m vsbench fly` (README)
 runs/
+# measurement chain logs (tools/step_chains/*.sh write them at the root)
+/*.log

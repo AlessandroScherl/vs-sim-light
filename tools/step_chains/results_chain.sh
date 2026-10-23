@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
+# Step 1-3 measurement chains (2026-09-18); the GPU ones only when the GPU is free.
 # the measurement chain on the station; CPU only
 set -x
-cd ~/genvs_ws/vs_sim_light
+cd "$(dirname "$0")/../.."   # the repository root
 export VSBENCH_SOFTWARE_GL=1
 PY=$PWD/.venv/bin/python
-OSMESA=$HOME/genvs_ws/mm/osmesa24/lib
+OSMESA=${VSBENCH_OSMESA_LIB:-$HOME/genvs_ws/mm/osmesa24/lib}   # a Mesa build with libOSMesa
 F='pci id|dri2|FEngine|Vulkan|CircularBuffer|physical device|feature level|GLFW'
 mkdir -p results/_tmp results/friction
 echo "### STEP determinism statistics open3d"
@@ -34,7 +35,7 @@ LD_LIBRARY_PATH=$OSMESA $PY tools/lighting_check.py --backend mujoco-osmesa 2>&1
 echo "### STEP cross variant"
 $PY tools/cross_variant.py --a mujoco-egl --b mujoco-osmesa --env-b LD_LIBRARY_PATH=$OSMESA 2>&1 | grep -Ev "$F"
 echo "### STEP friction"
-UV=$HOME/genvs_ws/uvhome/pythons
+UV=${VSBENCH_UV_PYTHONS:-$HOME/genvs_ws/uvhome/pythons}   # uv-managed interpreters
 tools/install_friction.sh mujoco-egl python3 2>&1 | tail -4
 tools/install_friction.sh pybullet-tiny python3 2>&1 | tail -4
 tools/install_friction.sh open3d-cpu python3 2>&1 | tail -4
