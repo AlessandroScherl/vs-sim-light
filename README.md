@@ -8,7 +8,8 @@ ART-VS, SIFT / ORB / AKAZE).
 
 ![A flight: the goal view (left) and the live camera (right), with the matched points and an arrow from each to where it should be](docs/media/demo.gif)
 
-*`sift_ransac` on `cluttered2`, starting 110 mm and 15 degrees away from the goal view; 1 mm away after 160 steps.*
+*`sift_ransac` (no mask) on `industrial1_drill`, from the frozen far start `wide100` / `w3_095`:
+743 mm and 97 degrees away from the goal view; 0.3 mm and 0.03 degrees after 600 steps (every 4th step shown).*
 
 ## Quick start
 
@@ -119,17 +120,35 @@ same places. The pictures are tone-mapped to look like the Isaac Sim renders of 
 objects: shoes, bottles, mugs, drills, ...), chained with `+`, e.g.
 `--perturb swap:ycb/006_mustard_bottle+ground:concrete`. The goal view stays the unperturbed one.
 
+## Masks
+
+`--mask` keeps only the matches whose point in the goal picture lies inside a mask:
+
+```bash
+python -m vsbench fly --scene industrial1_drill --method sift_ransac --start-set capped30 --limit 1 --mask objects
+python -m vsbench fly --scene poster2 --method sift_ransac --start-set near60 --limit 1 --mask my_mask.png
+```
+
+`objects` is the goal picture's objects, found from the goal depth (everything above the
+floor); it is the benchmark's labelled `objmask` cell, and only works in the rooms. A `.png`
+is your own mask on the goal picture (white = keep; another size is resized). The run's
+name and label then say `objmask` or `filemask-<md5>`, and each record says where the mask
+came from (`goal_mask_source`). Your own method receives the mask if its `set_target` has a
+`goal_mask=None` argument (a True/False array the size of the goal picture);
+`vsbench.methods.mask_matches(kp_des, kp_cur, goal_mask)` tells which matches to keep, as
+`examples/my_method.py` does. A method without that argument is refused a mask.
+
 ## Debug visualizations
 
 - **The film** (`--film`): goal | live camera, the matched points with an arrow from each to
   its target, the step, the number of matches and the true distance to the goal (the GIF above).
-- **The debug view** (below): one step drawn from the flight's log - each goal point joined to
-  its live match and checked against the true correspondence (the header counts the matches
+- **The debug view** (`--debug-gif`, below: the flight above, every 8th step): each goal point joined
+  to its live match and checked against the true correspondence (the header counts the matches
   within 20 px of the truth), the timeline of the whole flight (distance, angle, matches, where
-  each stop fired) and the error split into sideways, height, tilt and roll
-  (`vsbench/vs/bench/debugview.py`; `tools/readme_media.py demo` records and draws one).
+  each stop fired) and the error split into sideways, height, tilt and roll. `--debug-gif` writes
+  one `debug.gif` per episode next to its film (`vsbench/vs/bench/debugview.py`, animated).
 
-![The debug view of one step](docs/media/debug_view.jpg)
+![The debug view, animated over the flight above](docs/media/debug.gif)
 
 ## What you get from a run
 
@@ -140,7 +159,7 @@ and `final_rotation_deg` (the true distance to the goal pose when the episode en
 (e.g. `abs_10mm_1deg`: within 10 mm and 1 degree). Beside it, a dated run directory under
 `runs/<scene>_<name>/` holds the run's settings, machine and commit (`run.json`,
 `resolved_config.yaml`) and, with `--film`, one `episode.mp4` per episode (the record's `film`
-field gives its path). `--telemetry` adds a per-step log, and
+field gives its path; `--debug-gif` adds `debug.gif` beside it, field `debug_gif`). `--telemetry` adds a per-step log, and
 `python -m vsbench.world.fly summary --out runs` prints a table of a whole directory.
 
 ## Baselines included
