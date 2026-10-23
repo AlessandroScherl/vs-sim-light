@@ -1,0 +1,31 @@
+_schema: vsbench-external-method-1
+_source: external_method.yaml + method sift_ibvs
+arm:
+  kind: external
+controller:
+  dt: 0.016666666666666666
+episode:
+  divergence_abort: true
+  max_iter: 600
+  record_stops:
+  - velocity_quiet
+  - dec_plateau
+  telemetry_extended: false
+matcher:
+  num_landmarks: 0
+  variant: external
+method:
+  name: sift_ibvs
+  params: {}
+scoring:
+  success_rule:
+  - predicate_a
+  - paper_3cm_3deg
+  - cns_code_0p1d_10deg
+  - abs_10mm_1deg
+  - abs_20mm_2deg
+  - abs_50mm_5deg
+  - abs_100mm_10deg
+seed: 20260902
+stop:
+  rule: cns_plateau

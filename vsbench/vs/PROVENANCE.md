@@ -89,6 +89,13 @@ always traceable to the exact published-baseline code that produced it.
   `merge_ycb_library` and the placement rules; `MujocoScene` derives the goal with the copied
   `scenes.scene_view_goal_pose` and checks it with `starts.check_goal_match`; the `objmask`
   arms get their goal mask from the copied `labels.object_mask_from_depth`.
+- **The two adapters (U6a, U6b), outside the copy:** `vsbench/world/method_arm.py` flies a
+  vsbench method on the copied loop by subclassing the copied `Arm` (record `arm_kind:
+  external`, label `external:...`, its own config template validated by the adapter - the
+  copied `config.validate` refuses `matcher.variant: external` and is not edited), and
+  `vsbench/methods/vssim_arms.py` registers six protocol cells as vsbench methods (built by
+  the copied `build_arm` from the copied configs, only `matcher.device` stated). Neither edits
+  a copied file.
 - **Copied, not wired** (their dependencies are not in this venv; their tests skip or use
   stubs exactly as in vs-sim): CNS v1 (`$CNS_ROOT`, torch_geometric), DINOBot (DINO v1 ViT-S/8),
   LightGlue, RoMa, ViSP IBVS, ART-VS object mode (`objroi`: GroundingDINO / LangSAM /

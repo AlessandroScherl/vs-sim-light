@@ -1,0 +1,7 @@
+backend mujoco-egl (llvmpipe (LLVM 20.1.2, 256 bits)), scene poster, method sift_ransac {'arm': 'sift_ransac', 'device': 'cpu', 'scene_ransac': 'homography', 'episode': 'vsbench', 'start_id': 0, 'label': 'classical_sift/k24/ur/uniform/ransac-scene_default/cns_plateau'}, restoring budget 3000 steps
+setup checks for sift_ransac:
+  zero_at_target       pass  |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)
+  hold_at_target       pass  drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)
+  restoring_direction  pass  12 of 12 starts right and converged (converged in 52 to 559 steps)
+    per axis: vx pass  vy pass  vz pass  wx pass  wy pass  wz pass
+  all: pass
