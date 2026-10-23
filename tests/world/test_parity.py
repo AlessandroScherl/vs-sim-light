@@ -53,7 +53,7 @@ KNOWN_LANDING_MISSES = {
     ("vitvs_dinov3", "near60/n_001"): (
         "not only the wobble: the two worlds settle on different token-quantised floors "
         "(steps 76-150: mock 2.87-5.01 mm, MuJoCo 5.78-8.25 mm; median of steps 101-150 "
-        "4.10 vs 6.74 mm, 0.32 vs 0.85 deg - the medians differ by 0.53 deg > 0.3)"),
+        "4.10 vs 6.74 mm, 0.21 vs 0.73 deg - the rotation medians differ by 0.53 deg > 0.3)"),
     ("vitvs_dinov2", "near60/n_001"): (
         "the wobble: the medians of steps 101-150 agree (1.44 vs 3.30 mm, 0.33 vs 0.53 deg: "
         "d 1.86 mm / 0.20 deg); MuJoCo's curve wanders 2.57-5.33 mm in steps 76-150 and the "
@@ -211,5 +211,8 @@ def test_cpu_and_renderers_are_recorded(result):
     if not result["table"]:
         pytest.skip("nothing flown yet")
     GATES["cpu_s_per_world"] = result["cpu_s_per_world"]
+    GATES["spread_per_arm_and_world_pair"] = result["spread"]
+    GATES["artvs_mujoco960"] = ("not flown: stopped after 8 minutes to spare the shared CPU "
+                                "(~1.5 h at ~8 s/step); ART-VS passed the landing gate")
     GATES["gl_renderers"] = result["gl_renderers"]
     assert all("llvmpipe" in r.lower() for r in result["gl_renderers"]), result["gl_renderers"]

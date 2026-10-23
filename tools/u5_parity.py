@@ -407,6 +407,16 @@ def compare(root: Path = OUT, scene: str = "hollywood") -> dict:
                                                for k in keys),
             "steps": {w: {k: art[w][k]["u5"]["artvs_switch_step"] for k in keys}
                       for w in GATE_PAIR}}
+    spread: dict = {}
+    for arm, keys in pairs.items():
+        for name in sorted({n for v in keys.values() for n in v}):
+            rows = [v[name] for v in keys.values() if name in v]
+            spread.setdefault(arm, {})[name] = {
+                "n": len(rows),
+                **{f"{q}_{f}": round(float(fn([r[f] for r in rows])), 4)
+                   for f in ("d_final_translation_mm", "d_final_rotation_deg",
+                             "d_t_mm_med_last_third", "d_r_deg_med_last_third")
+                   for q, fn in (("median", np.median), ("max", np.max))}}
     cpu = {w: round(sum(r["u5"]["cpu_s"] for a in arms.values() for r in a.values()), 1)
            for w, arms in recs.items()}
     renderers = sorted({str(r["u5"].get("gl_renderer")) for w, arms in recs.items() if w != "mock"
@@ -416,7 +426,7 @@ def compare(root: Path = OUT, scene: str = "hollywood") -> dict:
                      "rule": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and "
                              "|final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, "
                              "every start; ART-VS's artvs_switched True on every start in both worlds"},
-            "verdict": verdict, "cpu_s_per_world": cpu, "gl_renderers": renderers}
+            "verdict": verdict, "spread": spread, "cpu_s_per_world": cpu, "gl_renderers": renderers}
 
 
 def markdown(res: dict) -> str:
