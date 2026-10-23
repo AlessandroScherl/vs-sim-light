@@ -291,7 +291,7 @@ the objects' box (Isaac's `BBoxCache` rule) and checked against the frozen start
 miss the frozen goal wins and the residual is recorded (open decision D-4, `goal_rule`). A room
 holds up to ~3.6 GB of memory (cluttered2: nine 4096² textures, uploaded to both GL contexts)
 and takes ~10 s to build; its goal depth equals Isaac's own to micrometres, its raw picture does
-not (no PBR, no tone mapping; `results/bridge/u4_rooms_vs_isaac.png`) - U4b's Isaac look, the
+not (no PBR, no tone mapping; `results/bridge/u4_rooms_vs_isaac.jpg`) - U4b's Isaac look, the
 default since, closes most of that (next section). The protocol has no near
 start set for the rooms, so `fly` (protocol sets only) flies them from `capped30` / `wide100`;
 the near smoke uses `check_baselines`' near start through `tools/u4_rooms.py smoke`.
@@ -375,7 +375,7 @@ diffuse shading); Isaac's dark tones carry a sun-lit floor (its glossy ground re
 sky), which the curve applies everywhere, so shadows stay lighter than Isaac's on dark ground
 (cluttered2: 66 vs 44 grey inside the shadow; drill 61 vs 54, cluttered3 99 vs 98); Isaac's
 picture is slightly softer (its denoiser) and cluttered2's ground keeps a larger per-pixel
-difference (19 grey levels). `results/bridge/u4b_look_vs_isaac.png` (raw | look | Isaac) and
+difference (19 grey levels). `results/bridge/u4b_look_vs_isaac.jpg` (raw | look | Isaac) and
 `results/bridge/u4b_drill_shadow_crop.png` show it.
 
 ```
@@ -565,7 +565,7 @@ colour is extrapolated. The same two floors under each other's curve (mean RGB o
 ground at the goal): the industrial concrete under its own scene's curve (197, 190, 184),
 under cluttered2's (191, 168, 166) - about 20 levels pinker; cluttered2's wood under its own
 curve (160, 116, 102), under the drill scene's (152, 91, 53). Preview of every mode at the
-goal pose: `results/bridge/u8_modes.png`. Scenes without a fitted curve (the instance suite) fly in
+goal pose: `results/bridge/u8_modes.jpg`. Scenes without a fitted curve (the instance suite) fly in
 the `raw` look, as before.
 
 **The light.** vs-sim's `light` scales the dome and the sun by the same `s` and gives both

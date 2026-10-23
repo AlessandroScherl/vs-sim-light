@@ -147,7 +147,7 @@
         }
       }
     },
-    "sheet": "results/bridge/u4_rooms_vs_isaac.png"
+    "sheet": "results/bridge/u4_rooms_vs_isaac.jpg"
   },
   "measure": {
     "how": "each room in a fresh process (tools/u4_rooms.py _one): fly.station_guard, MujocoScene, the goal capture, 3 redraws; RSS from /proc/self/status (steady) and getrusage (peak)",

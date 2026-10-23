@@ -1423,7 +1423,7 @@
       }
     },
     "shadow_crop": "results/bridge/u4b_drill_shadow_crop.png (industrial1_drill goal, full resolution, rows 300-620, columns 940-1360: raw | look | Isaac)",
-    "sheet": "results/bridge/u4b_look_vs_isaac.png",
+    "sheet": "results/bridge/u4b_look_vs_isaac.jpg",
     "vsbench_commit": "7076ead002fdfcb47a029e4dac93b28b6fc41581"
   },
   "shadows": {

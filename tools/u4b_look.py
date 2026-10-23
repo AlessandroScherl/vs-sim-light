@@ -8,7 +8,7 @@
                                                            #   -> vsbench/world/configs/look_isaac_fit_v1.json
     PYTHONPATH=. $VSBENCH_PY tools/u4b_look.py measure      # raw vs look vs Isaac, goal + held-out,
                                                            #   per-frame cost -> results/bridge/u4b_look.json,
-                                                           #   results/bridge/u4b_look_vs_isaac.png
+                                                           #   results/bridge/u4b_look_vs_isaac.jpg
 
 The Isaac pictures are read, never written (``$VSBENCH_ISAAC_GOALS``, default
 ``~/genvs_ws/vssim_out/check1``: Isaac's ``check_baselines`` run of 2026-09-17): per scene the
@@ -513,8 +513,8 @@ def cmd_measure(args) -> int:
             sheet.paste(Image.fromarray(np.asarray(img)).resize((tile_w, tile_h), Image.LANCZOS),
                         (j * tile_w, y + head))
             draw.text((j * tile_w + 6, y + 6), label, fill=(0, 0, 0))
-    out = OUT / "u4b_look_vs_isaac.png"
-    sheet.save(out, optimize=True)
+    out = OUT / "u4b_look_vs_isaac.jpg"
+    sheet.save(out, quality=90)   # JPEG since 2026-10-23 (4.8 MB as PNG)
     print(f"[u4b] wrote {out}")
     # a crop sheet of the drill's shadow edge (raw | look | Isaac), full resolution
     if "industrial1_drill" in args.scenes:

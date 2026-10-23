@@ -6,7 +6,7 @@ flights. The contract itself is ``tests/world/test_perturb_world.py``.
     source tools/cpu_env.sh
     PYTHONPATH=. $VSBENCH_PY tools/u8_perturb.py measure     # per scene in its own process:
                                                              #   recompile s + RSS per mode, the
-                                                             #   depth gate, results/bridge/u8_modes.png
+                                                             #   depth gate, results/bridge/u8_modes.jpg
     PYTHONPATH=. $VSBENCH_PY tools/u8_perturb.py smoke       # sift_ransac, 100 steps, one episode
                                                              #   per mode -> results/bridge/u8/
 
@@ -51,7 +51,7 @@ if str(REPO) not in sys.path:
 
 OUT = REPO / "results" / "bridge"
 RECORD = OUT / "u8_perturb.json"
-SHEET = OUT / "u8_modes.png"
+SHEET = OUT / "u8_modes.jpg"   # JPEG since 2026-10-23 (3.4 MB as PNG)
 SEED = 20260918            # vs-sim scripts/fly.py --perturb-seed default
 SWAP_ID = "ycb/006_mustard_bottle"
 PLAN = {
@@ -258,7 +258,7 @@ def cmd_measure(args) -> int:
     for i, t in enumerate(tiles):
         r, c = divmod(i, cols)
         sheet[r * H:(r + 1) * H, c * W:(c + 1) * W] = t
-    cv2.imwrite(str(SHEET), cv2.cvtColor(sheet, cv2.COLOR_RGB2BGR))
+    cv2.imwrite(str(SHEET), cv2.cvtColor(sheet, cv2.COLOR_RGB2BGR), [cv2.IMWRITE_JPEG_QUALITY, 90])
     from vsbench.world.perturb_world import LIGHT_RULE, LOOK_RULE
 
     _merge_record("measure", {

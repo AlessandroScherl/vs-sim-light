@@ -6,7 +6,7 @@ the smoke flights - the parts of the unit that are not in ``tests/world/test_sce
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py measure   # per room, in its own process: build /
                                                          #   compile s, peak + steady RSS, goal md5,
                                                          #   results/bridge/u4_<room>_goal.png
-    PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py isaac     # results/bridge/u4_rooms_vs_isaac.png
+    PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py isaac     # results/bridge/u4_rooms_vs_isaac.jpg
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --arms sift_ransac --max-iter 100
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --rooms cluttered2 --arms vitvs_dinov3
     PYTHONPATH=. $VSBENCH_PY tools/u4_rooms.py smoke --look raw --out results/bridge/u4b/raw \
@@ -226,8 +226,8 @@ def cmd_isaac(args) -> int:
                                           (Image.open(ip).convert("RGB"), f"{room} - Isaac RTX (check1, 2026-09-17)"))):
             sheet.paste(img.resize((tile_w, tile_h), Image.LANCZOS), (j * tile_w, y + 28))
             draw.text((j * tile_w + 8, y + 8), label, fill=(0, 0, 0))
-    out = OUT / "u4_rooms_vs_isaac.png"
-    sheet.save(out, optimize=True)
+    out = OUT / "u4_rooms_vs_isaac.jpg"
+    sheet.save(out, quality=90)   # JPEG since 2026-10-23 (2.9 MB as PNG)
     print(json.dumps(rows, indent=1))
     _merge_record("isaac_comparison", {"sheet": str(out.relative_to(REPO)), "rooms": rows,
                                        "isaac_source": str(ISAAC_GOALS), "observed": OBSERVED})
