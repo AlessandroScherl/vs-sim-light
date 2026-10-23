@@ -679,6 +679,11 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   `sift_ransac` (`--backends mujoco-egl -k vssim`); the demo's start 1 converges under 3 mm in
   300 steps with `sift_ransac`; the ViT methods pass `python -m vsbench.check`.
 - Cost: ~10 min.
+- Final review (2026-10-23): `results/bridge/u6b/check_vitvs_dinov2.txt` added (`python -m
+  vsbench.check --method vitvs_dinov2 --max-steps 300`, CPU, llvmpipe; 42 min wall, 5 000
+  CPU-s): zero and hold at target pass (gated), restoring direction 0 of 12 (report only, as
+  for `vitvs_dinov3`: the token grid stalls above the check's 2 mm / 0.2° hold on vsbench's
+  640 × 480 poster) - so `test_vssim_check_cli_gate` no longer skips it.
 
 ### Milestone 3 — the whole library, perturbations, the rig check
 
