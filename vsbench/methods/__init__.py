@@ -18,6 +18,7 @@ from vsbench.methods.base import (
     check_method,
     normalise_output,
 )
+from vsbench.methods.masking import mask_matches, takes_goal_mask
 
 _REGISTRY: dict[str, type] = {}
 T = TypeVar("T", bound=type)
@@ -84,7 +85,9 @@ __all__ = [
     "available_methods",
     "check_method",
     "make_method",
+    "mask_matches",
     "method_class",
     "normalise_output",
     "register",
+    "takes_goal_mask",
 ]

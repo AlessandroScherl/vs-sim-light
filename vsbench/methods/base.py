@@ -52,7 +52,11 @@ class VSMethod(Protocol):
         """Forget every state from a previous episode."""
 
     def set_target(self, desired_rgb: np.ndarray, desired_depth: np.ndarray | None = None, distance_prior: float | None = None) -> None:
-        """The desired view, with depth in the form ``wants_depth`` asked for."""
+        """The desired view, with depth in the form ``wants_depth`` asked for.
+
+        Optional: a ``goal_mask=None`` parameter (bool ``[H, W]`` on the desired view, True =
+        "match here"; ``--mask objects|<file.png>``) - see ``vsbench.methods.masking``. A
+        method without it never receives a mask."""
 
     def get_control_rate(self, current_rgb: np.ndarray, current_depth: np.ndarray | None = None) -> Any:
         """The twist (6,), alone or as ``(twist, info)``."""
@@ -74,6 +78,9 @@ def check_method(method: object) -> None:
         raise TypeError("privileged must be a bool")
     if method.privileged and not hasattr(method, "observe_truth"):
         raise TypeError("a privileged method must implement observe_truth")
+    from vsbench.methods.masking import takes_goal_mask
+
+    takes_goal_mask(method)          # uses_goal_mask = True without a goal_mask parameter raises
 
 
 def normalise_output(out: Any) -> tuple[np.ndarray, dict]:

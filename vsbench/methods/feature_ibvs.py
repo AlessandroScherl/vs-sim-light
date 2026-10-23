@@ -10,6 +10,9 @@ law with ``L`` stacked from ``vsbench.interaction.interaction_matrix``:
 
     twist = -gain * pinv(L) @ (s - s_target)       s in normalised image coordinates
 
+Goal mask (``--mask``): ``set_target(..., goal_mask=...)`` keeps only the desired keypoints
+inside the mask (``vsbench.methods.mask_matches``), so every match starts on the mask.
+
 Depth: ``depth="dense"`` (default) reads the current depth image at each keypoint and
 drops keypoints without depth; ``depth="scalar"`` uses the distance prior for all. With
 fewer than ``min_inliers`` (8) inliers the method returns a zero twist and sets ``lost``.
@@ -26,6 +29,7 @@ import numpy as np
 from vsbench.camera import CameraModel
 from vsbench.interaction import interaction_matrix, normalised
 from vsbench.methods import register
+from vsbench.methods.masking import mask_matches
 
 DETECTORS = ("sift", "orb")
 RANSAC_MODELS = ("homography", "fundamental")
@@ -86,8 +90,12 @@ class FeatureIBVS:
         self._desc_des: np.ndarray | None = None
         self._prior: float | None = None
 
-    def set_target(self, desired_rgb, desired_depth=None, distance_prior=None) -> None:
+    def set_target(self, desired_rgb, desired_depth=None, distance_prior=None,
+                   goal_mask=None) -> None:
         kp, desc = self._describe(desired_rgb)
+        if goal_mask is not None and desc is not None:
+            keep = mask_matches(kp, None, goal_mask)
+            kp, desc = kp[keep], desc[keep]
         if desc is None or len(kp) < self.min_inliers:
             raise ValueError(f"only {len(kp)} {self.detector} keypoints in the desired image")
         self._kp_des, self._desc_des = kp, desc

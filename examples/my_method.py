@@ -5,6 +5,9 @@ Fly it (one start, a film and a record under runs/):
     python -m vsbench fly --scene poster2 --method my_ibvs --plugin examples/my_method.py \\
         --start-set near60 --limit 1 --max-iter 150 --film
 
+Add ``--mask objects`` (the goal picture's objects) or ``--mask my_mask.png`` to filter the
+matches with a mask on the goal picture: it arrives in ``set_target`` as ``goal_mask``.
+
 Copy this file, change get_control_rate, keep the two attributes and four methods below.
 For a fuller pipeline (SIFT, ratio test, fundamental-matrix RANSAC for 3-D scenes) see
 ``vsbench/methods/feature_ibvs.py``.
@@ -13,7 +16,7 @@ For a fuller pipeline (SIFT, ratio test, fundamental-matrix RANSAC for 3-D scene
 import cv2
 import numpy as np
 
-from vsbench.methods import register
+from vsbench.methods import mask_matches, register
 
 
 @register("my_ibvs")                      # the name you pass to --method
@@ -33,11 +36,13 @@ class MyIBVS:
 
     def reset(self):
         """Forget everything from the previous episode."""
-        self.kp_goal = self.desc_goal = None
+        self.kp_goal = self.desc_goal = self.goal_mask = None
 
-    def set_target(self, desired_rgb, desired_depth=None, distance_prior=None):
-        """The goal picture (uint8, H x W x 3), plus depth in the form wants_depth asked for."""
+    def set_target(self, desired_rgb, desired_depth=None, distance_prior=None, goal_mask=None):
+        """The goal picture (uint8, H x W x 3), plus depth in the form wants_depth asked for;
+        goal_mask (bool H x W, True = match here) only with --mask, else None."""
         self.kp_goal, self.desc_goal = self._features(desired_rgb)
+        self.goal_mask = goal_mask
 
     def get_control_rate(self, current_rgb, current_depth=None):
         """One control step: the live picture (and depth) in, a camera velocity out."""
@@ -47,6 +52,10 @@ class MyIBVS:
             return np.zeros(6), {"lost": True}
         cur = kp[[x.queryIdx for x in m]]
         goal = self.kp_goal[[x.trainIdx for x in m]]
+        keep = mask_matches(goal, cur, self.goal_mask)              # all True without --mask
+        cur, goal = cur[keep], goal[keep]
+        if len(cur) < 8:
+            return np.zeros(6), {"lost": True}
         _, mask = cv2.findHomography(cur, goal, cv2.RANSAC, 3.0)   # drop wrong matches (planar model)
         u, v = cur[:, 0].astype(int), cur[:, 1].astype(int)
         Z = current_depth[v, u]                                     # metres, 0 = nothing hit
