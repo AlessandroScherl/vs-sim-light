@@ -45,6 +45,7 @@ import numpy as np
 
 from vsbench.world import build as buildmod
 from vsbench.world.camera import d435i_camera_model, d435i_intrinsics, describe
+from vsbench.world.perturb_world import WorldVerbs
 
 #: Isaac's ``reortho_every`` default (``IsaacScene.__init__``).
 REORTHO_EVERY = 300
@@ -129,7 +130,7 @@ def room_goal(cam, spec, placed, goal_rule: str = "frozen_on_miss"):
     return pos, R, d, check
 
 
-class MujocoScene:
+class MujocoScene(WorldVerbs):
     """One vs-sim benchmark scene, rendered by MuJoCo, behind ``vsbench.vs.scene.Scene``.
 
     ``MujocoScene("hollywood")`` reads the copied ``configs/scenes.yaml``, builds the plate,
@@ -138,6 +139,12 @@ class MujocoScene:
     builds the ground and the converted objects (loaded from the cache for this scene only)
     and derives the goal from their box (:func:`room_goal`). Hold it as a context manager or
     call :meth:`close`: it owns a GL context.
+
+    The perturbation verbs (``build_poster``, ``put_box``, ``remove_prim(s)``,
+    ``place_extra_objects``, ``set_prim_visible``, ``object_pose``, ``object_world_bbox``,
+    ``set_lighting`` / ``lighting_snapshot`` / ``restore_lighting``; PORT_PLAN U8) come from
+    :class:`vsbench.world.perturb_world.WorldVerbs`: an edit recompiles the model at the
+    next frame, the look stays the unedited scene's, the goal picture stays the unedited one.
     """
 
     def __init__(self, name: str, *, gl: str = "egl", samples: int = 4, specs: dict | None = None,
@@ -174,6 +181,9 @@ class MujocoScene:
         self.renderer = make_renderer(f"mujoco-{gl}", self.scene_spec, self.render_camera,
                                       samples=int(samples), **self.renderer_kwargs)
         self.compile_s = round(time.monotonic() - t_compile, 3)
+        self._gl, self._samples, self._cache = gl, int(samples), cache
+        st = self.renderer.model.stat           # pinned for every edited world (perturb_world)
+        self._stat = (float(st.extent), tuple(float(c) for c in st.center))
         self.render_mode = render_mode_from(gl, getattr(self.renderer, "gl_renderer", None))
         self.goal_check: dict | None = None
         if self.spec.kind == "poster":
@@ -191,6 +201,7 @@ class MujocoScene:
         self.goal_frame_md5: str | None = None
         self.n_renders = 0
         self._verbose = bool(verbose)
+        self._init_world(built)
         self.look_record = self.look.record(self.scene_spec, self.renderer_kwargs)
         self.look_record["gl_renderer"] = getattr(self.renderer, "gl_renderer", None)
         self.meta = {**meta, "render_mode": self.render_mode, "samples": int(samples),
@@ -253,10 +264,16 @@ class MujocoScene:
     def _draw(self, pose) -> tuple[np.ndarray, np.ndarray]:
         from vsbench.vs.scene import pose_to_T
 
+        self.sync()                                          # an edited world recompiles here
         self.n_renders += 1
         rgb, depth = self.renderer.render(pose_to_T(pose))
-        rgb = self.look.apply(np.ascontiguousarray(rgb))     # the tone curve: RGB only
+        rgb = self._tone(np.ascontiguousarray(rgb))          # the tone curve: RGB only
         return np.ascontiguousarray(rgb), np.ascontiguousarray(depth, dtype=np.float32)
+
+    def draw_fresh(self, pose) -> tuple[np.ndarray, np.ndarray]:
+        """The CURRENT world drawn at ``pose``, never from the goal cache, the camera left
+        where it is - for diagnostics (e.g. the perturbed world seen from the goal pose)."""
+        return self._draw(pose)
 
     def render_goal(self) -> tuple[np.ndarray, np.ndarray]:
         """The goal view, drawn once per scene and cached (the camera does not move)."""

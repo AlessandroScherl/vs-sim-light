@@ -1,0 +1,3777 @@
+{
+  "measure": {
+    "how": "per scene in a fresh process (tools/u8_perturb.py _one): MujocoScene, the goal capture, then per mode the copied perturb.build(mode, seed=20260918).begin at the smoke start's episode seed, the edited world compiled (scene.sync), drawn fresh at the goal pose, the depth gate at the goal and the start pose (ray caster on the compiled model, stride 4), end, the unedited world compiled again and redrawn at the goal; RSS from /proc/self/status",
+    "light_rule": "light: the dome and the sun scaled by s with colour temperature T change every pixel's linear radiance by f_c = s * blackbody_c(T) (UsdLux.BlackbodyTemperatureAsRgb, luminance 1); applied inside the scene's tone curve, y = 255 srgb(w/(1+w)), w = f_c (floor + e^k x^gamma) (raw look: y = clip(f_c x)); MuJoCo's own light terms clamp at 1, so the model's lights are not edited; depth untouched",
+    "look_rule": "the scene's look (fill share, light gain, shadow map and its fitted square, tone curve) is fitted once on the unperturbed goal and stays fixed under every perturbation: an edited world is drawn through the same renderer response, as in Isaac; the goal picture is the unperturbed one, captured before the first begin and served from the cache at the goal pose (vs-sim's rule)",
+    "scenes": {
+      "cluttered2": {
+        "modes": {
+          "combined": {
+            "begin_s": 1.013,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 7.666,
+              "edits": [
+                "place /World/Distractor_0 ycb/072-b_toy_airplane",
+                "place /World/Distractor_1 ycb/073-f_lego_duplo",
+                "put_box /World/Occluder 0.1361 m"
+              ],
+              "event": "compile",
+              "free_s": 0.62,
+              "hidden": [],
+              "n": 9,
+              "n_objects": 12,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7",
+                "/World/Distractor_0",
+                "/World/Distractor_1",
+                "/World/Occluder"
+              ],
+              "rss_mb_after": 4326.9,
+              "rss_mb_before": 3876.8,
+              "stat_pinned": true,
+              "total_s": 8.286,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.382,
+              "edits": [
+                "remove_prim /World/Occluder",
+                "remove_prim /World/Distractor_0",
+                "remove_prim /World/Distractor_1"
+              ],
+              "event": "compile",
+              "free_s": 0.466,
+              "hidden": [],
+              "n": 10,
+              "n_objects": 9,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3747.7,
+              "rss_mb_before": 4287.0,
+              "stat_pinned": false,
+              "total_s": 7.848,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.0001405545413790673
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0003304090137046245,
+                  "median_mm": 3.536320225538958e-05,
+                  "n": 8397,
+                  "p99_mm": 0.00016332103546456883
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 114796,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 8397,
+                "n_grid": 129600,
+                "n_unchanged": 120862,
+                "n_unchanged_undilated": 121203,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.590174754325886e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00022052646803327744
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0004395674592094778,
+                  "median_mm": 7.158835069187575e-05,
+                  "n": 8464,
+                  "p99_mm": 0.0002928195277085437
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 9.939307199502423e-05,
+                  "n": 114647,
+                  "p99_mm": 0.0002125278547282505
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 8464,
+                "n_grid": 129600,
+                "n_unchanged": 120693,
+                "n_unchanged_undilated": 121136,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "distractors": {
+                "items": [
+                  {
+                    "instance_id": "ycb/072-b_toy_airplane",
+                    "pixel": [
+                      963.7186606862775,
+                      868.1723963342903
+                    ],
+                    "x": 0.0506364101770765,
+                    "y": -0.1777263274064521,
+                    "yaw_deg": 59.223000705640835
+                  },
+                  {
+                    "instance_id": "ycb/073-f_lego_duplo",
+                    "pixel": [
+                      1530.9018221799747,
+                      493.27097035783373
+                    ],
+                    "x": 0.6196792048958002,
+                    "y": 0.1984042943487007,
+                    "yaw_deg": 155.60492870791418
+                  }
+                ],
+                "mode": "distractors",
+                "n": 2,
+                "prim_paths": [
+                  "/World/Distractor_0",
+                  "/World/Distractor_1"
+                ],
+                "seed": 2046166178
+              },
+              "light": {
+                "light_intensity_scale": 0.8363779680525396,
+                "light_temperature_k": 5142.86439265847,
+                "mode": "light",
+                "seed": 2046166178
+              },
+              "mode": "combined",
+              "noise": {
+                "brightness": 0.07843801398273456,
+                "contrast": 0.9565580162624558,
+                "lambda_read": 2.2952043133493843e-05,
+                "lambda_shot": 0.0035317716519303343,
+                "mode": "noise",
+                "seed": 2046166178,
+                "wb_gain": [
+                  1.0201250655468868,
+                  0.9254090783996218,
+                  0.9462876512807428
+                ]
+              },
+              "occluder": {
+                "centre": [
+                  0.0024775430212289687,
+                  0.00690598661659142,
+                  0.792393556083352
+                ],
+                "distance_m": 0.6189668681201984,
+                "image_width_frac": 0.16114131324172926,
+                "mode": "occluder",
+                "pixel": [
+                  859.0268666692043,
+                  868.6740970559679
+                ],
+                "prim_path": "/World/Occluder",
+                "seed": 2046166178,
+                "size_m": 0.13613167697543824
+              },
+              "seed": 2046166178
+            },
+            "edited_geometry": [
+              "/World/Distractor_0",
+              "/World/Distractor_1",
+              "/World/Occluder"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              180.65378584619674,
+              117.25770061674623,
+              100.69924039165127
+            ],
+            "mode": "combined",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              184.4067293595679,
+              122.2346807484568,
+              107.19650318287037
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4853.4,
+              "rss_mb": 3795.2
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                0.997076426235175,
+                0.8062053370930293,
+                0.662070010384268
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": true,
+                  "intensity": 2509.133904157619
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": true,
+                  "intensity": 2927.3228881838886
+                }
+              },
+              "n_compiles": 9,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/072-b_toy_airplane",
+                  "kind": "extra",
+                  "path": "/World/Distractor_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/073-f_lego_duplo",
+                  "kind": "extra",
+                  "path": "/World/Distractor_1",
+                  "visible": true
+                },
+                {
+                  "kind": "box",
+                  "path": "/World/Occluder",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "distractors": {
+            "begin_s": 1.183,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 8.782,
+              "edits": [
+                "place /World/Distractor_0 ycb/072-b_toy_airplane",
+                "place /World/Distractor_1 ycb/073-f_lego_duplo"
+              ],
+              "event": "compile",
+              "free_s": 0.573,
+              "hidden": [],
+              "n": 3,
+              "n_objects": 11,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7",
+                "/World/Distractor_0",
+                "/World/Distractor_1"
+              ],
+              "rss_mb_after": 4251.8,
+              "rss_mb_before": 3762.9,
+              "stat_pinned": true,
+              "total_s": 9.355,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 8.004,
+              "edits": [
+                "remove_prim /World/Distractor_0",
+                "remove_prim /World/Distractor_1"
+              ],
+              "event": "compile",
+              "free_s": 0.614,
+              "hidden": [],
+              "n": 4,
+              "n_objects": 9,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3713.2,
+              "rss_mb_before": 4252.1,
+              "stat_pinned": false,
+              "total_s": 8.619,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014771547950820284
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0011771026333651236,
+                  "median_mm": 8.708173537819164e-05,
+                  "n": 598,
+                  "p99_mm": 0.00043728746742521677
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122110,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 598,
+                "n_grid": 129600,
+                "n_unchanged": 128818,
+                "n_unchanged_undilated": 129002,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.923021626612183e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021871925328209585
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.001796866463621427,
+                  "median_mm": 6.877385239079103e-05,
+                  "n": 597,
+                  "p99_mm": 0.00043925270183819905
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010069303779669525,
+                  "n": 122008,
+                  "p99_mm": 0.00021305973255891778
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 597,
+                "n_grid": 129600,
+                "n_unchanged": 128818,
+                "n_unchanged_undilated": 129003,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "items": [
+                {
+                  "instance_id": "ycb/072-b_toy_airplane",
+                  "pixel": [
+                    963.7186606862775,
+                    868.1723963342903
+                  ],
+                  "x": 0.0506364101770765,
+                  "y": -0.1777263274064521,
+                  "yaw_deg": 59.223000705640835
+                },
+                {
+                  "instance_id": "ycb/073-f_lego_duplo",
+                  "pixel": [
+                    1530.9018221799747,
+                    493.27097035783373
+                  ],
+                  "x": 0.6196792048958002,
+                  "y": 0.1984042943487007,
+                  "yaw_deg": 155.60492870791418
+                }
+              ],
+              "mode": "distractors",
+              "n": 2,
+              "prim_paths": [
+                "/World/Distractor_0",
+                "/World/Distractor_1"
+              ],
+              "seed": 2046166178
+            },
+            "edited_geometry": [
+              "/World/Distractor_0",
+              "/World/Distractor_1"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              159.3873884202768,
+              115.83958725739087,
+              101.54619605273933
+            ],
+            "mode": "distractors",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              160.33980227623456,
+              117.13348042052469,
+              103.81789158950617
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4778.2,
+              "rss_mb": 3713.6
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 3,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/072-b_toy_airplane",
+                  "kind": "extra",
+                  "path": "/World/Distractor_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/073-f_lego_duplo",
+                  "kind": "extra",
+                  "path": "/World/Distractor_1",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "ground:concrete": {
+            "begin_s": 0.024,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 6.33,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png"
+              ],
+              "event": "compile",
+              "free_s": 0.42,
+              "hidden": [],
+              "n": 5,
+              "n_objects": 9,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3497.9,
+              "rss_mb_before": 3713.6,
+              "stat_pinned": true,
+              "total_s": 6.75,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.721,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png (the scene's own)"
+              ],
+              "event": "compile",
+              "free_s": 0.45,
+              "hidden": [],
+              "n": 6,
+              "n_objects": 9,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3707.6,
+              "rss_mb_before": 3491.2,
+              "stat_pinned": false,
+              "total_s": 8.171,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014002556033121375
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122708,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.94590392267014e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021849381806937626
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010080341072971066,
+                  "n": 122605,
+                  "p99_mm": 0.00021313423707702823
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "goal_texture": "/workspace/assets/cluttered2/ground.png",
+              "ground": "concrete",
+              "mode": "ground_swap",
+              "seed": 2046166178,
+              "texture": "/workspace/assets/industrial1/ground.png"
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              191.11134563353653,
+              168.23809368582326,
+              165.85110180265346
+            ],
+            "mode": "ground:concrete",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              190.189609375,
+              166.6161858603395,
+              164.60353057484568
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4778.2,
+              "rss_mb": 3707.8
+            },
+            "truth_model": {
+              "floor": "retextured",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 5,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/industrial1/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "ground:laminate": {
+            "begin_s": 0.383,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 6.78,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/polyhaven/laminate_floor_02.jpg"
+              ],
+              "event": "compile",
+              "free_s": 0.585,
+              "hidden": [],
+              "n": 7,
+              "n_objects": 9,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3780.6,
+              "rss_mb_before": 3780.6,
+              "stat_pinned": true,
+              "total_s": 7.365,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.096,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png (the scene's own)"
+              ],
+              "event": "compile",
+              "free_s": 0.518,
+              "hidden": [],
+              "n": 8,
+              "n_objects": 9,
+              "peak_rss_mb": 4778.2,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3732.6,
+              "rss_mb_before": 3732.8,
+              "stat_pinned": false,
+              "total_s": 7.614,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014002556033121375
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122708,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.94590392267014e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021849381806937626
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010080341072971066,
+                  "n": 122605,
+                  "p99_mm": 0.00021313423707702823
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "goal_texture": "/workspace/assets/cluttered2/ground.png",
+              "ground": "laminate",
+              "mode": "ground_swap",
+              "seed": 2046166178,
+              "texture": "/workspace/assets/polyhaven/laminate_floor_02.jpg"
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              219.51084688854843,
+              189.3260260129739,
+              179.15293216416208
+            ],
+            "mode": "ground:laminate",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              217.12270351080247,
+              186.6220196759259,
+              177.23016589506173
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4778.2,
+              "rss_mb": 3764.3
+            },
+            "truth_model": {
+              "floor": "retextured",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 7,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/polyhaven/laminate_floor_02.jpg",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "light": {
+            "begin_s": 0.291,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014002556033121375
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122708,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.94590392267014e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021849381806937626
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010080341072971066,
+                  "n": 122605,
+                  "p99_mm": 0.00021313423707702823
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "light_intensity_scale": 0.8363779680525396,
+              "light_temperature_k": 5142.86439265847,
+              "mode": "light",
+              "seed": 2046166178
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              159.57705284089056,
+              106.62477589073247,
+              85.43311764514131
+            ],
+            "mode": "light",
+            "n_compiles": 0,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              160.2753833912037,
+              107.82682484567901,
+              87.5144280478395
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 3693.2,
+              "rss_mb": 3615.2
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                0.997076426235175,
+                0.8062053370930293,
+                0.662070010384268
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": true,
+                  "intensity": 2509.133904157619
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": true,
+                  "intensity": 2927.3228881838886
+                }
+              },
+              "n_compiles": 0,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          },
+          "noise": {
+            "begin_s": 0.0,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014002556033121375
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122708,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.94590392267014e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021849381806937626
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010080341072971066,
+                  "n": 122605,
+                  "p99_mm": 0.00021313423707702823
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "brightness": 0.07843801398273456,
+              "contrast": 0.9565580162624558,
+              "lambda_read": 2.2952043133493843e-05,
+              "lambda_shot": 0.0035317716519303343,
+              "mode": "noise",
+              "seed": 2046166178,
+              "wb_gain": [
+                1.0201250655468868,
+                0.9254090783996218,
+                0.9462876512807428
+              ]
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              181.59225152394302,
+              125.9950288489748,
+              115.82754180656518
+            ],
+            "mode": "noise",
+            "n_compiles": 0,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              182.28471161265432,
+              127.02725212191358,
+              117.78855806327161
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4778.2,
+              "rss_mb": 3764.3
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 8,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          },
+          "none": {
+            "begin_s": 0.0,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014002556033121375
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 122708,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.94590392267014e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00021849381806937626
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010080341072971066,
+                  "n": 122605,
+                  "p99_mm": 0.00021313423707702823
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "mode": "none",
+              "seed": 2046166178
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              159.66276852364965,
+              115.99691136682205,
+              101.66901098542883
+            ],
+            "mode": "none",
+            "n_compiles": 0,
+            "picture_changed_at_goal": false,
+            "picture_mean_rgb": [
+              160.36222077546296,
+              117.14427710262346,
+              103.80289592978394
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 3687.5,
+              "rss_mb": 3542.8
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 0,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          },
+          "occluder": {
+            "begin_s": 0.001,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 7.639,
+              "edits": [
+                "put_box /World/Occluder 0.1361 m"
+              ],
+              "event": "compile",
+              "free_s": 0.559,
+              "hidden": [],
+              "n": 1,
+              "n_objects": 10,
+              "peak_rss_mb": 4073.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7",
+                "/World/Occluder"
+              ],
+              "rss_mb_after": 3643.2,
+              "rss_mb_before": 3616.0,
+              "stat_pinned": true,
+              "total_s": 8.198,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.291,
+              "edits": [
+                "remove_prim /World/Occluder"
+              ],
+              "event": "compile",
+              "free_s": 0.478,
+              "hidden": [],
+              "n": 2,
+              "n_objects": 9,
+              "peak_rss_mb": 4088.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3658.3,
+              "rss_mb_before": 3656.1,
+              "stat_pinned": false,
+              "total_s": 7.768,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00013896527307322146
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.000164289362225567,
+                  "median_mm": 3.536320225538958e-05,
+                  "n": 8267,
+                  "p99_mm": 0.00011481391581913414
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 114926,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 8267,
+                "n_grid": 129600,
+                "n_unchanged": 121052,
+                "n_unchanged_undilated": 121333,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.596382366527934e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00022040879914309012
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0004395674592094778,
+                  "median_mm": 7.159455323035857e-05,
+                  "n": 8330,
+                  "p99_mm": 0.00029300024331768655
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 9.943529621914138e-05,
+                  "n": 114781,
+                  "p99_mm": 0.00021252983013475557
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 8330,
+                "n_grid": 129600,
+                "n_unchanged": 120888,
+                "n_unchanged_undilated": 121270,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "centre": [
+                0.0024775430212289687,
+                0.00690598661659142,
+                0.792393556083352
+              ],
+              "distance_m": 0.6189668681201984,
+              "image_width_frac": 0.16114131324172926,
+              "mode": "occluder",
+              "pixel": [
+                859.0268666692043,
+                868.6740970559679
+              ],
+              "prim_path": "/World/Occluder",
+              "seed": 2046166178,
+              "size_m": 0.13613167697543824
+            },
+            "edited_geometry": [
+              "/World/Occluder"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              158.90519116648974,
+              115.5899796390721,
+              101.31314933087378
+            ],
+            "mode": "occluder",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              162.6491690779321,
+              121.0948191550926,
+              108.57701919367284
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4088.7,
+              "rss_mb": 3690.1
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 1,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                },
+                {
+                  "kind": "box",
+                  "path": "/World/Occluder",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "swap:ycb/006_mustard_bottle": {
+            "begin_s": 0.66,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 8.15,
+              "edits": [
+                "set_prim_visible /World/Obj_0 False",
+                "place /World/Swap_0 ycb/006_mustard_bottle"
+              ],
+              "event": "compile",
+              "free_s": 0.506,
+              "hidden": [
+                "/World/Obj_0"
+              ],
+              "n": 11,
+              "n_objects": 9,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7",
+                "/World/Swap_0"
+              ],
+              "rss_mb_after": 3795.7,
+              "rss_mb_before": 3795.9,
+              "stat_pinned": true,
+              "total_s": 8.656,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.367,
+              "edits": [
+                "remove_prim /World/Swap_0",
+                "set_prim_visible /World/Obj_0 True"
+              ],
+              "event": "compile",
+              "free_s": 0.511,
+              "hidden": [],
+              "n": 12,
+              "n_objects": 9,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3739.8,
+              "rss_mb_before": 3788.0,
+              "stat_pinned": false,
+              "total_s": 7.878,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00012951049843667946
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0007809022537497157,
+                  "median_mm": 6.180741951578028e-05,
+                  "n": 1034,
+                  "p99_mm": 0.00025871239941910274
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 123281,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 2191,
+                "n_grid": 129600,
+                "n_unchanged": 127101,
+                "n_unchanged_undilated": 127409,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.917851695462332e-05,
+                  "n": 129600,
+                  "p99_mm": 0.0002164745415744739
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0013829985952007462,
+                  "median_mm": 6.087596648995941e-05,
+                  "n": 1039,
+                  "p99_mm": 0.0003069049982995502
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010052581733699384,
+                  "n": 123204,
+                  "p99_mm": 0.00021306020961731067
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 2216,
+                "n_grid": 129600,
+                "n_unchanged": 127076,
+                "n_unchanged_undilated": 127384,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "goal_instance": "ycb/003_cracker_box",
+              "live_instance": "ycb/006_mustard_bottle",
+              "mode": "swap_instance",
+              "prim_paths": [
+                "/World/Swap_0"
+              ],
+              "seed": 2046166178,
+              "swapped": true,
+              "xy": [
+                -0.47903233766555786,
+                0.3188343644142151
+              ]
+            },
+            "edited_geometry": [
+              "/World/Obj_0",
+              "/World/Swap_0"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              159.80630429668804,
+              116.0776843146957,
+              101.71687445754009
+            ],
+            "mode": "swap:ycb/006_mustard_bottle",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              160.55064718364198,
+              117.48661217206791,
+              103.67251012731481
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4853.4,
+              "rss_mb": 3762.6
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "none"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 11,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": false
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/006_mustard_bottle",
+                  "kind": "extra",
+                  "path": "/World/Swap_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "swap:ycb/006_mustard_bottle+ground:concrete": {
+            "begin_s": 0.644,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 6.841,
+              "edits": [
+                "set_prim_visible /World/Obj_0 False",
+                "place /World/Swap_0 ycb/006_mustard_bottle",
+                "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png"
+              ],
+              "event": "compile",
+              "free_s": 0.402,
+              "hidden": [
+                "/World/Obj_0"
+              ],
+              "n": 13,
+              "n_objects": 9,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7",
+                "/World/Swap_0"
+              ],
+              "rss_mb_after": 3554.7,
+              "rss_mb_before": 3738.9,
+              "stat_pinned": true,
+              "total_s": 7.243,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 7.717,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png (the scene's own)",
+                "remove_prim /World/Swap_0",
+                "set_prim_visible /World/Obj_0 True"
+              ],
+              "event": "compile",
+              "free_s": 0.485,
+              "hidden": [],
+              "n": 14,
+              "n_objects": 9,
+              "peak_rss_mb": 4853.4,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0",
+                "/World/Obj_1",
+                "/World/Obj_2",
+                "/World/Obj_3",
+                "/World/Obj_4",
+                "/World/Obj_5",
+                "/World/Obj_6",
+                "/World/Obj_7"
+              ],
+              "rss_mb_after": 3722.4,
+              "rss_mb_before": 3602.3,
+              "stat_pinned": false,
+              "total_s": 8.201,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.006215239211515566,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00012951049843667946
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0007809022537497157,
+                  "median_mm": 6.180741951578028e-05,
+                  "n": 1034,
+                  "p99_mm": 0.00025871239941910274
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 4.116979801516152e-05,
+                  "median_mm": 4.116979801516152e-05,
+                  "n": 123281,
+                  "p99_mm": 4.116979801516152e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 2191,
+                "n_grid": 129600,
+                "n_unchanged": 127101,
+                "n_unchanged_undilated": 127409,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.019869569230168693,
+                  "median_mm": 9.917851695462332e-05,
+                  "n": 129600,
+                  "p99_mm": 0.0002164745415744739
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0013829985952007462,
+                  "median_mm": 6.087596648995941e-05,
+                  "n": 1039,
+                  "p99_mm": 0.0003069049982995502
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0002684399000862925,
+                  "median_mm": 0.00010052581733699384,
+                  "n": 123204,
+                  "p99_mm": 0.00021306020961731067
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 2216,
+                "n_grid": 129600,
+                "n_unchanged": 127076,
+                "n_unchanged_undilated": 127384,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "ground_swap": {
+                "goal_texture": "/workspace/assets/cluttered2/ground.png",
+                "ground": "concrete",
+                "mode": "ground_swap",
+                "seed": 2046166178,
+                "texture": "/workspace/assets/industrial1/ground.png"
+              },
+              "mode": "chain",
+              "parts": [
+                "swap_instance",
+                "ground_swap"
+              ],
+              "seed": 2046166178,
+              "swap_instance": {
+                "goal_instance": "ycb/003_cracker_box",
+                "live_instance": "ycb/006_mustard_bottle",
+                "mode": "swap_instance",
+                "prim_paths": [
+                  "/World/Swap_0"
+                ],
+                "seed": 2046166178,
+                "swapped": true,
+                "xy": [
+                  -0.47903233766555786,
+                  0.3188343644142151
+                ]
+              }
+            },
+            "edited_geometry": [
+              "/World/Obj_0",
+              "/World/Swap_0"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              191.29840770272793,
+              168.35398804357524,
+              165.94098036193736
+            ],
+            "mode": "swap:ycb/006_mustard_bottle+ground:concrete",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              190.5646633873457,
+              167.22310088734568,
+              164.799481095679
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 4853.4,
+              "rss_mb": 3738.4
+            },
+            "truth_model": {
+              "floor": "retextured",
+              "floor_z": 0.0,
+              "object": "none"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": 5142.86439265847,
+                  "enable_color_temperature": false,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 13,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/industrial1/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/003_cracker_box",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": false
+                },
+                {
+                  "instance_id": "ycb/004_sugar_box",
+                  "kind": "object",
+                  "path": "/World/Obj_1",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/005_tomato_soup_can",
+                  "kind": "object",
+                  "path": "/World/Obj_2",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/008_pudding_box",
+                  "kind": "object",
+                  "path": "/World/Obj_3",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/010_potted_meat_can",
+                  "kind": "object",
+                  "path": "/World/Obj_4",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/011_banana",
+                  "kind": "object",
+                  "path": "/World/Obj_5",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/019_pitcher_base",
+                  "kind": "object",
+                  "path": "/World/Obj_6",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/024_bowl",
+                  "kind": "object",
+                  "path": "/World/Obj_7",
+                  "visible": true
+                },
+                {
+                  "instance_id": "ycb/006_mustard_bottle",
+                  "kind": "extra",
+                  "path": "/World/Swap_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          }
+        },
+        "scene": {
+          "compile_s": 7.607,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_depth_md5": "15c11a9ef3493714655659e57fe4c414",
+          "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+          "init_s": 13.654,
+          "look": "isaac_fit_v1",
+          "look_curve_id": "isaac_fit_v1/cluttered2",
+          "n_objects": 9,
+          "peak_rss_mb": 4853.4,
+          "render_mode": "mujoco-llvmpipe",
+          "rss_after_init": {
+            "peak_rss_mb": 3687.5,
+            "rss_mb": 3496.0
+          },
+          "scene": "cluttered2",
+          "start_id": "n_000"
+        }
+      },
+      "industrial1_drill": {
+        "modes": {
+          "ground:wood": {
+            "begin_s": 0.632,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 1.562,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png"
+              ],
+              "event": "compile",
+              "free_s": 0.171,
+              "hidden": [],
+              "n": 1,
+              "n_objects": 2,
+              "peak_rss_mb": 1408.6,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0"
+              ],
+              "rss_mb_after": 1361.9,
+              "rss_mb_before": 1148.6,
+              "stat_pinned": true,
+              "total_s": 1.733,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 0.605,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png (the scene's own)"
+              ],
+              "event": "compile",
+              "free_s": 0.319,
+              "hidden": [],
+              "n": 2,
+              "n_objects": 2,
+              "peak_rss_mb": 1499.5,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0"
+              ],
+              "rss_mb_after": 1168.1,
+              "rss_mb_before": 1374.1,
+              "stat_pinned": false,
+              "total_s": 0.923,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 84.56510802872091,
+                  "median_mm": 8.56600079757186e-06,
+                  "n": 129600,
+                  "p99_mm": 5.9782212714076765e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 8.56600079757186e-06,
+                  "median_mm": 8.56600079757186e-06,
+                  "n": 115261,
+                  "p99_mm": 8.56600079757186e-06
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 87.76596161703343,
+                  "median_mm": 8.167478873777334e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014749804648883638
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0001732368726248268,
+                  "median_mm": 8.473405366249409e-05,
+                  "n": 114867,
+                  "p99_mm": 0.00014594513622512292
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "goal_texture": "/workspace/assets/industrial1/ground.png",
+              "ground": "wood",
+              "mode": "ground_swap",
+              "seed": 1127093488,
+              "texture": "/workspace/assets/cluttered2/ground.png"
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              152.27086351844943,
+              90.56863119355202,
+              52.7346457171116
+            ],
+            "mode": "ground:wood",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              151.87356626157407,
+              94.64868055555556,
+              61.6025106095679
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1499.5,
+              "rss_mb": 1231.2
+            },
+            "truth_model": {
+              "floor": "retextured",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 1,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "handal_drill_25",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "none": {
+            "begin_s": 0.0,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 84.56510802872091,
+                  "median_mm": 8.56600079757186e-06,
+                  "n": 129600,
+                  "p99_mm": 5.9782212714076765e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 8.56600079757186e-06,
+                  "median_mm": 8.56600079757186e-06,
+                  "n": 115261,
+                  "p99_mm": 8.56600079757186e-06
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start n_000": {
+                "all_vs_ray": {
+                  "max_mm": 87.76596161703343,
+                  "median_mm": 8.167478873777334e-05,
+                  "n": 129600,
+                  "p99_mm": 0.00014749804648883638
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 0.0001732368726248268,
+                  "median_mm": 8.473405366249409e-05,
+                  "n": 114867,
+                  "p99_mm": 0.00014594513622512292
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "mode": "none",
+              "seed": 1127093488
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              197.11426241313194,
+              189.89277379165546,
+              184.38702596715282
+            ],
+            "mode": "none",
+            "n_compiles": 0,
+            "picture_changed_at_goal": false,
+            "picture_mean_rgb": [
+              191.80861207561728,
+              183.11714940200616,
+              178.85906780478396
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1258.2,
+              "rss_mb": 1116.3
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 0,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/industrial1/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "handal_drill_25",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          }
+        },
+        "scene": {
+          "compile_s": 1.297,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_depth_md5": "7c6f56d6772d49b87e58c0ef8f25168c",
+          "goal_frame_md5": "df7b04e95d8d9b8daf9ace35e7c762d3",
+          "init_s": 1.57,
+          "look": "isaac_fit_v1",
+          "look_curve_id": "isaac_fit_v1/industrial1_drill",
+          "n_objects": 2,
+          "peak_rss_mb": 1499.5,
+          "render_mode": "mujoco-llvmpipe",
+          "rss_after_init": {
+            "peak_rss_mb": 1258.2,
+            "rss_mb": 1085.3
+          },
+          "scene": "industrial1_drill",
+          "start_id": "n_000"
+        }
+      },
+      "inst_drill": {
+        "modes": {
+          "none": {
+            "begin_s": 0.0,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.0010011857865532825,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 129600,
+                  "p99_mm": 7.460575572715278e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 1.5982668744030093e-05,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 109276,
+                  "p99_mm": 1.5982668744030093e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start t1n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.0013778514201812087,
+                  "median_mm": 1.373863225961891e-05,
+                  "n": 129600,
+                  "p99_mm": 6.694923128935935e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 7.65931932322772e-05,
+                  "median_mm": 1.2742737698356876e-05,
+                  "n": 109824,
+                  "p99_mm": 5.2741274333967275e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "mode": "none",
+              "seed": 68660192
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              62.00927010505509,
+              25.577098356455213,
+              10.514239174201105
+            ],
+            "mode": "none",
+            "n_compiles": 0,
+            "picture_changed_at_goal": false,
+            "picture_mean_rgb": [
+              59.1143465470679,
+              29.517089120370372,
+              17.752854456018518
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1296.0,
+              "rss_mb": 1170.6
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 0,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          },
+          "swap:@other_small": {
+            "begin_s": 0.156,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 4.081,
+              "edits": [
+                "set_prim_visible /World/Obj_0 False",
+                "place /World/Swap_0 objv_0de890446936"
+              ],
+              "event": "compile",
+              "free_s": 0.151,
+              "hidden": [
+                "/World/Obj_0"
+              ],
+              "n": 3,
+              "n_objects": 2,
+              "peak_rss_mb": 1930.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Swap_0"
+              ],
+              "rss_mb_after": 1517.5,
+              "rss_mb_before": 1195.4,
+              "stat_pinned": true,
+              "total_s": 4.232,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 0.686,
+              "edits": [
+                "remove_prim /World/Swap_0",
+                "set_prim_visible /World/Obj_0 True"
+              ],
+              "event": "compile",
+              "free_s": 0.362,
+              "hidden": [],
+              "n": 4,
+              "n_objects": 2,
+              "peak_rss_mb": 1930.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0"
+              ],
+              "rss_mb_after": 1438.6,
+              "rss_mb_before": 1735.3,
+              "stat_pinned": false,
+              "total_s": 1.048,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 10.200255511944034,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 129600,
+                  "p99_mm": 5.09826584099704e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 10.200255511944034,
+                  "median_mm": 2.4159040240556706e-05,
+                  "n": 8696,
+                  "p99_mm": 0.00023686073118422133
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 1.5982668744030093e-05,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 120904,
+                  "p99_mm": 1.5982668744030093e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 23218,
+                "n_grid": 129600,
+                "n_unchanged": 105306,
+                "n_unchanged_undilated": 106382,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start t1n_000": {
+                "all_vs_ray": {
+                  "max_mm": 10.594539183646889,
+                  "median_mm": 1.284857242822568e-05,
+                  "n": 129600,
+                  "p99_mm": 5.5879313091700025e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 10.594539183646889,
+                  "median_mm": 1.8331605289301223e-05,
+                  "n": 8427,
+                  "p99_mm": 0.0002091905816048454
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 7.65931932322772e-05,
+                  "median_mm": 1.2572439700431204e-05,
+                  "n": 121173,
+                  "p99_mm": 5.19267816345703e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 22562,
+                "n_grid": 129600,
+                "n_unchanged": 105979,
+                "n_unchanged_undilated": 107038,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "floor_centre_xy": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17
+              ],
+              "goal_bbox": [
+                [
+                  -0.1185999858857289,
+                  -0.12000000110249347,
+                  0.0
+                ],
+                [
+                  0.11859998588572891,
+                  0.1200000011024935,
+                  0.06109376845812383
+                ]
+              ],
+              "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+              "goal_size_m": 0.24,
+              "live_bbox": [
+                [
+                  -0.05361199475829357,
+                  -0.07999999826696379,
+                  -6.938893903907228e-18
+                ],
+                [
+                  0.05361199475829357,
+                  0.07999999826696381,
+                  0.05898327292614419
+                ]
+              ],
+              "live_instance": "objv_0de890446936",
+              "live_name": "other_small",
+              "live_placement": {
+                "canonical": "library",
+                "native_extent_m": [
+                  150.84085083007807,
+                  225.08522317436865,
+                  82.97664648586829
+                ],
+                "pre_rot_x_deg": 90.0,
+                "size_m": 0.16,
+                "upright_yaw_add_deg": 90.0,
+                "yaw_deg": 0.0,
+                "yaw_rule": "0"
+              },
+              "live_size_m": 0.16,
+              "mode": "swap_instance",
+              "prim_paths": [
+                "/World/Swap_0"
+              ],
+              "reference_position": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17,
+                0.28591402555179524
+              ],
+              "seed": 68660192,
+              "size_ratio": 0.6666666460997347,
+              "swapped": true
+            },
+            "edited_geometry": [
+              "/World/Obj_0",
+              "/World/Swap_0"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              61.69798352411831,
+              25.37786177463111,
+              10.498908224707206
+            ],
+            "mode": "swap:@other_small",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              60.58921103395062,
+              26.784514371141974,
+              11.88416618441358
+            ],
+            "reference_position": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17,
+              0.28591402555179524
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1930.7,
+              "rss_mb": 1439.2
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "none"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 3,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": false
+                },
+                {
+                  "instance_id": "objv_0de890446936",
+                  "kind": "extra",
+                  "path": "/World/Swap_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "swap:@other_small+ground:concrete": {
+            "begin_s": 0.254,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 3.344,
+              "edits": [
+                "set_prim_visible /World/Obj_0 False",
+                "place /World/Swap_0 objv_0de890446936",
+                "build_poster /World/Ground <- /workspace/assets/industrial1/ground.png"
+              ],
+              "event": "compile",
+              "free_s": 0.162,
+              "hidden": [
+                "/World/Obj_0"
+              ],
+              "n": 5,
+              "n_objects": 2,
+              "peak_rss_mb": 1930.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Swap_0"
+              ],
+              "rss_mb_after": 1381.7,
+              "rss_mb_before": 1439.2,
+              "stat_pinned": true,
+              "total_s": 3.506,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 0.947,
+              "edits": [
+                "build_poster /World/Ground <- /workspace/assets/cluttered2/ground.png (the scene's own)",
+                "remove_prim /World/Swap_0",
+                "set_prim_visible /World/Obj_0 True"
+              ],
+              "event": "compile",
+              "free_s": 0.226,
+              "hidden": [],
+              "n": 6,
+              "n_objects": 2,
+              "peak_rss_mb": 1930.7,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0"
+              ],
+              "rss_mb_after": 1529.9,
+              "rss_mb_before": 1571.9,
+              "stat_pinned": false,
+              "total_s": 1.173,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 10.200255511944034,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 129600,
+                  "p99_mm": 5.09826584099704e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 10.200255511944034,
+                  "median_mm": 2.4159040240556706e-05,
+                  "n": 8696,
+                  "p99_mm": 0.00023686073118422133
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 1.5982668744030093e-05,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 120904,
+                  "p99_mm": 1.5982668744030093e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 23218,
+                "n_grid": 129600,
+                "n_unchanged": 105306,
+                "n_unchanged_undilated": 106382,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start t1n_000": {
+                "all_vs_ray": {
+                  "max_mm": 10.594539183646889,
+                  "median_mm": 1.284857242822568e-05,
+                  "n": 129600,
+                  "p99_mm": 5.5879313091700025e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 10.594539183646889,
+                  "median_mm": 1.8331605289301223e-05,
+                  "n": 8427,
+                  "p99_mm": 0.0002091905816048454
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 7.65931932322772e-05,
+                  "median_mm": 1.2572439700431204e-05,
+                  "n": 121173,
+                  "p99_mm": 5.19267816345703e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 22562,
+                "n_grid": 129600,
+                "n_unchanged": 105979,
+                "n_unchanged_undilated": 107038,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "ground_swap": {
+                "goal_texture": "/workspace/assets/cluttered2/ground.png",
+                "ground": "concrete",
+                "mode": "ground_swap",
+                "seed": 68660192,
+                "texture": "/workspace/assets/industrial1/ground.png"
+              },
+              "mode": "chain",
+              "parts": [
+                "swap_instance",
+                "ground_swap"
+              ],
+              "seed": 68660192,
+              "swap_instance": {
+                "floor_centre_xy": [
+                  6.938893903907228e-18,
+                  1.3877787807814457e-17
+                ],
+                "goal_bbox": [
+                  [
+                    -0.1185999858857289,
+                    -0.12000000110249347,
+                    0.0
+                  ],
+                  [
+                    0.11859998588572891,
+                    0.1200000011024935,
+                    0.06109376845812383
+                  ]
+                ],
+                "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+                "goal_size_m": 0.24,
+                "live_bbox": [
+                  [
+                    -0.05361199475829357,
+                    -0.07999999826696379,
+                    -6.938893903907228e-18
+                  ],
+                  [
+                    0.05361199475829357,
+                    0.07999999826696381,
+                    0.05898327292614419
+                  ]
+                ],
+                "live_instance": "objv_0de890446936",
+                "live_name": "other_small",
+                "live_placement": {
+                  "canonical": "library",
+                  "native_extent_m": [
+                    150.84085083007807,
+                    225.08522317436865,
+                    82.97664648586829
+                  ],
+                  "pre_rot_x_deg": 90.0,
+                  "size_m": 0.16,
+                  "upright_yaw_add_deg": 90.0,
+                  "yaw_deg": 0.0,
+                  "yaw_rule": "0"
+                },
+                "live_size_m": 0.16,
+                "mode": "swap_instance",
+                "prim_paths": [
+                  "/World/Swap_0"
+                ],
+                "reference_position": [
+                  6.938893903907228e-18,
+                  1.3877787807814457e-17,
+                  0.28591402555179524
+                ],
+                "seed": 68660192,
+                "size_ratio": 0.6666666460997347,
+                "swapped": true
+              }
+            },
+            "edited_geometry": [
+              "/World/Obj_0",
+              "/World/Swap_0"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              95.0456974128234,
+              88.35152683120492,
+              83.1086812677827
+            ],
+            "mode": "swap:@other_small+ground:concrete",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              91.69869116512346,
+              85.52649353780865,
+              79.62026909722222
+            ],
+            "reference_position": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17,
+              0.28591402555179524
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1930.7,
+              "rss_mb": 1530.0
+            },
+            "truth_model": {
+              "floor": "retextured",
+              "floor_z": 0.0,
+              "object": "none"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 5,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/industrial1/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": false
+                },
+                {
+                  "instance_id": "objv_0de890446936",
+                  "kind": "extra",
+                  "path": "/World/Swap_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          },
+          "swap:@same": {
+            "begin_s": 0.001,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": null,
+            "compile_end": null,
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.0010011857865532825,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 129600,
+                  "p99_mm": 7.460575572715278e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 1.5982668744030093e-05,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 109276,
+                  "p99_mm": 1.5982668744030093e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start t1n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.0013778514201812087,
+                  "median_mm": 1.373863225961891e-05,
+                  "n": 129600,
+                  "p99_mm": 6.694923128935935e-05
+                },
+                "edited_vs_ray": null,
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 7.65931932322772e-05,
+                  "median_mm": 1.2742737698356876e-05,
+                  "n": 109824,
+                  "p99_mm": 5.2741274333967275e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 0,
+                "n_grid": 129600,
+                "n_unchanged": 129600,
+                "n_unchanged_undilated": 129600,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "floor_centre_xy": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17
+              ],
+              "goal_bbox": [
+                [
+                  -0.1185999858857289,
+                  -0.12000000110249347,
+                  0.0
+                ],
+                [
+                  0.11859998588572891,
+                  0.1200000011024935,
+                  0.06109376845812383
+                ]
+              ],
+              "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+              "goal_size_m": 0.24,
+              "live_bbox": [
+                [
+                  -0.1185999858857289,
+                  -0.12000000110249347,
+                  0.0
+                ],
+                [
+                  0.11859998588572891,
+                  0.1200000011024935,
+                  0.06109376845812383
+                ]
+              ],
+              "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+              "live_name": "same",
+              "live_placement": null,
+              "live_size_m": 0.24,
+              "mode": "swap_instance",
+              "prim_paths": [],
+              "reference_position": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17,
+                0.42887105155853544
+              ],
+              "seed": 68660192,
+              "size_ratio": 1.0,
+              "swapped": false
+            },
+            "edited_geometry": [],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              62.00927010505509,
+              25.577098356455213,
+              10.514239174201105
+            ],
+            "mode": "swap:@same",
+            "n_compiles": 0,
+            "picture_changed_at_goal": false,
+            "picture_mean_rgb": [
+              59.1143465470679,
+              29.517089120370372,
+              17.752854456018518
+            ],
+            "reference_position": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17,
+              0.42887105155853544
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1296.0,
+              "rss_mb": 1170.6
+            },
+            "truth_model": {
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "rigid"
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 0,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": true
+                }
+              ],
+              "unedited": true
+            }
+          },
+          "swap:@same_small": {
+            "begin_s": 0.097,
+            "cached_goal_md5_unchanged": true,
+            "compile_begin": {
+              "compile_s": 1.352,
+              "edits": [
+                "set_prim_visible /World/Obj_0 False",
+                "place /World/Swap_0 a2de48529b1549488940fa98a3a3bac6"
+              ],
+              "event": "compile",
+              "free_s": 0.289,
+              "hidden": [
+                "/World/Obj_0"
+              ],
+              "n": 1,
+              "n_objects": 2,
+              "peak_rss_mb": 1296.0,
+              "prims": [
+                "/World/Ground",
+                "/World/Swap_0"
+              ],
+              "rss_mb_after": 1153.0,
+              "rss_mb_before": 1171.0,
+              "stat_pinned": true,
+              "total_s": 1.641,
+              "unedited": false
+            },
+            "compile_end": {
+              "compile_s": 1.017,
+              "edits": [
+                "remove_prim /World/Swap_0",
+                "set_prim_visible /World/Obj_0 True"
+              ],
+              "event": "compile",
+              "free_s": 0.181,
+              "hidden": [],
+              "n": 2,
+              "n_objects": 2,
+              "peak_rss_mb": 1296.0,
+              "prims": [
+                "/World/Ground",
+                "/World/Obj_0"
+              ],
+              "rss_mb_after": 1163.1,
+              "rss_mb_before": 1157.1,
+              "stat_pinned": false,
+              "total_s": 1.197,
+              "unedited": true
+            },
+            "depth": {
+              "goal": {
+                "all_vs_ray": {
+                  "max_mm": 0.005443458413023627,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 129600,
+                  "p99_mm": 3.989018496741705e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.005443458413023627,
+                  "median_mm": 1.8653279976188486e-05,
+                  "n": 8389,
+                  "p99_mm": 0.00013019808068115651
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 1.5982668744030093e-05,
+                  "median_mm": 1.5982668744030093e-05,
+                  "n": 121211,
+                  "p99_mm": 1.5982668744030093e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 22461,
+                "n_grid": 129600,
+                "n_unchanged": 106053,
+                "n_unchanged_undilated": 107139,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              },
+              "start t1n_000": {
+                "all_vs_ray": {
+                  "max_mm": 0.0007036631705648055,
+                  "median_mm": 1.2957817957515161e-05,
+                  "n": 129600,
+                  "p99_mm": 5.568032956648752e-05
+                },
+                "edited_vs_ray": {
+                  "max_mm": 0.0007036631705648055,
+                  "median_mm": 2.1682672129985647e-05,
+                  "n": 8108,
+                  "p99_mm": 0.00010051019615098246
+                },
+                "frame_finite": true,
+                "frame_nonneg": true,
+                "ground_vs_plane": {
+                  "max_mm": 7.65931932322772e-05,
+                  "median_mm": 1.2565994217395016e-05,
+                  "n": 121492,
+                  "p99_mm": 5.189467688904158e-05
+                },
+                "miss_with_depth_0": true,
+                "n_changed_hit": 21843,
+                "n_grid": 129600,
+                "n_unchanged": 106686,
+                "n_unchanged_undilated": 107757,
+                "unchanged_identical_share": 1.0,
+                "unchanged_max_abs_m": 0.0,
+                "undilated_identical_share": 1.0,
+                "undilated_max_abs_m": 0.0
+              }
+            },
+            "draw": {
+              "floor_centre_xy": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17
+              ],
+              "goal_bbox": [
+                [
+                  -0.1185999858857289,
+                  -0.12000000110249347,
+                  0.0
+                ],
+                [
+                  0.11859998588572891,
+                  0.1200000011024935,
+                  0.06109376845812383
+                ]
+              ],
+              "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+              "goal_size_m": 0.24,
+              "live_bbox": [
+                [
+                  -0.07906665919827532,
+                  -0.08000000269903239,
+                  0.0
+                ],
+                [
+                  0.07906665919827534,
+                  0.0800000026990324,
+                  0.0407291799720026
+                ]
+              ],
+              "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+              "live_name": "same_small",
+              "live_placement": {
+                "canonical": "library",
+                "native_extent_m": [
+                  3.12639698669917,
+                  3.163302584303904,
+                  0.8052419744704142
+                ],
+                "pre_rot_x_deg": 90.0,
+                "size_m": 0.16,
+                "upright_yaw_add_deg": 90.0,
+                "yaw_deg": 0.0,
+                "yaw_rule": "0"
+              },
+              "live_size_m": 0.16,
+              "mode": "swap_instance",
+              "prim_paths": [
+                "/World/Swap_0"
+              ],
+              "reference_position": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17,
+                0.28591404139167775
+              ],
+              "seed": 68660192,
+              "size_ratio": 0.6666666830336394,
+              "swapped": true
+            },
+            "edited_geometry": [
+              "/World/Obj_0",
+              "/World/Swap_0"
+            ],
+            "end_s": 0.0,
+            "ground_mean_rgb_at_goal": [
+              61.96541568009504,
+              25.46401729215995,
+              10.531164663273135
+            ],
+            "mode": "swap:@same_small",
+            "n_compiles": 2,
+            "picture_changed_at_goal": true,
+            "picture_mean_rgb": [
+              60.749398148148146,
+              27.062323013117282,
+              13.470882523148148
+            ],
+            "reference_position": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17,
+              0.28591404139167775
+            ],
+            "restored_goal_depth_md5": true,
+            "restored_goal_md5": true,
+            "rss_after_end": {
+              "peak_rss_mb": 1296.0,
+              "rss_mb": 1195.4
+            },
+            "truth_model": {
+              "centre_xy": [
+                6.938893903907228e-18,
+                1.3877787807814457e-17
+              ],
+              "floor": "same",
+              "floor_z": 0.0,
+              "object": "scaled",
+              "s": 0.6666666830336394
+            },
+            "world_while_perturbed": {
+              "light_factor_rgb": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lighting": {
+                "/World/DomeLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3000.0
+                },
+                "/World/SunLight": {
+                  "color_temperature": null,
+                  "enable_color_temperature": null,
+                  "intensity": 3500.0
+                }
+              },
+              "n_compiles": 1,
+              "prims": [
+                {
+                  "kind": "ground",
+                  "path": "/World/Ground",
+                  "texture": "/workspace/assets/cluttered2/ground.png",
+                  "visible": true
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "object",
+                  "path": "/World/Obj_0",
+                  "visible": false
+                },
+                {
+                  "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+                  "kind": "extra",
+                  "path": "/World/Swap_0",
+                  "visible": true
+                }
+              ],
+              "unedited": false
+            }
+          }
+        },
+        "scene": {
+          "compile_s": 1.721,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_depth_md5": "5e2fa40428782ce5624bc8cdb7742373",
+          "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+          "init_s": 2.615,
+          "look": "raw",
+          "look_curve_id": null,
+          "n_objects": 2,
+          "peak_rss_mb": 1930.7,
+          "render_mode": "mujoco-llvmpipe",
+          "rss_after_init": {
+            "peak_rss_mb": 1296.0,
+            "rss_mb": 1123.2
+          },
+          "scene": "inst_drill",
+          "start_id": "t1n_000"
+        }
+      }
+    },
+    "sheet": "results/bridge/u8_modes.png"
+  },
+  "unit": "U8 - the perturbation world verbs in MuJoCo (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 11:36:31 +0200"
+}

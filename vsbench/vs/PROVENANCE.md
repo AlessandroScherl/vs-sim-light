@@ -86,8 +86,8 @@ copied `_goal_capture_fields`, unedited; the frozen-schema tests allow extra key
 - **Flown on the MuJoCo world (from U2 on):** ViT-VS (DINOv3 ViT-S/16, published DINOv2
   ViT-S/14 chain), ART-VS (36-tile latching switch), the 4-way pre-align, the classical
   SIFT / ORB / AKAZE arms ± RANSAC (OpenCV pinned to 4.11.0.86, the flight interpreter's), the
-  bench (loop, records, scoring, stats, perturbation `noise`, films, debug log), the scenes,
-  the frozen starts, the camera. From U4 the three rooms too (`industrial1_drill`,
+  bench (loop, records, scoring, stats, perturbation `noise` - every mode since U8 - films,
+  debug log), the scenes, the frozen starts, the camera. From U4 the three rooms too (`industrial1_drill`,
   `cluttered2`, `cluttered3`): `vsbench.world.build` calls the copied Isaac-free
   `isaac_scene.scatter_items`, `scenes.load_layout` / `check_layout`, `assets.load_library` /
   `merge_ycb_library` and the placement rules; `MujocoScene` derives the goal with the copied
@@ -97,6 +97,16 @@ copied `_goal_capture_fields`, unedited; the frozen-schema tests allow extra key
   fitted light, a finer shadow map and a per-scene tone curve on the RGB, never on depth); the
   copied baselines see that picture exactly as they would see Isaac's - no copied file knows
   about it. The copied `MockPlaneScene` is compared against the `raw` look only (U1).
+  From U8 every perturbation mode of the copied `bench/perturb.py` flies on the MuJoCo world
+  (`light`, `distractors`, `occluder`, `noise`, `combined`, `ground:`, `swap:<id>`,
+  `swap:@<name>`, `a+b`): `perturb.py` is unedited and asks the scene for Isaac's verbs
+  (`_needs`); `vsbench/world/perturb_world.py` (outside the copy) implements them on
+  `MujocoScene` under Isaac's prim paths, places extra objects with the copied placement rules
+  on the converted cache, and draws the light through the scene's tone curve. The copied
+  `test_perturb.py` is unedited too; its contract is re-run against the real world by
+  `tests/world/test_perturb_world.py`. `vsbench.world.fly run --perturb` is vs-sim's
+  `fly.py run --perturb` (same default seed 20260918); a perturbed record adds
+  `perturb_mode`, `perturb_seed` and `world_compiles`.
 - **The two adapters (U6a, U6b), outside the copy:** `vsbench/world/method_arm.py` flies a
   vsbench method on the copied loop by subclassing the copied `Arm` (record `arm_kind:
   external`, label `external:...`, its own config template validated by the adapter - the
