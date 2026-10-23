@@ -274,9 +274,9 @@ decision or a scene verb we add; **n/a** = Isaac-specific or not meaningful in M
 | The episode loop, telemetry, divergence abort, three success rules, stop rules recorded, records + run sidecar | `bench/{runner,scoring,run}.py` | **now** (copy) | `open_run` refuses a dirty tree: the driver passes `allow_dirty=True` and writes both commits into the sidecar. |
 | Films (`FilmWriter` via `on_step`), clean film, debug view, debug log | `bench/{films,debugview,debuglog}.py` | **now** (copy; smoke in U9) | `ffmpeg` binary: `imageio_ffmpeg.get_ffmpeg_exe()` if `shutil.which("ffmpeg")` is empty. |
 | Perturbation `noise` (RGB Poisson–Gaussian + brightness/contrast/WB) | `bench/perturb.py::apply_noise` | **now** (copy) | numpy on the live frame; world-agnostic. |
-| Perturbation `ground:<name>` | needs `scene.build_poster(...)` | **later** (U8) | MuJoCo textures are baked at `MjSpec.compile()`; a re-texture = rebuild the model (~1–3 s). A scene verb that recompiles; fine per episode. |
-| Perturbation `occluder`, `distractors`, `swap:` | needs `put_box`, `place_extra_objects`, `remove_prim(s)`, `set_prim_visible`, `object_world_bbox`, `object_pose` | **later** (U8) | same recompile path; `swap` also needs the converted library (U7). All scene verbs of the new world; the copied `perturb.py` is not edited. |
-| Perturbation `light` | `set_lighting`, `lighting_snapshot`, `restore_lighting` | **later** (U8) | MuJoCo `model.light_diffuse/ambient` live; the Isaac-to-MuJoCo intensity mapping is a tone fit — stated on the record. |
+| Perturbation `ground:<name>` | needs `scene.build_poster(...)` | **now** (U8, built) | MuJoCo textures are baked at `MjSpec.compile()`; a re-texture = rebuild the model (cluttered2 ~7 s, measured). `vsbench/world/perturb_world.py`. |
+| Perturbation `occluder`, `distractors`, `swap:<id>`, `swap:@<name>`, `combined`, `a+b` | needs `put_box`, `place_extra_objects`, `remove_prim(s)`, `set_prim_visible`, `object_world_bbox`, `object_pose` | **now** (U8, built) | same recompile path (cluttered2 7–9 s); extra objects from the converted cache by the copied placement rules (the 74 YCB distractor scans converted in U8). The copied `perturb.py` is not edited. |
+| Perturbation `light` | `set_lighting`, `lighting_snapshot`, `restore_lighting` | **now** (U8, built) | not a model edit (MuJoCo clamps each light at 1, the fitted look drives the sun to ~1): the factor `s * blackbody(T)` scales the radiance inside the scene's tone curve; depth untouched. |
 | Scatter + gravity settle to **bake** a new layout | `bake.py` (PhysX) | **n/a** | "a re-settle may never define a goal"; we only *load* layouts. |
 | Segmentation annotator | (Isaac) | **later** | MuJoCo's segmentation pass (already used for depth) gives geom ids; only the object-mode arms need it. |
 | Goal-capture warm-up (8 RTX captures) | `scenes.yaml::scene` | **n/a** | RTX history artefact; recorded as `n_captures: 1`. |
@@ -626,7 +626,7 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   contact sheet; 12 random objects' scaled longest extents equal `RESCUE_TARGETS_M` ± 1 mm.
 - Cost: one process, `nice -n 19`, `OMP_NUM_THREADS=1`, ~1 h; disk 4–6 GB.
 
-**U8 — Perturbations that need world verbs** (`mujoco_scene.py`: `build_poster`, `put_box`, `remove_prim(s)`, `place_extra_objects`, `set_prim_visible`, `object_world_bbox`, `object_pose`, `set_lighting`/`lighting_snapshot`/`restore_lighting`)
+**U8 — Perturbations that need world verbs** (`mujoco_scene.py`: `build_poster`, `put_box`, `remove_prim(s)`, `place_extra_objects`, `set_prim_visible`, `object_world_bbox`, `object_pose`, `set_lighting`/`lighting_snapshot`/`restore_lighting`) *(done, 2026-10-23)*
 - Do: each verb edits a `SceneSpec` copy and recompiles (camera pose kept); the copied
   `perturb._needs` then admits `ground:`, `occluder`, `distractors`, `light`, `combined`,
   `swap:@name` (needs U7 + instance-suite scenes via `scene_spec_for`).
@@ -634,6 +634,73 @@ write their committed JSON only with `VSBENCH_WRITE_GATES=1` (else a pytest temp
   render md5 unchanged); one episode per mode on `cluttered2` with `sift_ransac` writes its
   draw to the record.
 - Cost: recompile 1–3 s per episode; ~20 min.
+- Built (`vsbench/world/perturb_world.py`, mixed into `MujocoScene`; `vsbench.world.fly run
+  --perturb` / `--perturb-seed`, vs-sim's flags and default seed 20260918;
+  `tests/world/test_perturb_world.py`; `tools/u8_perturb.py measure | smoke | summary`; user
+  notes in `docs/PORT_NOTES.md`): the world is a table of prims under Isaac's paths
+  (`/World/Ground`, `/World/Obj_<i>` in layout order, `/World/Poster`, `/World/Backdrop`, and
+  the verbs' `/World/Occluder`, `/World/Distractor_<k>`, `/World/Swap_<k>`); a verb edits the
+  table, the next frame recompiles (the old model and GL contexts freed first; several edits
+  - a chain, one episode's `end` plus the next `begin` - one compile). A recompile keeps the
+  camera, the look's renderer settings and MuJoCo's `stat.extent` / `stat.center` of the
+  unedited scene (new backend kwargs `stat_extent` / `stat_center`: the clipping planes and the
+  shadow clip are stored relative to the extent); back at the unedited table it compiles as
+  at start-up. Extra objects: `vsbench.world.assets.placed_object` with the copied rules on
+  the cache; the distractor pool (YCB library minus the scene's own, 74 scans) converted in
+  U8 (`tools/convert_objects.py convert`, 74/74 ok, 249 s, cache 2.9 GB). The light: a relight
+  of the radiance inside the tone curve (below). Every copied mode is feasible; refused
+  loudly: unknown prims, Nucleus assets (D-6), objects missing from the cache, non-square
+  tiled posters, light states whose dome and sun factors differ (not a pure rescale).
+- The goal frame: as vs-sim - captured once before the first `begin`, served from the cache at
+  the goal pose, so a perturbed flight steers to the unperturbed goal picture; a verb that
+  edits the world captures the goal first if nobody has (no goal can be drawn perturbed).
+- The look under a perturbation (D-11, builder default): **fixed** - the scene's
+  `isaac_fit_v1` light, shadow map (its square fitted to the *unedited* scene) and tone curve
+  stay as fitted on the unperturbed goal; an edited world is drawn through the same response.
+  The `light` mode: Isaac scales dome and sun by the same `s` with the same temperature `T`,
+  so every pixel's linear radiance changes by `f_c = s * blackbody_c(T)` (USD's
+  `UsdLux.BlackbodyTemperatureAsRgb`); applied as `y = 255 srgb(w/(1+w))`, `w = f_c (floor +
+  e^k x^gamma)` (raw: `y = clip(f_c x)`), a 256-entry table; `f = 1` is the scene's table bit
+  for bit (gated). Known cost: the curve is constrained only by its own scene's colours - the
+  same floors under each other's curve (ground mean RGB at the goal): industrial concrete
+  under its own curve (197, 190, 184), under cluttered2's (191, 168, 166), i.e. ~20 levels
+  pinker; cluttered2's wood under its own (160, 116, 102), under the drill's (152, 91, 53).
+- Gates (`results/bridge/u8_perturb_gates.json`, 14 tests, ~70 s): every verb present; the
+  copied contract mode by mode on industrial1_drill (light, occluder, distractors, ground,
+  swap, chain order through a recording proxy, combined, the copied loop flying
+  `occluder+ground:wood` 3 steps), inst_drill (`swap:@same_small` centred on the goal box,
+  size ratio 0.16 / 0.24, the size-matched pose; `@same` a recorded no-op without a compile;
+  `@other_small+ground:concrete`) and hollywood (light, occluder; `ground:` and `swap:`
+  refused by the copied code); after every mode the cached goal md5 unchanged **and** the goal
+  redrawn from the restored world = the goal md5 (picture and depth); the occluder's face at
+  `distance - size/2` on its ray (< 1 mm) and its image width within 3 px; the light picture =
+  the relit table on the renderer's own output, depth identical.
+- Depth under perturbation (gated in the tests, measured on all 17 scene x mode pairs of
+  `results/bridge/u8_perturb.json`, stride-4 grid at the goal and the smoke start): every pixel
+  whose ray meets the same unedited surface in both worlds (one grid cell of margin around
+  edited geometry) has **exactly** the clean depth (max |difference| 0 m, 105 k-130 k pixels
+  per view; without the margin 1.000000 of them identical - a single silhouette pixel of a
+  drill-room distractor's foot differed by 2.1 mm in one test run, which is why the margin
+  exists); every hit pixel against its own ray caster median <= 1e-4 mm, p99 <= 4e-4 mm (the
+  occluder, distractors, swapped objects included; max 10.2 mm on one silhouette pixel of
+  `@other_small`); the ground against the analytic `z = 0` plane median 4e-5 mm.
+- Cost (cluttered2, load ~25, 2 llvmpipe threads; `results/bridge/u8_perturb.json`):
+  recompile 6.3–8.8 s per edit (ground 6.3–6.8, occluder 7.6, swap 6.8–8.2, distractors 8.8,
+  combined 7.7) plus ~0.6 s to free the old model; the restore 7.1–8.0 s, deferred to the next
+  frame drawn, so in a flight it merges with the next episode's `begin`; `light` and `noise`
+  0 s. RSS: 3.50 GB after start-up, 3.5–4.3 GB after a perturbed compile, peak 4.85 GB
+  (measure) / 5.55 GB (in the smoke flights, `combined`); after each `end` 3.54–3.80 GB (the
+  allocator keeps ~0.2–0.3 GB; no steady growth over the 10 modes). inst_drill 0.7–4.1 s
+  (other objects' 4096² textures), industrial1_drill 0.6–1.6 s.
+- Smoke (recorded, not thresholded; `results/bridge/u8/`, `smoke_summary.json`; `sift_ransac`,
+  100 steps, CPU, the draw on every record): cluttered2 from the U4b smoke start (`n_000`,
+  7.76 mm): none 1.20 mm (= U4b), light 0.52, occluder 0.17, distractors 0.73,
+  `ground:concrete` 4.13, `ground:laminate` 2.98 (divergence abort at step 39), noise 18.41,
+  combined 0.44, `swap:ycb/006_mustard_bottle` 1.83, `swap:...+ground:concrete` 8.64
+  (divergence abort at step 79); inst_drill (`raw`, `t1near3` `t1n_000`, 6.45 mm): none 0.23,
+  `@same` 0.23 (no-op, bit-identical), `@same_small` 139.6 mm from the goal / **3.77 mm from
+  the size-matched pose**, `@other_small` 738 mm (0 matches on frame 1: SIFT finds nothing on
+  another drill), `@other_small+ground:concrete` 345 mm. Context only, never pooled (D-9).
 
 **U9 — The rig check twin** (`vsbench/world/check_baselines.py`)
 - Do: per scene × arm, the arm gets its own goal picture as the live frame (must re-find its
@@ -680,6 +747,12 @@ Open — the recommendation is the working default until the owner rules:
 - **D-8 CPU-only torch in the existing venv** (~750 MB; cannot touch the GPU). Default: yes.
 - **D-9 Record labelling.** Every MuJoCo record carries `render_mode: mujoco-*`,
   `vsbench_commit`, `vssim_commit`; MuJoCo and Isaac numbers are never pooled. Default: yes.
+- **D-11 (new, U8) The look under a perturbation.** (a) **fixed** (default, built): the
+  scene's fitted light, shadow map and tone curve stay as fitted on the unperturbed goal, so a
+  perturbation changes the picture as it would through Isaac's fixed renderer; cost: the curve
+  extrapolates outside its scene's colours (a re-textured floor ~20 grey levels off its own
+  scene's curve, measured). (b) re-fit per perturbation: impossible without an Isaac picture
+  of the perturbed world. (c) `raw` for perturbed flights: loses the U4b match everywhere.
 - **D-10 (new) The Step-3 loop.** Keep `vsbench.episode.run_episode` as the Step 1–3 gate
   instrument beside the one benchmark loop (default), or retire it once `MethodArm` (U6a) flies
   every vsbench method through the benchmark loop. Cost of keeping: two loops in one repo, one
@@ -788,6 +861,17 @@ The old picture stays available ("raw") for the tests that compare against the c
 catching bugs, teaching, and checking that the competitor code still behaves the same after a
 change.
 
+**Disturbances (U8).** vs-sim can change the world after the goal picture is taken - dim
+or tint the light, put a grey box in front of the camera, scatter extra objects, lay another
+floor, swap the object for another one - so a method must reach a goal whose picture no
+longer matches exactly. All of these now work in the light simulator too, with vs-sim's own
+code deciding what changes and where. MuJoCo has to rebuild its scene for each change (about
+7-9 seconds for the biggest room); everything the change does not touch stays exactly as it
+was, down to the depth of every pixel, and the scene comes back bit for bit afterwards. The
+"Isaac look" of each scene stays as it was fitted on the clean scene: a new floor is seen
+through the same "camera" - which makes a floor whose colours the scene never had come out a
+little off (about 20 grey levels).
+
 **How the evaluation stays safe.** Everything runs with the graphics card hidden, MuJoCo drawing
 on the CPU, PyTorch's CPU-only build, lowest CPU priority and at most two threads; nothing opens
 the Isaac container, the lock files, the result folders or the vs-sim checkout for writing; no
@@ -798,4 +882,6 @@ about two minutes.
 **Still open for the owner** (§8): the pixel-centre convention (D-3), "the frozen goal wins"
 (D-4), no depth noise for now (D-5), skipping the six objects that live only on NVIDIA's server
 (D-6), the 10 GB disk budget (D-7), CPU-only PyTorch in the existing environment (D-8), the
-never-pool rule (D-9), and whether the old Step-3 loop stays as a test instrument (D-10).
+never-pool rule (D-9), whether the old Step-3 loop stays as a test instrument (D-10), and
+whether a perturbed world keeps its scene's fitted look (D-11; built that way: an occluder,
+another floor or another object is seen through the same "camera" as the clean scene).
