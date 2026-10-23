@@ -36,7 +36,7 @@ def _drift():
 def vc():
     mod = _drift()
     if not mod.vc.CLONE.is_dir():
-        pytest.skip(f"the pinned vs-sim clone is not at {mod.vc.CLONE} (README, U0)")
+        pytest.skip(f"the pinned vs-sim clone is not at {mod.vc.CLONE} (docs/PORT_NOTES.md section 5, U0)")
     return mod.vc
 
 

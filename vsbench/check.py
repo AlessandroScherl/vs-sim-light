@@ -28,7 +28,7 @@ def default_backend() -> str:
     for name in MUJOCO_VARIANTS:
         if package_installed(name) and probe_backend(name)[0]:
             return name
-    raise SystemExit("no MuJoCo variant starts here; pip install vsbench[mujoco] and see the README for OSMesa/EGL")
+    raise SystemExit("no MuJoCo variant starts here; pip install vsbench[mujoco] and see docs/PORT_NOTES.md section 1 for OSMesa/EGL")
 
 
 def parse_params(items: list[str]) -> dict:
