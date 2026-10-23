@@ -1,0 +1,3481 @@
+{
+  "cpu_s_per_world": {
+    "mock": 11257.1,
+    "mujoco": 10432.8,
+    "mujoco960": 4342.6
+  },
+  "gate": {
+    "landing_deg": 0.3,
+    "landing_mm": 3.0,
+    "pair": "mock-mujoco",
+    "rule": "|final_translation_mm(mock) - final_translation_mm(mujoco)| <= 3 and |final_rotation_deg(mock) - final_rotation_deg(mujoco)| <= 0.3 at the cap, every start; ART-VS's artvs_switched True on every start in both worlds"
+  },
+  "gl_renderers": [
+    "llvmpipe (LLVM 20.1.2, 256 bits)"
+  ],
+  "pairs": {
+    "artvs": {
+      "narrow20/start_00": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0644,
+          "d_final_translation_mm": 0.3514,
+          "d_r_deg_med_last_third": 0.0508,
+          "d_t_mm_max_second_half": 2.593,
+          "d_t_mm_med_last_third": 0.3555,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.1874,
+          "landing_pose_distance_mm": 1.471,
+          "t_curve_corr": 0.9972,
+          "twist_norm_corr_v_xyz": 0.9153,
+          "twist_norm_corr_w": 0.8249
+        }
+      },
+      "narrow20/start_01": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0785,
+          "d_final_translation_mm": 0.4522,
+          "d_r_deg_med_last_third": 0.1273,
+          "d_t_mm_max_second_half": 0.763,
+          "d_t_mm_med_last_third": 0.873,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0918,
+          "landing_pose_distance_mm": 0.7119,
+          "t_curve_corr": 0.9994,
+          "twist_norm_corr_v_xyz": 0.8962,
+          "twist_norm_corr_w": 0.7464
+        }
+      },
+      "near60/n_000": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            138,
+            138
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0446,
+          "d_final_translation_mm": 0.3959,
+          "d_r_deg_med_last_third": 0.0466,
+          "d_t_mm_max_second_half": 0.417,
+          "d_t_mm_med_last_third": 0.4755,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0587,
+          "landing_pose_distance_mm": 0.4737,
+          "t_curve_corr": 0.8146,
+          "twist_norm_corr_v_xyz": 0.794,
+          "twist_norm_corr_w": 0.876
+        }
+      },
+      "near60/n_001": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            132,
+            134
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0298,
+          "d_final_translation_mm": 0.026,
+          "d_r_deg_med_last_third": 0.0247,
+          "d_t_mm_max_second_half": 0.463,
+          "d_t_mm_med_last_third": 0.0565,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0435,
+          "landing_pose_distance_mm": 0.4279,
+          "t_curve_corr": 0.3523,
+          "twist_norm_corr_v_xyz": 0.473,
+          "twist_norm_corr_w": 0.7506
+        }
+      },
+      "near60/n_002": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            50,
+            50
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0369,
+          "d_final_translation_mm": 0.7904,
+          "d_r_deg_med_last_third": 0.0603,
+          "d_t_mm_max_second_half": 0.891,
+          "d_t_mm_med_last_third": 1.224,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.1362,
+          "landing_pose_distance_mm": 1.1512,
+          "t_curve_corr": 0.9846,
+          "twist_norm_corr_v_xyz": 0.333,
+          "twist_norm_corr_w": 0.3069
+        }
+      }
+    },
+    "sift_ransac": {
+      "narrow20/start_00": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0111,
+          "d_final_translation_mm": 0.0146,
+          "d_r_deg_med_last_third": 0.0079,
+          "d_t_mm_max_second_half": 0.008,
+          "d_t_mm_med_last_third": 0.0045,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0152,
+          "landing_pose_distance_mm": 0.1203,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9998,
+          "twist_norm_corr_w": 0.9988
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0006,
+          "d_final_translation_mm": 0.0118,
+          "d_r_deg_med_last_third": 0.0027,
+          "d_t_mm_max_second_half": 0.018,
+          "d_t_mm_med_last_third": 0.0105,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0027,
+          "landing_pose_distance_mm": 0.0253,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9998,
+          "twist_norm_corr_w": 0.9988
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0104,
+          "d_final_translation_mm": 0.0264,
+          "d_r_deg_med_last_third": 0.0106,
+          "d_t_mm_max_second_half": 0.026,
+          "d_t_mm_med_last_third": 0.015,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0159,
+          "landing_pose_distance_mm": 0.1284,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9998,
+          "twist_norm_corr_w": 0.9986
+        }
+      },
+      "narrow20/start_01": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0183,
+          "d_final_translation_mm": 0.0514,
+          "d_r_deg_med_last_third": 0.0056,
+          "d_t_mm_max_second_half": 0.009,
+          "d_t_mm_med_last_third": 0.032,
+          "first_frame_n_matches": [
+            22,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0216,
+          "landing_pose_distance_mm": 0.166,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9995,
+          "twist_norm_corr_w": 0.9986
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0014,
+          "d_final_translation_mm": 0.0353,
+          "d_r_deg_med_last_third": 0.0022,
+          "d_t_mm_max_second_half": 0.008,
+          "d_t_mm_med_last_third": 0.022,
+          "first_frame_n_matches": [
+            22,
+            22
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.002,
+          "landing_pose_distance_mm": 0.0373,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9995,
+          "twist_norm_corr_w": 0.9986
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0197,
+          "d_final_translation_mm": 0.0867,
+          "d_r_deg_med_last_third": 0.0078,
+          "d_t_mm_max_second_half": 0.001,
+          "d_t_mm_med_last_third": 0.054,
+          "first_frame_n_matches": [
+            22,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0225,
+          "landing_pose_distance_mm": 0.1775,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9996,
+          "twist_norm_corr_w": 0.9989
+        }
+      },
+      "near60/n_000": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0042,
+          "d_final_translation_mm": 0.0588,
+          "d_r_deg_med_last_third": 0.0032,
+          "d_t_mm_max_second_half": 0.007,
+          "d_t_mm_med_last_third": 0.0225,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0104,
+          "landing_pose_distance_mm": 0.0782,
+          "t_curve_corr": 0.9999,
+          "twist_norm_corr_v_xyz": 0.9993,
+          "twist_norm_corr_w": 1.0
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0002,
+          "d_final_translation_mm": 0.033,
+          "d_r_deg_med_last_third": 0.0,
+          "d_t_mm_max_second_half": 0.003,
+          "d_t_mm_med_last_third": 0.0075,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.005,
+          "landing_pose_distance_mm": 0.0393,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9994,
+          "twist_norm_corr_w": 1.0
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.004,
+          "d_final_translation_mm": 0.0258,
+          "d_r_deg_med_last_third": 0.0032,
+          "d_t_mm_max_second_half": 0.004,
+          "d_t_mm_med_last_third": 0.015,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0063,
+          "landing_pose_distance_mm": 0.0478,
+          "t_curve_corr": 1.0,
+          "twist_norm_corr_v_xyz": 0.9991,
+          "twist_norm_corr_w": 0.9999
+        }
+      },
+      "near60/n_001": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0013,
+          "d_final_translation_mm": 0.0345,
+          "d_r_deg_med_last_third": 0.0007,
+          "d_t_mm_max_second_half": 0.003,
+          "d_t_mm_med_last_third": 0.0205,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0041,
+          "landing_pose_distance_mm": 0.0346,
+          "t_curve_corr": 0.9998,
+          "twist_norm_corr_v_xyz": 0.9949,
+          "twist_norm_corr_w": 0.9998
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0043,
+          "d_final_translation_mm": 0.0346,
+          "d_r_deg_med_last_third": 0.0041,
+          "d_t_mm_max_second_half": 0.032,
+          "d_t_mm_med_last_third": 0.004,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0058,
+          "landing_pose_distance_mm": 0.0452,
+          "t_curve_corr": 0.9998,
+          "twist_norm_corr_v_xyz": 0.9929,
+          "twist_norm_corr_w": 0.9997
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.003,
+          "d_final_translation_mm": 0.0001,
+          "d_r_deg_med_last_third": 0.0034,
+          "d_t_mm_max_second_half": 0.035,
+          "d_t_mm_med_last_third": 0.0245,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0052,
+          "landing_pose_distance_mm": 0.0403,
+          "t_curve_corr": 0.9998,
+          "twist_norm_corr_v_xyz": 0.9886,
+          "twist_norm_corr_w": 0.9995
+        }
+      },
+      "near60/n_002": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0056,
+          "d_final_translation_mm": 0.05,
+          "d_r_deg_med_last_third": 0.0013,
+          "d_t_mm_max_second_half": 0.023,
+          "d_t_mm_med_last_third": 0.028,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0063,
+          "landing_pose_distance_mm": 0.0501,
+          "t_curve_corr": 0.9999,
+          "twist_norm_corr_v_xyz": 0.9997,
+          "twist_norm_corr_w": 0.9999
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0056,
+          "d_final_translation_mm": 0.0467,
+          "d_r_deg_med_last_third": 0.0079,
+          "d_t_mm_max_second_half": 0.007,
+          "d_t_mm_med_last_third": 0.0705,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0067,
+          "landing_pose_distance_mm": 0.0527,
+          "t_curve_corr": 0.9998,
+          "twist_norm_corr_v_xyz": 0.9997,
+          "twist_norm_corr_w": 0.9999
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            null,
+            null
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0112,
+          "d_final_translation_mm": 0.0967,
+          "d_r_deg_med_last_third": 0.0092,
+          "d_t_mm_max_second_half": 0.03,
+          "d_t_mm_med_last_third": 0.0985,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0129,
+          "landing_pose_distance_mm": 0.1009,
+          "t_curve_corr": 0.9998,
+          "twist_norm_corr_v_xyz": 0.9998,
+          "twist_norm_corr_w": 0.9999
+        }
+      }
+    },
+    "vitvs_dinov2": {
+      "narrow20/start_00": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            126,
+            128
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2077,
+          "d_final_translation_mm": 0.1383,
+          "d_r_deg_med_last_third": 0.1016,
+          "d_t_mm_max_second_half": 3.696,
+          "d_t_mm_med_last_third": 1.0645,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.6478,
+          "landing_pose_distance_mm": 5.4141,
+          "t_curve_corr": 0.998,
+          "twist_norm_corr_v_xyz": 0.9458,
+          "twist_norm_corr_w": 0.8267
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            126,
+            125
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0768,
+          "d_final_translation_mm": 0.258,
+          "d_r_deg_med_last_third": 0.0607,
+          "d_t_mm_max_second_half": 2.313,
+          "d_t_mm_med_last_third": 0.6245,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.1901,
+          "landing_pose_distance_mm": 1.9927,
+          "t_curve_corr": 0.9991,
+          "twist_norm_corr_v_xyz": 0.9247,
+          "twist_norm_corr_w": 0.7966
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            125,
+            128
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1309,
+          "d_final_translation_mm": 0.1197,
+          "d_r_deg_med_last_third": 0.1623,
+          "d_t_mm_max_second_half": 1.383,
+          "d_t_mm_med_last_third": 1.689,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.5711,
+          "landing_pose_distance_mm": 4.59,
+          "t_curve_corr": 0.9992,
+          "twist_norm_corr_v_xyz": 0.9317,
+          "twist_norm_corr_w": 0.8174
+        }
+      },
+      "narrow20/start_01": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            123,
+            124
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1302,
+          "d_final_translation_mm": 0.188,
+          "d_r_deg_med_last_third": 0.1271,
+          "d_t_mm_max_second_half": 1.355,
+          "d_t_mm_med_last_third": 0.219,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3308,
+          "landing_pose_distance_mm": 2.3702,
+          "t_curve_corr": 0.9991,
+          "twist_norm_corr_v_xyz": 0.8924,
+          "twist_norm_corr_w": 0.7296
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            123,
+            126
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1916,
+          "d_final_translation_mm": 1.3045,
+          "d_r_deg_med_last_third": 0.0027,
+          "d_t_mm_max_second_half": 1.927,
+          "d_t_mm_med_last_third": 0.0045,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.2009,
+          "landing_pose_distance_mm": 1.4008,
+          "t_curve_corr": 0.9978,
+          "twist_norm_corr_v_xyz": 0.8696,
+          "twist_norm_corr_w": 0.6974
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            126,
+            124
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0614,
+          "d_final_translation_mm": 1.1165,
+          "d_r_deg_med_last_third": 0.1298,
+          "d_t_mm_max_second_half": 0.572,
+          "d_t_mm_med_last_third": 0.2145,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.2652,
+          "landing_pose_distance_mm": 2.1073,
+          "t_curve_corr": 0.9988,
+          "twist_norm_corr_v_xyz": 0.8654,
+          "twist_norm_corr_w": 0.6796
+        }
+      },
+      "near60/n_000": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            122,
+            117
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1944,
+          "d_final_translation_mm": 2.3428,
+          "d_r_deg_med_last_third": 0.1616,
+          "d_t_mm_max_second_half": 1.171,
+          "d_t_mm_med_last_third": 2.2235,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3293,
+          "landing_pose_distance_mm": 2.6216,
+          "t_curve_corr": -0.1309,
+          "twist_norm_corr_v_xyz": 0.4146,
+          "twist_norm_corr_w": 0.5396
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            122,
+            120
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1238,
+          "d_final_translation_mm": 0.9256,
+          "d_r_deg_med_last_third": 0.176,
+          "d_t_mm_max_second_half": 0.847,
+          "d_t_mm_med_last_third": 1.0375,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.2852,
+          "landing_pose_distance_mm": 2.4515,
+          "t_curve_corr": 0.4798,
+          "twist_norm_corr_v_xyz": 0.327,
+          "twist_norm_corr_w": 0.4862
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            120,
+            117
+          ],
+          "curve_median_gate": false,
+          "d_final_rotation_deg": 0.3182,
+          "d_final_translation_mm": 1.4172,
+          "d_r_deg_med_last_third": 0.3376,
+          "d_t_mm_max_second_half": 0.324,
+          "d_t_mm_med_last_third": 1.186,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 0.4068,
+          "landing_pose_distance_mm": 3.0103,
+          "t_curve_corr": 0.5519,
+          "twist_norm_corr_v_xyz": 0.3699,
+          "twist_norm_corr_w": 0.5601
+        }
+      },
+      "near60/n_001": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            120,
+            115
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.4396,
+          "d_final_translation_mm": 3.8011,
+          "d_r_deg_med_last_third": 0.1983,
+          "d_t_mm_max_second_half": 2.589,
+          "d_t_mm_med_last_third": 1.862,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 0.6825,
+          "landing_pose_distance_mm": 5.4637,
+          "t_curve_corr": -0.2331,
+          "twist_norm_corr_v_xyz": 0.2618,
+          "twist_norm_corr_w": 0.3058
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            120,
+            115
+          ],
+          "curve_median_gate": false,
+          "d_final_rotation_deg": 0.1915,
+          "d_final_translation_mm": 3.9403,
+          "d_r_deg_med_last_third": 0.0843,
+          "d_t_mm_max_second_half": 3.212,
+          "d_t_mm_med_last_third": 3.366,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 0.582,
+          "landing_pose_distance_mm": 4.8234,
+          "t_curve_corr": -0.3795,
+          "twist_norm_corr_v_xyz": 0.3281,
+          "twist_norm_corr_w": 0.3856
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            115,
+            115
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2481,
+          "d_final_translation_mm": 0.1392,
+          "d_r_deg_med_last_third": 0.114,
+          "d_t_mm_max_second_half": 0.623,
+          "d_t_mm_med_last_third": 1.504,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3619,
+          "landing_pose_distance_mm": 2.7752,
+          "t_curve_corr": 0.573,
+          "twist_norm_corr_v_xyz": 0.3442,
+          "twist_norm_corr_w": 0.3691
+        }
+      },
+      "near60/n_002": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            70,
+            69
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0093,
+          "d_final_translation_mm": 0.2093,
+          "d_r_deg_med_last_third": 0.0035,
+          "d_t_mm_max_second_half": 0.297,
+          "d_t_mm_med_last_third": 0.098,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.1344,
+          "landing_pose_distance_mm": 1.0154,
+          "t_curve_corr": 0.8653,
+          "twist_norm_corr_v_xyz": 0.371,
+          "twist_norm_corr_w": 0.4401
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            70,
+            67
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0186,
+          "d_final_translation_mm": 0.0348,
+          "d_r_deg_med_last_third": 0.0119,
+          "d_t_mm_max_second_half": 0.015,
+          "d_t_mm_med_last_third": 0.12,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0948,
+          "landing_pose_distance_mm": 0.7496,
+          "t_curve_corr": 0.8581,
+          "twist_norm_corr_v_xyz": 0.1885,
+          "twist_norm_corr_w": 0.2336
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            67,
+            69
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0093,
+          "d_final_translation_mm": 0.2442,
+          "d_r_deg_med_last_third": 0.0154,
+          "d_t_mm_max_second_half": 0.312,
+          "d_t_mm_med_last_third": 0.022,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.0439,
+          "landing_pose_distance_mm": 0.5514,
+          "t_curve_corr": 0.9563,
+          "twist_norm_corr_v_xyz": 0.1877,
+          "twist_norm_corr_w": 0.2842
+        }
+      }
+    },
+    "vitvs_dinov3": {
+      "narrow20/start_00": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            127,
+            131
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0155,
+          "d_final_translation_mm": 0.6731,
+          "d_r_deg_med_last_third": 0.1621,
+          "d_t_mm_max_second_half": 0.651,
+          "d_t_mm_med_last_third": 1.3605,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.5843,
+          "landing_pose_distance_mm": 4.5985,
+          "t_curve_corr": 0.9964,
+          "twist_norm_corr_v_xyz": 0.9238,
+          "twist_norm_corr_w": 0.7773
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            127,
+            125
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2876,
+          "d_final_translation_mm": 1.9509,
+          "d_r_deg_med_last_third": 0.211,
+          "d_t_mm_max_second_half": 0.58,
+          "d_t_mm_med_last_third": 1.447,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.4742,
+          "landing_pose_distance_mm": 3.8034,
+          "t_curve_corr": 0.9979,
+          "twist_norm_corr_v_xyz": 0.9113,
+          "twist_norm_corr_w": 0.7551
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            125,
+            131
+          ],
+          "curve_median_gate": false,
+          "d_final_rotation_deg": 0.2721,
+          "d_final_translation_mm": 2.624,
+          "d_r_deg_med_last_third": 0.3731,
+          "d_t_mm_max_second_half": 1.231,
+          "d_t_mm_med_last_third": 2.8075,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.4343,
+          "landing_pose_distance_mm": 3.6756,
+          "t_curve_corr": 0.9982,
+          "twist_norm_corr_v_xyz": 0.9043,
+          "twist_norm_corr_w": 0.741
+        }
+      },
+      "narrow20/start_01": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            121,
+            131
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2325,
+          "d_final_translation_mm": 2.294,
+          "d_r_deg_med_last_third": 0.2032,
+          "d_t_mm_max_second_half": 2.345,
+          "d_t_mm_med_last_third": 2.1485,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.4308,
+          "landing_pose_distance_mm": 3.6985,
+          "t_curve_corr": 0.9963,
+          "twist_norm_corr_v_xyz": 0.8243,
+          "twist_norm_corr_w": 0.6198
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            121,
+            124
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2932,
+          "d_final_translation_mm": 2.7112,
+          "d_r_deg_med_last_third": 0.2435,
+          "d_t_mm_max_second_half": 1.235,
+          "d_t_mm_med_last_third": 2.34,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3884,
+          "landing_pose_distance_mm": 3.251,
+          "t_curve_corr": 0.9993,
+          "twist_norm_corr_v_xyz": 0.8419,
+          "twist_norm_corr_w": 0.6246
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            124,
+            131
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0607,
+          "d_final_translation_mm": 0.4171,
+          "d_r_deg_med_last_third": 0.0403,
+          "d_t_mm_max_second_half": 3.58,
+          "d_t_mm_med_last_third": 0.1915,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.2842,
+          "landing_pose_distance_mm": 2.5796,
+          "t_curve_corr": 0.9973,
+          "twist_norm_corr_v_xyz": 0.8296,
+          "twist_norm_corr_w": 0.6029
+        }
+      },
+      "near60/n_000": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            121,
+            119
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0289,
+          "d_final_translation_mm": 0.59,
+          "d_r_deg_med_last_third": 0.0203,
+          "d_t_mm_max_second_half": 0.81,
+          "d_t_mm_med_last_third": 0.388,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.1989,
+          "landing_pose_distance_mm": 1.306,
+          "t_curve_corr": 0.3621,
+          "twist_norm_corr_v_xyz": 0.2815,
+          "twist_norm_corr_w": 0.4012
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            121,
+            128
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.1788,
+          "d_final_translation_mm": 0.4056,
+          "d_r_deg_med_last_third": 0.0751,
+          "d_t_mm_max_second_half": 2.041,
+          "d_t_mm_med_last_third": 0.328,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.204,
+          "landing_pose_distance_mm": 1.2695,
+          "t_curve_corr": -0.0677,
+          "twist_norm_corr_v_xyz": 0.3715,
+          "twist_norm_corr_w": 0.5241
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            128,
+            119
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2077,
+          "d_final_translation_mm": 0.9956,
+          "d_r_deg_med_last_third": 0.0954,
+          "d_t_mm_max_second_half": 1.231,
+          "d_t_mm_med_last_third": 0.716,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3065,
+          "landing_pose_distance_mm": 2.5557,
+          "t_curve_corr": 0.4428,
+          "twist_norm_corr_v_xyz": 0.3709,
+          "twist_norm_corr_w": 0.4944
+        }
+      },
+      "near60/n_001": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            117,
+            124
+          ],
+          "curve_median_gate": false,
+          "d_final_rotation_deg": 0.654,
+          "d_final_translation_mm": 3.8855,
+          "d_r_deg_med_last_third": 0.5262,
+          "d_t_mm_max_second_half": 3.247,
+          "d_t_mm_med_last_third": 2.639,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 1.0686,
+          "landing_pose_distance_mm": 8.488,
+          "t_curve_corr": 0.385,
+          "twist_norm_corr_v_xyz": 0.362,
+          "twist_norm_corr_w": 0.3992
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            117,
+            117
+          ],
+          "curve_median_gate": false,
+          "d_final_rotation_deg": 0.2628,
+          "d_final_translation_mm": 0.1484,
+          "d_r_deg_med_last_third": 0.4014,
+          "d_t_mm_max_second_half": 0.869,
+          "d_t_mm_med_last_third": 0.8165,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.6259,
+          "landing_pose_distance_mm": 5.2175,
+          "t_curve_corr": 0.3459,
+          "twist_norm_corr_v_xyz": 0.2487,
+          "twist_norm_corr_w": 0.3486
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            117,
+            124
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.3912,
+          "d_final_translation_mm": 4.034,
+          "d_r_deg_med_last_third": 0.1248,
+          "d_t_mm_max_second_half": 2.378,
+          "d_t_mm_med_last_third": 1.8225,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 0.5367,
+          "landing_pose_distance_mm": 4.199,
+          "t_curve_corr": 0.858,
+          "twist_norm_corr_v_xyz": 0.3578,
+          "twist_norm_corr_w": 0.4298
+        }
+      },
+      "near60/n_002": {
+        "mock-mujoco": {
+          "cns_plateau_step": [
+            62,
+            69
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.0774,
+          "d_final_translation_mm": 0.6393,
+          "d_r_deg_med_last_third": 0.0235,
+          "d_t_mm_max_second_half": 0.15,
+          "d_t_mm_med_last_third": 0.1565,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.3041,
+          "landing_pose_distance_mm": 2.7087,
+          "t_curve_corr": 0.7315,
+          "twist_norm_corr_v_xyz": 0.2637,
+          "twist_norm_corr_w": 0.3429
+        },
+        "mock-mujoco960": {
+          "cns_plateau_step": [
+            62,
+            60
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2062,
+          "d_final_translation_mm": 2.9414,
+          "d_r_deg_med_last_third": 0.1946,
+          "d_t_mm_max_second_half": 2.582,
+          "d_t_mm_med_last_third": 2.7225,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": true,
+          "landing_pose_angle_deg": 0.4607,
+          "landing_pose_distance_mm": 4.2852,
+          "t_curve_corr": -0.4005,
+          "twist_norm_corr_v_xyz": 0.1274,
+          "twist_norm_corr_w": 0.145
+        },
+        "mujoco960-mujoco": {
+          "cns_plateau_step": [
+            60,
+            69
+          ],
+          "curve_median_gate": true,
+          "d_final_rotation_deg": 0.2836,
+          "d_final_translation_mm": 3.5808,
+          "d_r_deg_med_last_third": 0.2181,
+          "d_t_mm_max_second_half": 2.732,
+          "d_t_mm_med_last_third": 2.879,
+          "first_frame_n_matches": [
+            24,
+            24
+          ],
+          "landing_gate": false,
+          "landing_pose_angle_deg": 0.6644,
+          "landing_pose_distance_mm": 5.9782,
+          "t_curve_corr": -0.793,
+          "twist_norm_corr_v_xyz": 0.1135,
+          "twist_norm_corr_w": 0.1629
+        }
+      }
+    }
+  },
+  "scene": "hollywood",
+  "spread": {
+    "artvs": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.0785,
+        "max_d_final_translation_mm": 0.7904,
+        "max_d_r_deg_med_last_third": 0.1273,
+        "max_d_t_mm_med_last_third": 1.224,
+        "median_d_final_rotation_deg": 0.0446,
+        "median_d_final_translation_mm": 0.3959,
+        "median_d_r_deg_med_last_third": 0.0508,
+        "median_d_t_mm_med_last_third": 0.4755,
+        "n": 5
+      }
+    },
+    "sift_ransac": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.0183,
+        "max_d_final_translation_mm": 0.0588,
+        "max_d_r_deg_med_last_third": 0.0079,
+        "max_d_t_mm_med_last_third": 0.032,
+        "median_d_final_rotation_deg": 0.0056,
+        "median_d_final_translation_mm": 0.05,
+        "median_d_r_deg_med_last_third": 0.0032,
+        "median_d_t_mm_med_last_third": 0.0225,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.0056,
+        "max_d_final_translation_mm": 0.0467,
+        "max_d_r_deg_med_last_third": 0.0079,
+        "max_d_t_mm_med_last_third": 0.0705,
+        "median_d_final_rotation_deg": 0.0014,
+        "median_d_final_translation_mm": 0.0346,
+        "median_d_r_deg_med_last_third": 0.0027,
+        "median_d_t_mm_med_last_third": 0.0105,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.0197,
+        "max_d_final_translation_mm": 0.0967,
+        "max_d_r_deg_med_last_third": 0.0106,
+        "max_d_t_mm_med_last_third": 0.0985,
+        "median_d_final_rotation_deg": 0.0104,
+        "median_d_final_translation_mm": 0.0264,
+        "median_d_r_deg_med_last_third": 0.0078,
+        "median_d_t_mm_med_last_third": 0.0245,
+        "n": 5
+      }
+    },
+    "vitvs_dinov2": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.4396,
+        "max_d_final_translation_mm": 3.8011,
+        "max_d_r_deg_med_last_third": 0.1983,
+        "max_d_t_mm_med_last_third": 2.2235,
+        "median_d_final_rotation_deg": 0.1944,
+        "median_d_final_translation_mm": 0.2093,
+        "median_d_r_deg_med_last_third": 0.1271,
+        "median_d_t_mm_med_last_third": 1.0645,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.1916,
+        "max_d_final_translation_mm": 3.9403,
+        "max_d_r_deg_med_last_third": 0.176,
+        "max_d_t_mm_med_last_third": 3.366,
+        "median_d_final_rotation_deg": 0.1238,
+        "median_d_final_translation_mm": 0.9256,
+        "median_d_r_deg_med_last_third": 0.0607,
+        "median_d_t_mm_med_last_third": 0.6245,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.3182,
+        "max_d_final_translation_mm": 1.4172,
+        "max_d_r_deg_med_last_third": 0.3376,
+        "max_d_t_mm_med_last_third": 1.689,
+        "median_d_final_rotation_deg": 0.1309,
+        "median_d_final_translation_mm": 0.2442,
+        "median_d_r_deg_med_last_third": 0.1298,
+        "median_d_t_mm_med_last_third": 1.186,
+        "n": 5
+      }
+    },
+    "vitvs_dinov3": {
+      "mock-mujoco": {
+        "max_d_final_rotation_deg": 0.654,
+        "max_d_final_translation_mm": 3.8855,
+        "max_d_r_deg_med_last_third": 0.5262,
+        "max_d_t_mm_med_last_third": 2.639,
+        "median_d_final_rotation_deg": 0.0774,
+        "median_d_final_translation_mm": 0.6731,
+        "median_d_r_deg_med_last_third": 0.1621,
+        "median_d_t_mm_med_last_third": 1.3605,
+        "n": 5
+      },
+      "mock-mujoco960": {
+        "max_d_final_rotation_deg": 0.2932,
+        "max_d_final_translation_mm": 2.9414,
+        "max_d_r_deg_med_last_third": 0.4014,
+        "max_d_t_mm_med_last_third": 2.7225,
+        "median_d_final_rotation_deg": 0.2628,
+        "median_d_final_translation_mm": 1.9509,
+        "median_d_r_deg_med_last_third": 0.211,
+        "median_d_t_mm_med_last_third": 1.447,
+        "n": 5
+      },
+      "mujoco960-mujoco": {
+        "max_d_final_rotation_deg": 0.3912,
+        "max_d_final_translation_mm": 4.034,
+        "max_d_r_deg_med_last_third": 0.3731,
+        "max_d_t_mm_med_last_third": 2.879,
+        "median_d_final_rotation_deg": 0.2721,
+        "median_d_final_translation_mm": 2.624,
+        "median_d_r_deg_med_last_third": 0.1248,
+        "median_d_t_mm_med_last_third": 1.8225,
+        "n": 5
+      }
+    }
+  },
+  "table": {
+    "artvs": {
+      "narrow20/start_00": {
+        "mock": {
+          "artvs_switch_step": 17,
+          "artvs_switched": true,
+          "cns_plateau_step": null,
+          "cpu_s": 1543.69,
+          "final_rotation_deg": 0.3797,
+          "final_translation_mm": 5.1814,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.0603,
+          "r_deg_med_last_third": 0.4782,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 8.321,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 11.961,
+          "t_mm_med_last_third": 6.1285,
+          "t_mm_min_second_half": 5.188,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": 14,
+          "artvs_switched": true,
+          "cns_plateau_step": null,
+          "cpu_s": 1600.6,
+          "final_rotation_deg": 0.4441,
+          "final_translation_mm": 5.5329,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.6201,
+          "r_deg_med_last_third": 0.4274,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 8.424,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 9.368,
+          "t_mm_med_last_third": 5.773,
+          "t_mm_min_second_half": 5.465,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "narrow20/start_01": {
+        "mock": {
+          "artvs_switch_step": 17,
+          "artvs_switched": true,
+          "cns_plateau_step": null,
+          "cpu_s": 1401.59,
+          "final_rotation_deg": 0.4991,
+          "final_translation_mm": 5.7216,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.0649,
+          "r_deg_med_last_third": 0.5612,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 6.965,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 11.718,
+          "t_mm_med_last_third": 6.4085,
+          "t_mm_min_second_half": 5.795,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": 17,
+          "artvs_switched": true,
+          "cns_plateau_step": null,
+          "cpu_s": 1466.65,
+          "final_rotation_deg": 0.5776,
+          "final_translation_mm": 6.1737,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 1.1754,
+          "r_deg_med_last_third": 0.6885,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 7.417,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 12.481,
+          "t_mm_med_last_third": 7.2815,
+          "t_mm_min_second_half": 6.217,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_000": {
+        "mock": {
+          "artvs_switch_step": 4,
+          "artvs_switched": true,
+          "cns_plateau_step": 138,
+          "cpu_s": 1571.94,
+          "final_rotation_deg": 0.1591,
+          "final_translation_mm": 1.3395,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.3641,
+          "r_deg_med_last_third": 0.1966,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 8.303,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 1.501,
+          "t_mm_med_last_third": 1.264,
+          "t_mm_min_second_half": 1.096,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": 5,
+          "artvs_switched": true,
+          "cns_plateau_step": 138,
+          "cpu_s": 1571.23,
+          "final_rotation_deg": 0.1145,
+          "final_translation_mm": 1.7354,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.3308,
+          "r_deg_med_last_third": 0.15,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 8.01,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 1.918,
+          "t_mm_med_last_third": 1.7395,
+          "t_mm_min_second_half": 1.479,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_001": {
+        "mock": {
+          "artvs_switch_step": 2,
+          "artvs_switched": true,
+          "cns_plateau_step": 132,
+          "cpu_s": 1841.39,
+          "final_rotation_deg": 0.1036,
+          "final_translation_mm": 2.1028,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.2164,
+          "r_deg_med_last_third": 0.1132,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 10.39,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 2.747,
+          "t_mm_med_last_third": 2.0485,
+          "t_mm_min_second_half": 1.879,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": 3,
+          "artvs_switched": true,
+          "cns_plateau_step": 134,
+          "cpu_s": 1805.21,
+          "final_rotation_deg": 0.1334,
+          "final_translation_mm": 2.0769,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.1678,
+          "r_deg_med_last_third": 0.1379,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 9.882,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 2.284,
+          "t_mm_med_last_third": 2.105,
+          "t_mm_min_second_half": 1.796,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_002": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": false,
+          "cns_plateau_step": 50,
+          "cpu_s": 162.52,
+          "final_rotation_deg": 1.2655,
+          "final_translation_mm": 8.8781,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.2635,
+          "r_deg_med_last_third": 1.2413,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.202,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.777,
+          "t_mm_med_last_third": 8.373,
+          "t_mm_min_second_half": 7.668,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": false,
+          "cns_plateau_step": 50,
+          "cpu_s": 118.78,
+          "final_rotation_deg": 1.3024,
+          "final_translation_mm": 9.6685,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 1.3024,
+          "r_deg_med_last_third": 1.3016,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.628,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 9.668,
+          "t_mm_med_last_third": 9.597,
+          "t_mm_min_second_half": 8.773,
+          "terminated_reason": "max_iter"
+        }
+      }
+    },
+    "sift_ransac": {
+      "narrow20/start_00": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 308.14,
+          "final_rotation_deg": 0.041,
+          "final_translation_mm": 0.5802,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.5401,
+          "r_deg_med_last_third": 0.0963,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.468,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 7.267,
+          "t_mm_med_last_third": 1.327,
+          "t_mm_min_second_half": 0.6,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 245.67,
+          "final_rotation_deg": 0.0299,
+          "final_translation_mm": 0.5656,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.5424,
+          "r_deg_med_last_third": 0.0884,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.881,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 7.259,
+          "t_mm_med_last_third": 1.3225,
+          "t_mm_min_second_half": 0.583,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 282.29,
+          "final_rotation_deg": 0.0404,
+          "final_translation_mm": 0.592,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.55,
+          "r_deg_med_last_third": 0.099,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.092,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 7.285,
+          "t_mm_med_last_third": 1.3375,
+          "t_mm_min_second_half": 0.609,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "narrow20/start_01": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 342.72,
+          "final_rotation_deg": 0.0363,
+          "final_translation_mm": 0.5002,
+          "first_frame_n_matches": 22,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.4965,
+          "r_deg_med_last_third": 0.0824,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.667,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 6.181,
+          "t_mm_med_last_third": 1.133,
+          "t_mm_min_second_half": 0.517,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 245.08,
+          "final_rotation_deg": 0.018,
+          "final_translation_mm": 0.4488,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.4931,
+          "r_deg_med_last_third": 0.0768,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.883,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 6.172,
+          "t_mm_med_last_third": 1.101,
+          "t_mm_min_second_half": 0.464,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 283.69,
+          "final_rotation_deg": 0.0377,
+          "final_translation_mm": 0.5355,
+          "first_frame_n_matches": 22,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.4954,
+          "r_deg_med_last_third": 0.0846,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.099,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 6.173,
+          "t_mm_med_last_third": 1.155,
+          "t_mm_min_second_half": 0.554,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_000": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 341.27,
+          "final_rotation_deg": 0.0178,
+          "final_translation_mm": 0.0548,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.2401,
+          "r_deg_med_last_third": 0.0436,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.686,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.448,
+          "t_mm_med_last_third": 0.0805,
+          "t_mm_min_second_half": 0.055,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 245.29,
+          "final_rotation_deg": 0.0221,
+          "final_translation_mm": 0.1136,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.2391,
+          "r_deg_med_last_third": 0.0468,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.891,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.455,
+          "t_mm_med_last_third": 0.103,
+          "t_mm_min_second_half": 0.07,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 290.62,
+          "final_rotation_deg": 0.018,
+          "final_translation_mm": 0.0878,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.239,
+          "r_deg_med_last_third": 0.0436,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.195,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.451,
+          "t_mm_med_last_third": 0.088,
+          "t_mm_min_second_half": 0.08,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_001": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 311.46,
+          "final_rotation_deg": 0.0126,
+          "final_translation_mm": 0.031,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.1714,
+          "r_deg_med_last_third": 0.0318,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.511,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.292,
+          "t_mm_med_last_third": 0.093,
+          "t_mm_min_second_half": 0.033,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 246.53,
+          "final_rotation_deg": 0.0113,
+          "final_translation_mm": 0.0655,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.1726,
+          "r_deg_med_last_third": 0.0311,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.898,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.289,
+          "t_mm_med_last_third": 0.1135,
+          "t_mm_min_second_half": 0.067,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 285.31,
+          "final_rotation_deg": 0.0083,
+          "final_translation_mm": 0.0656,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.17,
+          "r_deg_med_last_third": 0.0277,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.1,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.324,
+          "t_mm_med_last_third": 0.089,
+          "t_mm_min_second_half": 0.064,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_002": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 349.44,
+          "final_rotation_deg": 0.0153,
+          "final_translation_mm": 0.0998,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.1099,
+          "r_deg_med_last_third": 0.0287,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.729,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.486,
+          "t_mm_med_last_third": 0.164,
+          "t_mm_min_second_half": 0.101,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 247.26,
+          "final_rotation_deg": 0.0209,
+          "final_translation_mm": 0.1498,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.1078,
+          "r_deg_med_last_third": 0.03,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.904,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.509,
+          "t_mm_med_last_third": 0.192,
+          "t_mm_min_second_half": 0.152,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": null,
+          "cpu_s": 282.36,
+          "final_rotation_deg": 0.0097,
+          "final_translation_mm": 0.0531,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.1084,
+          "r_deg_med_last_third": 0.0208,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.085,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 0.479,
+          "t_mm_med_last_third": 0.0935,
+          "t_mm_min_second_half": 0.054,
+          "terminated_reason": "max_iter"
+        }
+      }
+    },
+    "vitvs_dinov2": {
+      "narrow20/start_00": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 126,
+          "cpu_s": 322.43,
+          "final_rotation_deg": 0.3256,
+          "final_translation_mm": 6.9694,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.0319,
+          "r_deg_med_last_third": 0.4602,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.387,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 12.597,
+          "t_mm_med_last_third": 8.0415,
+          "t_mm_min_second_half": 7.07,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 128,
+          "cpu_s": 275.9,
+          "final_rotation_deg": 0.5333,
+          "final_translation_mm": 7.1078,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.5528,
+          "r_deg_med_last_third": 0.3586,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.944,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.901,
+          "t_mm_med_last_third": 6.977,
+          "t_mm_min_second_half": 6.518,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 125,
+          "cpu_s": 342.7,
+          "final_rotation_deg": 0.4024,
+          "final_translation_mm": 7.2274,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.6807,
+          "r_deg_med_last_third": 0.5209,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.244,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 10.284,
+          "t_mm_med_last_third": 8.666,
+          "t_mm_min_second_half": 7.152,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "narrow20/start_01": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 123,
+          "cpu_s": 378.82,
+          "final_rotation_deg": 0.9351,
+          "final_translation_mm": 9.7634,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.2321,
+          "r_deg_med_last_third": 1.0133,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.755,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 13.212,
+          "t_mm_med_last_third": 10.485,
+          "t_mm_min_second_half": 9.72,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 124,
+          "cpu_s": 279.97,
+          "final_rotation_deg": 0.8048,
+          "final_translation_mm": 9.5754,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 1.3583,
+          "r_deg_med_last_third": 0.8862,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.962,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 14.567,
+          "t_mm_med_last_third": 10.266,
+          "t_mm_min_second_half": 9.62,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 126,
+          "cpu_s": 333.1,
+          "final_rotation_deg": 0.7435,
+          "final_translation_mm": 8.4589,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.4261,
+          "r_deg_med_last_third": 1.016,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.217,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 15.139,
+          "t_mm_med_last_third": 10.4805,
+          "t_mm_min_second_half": 8.824,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_000": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 122,
+          "cpu_s": 347.39,
+          "final_rotation_deg": 0.4914,
+          "final_translation_mm": 5.1169,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.6706,
+          "r_deg_med_last_third": 0.4832,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.503,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.286,
+          "t_mm_med_last_third": 4.9985,
+          "t_mm_min_second_half": 2.385,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 117,
+          "cpu_s": 327.04,
+          "final_rotation_deg": 0.297,
+          "final_translation_mm": 2.774,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.4217,
+          "r_deg_med_last_third": 0.3216,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.179,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 4.115,
+          "t_mm_med_last_third": 2.775,
+          "t_mm_min_second_half": 2.273,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 120,
+          "cpu_s": 349.35,
+          "final_rotation_deg": 0.6152,
+          "final_translation_mm": 4.1913,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.7082,
+          "r_deg_med_last_third": 0.6592,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.267,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 4.439,
+          "t_mm_med_last_third": 3.961,
+          "t_mm_min_second_half": 2.234,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_001": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 120,
+          "cpu_s": 355.98,
+          "final_rotation_deg": 0.3089,
+          "final_translation_mm": 1.5327,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.3896,
+          "r_deg_med_last_third": 0.3329,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.572,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 2.745,
+          "t_mm_med_last_third": 1.4385,
+          "t_mm_min_second_half": 1.127,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 115,
+          "cpu_s": 301.32,
+          "final_rotation_deg": 0.7484,
+          "final_translation_mm": 5.3338,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.7639,
+          "r_deg_med_last_third": 0.5312,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.059,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.334,
+          "t_mm_med_last_third": 3.3005,
+          "t_mm_min_second_half": 2.571,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 115,
+          "cpu_s": 348.95,
+          "final_rotation_deg": 0.5003,
+          "final_translation_mm": 5.473,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.6102,
+          "r_deg_med_last_third": 0.4172,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.261,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.957,
+          "t_mm_med_last_third": 4.8045,
+          "t_mm_min_second_half": 2.529,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_002": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 70,
+          "cpu_s": 323.0,
+          "final_rotation_deg": 0.8806,
+          "final_translation_mm": 8.6371,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.0036,
+          "r_deg_med_last_third": 0.881,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.39,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.729,
+          "t_mm_med_last_third": 8.43,
+          "t_mm_min_second_half": 7.979,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 69,
+          "cpu_s": 287.34,
+          "final_rotation_deg": 0.89,
+          "final_translation_mm": 8.4278,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.9014,
+          "r_deg_med_last_third": 0.8845,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.0,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.432,
+          "t_mm_med_last_third": 8.332,
+          "t_mm_min_second_half": 8.027,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 67,
+          "cpu_s": 359.01,
+          "final_rotation_deg": 0.8992,
+          "final_translation_mm": 8.6719,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.9256,
+          "r_deg_med_last_third": 0.8691,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.311,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.744,
+          "t_mm_med_last_third": 8.31,
+          "t_mm_min_second_half": 7.732,
+          "terminated_reason": "max_iter"
+        }
+      }
+    },
+    "vitvs_dinov3": {
+      "narrow20/start_00": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 127,
+          "cpu_s": 267.31,
+          "final_rotation_deg": 0.6922,
+          "final_translation_mm": 10.4573,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.7629,
+          "r_deg_med_last_third": 0.7104,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.298,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 12.227,
+          "t_mm_med_last_third": 10.875,
+          "t_mm_min_second_half": 10.388,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 131,
+          "cpu_s": 227.84,
+          "final_rotation_deg": 0.7077,
+          "final_translation_mm": 9.7842,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.7323,
+          "r_deg_med_last_third": 0.5483,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.846,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 11.576,
+          "t_mm_med_last_third": 9.5145,
+          "t_mm_min_second_half": 9.133,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 125,
+          "cpu_s": 241.21,
+          "final_rotation_deg": 0.9798,
+          "final_translation_mm": 12.4082,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.9794,
+          "r_deg_med_last_third": 0.9214,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.885,
+          "start_rotation_deg": 8.045,
+          "start_translation_mm": 107.673,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 12.807,
+          "t_mm_med_last_third": 12.322,
+          "t_mm_min_second_half": 11.953,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "narrow20/start_01": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 121,
+          "cpu_s": 268.56,
+          "final_rotation_deg": 0.9942,
+          "final_translation_mm": 12.6656,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.1836,
+          "r_deg_med_last_third": 1.006,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.298,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 15.171,
+          "t_mm_med_last_third": 12.9395,
+          "t_mm_min_second_half": 12.466,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 131,
+          "cpu_s": 229.33,
+          "final_rotation_deg": 0.7617,
+          "final_translation_mm": 10.3716,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 1.6317,
+          "r_deg_med_last_third": 0.8028,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.852,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 17.516,
+          "t_mm_med_last_third": 10.791,
+          "t_mm_min_second_half": 10.196,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 124,
+          "cpu_s": 239.6,
+          "final_rotation_deg": 0.7011,
+          "final_translation_mm": 9.9544,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 1.0669,
+          "r_deg_med_last_third": 0.7625,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.873,
+          "start_rotation_deg": 6.921,
+          "start_translation_mm": 86.769,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 13.936,
+          "t_mm_med_last_third": 10.5995,
+          "t_mm_min_second_half": 10.164,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_000": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 121,
+          "cpu_s": 259.06,
+          "final_rotation_deg": 0.4249,
+          "final_translation_mm": 4.5276,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.8812,
+          "r_deg_med_last_third": 0.4461,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.272,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 6.223,
+          "t_mm_med_last_third": 3.991,
+          "t_mm_min_second_half": 3.692,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 119,
+          "cpu_s": 250.05,
+          "final_rotation_deg": 0.396,
+          "final_translation_mm": 5.1176,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.8302,
+          "r_deg_med_last_third": 0.4258,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.017,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.413,
+          "t_mm_med_last_third": 4.379,
+          "t_mm_min_second_half": 3.517,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 128,
+          "cpu_s": 236.9,
+          "final_rotation_deg": 0.6037,
+          "final_translation_mm": 4.122,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.7206,
+          "r_deg_med_last_third": 0.5212,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.857,
+          "start_rotation_deg": 2.979,
+          "start_translation_mm": 5.577,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 4.182,
+          "t_mm_med_last_third": 3.663,
+          "t_mm_min_second_half": 2.277,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_001": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 117,
+          "cpu_s": 290.19,
+          "final_rotation_deg": 0.2194,
+          "final_translation_mm": 4.2762,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.4391,
+          "r_deg_med_last_third": 0.2068,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.52,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.007,
+          "t_mm_med_last_third": 4.096,
+          "t_mm_min_second_half": 2.868,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 124,
+          "cpu_s": 233.89,
+          "final_rotation_deg": 0.8734,
+          "final_translation_mm": 8.1617,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.9123,
+          "r_deg_med_last_third": 0.733,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.905,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.254,
+          "t_mm_med_last_third": 6.735,
+          "t_mm_min_second_half": 5.775,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 117,
+          "cpu_s": 231.27,
+          "final_rotation_deg": 0.4822,
+          "final_translation_mm": 4.1277,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.7388,
+          "r_deg_med_last_third": 0.6082,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.838,
+          "start_rotation_deg": 2.186,
+          "start_translation_mm": 3.842,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.876,
+          "t_mm_med_last_third": 4.9125,
+          "t_mm_min_second_half": 2.895,
+          "terminated_reason": "max_iter"
+        }
+      },
+      "near60/n_002": {
+        "mock": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 62,
+          "cpu_s": 270.19,
+          "final_rotation_deg": 0.8256,
+          "final_translation_mm": 7.9296,
+          "first_frame_n_matches": 24,
+          "gl_renderer": null,
+          "goal_frame_md5": null,
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.9381,
+          "r_deg_med_last_third": 0.8741,
+          "render_mode": "numpy-mock",
+          "sec_per_step": 1.318,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.506,
+          "t_mm_med_last_third": 8.0315,
+          "t_mm_min_second_half": 7.755,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 69,
+          "cpu_s": 227.85,
+          "final_rotation_deg": 0.9031,
+          "final_translation_mm": 8.5689,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            959.5,
+            539.5
+          ],
+          "r_deg_max_second_half": 0.9302,
+          "r_deg_med_last_third": 0.8976,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.85,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 8.656,
+          "t_mm_med_last_third": 8.188,
+          "t_mm_min_second_half": 7.698,
+          "terminated_reason": "max_iter"
+        },
+        "mujoco960": {
+          "artvs_switch_step": null,
+          "artvs_switched": null,
+          "cns_plateau_step": 60,
+          "cpu_s": 236.25,
+          "final_rotation_deg": 0.6195,
+          "final_translation_mm": 4.9881,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "goal_frame_md5": "c51552543314f7bdc5965b988a3fb167",
+          "n_steps": 150,
+          "principal_point_drawn": [
+            960.0,
+            540.0
+          ],
+          "r_deg_max_second_half": 0.7491,
+          "r_deg_med_last_third": 0.6795,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 0.857,
+          "start_rotation_deg": 1.335,
+          "start_translation_mm": 5.989,
+          "steps": 150,
+          "steps_last_third": [
+            101,
+            150
+          ],
+          "steps_second_half": [
+            76,
+            150
+          ],
+          "t_mm_max_second_half": 5.924,
+          "t_mm_med_last_third": 5.309,
+          "t_mm_min_second_half": 5.005,
+          "terminated_reason": "max_iter"
+        }
+      }
+    }
+  },
+  "verdict": {
+    "artvs_switch": {
+      "d_switch_step": {
+        "narrow20/start_00": 3,
+        "narrow20/start_01": 0,
+        "near60/n_000": 1,
+        "near60/n_001": 1,
+        "near60/n_002": null
+      },
+      "not_fired": {
+        "mock": [
+          "near60/n_002"
+        ],
+        "mujoco": [
+          "near60/n_002"
+        ]
+      },
+      "pass": false,
+      "re_stated_pass": true,
+      "steps": {
+        "mock": {
+          "narrow20/start_00": 17,
+          "narrow20/start_01": 17,
+          "near60/n_000": 4,
+          "near60/n_001": 2,
+          "near60/n_002": null
+        },
+        "mujoco": {
+          "narrow20/start_00": 14,
+          "narrow20/start_01": 17,
+          "near60/n_000": 5,
+          "near60/n_001": 3,
+          "near60/n_002": null
+        }
+      },
+      "worlds_agree_on_every_start": true
+    },
+    "landing": {
+      "artvs": {
+        "failing": [],
+        "failing_but_curve_medians_agree": [],
+        "n": 5,
+        "pass": true
+      },
+      "sift_ransac": {
+        "failing": [],
+        "failing_but_curve_medians_agree": [],
+        "n": 5,
+        "pass": true
+      },
+      "vitvs_dinov2": {
+        "failing": [
+          "near60/n_001"
+        ],
+        "failing_but_curve_medians_agree": [
+          "near60/n_001"
+        ],
+        "n": 5,
+        "pass": false
+      },
+      "vitvs_dinov3": {
+        "failing": [
+          "near60/n_001"
+        ],
+        "failing_but_curve_medians_agree": [],
+        "n": 5,
+        "pass": false
+      }
+    },
+    "original_gate": {
+      "artvs_switch_pass": false,
+      "landing_failing": {
+        "artvs": [],
+        "sift_ransac": [],
+        "vitvs_dinov2": [
+          "near60/n_001"
+        ],
+        "vitvs_dinov3": [
+          "near60/n_001"
+        ]
+      },
+      "landing_pass": {
+        "artvs": true,
+        "sift_ransac": true,
+        "vitvs_dinov2": false,
+        "vitvs_dinov3": false
+      },
+      "rule": {
+        "artvs_switch": "artvs_switched True on every start in both worlds",
+        "landing": "every arm, every start: |d final_translation_mm| <= 3 and |d final_rotation_deg| <= 0.3 at the cap, mock vs mujoco"
+      }
+    },
+    "outcome": "accepted with findings",
+    "re_stated_gate": {
+      "artvs_switch_pass": true,
+      "landing_pass": {
+        "artvs": true,
+        "sift_ransac": true
+      },
+      "rule": {
+        "artvs_switch": "the two worlds agree on whether it fires on each start and, where both fire, on when (|d switch step| <= 5)",
+        "landing": "sift_ransac and artvs: unchanged; vitvs_dinov3 / vitvs_dinov2: the landing is reported, gated by the curve rule instead",
+        "vitvs_curve": "per start: |d median t_mm over steps 101-150| <= 3 and |d median r_deg over steps 101-150| <= 0.5, mock vs mujoco; AND the spread (median over the starts of those two differences) no larger than the same spread between mujoco960 and mujoco (the half-pixel control)"
+      },
+      "vitvs_curve_pass": {
+        "vitvs_dinov2": true,
+        "vitvs_dinov3": false
+      }
+    },
+    "vitvs_curve": {
+      "vitvs_dinov2": {
+        "control_pair": "mujoco960-mujoco",
+        "failing_starts": [],
+        "n": 5,
+        "pass": true,
+        "per_start": {
+          "narrow20/start_00": {
+            "d_r_deg_med_last_third": 0.1016,
+            "d_t_mm_med_last_third": 1.0645,
+            "pass": true
+          },
+          "narrow20/start_01": {
+            "d_r_deg_med_last_third": 0.1271,
+            "d_t_mm_med_last_third": 0.219,
+            "pass": true
+          },
+          "near60/n_000": {
+            "d_r_deg_med_last_third": 0.1616,
+            "d_t_mm_med_last_third": 2.2235,
+            "pass": true
+          },
+          "near60/n_001": {
+            "d_r_deg_med_last_third": 0.1983,
+            "d_t_mm_med_last_third": 1.862,
+            "pass": true
+          },
+          "near60/n_002": {
+            "d_r_deg_med_last_third": 0.0035,
+            "d_t_mm_med_last_third": 0.098,
+            "pass": true
+          }
+        },
+        "spread": {
+          "d_r_deg_med_last_third": {
+            "control_max_reported": 0.3376,
+            "control_median": 0.1298,
+            "gate_pair_max_reported": 0.1983,
+            "gate_pair_median": 0.1271,
+            "pass": true
+          },
+          "d_t_mm_med_last_third": {
+            "control_max_reported": 1.689,
+            "control_median": 1.186,
+            "gate_pair_max_reported": 2.2235,
+            "gate_pair_median": 1.0645,
+            "pass": true
+          }
+        },
+        "spread_pass": true
+      },
+      "vitvs_dinov3": {
+        "control_pair": "mujoco960-mujoco",
+        "failing_starts": [
+          "near60/n_001"
+        ],
+        "n": 5,
+        "pass": false,
+        "per_start": {
+          "narrow20/start_00": {
+            "d_r_deg_med_last_third": 0.1621,
+            "d_t_mm_med_last_third": 1.3605,
+            "pass": true
+          },
+          "narrow20/start_01": {
+            "d_r_deg_med_last_third": 0.2032,
+            "d_t_mm_med_last_third": 2.1485,
+            "pass": true
+          },
+          "near60/n_000": {
+            "d_r_deg_med_last_third": 0.0203,
+            "d_t_mm_med_last_third": 0.388,
+            "pass": true
+          },
+          "near60/n_001": {
+            "d_r_deg_med_last_third": 0.5262,
+            "d_t_mm_med_last_third": 2.639,
+            "pass": false
+          },
+          "near60/n_002": {
+            "d_r_deg_med_last_third": 0.0235,
+            "d_t_mm_med_last_third": 0.1565,
+            "pass": true
+          }
+        },
+        "spread": {
+          "d_r_deg_med_last_third": {
+            "control_max_reported": 0.3731,
+            "control_median": 0.1248,
+            "gate_pair_max_reported": 0.5262,
+            "gate_pair_median": 0.1621,
+            "pass": false
+          },
+          "d_t_mm_med_last_third": {
+            "control_max_reported": 2.879,
+            "control_median": 1.8225,
+            "gate_pair_max_reported": 2.639,
+            "gate_pair_median": 1.3605,
+            "pass": true
+          }
+        },
+        "spread_pass": false
+      }
+    }
+  },
+  "worlds": [
+    "mock",
+    "mujoco",
+    "mujoco960"
+  ]
+}

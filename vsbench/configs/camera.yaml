@@ -1,0 +1,49 @@
+# The camera — single source of truth for every renderer in this repository.
+#
+# Models the Intel RealSense D435i RGB sensor (the real-world deployment camera).
+# Every Isaac Sim render and the mock scene MUST read intrinsics from this file;
+# nothing may duplicate the derived values in code (`vssim.camera` derives them).
+#
+# History: locked 2026-05-26 in the genvs-sim project; carried unchanged through
+# Refine-VS; extracted here 2026-09-11. Every frozen start file and every stored
+# campaign was rendered with exactly these numbers.
+
+version: 1
+sensor: intel_realsense_d435i_rgb
+
+# --- Optical intrinsics (must match the real D435i RGB spec) ---
+# D435i RGB spec: 1920×1080 @ 30 FPS, FoV 69° × 42° (H × V), ±3°.
+# In Isaac Sim we set the vertical FoV directly; the horizontal FoV follows from
+# the resolution aspect (16:9 at 1920×1080 → derived hFoV ≈ 68.6° ≈ 69°).
+intrinsics:
+  resolution:
+    width: 1920          # pixels
+    height: 1080         # pixels  → aspect 16:9
+  fov_vertical_deg: 42.0 # vertical field of view
+  # Isaac Sim USD camera focal-length math:
+  #   focal_length = (vert_aperture / 2) / tan(fov_v / 2)
+  # 20.955 mm is the Isaac Sim default vertical aperture; we use a SQUARE
+  # aperture (vert = horiz) and let the resolution aspect determine the hFoV.
+  vert_aperture_mm: 20.955
+  horiz_aperture_mm: 20.955
+
+# Derived quantities (computed, not authored — listed for reference / sanity
+# checks; `vssim.camera.CameraConfig` recomputes them from `intrinsics`):
+derived:
+  fov_horizontal_deg_at_16_9: 68.6   # 2*atan(tan(21°)*16/9)
+  matches_d435i_rgb_spec: true        # 68.6° vs 69° spec, within ±3°
+  v_window_per_m_distance: 0.767      # 2*tan(21°)
+  h_window_per_m_distance: 1.364      # v_window_per_m * 16/9
+  fx_fy_px: 1406.748                  # 1080 / (2*tan(21°)); the principal point is (960, 540)
+
+# --- Working distance: how a `scene_view` goal frames a measured bounding box ---
+# A scene's goal camera sits at the smallest distance at which the scene's
+# bounding box occupies `frame_fill` of the limiting frame dimension:
+#   d = max(w / (frame_fill * h_window_per_m), h / (frame_fill * v_window_per_m))
+# Each scene may override `frame_fill` in its own `goal:` block (the six benchmark
+# rooms say 0.85); this is the default when a scene does not.
+working_distance:
+  method: auto_bbox_fit
+  frame_fill: 0.70
+  per_category_frame_fill:
+    drinking_glass: 0.50   # tall thin profile needs the camera farther back

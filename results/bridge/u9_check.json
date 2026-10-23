@@ -1,0 +1,508 @@
+{
+  "cells": {
+    "cluttered2/artvs": {
+      "far": [
+        [
+          "w1_034",
+          479.474321369861,
+          3144.8888742083245,
+          103.16387583052114,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 5.0565,
+      "identity_ok": true,
+      "isaac_near_final_mm": 99.23342906621188,
+      "isaac_near_ok": false,
+      "near_final_deg": 2.5321464469245334,
+      "near_final_mm": 39.23517086055659,
+      "near_ok": false,
+      "near_start_mm": 7.75936872787686
+    },
+    "cluttered2/orb_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.474321369861,
+          2.0354435109203473,
+          0.10268490315325995,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0836,
+      "identity_ok": true,
+      "isaac_near_final_mm": 1.7011665604588693,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.0562655840554602,
+      "near_final_mm": 0.6490432237032213,
+      "near_ok": true,
+      "near_start_mm": 7.75936872787686
+    },
+    "cluttered2/sift_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.474321369861,
+          0.5364325060199986,
+          0.02192294715985141,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0156,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.6617550628137486,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.0068477641183162154,
+      "near_final_mm": 0.12117666079626244,
+      "near_ok": true,
+      "near_start_mm": 7.75936872787686
+    },
+    "cluttered2/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_034",
+          479.474321369861,
+          1052.4020735835938,
+          73.76377980704179,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 7.3913,
+      "identity_ok": true,
+      "isaac_near_final_mm": 43.75414261982839,
+      "isaac_near_ok": false,
+      "near_final_deg": 2.492132327311347,
+      "near_final_mm": 57.352081495197496,
+      "near_ok": false,
+      "near_start_mm": 7.75936872787686
+    },
+    "cluttered3/artvs": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          2546.139060075375,
+          98.85799086906817,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.9673,
+      "identity_ok": true,
+      "isaac_near_final_mm": 2.234021658613581,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.21784427016672372,
+      "near_final_mm": 7.505813796173484,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876856
+    },
+    "cluttered3/orb_ransac": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          3.345811637304905,
+          0.15970395377203309,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.3094,
+      "identity_ok": true,
+      "isaac_near_final_mm": 1.813605630765979,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.12163583163086669,
+      "near_final_mm": 2.4009408084270887,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876856
+    },
+    "cluttered3/sift_ransac": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          0.3632853720105623,
+          0.01536406746545804,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.029,
+      "identity_ok": true,
+      "isaac_near_final_mm": 2.1856061488736294,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.006780702015234171,
+      "near_final_mm": 0.22507702560080217,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876856
+    },
+    "cluttered3/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          41.095271423329805,
+          1.5618178884786267,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 5.5286,
+      "identity_ok": true,
+      "isaac_near_final_mm": 47.66996240170822,
+      "isaac_near_ok": false,
+      "near_final_deg": 1.895346205428385,
+      "near_final_mm": 42.89874693088824,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876856
+    },
+    "hollywood/artvs": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          3.495301876512151,
+          0.3283425305525744,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 2.5918,
+      "identity_ok": true,
+      "isaac_near_final_mm": 1.6152262148414822,
+      "isaac_near_ok": true,
+      "near_final_deg": 2.542367303062715,
+      "near_final_mm": 20.110961547766692,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    },
+    "hollywood/orb_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          1.0321630509916786,
+          0.10937788530781517,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0763,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.42687105242275186,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.095565763902447,
+      "near_final_mm": 0.5923050170725234,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "hollywood/sift_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          0.002107523938613782,
+          0.0002787855313815389,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0012,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.1709971209624293,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.0035078237587526174,
+      "near_final_mm": 0.009294943637452358,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "hollywood/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          6.039757162080682,
+          0.37149394511465933,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.7417,
+      "identity_ok": true,
+      "isaac_near_final_mm": 3.961955949828275,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.48582821043386515,
+      "near_final_mm": 5.755497480939235,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "industrial1_drill/artvs": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986583,
+          97.81505701510982,
+          10.520976843920698,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 4.5559,
+      "identity_ok": true,
+      "isaac_near_final_mm": 29.710378746358103,
+      "isaac_near_ok": false,
+      "near_final_deg": 4.040667611256819,
+      "near_final_mm": 35.351034604071984,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    },
+    "industrial1_drill/orb_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986583,
+          11397.222175840221,
+          89.91397996885401,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0517,
+      "identity_ok": true,
+      "isaac_near_final_mm": 1.0112827596112357,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.033490975761496636,
+      "near_final_mm": 0.40089932935856687,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "industrial1_drill/sift_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986583,
+          2982.0027753230097,
+          85.81402051079552,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0202,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.1745843295572268,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.021659632615353207,
+      "near_final_mm": 0.1569396544995568,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "industrial1_drill/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986583,
+          415.25386854308147,
+          84.28428110524031,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 3.2285,
+      "identity_ok": true,
+      "isaac_near_final_mm": 19.802321802916634,
+      "isaac_near_ok": false,
+      "near_final_deg": 2.8825718965510556,
+      "near_final_mm": 25.050796352982047,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster2/artvs": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          6.100497122878648,
+          0.6938434150779845,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 1.2262,
+      "identity_ok": true,
+      "isaac_near_final_mm": 17.155285638961672,
+      "isaac_near_ok": false,
+      "near_final_deg": 2.436434656439062,
+      "near_final_mm": 9.514629217385234,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster2/orb_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          1.082080946405833,
+          0.11596304446868988,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0852,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.41487717835568977,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.12095033710955497,
+      "near_final_mm": 0.6614088044983276,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster2/sift_ransac": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          0.006030186487927317,
+          0.0006879890067314807,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0038,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.14633783416844304,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.006093459495274109,
+      "near_final_mm": 0.029422360322378806,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster2/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_034",
+          479.47432136986095,
+          8.492698191626161,
+          0.8694597930620146,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 2.5208,
+      "identity_ok": true,
+      "isaac_near_final_mm": 14.889824735036829,
+      "isaac_near_ok": false,
+      "near_final_deg": 2.712681230080642,
+      "near_final_mm": 19.560148930190216,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster3/artvs": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          2.268069291302621,
+          0.2687913758936388,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.2781,
+      "identity_ok": true,
+      "isaac_near_final_mm": 24.0531818232602,
+      "isaac_near_ok": false,
+      "near_final_deg": 0.20401020852910026,
+      "near_final_mm": 2.1580801070337383,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster3/orb_ransac": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          4.004282197414808,
+          0.48379551206033855,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0467,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.20994707858786343,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.03723133503755924,
+      "near_final_mm": 0.36265751877406144,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster3/sift_ransac": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          0.018579935378470913,
+          0.0023754514564795597,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 0.0205,
+      "identity_ok": true,
+      "isaac_near_final_mm": 0.16465535038842014,
+      "isaac_near_ok": true,
+      "near_final_deg": 0.021639387513562803,
+      "near_final_mm": 0.15870505538430907,
+      "near_ok": true,
+      "near_start_mm": 7.759368727876952
+    },
+    "poster3/vitvs_dinov3": {
+      "far": [
+        [
+          "w1_076",
+          292.92774803055016,
+          15.506022559018696,
+          1.8121679571978386,
+          "max_iter"
+        ]
+      ],
+      "final_over_start": 1.1561,
+      "identity_ok": true,
+      "isaac_near_final_mm": 8.839308803858659,
+      "isaac_near_ok": false,
+      "near_final_deg": 0.727267923134189,
+      "near_final_mm": 8.970655625506119,
+      "near_ok": false,
+      "near_start_mm": 7.759368727876952
+    }
+  },
+  "identity_all_green": true,
+  "identity_fail": [],
+  "matrix": {
+    "arms": [
+      "sift_ransac",
+      "orb_ransac",
+      "vitvs_dinov3",
+      "artvs"
+    ],
+    "scenes": [
+      "hollywood",
+      "poster2",
+      "poster3",
+      "industrial1_drill",
+      "cluttered2",
+      "cluttered3"
+    ]
+  },
+  "near_all_green": false,
+  "near_fail": [
+    "hollywood/artvs",
+    "poster2/vitvs_dinov3",
+    "poster2/artvs",
+    "poster3/vitvs_dinov3",
+    "industrial1_drill/vitvs_dinov3",
+    "industrial1_drill/artvs",
+    "cluttered2/vitvs_dinov3",
+    "cluttered2/artvs",
+    "cluttered3/vitvs_dinov3"
+  ],
+  "near_fail_diagnosis": {
+    "cluttered2/artvs": "as_in_isaac",
+    "cluttered2/vitvs_dinov3": "as_in_isaac",
+    "cluttered3/vitvs_dinov3": "as_in_isaac",
+    "hollywood/artvs": "not_the_look_nor_the_world",
+    "industrial1_drill/artvs": "as_in_isaac",
+    "industrial1_drill/vitvs_dinov3": "as_in_isaac",
+    "poster2/artvs": "as_in_isaac",
+    "poster2/vitvs_dinov3": "as_in_isaac",
+    "poster3/vitvs_dinov3": "as_in_isaac"
+  },
+  "near_rule": "near_ok = final_mm < start_mm after --near-steps steps, no error (vs-sim check_baselines docstring: 'it must land closer than it started'; vs-sim's script computes no near verdict, the twin reads that sentence literally; 'by a lot' is not quantified there and is reported here as final_over_start, not thresholded)",
+  "port_gate": "every near miss (near_ok False: final >= start) is shared with Isaac's own check from the same start, or diagnosed outside the world (reproduced bit for bit, and missed without the look and, on a poster, on the copied numpy mock)",
+  "port_gate_explained": "9/9",
+  "port_gate_pass": true,
+  "source": "results/bridge/u9/summary.json, results/bridge/u9/diagnose.json",
+  "unit": "U9 - the rig check twin (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 17:55:00 +0200"
+}

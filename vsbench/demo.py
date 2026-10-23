@@ -179,6 +179,9 @@ def run_demo_parallel(backend: str, method_name: str, params: dict, scene: str, 
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--method", default="sift_ibvs", choices=available_methods())
     ap.add_argument("--param", action="append", default=[], help="constructor argument key=value, repeatable")

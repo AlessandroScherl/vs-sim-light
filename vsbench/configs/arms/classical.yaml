@@ -1,0 +1,54 @@
+# The classical baseline arm: SIFT / ORB / AKAZE into the same IBVS controller.
+#
+# The classical methods run in **two columns** — with their published geometric
+# verification and without it — and the two are different methods, so they are
+# different cells with different labels. The label carries the SETTING, not the resolved model
+# (`.../ransac-scene_default/...` vs `.../ransac-none/...`), so one cell keeps one label
+# across scenes; the resolved model is on the record as `ransac_model`. Exactly two lines
+# separate the six classical cells of a wave:
+#
+#   matcher.variant:  classical_sift | classical_orb | classical_akaze
+#   matcher.ransac:   scene_default  | none
+#
+# `scene_default` resolves from the scene's own spec at build time
+# (`vssim.scenes.SceneSpec.ransac`: homography on the posters, fundamental
+# on the rooms) — the model is a per-scene property and there is no safe default,
+# so a runbook passes `scene_spec=` and a config that forgets to fails loudly.
+# The resolved model, what was asked for, and how often the filter actually fitted
+# one are all on the episode record (`ransac_model`, `ransac_requested`,
+# `ransac_frames_applied`).
+#
+# FOR A DRIVER: `build_arm(..., scene_spec=specs[scene])` is REQUIRED for
+# `ransac: scene_default` — without it the matcher refuses rather than guessing. And a
+# shared-encoder `backbone=` override must not be passed to a classical cell: it is a
+# TypeError by design, because a classical arm has no encoder.
+
+seed: 20260902
+
+matcher:
+  variant: classical_sift
+  num_landmarks: 24                # the published `num_pairs`: the best 24 by distance
+  ransac: scene_default            # the with-RANSAC column; `none` is the other one
+  ransac_thresh_px: 3.0            # the published reprojection threshold
+
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666         # 1/60 s
+  solve_unrounded: true            # sub-pixel on every arm
+  ema_alpha: 0.0
+  weighting:                       # the published classical path is UNWEIGHTED, and a
+    use_trust: false               # keypoint detector has no second-peak margin at all
+    use_margin: false              # (build_arm refuses `use_margin` on this matcher)
+    per_axis: false
+
+stop:
+  rule: cns_plateau                # CNS's plateau rule scores every arm
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]

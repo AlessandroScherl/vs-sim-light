@@ -88,6 +88,9 @@ def replay_check(log: EpisodeLog, renderer, on_frame=None) -> ReplayResult:
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[1])
     ap.add_argument("log", help="an episode .npz written by run_episode")
     ap.add_argument("--video", default=None, help="write the debug video here (mp4)")

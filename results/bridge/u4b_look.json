@@ -1,0 +1,1869 @@
+{
+  "capped30_first_frame": {
+    "gate": null,
+    "note": "U4b held out at a far pose, REPORT ONLY (no gate): Isaac's first live frame of the capped30 start w1_034 (hollywood, cluttered2; the only capped30 first frames on disk are frame 1 of vs-sim's check3 films, read only) against MuJoCo raw and isaac_fit_v1 at the same pose. The film frame is half scale, JPEG then H.264, with the matched points and arrows drawn on it: both sides are compared at half scale (INTER_AREA, as the film) outside a dilated mask of the overlay colours. The film-artefact floor is the same statistic between the film's goal half and Isaac's goal PNG of the same run (also half scale, masked).",
+    "scenes": {
+      "cluttered2": {
+        "compared_px_share": 0.9111,
+        "film_artefact_floor": {
+          "hist_emd_mean": 1.903,
+          "mean_grey_diff": -1.09,
+          "pixel_mae": 5.307,
+          "vs": "$VSBENCH_ISAAC_GOALS/../check3/cluttered2_goal.png"
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "isaac_film": "$VSBENCH_ISAAC_GOALS/../check3/films/cluttered2_sift_ransac_w1_034/episode.mp4",
+        "isaac_film_md5": "6c343e9a70d677d520ed50f53eb1ff4c",
+        "isaac_fit_v1": {
+          "hist_emd_mean": 20.614,
+          "hist_emd_rgb": [
+            14.814,
+            22.365,
+            24.663
+          ],
+          "mean_grey": {
+            "isaac": 121.96,
+            "mujoco": 119.44
+          },
+          "mean_grey_diff": -2.52,
+          "mean_rgb": {
+            "isaac": [
+              156.76,
+              110.8,
+              98.32
+            ],
+            "mujoco": [
+              150.12,
+              108.9,
+              99.29
+            ]
+          },
+          "pixel_mae": 35.171
+        },
+        "raw": {
+          "hist_emd_mean": 90.661,
+          "hist_emd_rgb": [
+            99.686,
+            86.0,
+            86.297
+          ],
+          "mean_grey": {
+            "isaac": 121.96,
+            "mujoco": 31.3
+          },
+          "mean_grey_diff": -90.66,
+          "mean_rgb": {
+            "isaac": [
+              156.76,
+              110.8,
+              98.32
+            ],
+            "mujoco": [
+              57.08,
+              24.8,
+              12.02
+            ]
+          },
+          "pixel_mae": 90.662
+        },
+        "render_mode": "mujoco-llvmpipe",
+        "start_deg": 81.75,
+        "start_id": "w1_034",
+        "start_mm": 479.47
+      },
+      "hollywood": {
+        "compared_px_share": 0.9552,
+        "film_artefact_floor": {
+          "hist_emd_mean": 0.469,
+          "mean_grey_diff": -0.41,
+          "pixel_mae": 1.791,
+          "vs": "$VSBENCH_ISAAC_GOALS/../check3/hollywood_goal.png"
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "isaac_film": "$VSBENCH_ISAAC_GOALS/../check3/films/hollywood_sift_ransac_w1_034/episode.mp4",
+        "isaac_film_md5": "84e0daf8e0b50ea991d03f015957de32",
+        "isaac_fit_v1": {
+          "hist_emd_mean": 18.784,
+          "hist_emd_rgb": [
+            18.508,
+            18.68,
+            19.164
+          ],
+          "mean_grey": {
+            "isaac": 179.08,
+            "mujoco": 185.39
+          },
+          "mean_grey_diff": 6.31,
+          "mean_rgb": {
+            "isaac": [
+              179.79,
+              179.01,
+              178.43
+            ],
+            "mujoco": [
+              185.39,
+              185.38,
+              185.39
+            ]
+          },
+          "pixel_mae": 21.512
+        },
+        "raw": {
+          "hist_emd_mean": 87.926,
+          "hist_emd_rgb": [
+            88.644,
+            87.858,
+            87.276
+          ],
+          "mean_grey": {
+            "isaac": 179.08,
+            "mujoco": 91.15
+          },
+          "mean_grey_diff": -87.93,
+          "mean_rgb": {
+            "isaac": [
+              179.79,
+              179.01,
+              178.43
+            ],
+            "mujoco": [
+              91.15,
+              91.15,
+              91.15
+            ]
+          },
+          "pixel_mae": 87.936
+        },
+        "render_mode": "mujoco-llvmpipe",
+        "start_deg": 83.38,
+        "start_id": "w1_034",
+        "start_mm": 479.47
+      }
+    },
+    "vsbench_commit": "c1f91a8ace228a4272d9386a7a20d52453ac1b7a+dirty"
+  },
+  "measure": {
+    "how": "each scene x look in a fresh process (tools/u4b_look.py _measure): MujocoScene, the goal capture, the near start's frame, 4 redraws of that frame (renderer + curve timed; the curve alone timed too); statistics against Isaac's pictures (read only)",
+    "isaac_repeats": [
+      "/home/alessandro/genvs_ws/vssim_out/check2",
+      "/home/alessandro/genvs_ws/vssim_out/check3"
+    ],
+    "isaac_root": "/home/alessandro/genvs_ws/vssim_out/check1",
+    "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+    "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+    "metrics": "MuJoCo ``m`` against Isaac ``i`` (same pose): mean grey, per-channel means, per-channel histogram distance (1-D earth mover's distance between the 256-bin histograms, in grey levels: how far, on average, the grey levels must move to turn one histogram into the other) and the per-pixel mean absolute difference (grey levels).",
+    "scenes": {
+      "cluttered2": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0151,
+            "frame_s": [
+              0.535,
+              0.3906,
+              0.5793,
+              0.644
+            ],
+            "frame_s_median": 0.5571,
+            "init_s": 12.072,
+            "rss_peak_mb": 3687.9
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.3269,
+              0.2898,
+              0.3297,
+              0.7058
+            ],
+            "frame_s_median": 0.3283,
+            "init_s": 12.717,
+            "rss_peak_mb": 3495.7
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 130.78,
+              "mujoco": 125.68
+            },
+            "raw": {
+              "isaac": 130.78,
+              "mujoco": 32.2
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 8.907,
+            "hist_emd_rgb": [
+              4.314,
+              9.109,
+              13.299
+            ],
+            "mean_grey": {
+              "isaac": 132.44,
+              "mujoco": 127.1
+            },
+            "mean_grey_diff": -5.34,
+            "mean_rgb": {
+              "isaac": [
+                163.45,
+                123.05,
+                110.81
+              ],
+              "mujoco": [
+                160.36,
+                117.14,
+                103.8
+              ]
+            },
+            "pixel_mae": 19.249
+          },
+          "isaac_md5": "70898fed67d810f6ab6c583d9a7461c1",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_goal.png",
+          "isaac_repeat_floor": [
+            {
+              "hist_emd_mean": 0.076,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check2/cluttered2_goal.png",
+              "mean_grey_diff": 0.07,
+              "pixel_mae": 1.113
+            },
+            {
+              "hist_emd_mean": 0.2,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check3/cluttered2_goal.png",
+              "mean_grey_diff": 0.2,
+              "pixel_mae": 1.171
+            }
+          ],
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 164.32,
+              "mujoco": 154.55
+            },
+            "raw": {
+              "isaac": 164.32,
+              "mujoco": 85.31
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 97.61,
+            "hist_emd_rgb": [
+              100.348,
+              95.162,
+              97.321
+            ],
+            "mean_grey": {
+              "isaac": 132.44,
+              "mujoco": 34.83
+            },
+            "mean_grey_diff": -97.61,
+            "mean_rgb": {
+              "isaac": [
+                163.45,
+                123.05,
+                110.81
+              ],
+              "mujoco": [
+                63.1,
+                27.89,
+                13.49
+              ]
+            },
+            "pixel_mae": 97.611
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "83304bf28e9176240187fea52f52be38",
+          "raw": "471fe7bd52701a49d61e27a7d3d9669c"
+        },
+        "look_record": {
+          "ambient": 0.17625,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.0079929571055772,
+              1.557277638191238,
+              1.641297240223515
+            ],
+            [
+              2.205433514191888e-17,
+              0.5855257221605024,
+              0.9546887045997234
+            ],
+            [
+              0.015260805772838178,
+              0.4164986424222939,
+              0.7702675824096917
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.175,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/cluttered2",
+          "look_curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
+          "shadowclip_m": 1.672015094232153,
+          "shadowsize": 8192,
+          "sun_intensity": 1.153257163
+        },
+        "near": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 130.03,
+              "mujoco": 125.73
+            },
+            "raw": {
+              "isaac": 130.03,
+              "mujoco": 32.27
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 8.779,
+            "hist_emd_rgb": [
+              4.163,
+              8.868,
+              13.307
+            ],
+            "mean_grey": {
+              "isaac": 131.76,
+              "mujoco": 127.17
+            },
+            "mean_grey_diff": -4.59,
+            "mean_rgb": {
+              "isaac": [
+                163.32,
+                122.25,
+                109.73
+              ],
+              "mujoco": [
+                160.42,
+                117.19,
+                103.9
+              ]
+            },
+            "pixel_mae": 19.406
+          },
+          "isaac_md5": "d03bad10f3e0f10f937d68ab0a879817",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered2_sift_ransac_near_first.png",
+          "isaac_repeat_floor": [
+            {
+              "hist_emd_mean": 0.054,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check3/cluttered2_sift_ransac_near_first.png",
+              "mean_grey_diff": 0.02,
+              "pixel_mae": 1.439
+            }
+          ],
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 164.66,
+              "mujoco": 154.36
+            },
+            "raw": {
+              "isaac": 164.66,
+              "mujoco": 85.07
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 96.839,
+            "hist_emd_rgb": [
+              100.081,
+              94.271,
+              96.165
+            ],
+            "mean_grey": {
+              "isaac": 131.76,
+              "mujoco": 34.93
+            },
+            "mean_grey_diff": -96.83,
+            "mean_rgb": {
+              "isaac": [
+                163.32,
+                122.25,
+                109.73
+              ],
+              "mujoco": [
+                63.24,
+                27.98,
+                13.56
+              ]
+            },
+            "pixel_mae": 96.84
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      },
+      "cluttered3": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0164,
+            "frame_s": [
+              0.5282,
+              0.475,
+              0.4179,
+              0.5169
+            ],
+            "frame_s_median": 0.4959,
+            "init_s": 11.233,
+            "rss_peak_mb": 3360.0
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.3041,
+              0.2521,
+              0.5115,
+              0.2396
+            ],
+            "frame_s_median": 0.2781,
+            "init_s": 11.069,
+            "rss_peak_mb": 3167.9
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 219.11,
+              "mujoco": 218.54
+            },
+            "raw": {
+              "isaac": 219.11,
+              "mujoco": 127.14
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.481,
+            "hist_emd_rgb": [
+              1.195,
+              2.68,
+              3.569
+            ],
+            "mean_grey": {
+              "isaac": 217.09,
+              "mujoco": 216.31
+            },
+            "mean_grey_diff": -0.78,
+            "mean_rgb": {
+              "isaac": [
+                231.35,
+                219.26,
+                200.65
+              ],
+              "mujoco": [
+                230.99,
+                218.57,
+                199.37
+              ]
+            },
+            "pixel_mae": 4.093
+          },
+          "isaac_md5": "f5ab1a653e7815023202dad5db1bde1f",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_goal.png",
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 164.76,
+              "mujoco": 158.77
+            },
+            "raw": {
+              "isaac": 164.76,
+              "mujoco": 83.49
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 91.573,
+            "hist_emd_rgb": [
+              78.249,
+              93.313,
+              103.157
+            ],
+            "mean_grey": {
+              "isaac": 217.09,
+              "mujoco": 125.51
+            },
+            "mean_grey_diff": -91.58,
+            "mean_rgb": {
+              "isaac": [
+                231.35,
+                219.26,
+                200.65
+              ],
+              "mujoco": [
+                153.1,
+                125.95,
+                97.49
+              ]
+            },
+            "pixel_mae": 91.574
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "be3ec19bbc5c7d7d8ac76e1c131888f3",
+          "raw": "af1f61b7d2d3c2f58e1f324061b97f8d"
+        },
+        "look_record": {
+          "ambient": 0.17625,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.2150460251223036,
+              2.294180580013796,
+              2.363277740002733
+            ],
+            [
+              0.03494048212641573,
+              1.9150577580178767,
+              1.6610340769833314
+            ],
+            [
+              0.024361699421458268,
+              1.8521258945543062,
+              1.824936931877214
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.175,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/cluttered3",
+          "look_curve_md5": "48aa0abb9559f2bdd5d98e5b07014c1c",
+          "shadowclip_m": 1.672015094232153,
+          "shadowsize": 8192,
+          "sun_intensity": 1.153257163
+        },
+        "near": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 218.84,
+              "mujoco": 218.43
+            },
+            "raw": {
+              "isaac": 218.84,
+              "mujoco": 126.93
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.296,
+            "hist_emd_rgb": [
+              1.09,
+              2.482,
+              3.317
+            ],
+            "mean_grey": {
+              "isaac": 216.8,
+              "mujoco": 216.17
+            },
+            "mean_grey_diff": -0.63,
+            "mean_rgb": {
+              "isaac": [
+                231.18,
+                218.99,
+                200.22
+              ],
+              "mujoco": [
+                230.89,
+                218.43,
+                199.19
+              ]
+            },
+            "pixel_mae": 4.091
+          },
+          "isaac_md5": "89e5922af71ba8162309458d9cd2116e",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/cluttered3_sift_ransac_near_first.png",
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 164.59,
+              "mujoco": 158.7
+            },
+            "raw": {
+              "isaac": 164.59,
+              "mujoco": 83.53
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 91.502,
+            "hist_emd_rgb": [
+              78.313,
+              93.276,
+              102.917
+            ],
+            "mean_grey": {
+              "isaac": 216.8,
+              "mujoco": 125.29
+            },
+            "mean_grey_diff": -91.51,
+            "mean_rgb": {
+              "isaac": [
+                231.18,
+                218.99,
+                200.22
+              ],
+              "mujoco": [
+                152.87,
+                125.72,
+                97.3
+              ]
+            },
+            "pixel_mae": 91.503
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      },
+      "hollywood": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0322,
+            "frame_s": [
+              0.2646,
+              0.3935,
+              0.2789,
+              0.3829
+            ],
+            "frame_s_median": 0.3309,
+            "init_s": 1.033,
+            "rss_peak_mb": 917.3
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.2006,
+              0.1856,
+              0.1866,
+              0.2708
+            ],
+            "frame_s_median": 0.1936,
+            "init_s": 0.923,
+            "rss_peak_mb": 711.1
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 5.657,
+            "hist_emd_rgb": [
+              5.66,
+              5.668,
+              5.643
+            ],
+            "mean_grey": {
+              "isaac": 183.81,
+              "mujoco": 181.85
+            },
+            "mean_grey_diff": -1.96,
+            "mean_rgb": {
+              "isaac": [
+                183.82,
+                183.8,
+                183.81
+              ],
+              "mujoco": [
+                181.84,
+                181.84,
+                181.87
+              ]
+            },
+            "pixel_mae": 9.489
+          },
+          "isaac_md5": "c190c4569ea539d2f05fb12e626e9f00",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_goal.png",
+          "isaac_repeat_floor": [
+            {
+              "hist_emd_mean": 0.014,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check2/hollywood_goal.png",
+              "mean_grey_diff": 0.0,
+              "pixel_mae": 0.275
+            },
+            {
+              "hist_emd_mean": 0.016,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check3/hollywood_goal.png",
+              "mean_grey_diff": 0.0,
+              "pixel_mae": 0.276
+            }
+          ],
+          "raw": {
+            "hist_emd_mean": 92.821,
+            "hist_emd_rgb": [
+              92.832,
+              92.811,
+              92.821
+            ],
+            "mean_grey": {
+              "isaac": 183.81,
+              "mujoco": 90.99
+            },
+            "mean_grey_diff": -92.82,
+            "mean_rgb": {
+              "isaac": [
+                183.82,
+                183.8,
+                183.81
+              ],
+              "mujoco": [
+                90.99,
+                90.99,
+                90.99
+              ]
+            },
+            "pixel_mae": 92.822
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "6f892b0b3bc0c06fd52b4dd31ec03402",
+          "raw": "04938e905ddffd06dd816a45b24804c7"
+        },
+        "look_record": {
+          "ambient": 0.15975,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.1785634672639508,
+              2.4818343777436063,
+              2.349577891258335
+            ],
+            [
+              0.17802251040519487,
+              2.4797043928982667,
+              2.3461995642832463
+            ],
+            [
+              0.17821667830962995,
+              2.4821518592614664,
+              2.346838748652408
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.065,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/hollywood",
+          "look_curve_md5": "55fc9f90f44486674e21835b05e1fdb5",
+          "shadowclip_m": 2.786691823720255,
+          "shadowsize": 8192,
+          "sun_intensity": 1.045292662
+        },
+        "near": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 5.599,
+            "hist_emd_rgb": [
+              5.601,
+              5.611,
+              5.585
+            ],
+            "mean_grey": {
+              "isaac": 180.93,
+              "mujoco": 180.15
+            },
+            "mean_grey_diff": -0.78,
+            "mean_rgb": {
+              "isaac": [
+                180.95,
+                180.92,
+                180.93
+              ],
+              "mujoco": [
+                180.14,
+                180.14,
+                180.17
+              ]
+            },
+            "pixel_mae": 9.642
+          },
+          "isaac_md5": "f838d3ac15c4b8f7084b34d8177e7408",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/hollywood_sift_ransac_near_first.png",
+          "isaac_repeat_floor": [
+            {
+              "hist_emd_mean": 0.024,
+              "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check3/hollywood_sift_ransac_near_first.png",
+              "mean_grey_diff": 0.0,
+              "pixel_mae": 0.42
+            }
+          ],
+          "raw": {
+            "hist_emd_mean": 91.93,
+            "hist_emd_rgb": [
+              91.942,
+              91.92,
+              91.927
+            ],
+            "mean_grey": {
+              "isaac": 180.93,
+              "mujoco": 89.01
+            },
+            "mean_grey_diff": -91.92,
+            "mean_rgb": {
+              "isaac": [
+                180.95,
+                180.92,
+                180.93
+              ],
+              "mujoco": [
+                89.01,
+                89.01,
+                89.01
+              ]
+            },
+            "pixel_mae": 91.93
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      },
+      "industrial1_drill": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0162,
+            "frame_s": [
+              0.4159,
+              0.2732,
+              0.3881,
+              0.2618
+            ],
+            "frame_s_median": 0.3307,
+            "init_s": 1.615,
+            "rss_peak_mb": 1011.8
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.2514,
+              0.1767,
+              0.5839,
+              0.1747
+            ],
+            "frame_s_median": 0.2141,
+            "init_s": 0.992,
+            "rss_peak_mb": 815.0
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 191.38,
+              "mujoco": 190.36
+            },
+            "raw": {
+              "isaac": 191.38,
+              "mujoco": 86.77
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.708,
+            "hist_emd_rgb": [
+              2.47,
+              2.604,
+              3.051
+            ],
+            "mean_grey": {
+              "isaac": 185.44,
+              "mujoco": 184.59
+            },
+            "mean_grey_diff": -0.85,
+            "mean_rgb": {
+              "isaac": [
+                193.48,
+                183.92,
+                178.9
+              ],
+              "mujoco": [
+                191.81,
+                183.12,
+                178.86
+              ]
+            },
+            "pixel_mae": 7.956
+          },
+          "isaac_md5": "cbff2ee755a49c489851a1391b93c419",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_goal.png",
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 137.2,
+              "mujoco": 137.8
+            },
+            "raw": {
+              "isaac": 137.2,
+              "mujoco": 53.82
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 102.284,
+            "hist_emd_rgb": [
+              101.359,
+              102.601,
+              102.892
+            ],
+            "mean_grey": {
+              "isaac": 185.44,
+              "mujoco": 83.15
+            },
+            "mean_grey_diff": -102.29,
+            "mean_rgb": {
+              "isaac": [
+                193.48,
+                183.92,
+                178.9
+              ],
+              "mujoco": [
+                92.12,
+                81.32,
+                76.01
+              ]
+            },
+            "pixel_mae": 102.309
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "df7b04e95d8d9b8daf9ace35e7c762d3",
+          "raw": "c350e2218d9920b9b3faf94cd5df5fde"
+        },
+        "look_record": {
+          "ambient": 0.17625,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.021903500263680035,
+              2.0239057327140366,
+              2.0804042005677186
+            ],
+            [
+              2.5815596856190595e-22,
+              1.726801921214454,
+              1.7102429650146125
+            ],
+            [
+              8.284618248489928e-18,
+              1.544840063396872,
+              1.5289301327514835
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.175,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/industrial1_drill",
+          "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+          "shadowclip_m": 1.672015094232153,
+          "shadowsize": 8192,
+          "sun_intensity": 1.153257163
+        },
+        "near": {
+          "ground": {
+            "isaac_fit_v1": {
+              "isaac": 191.45,
+              "mujoco": 190.96
+            },
+            "raw": {
+              "isaac": 191.45,
+              "mujoco": 87.33
+            }
+          },
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.541,
+            "hist_emd_rgb": [
+              2.386,
+              2.355,
+              2.881
+            ],
+            "mean_grey": {
+              "isaac": 185.34,
+              "mujoco": 184.96
+            },
+            "mean_grey_diff": -0.38,
+            "mean_rgb": {
+              "isaac": [
+                193.13,
+                183.86,
+                179.02
+              ],
+              "mujoco": [
+                191.73,
+                183.55,
+                179.6
+              ]
+            },
+            "pixel_mae": 7.718
+          },
+          "isaac_md5": "bbc55063253a38c3c494f4f2e3201ad9",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/industrial1_drill_sift_ransac_near_first.png",
+          "objects": {
+            "isaac_fit_v1": {
+              "isaac": 137.31,
+              "mujoco": 137.81
+            },
+            "raw": {
+              "isaac": 137.31,
+              "mujoco": 53.82
+            }
+          },
+          "raw": {
+            "hist_emd_mean": 101.791,
+            "hist_emd_rgb": [
+              101.019,
+              102.06,
+              102.293
+            ],
+            "mean_grey": {
+              "isaac": 185.34,
+              "mujoco": 83.55
+            },
+            "mean_grey_diff": -101.79,
+            "mean_rgb": {
+              "isaac": [
+                193.13,
+                183.86,
+                179.02
+              ],
+              "mujoco": [
+                92.11,
+                81.8,
+                76.72
+              ]
+            },
+            "pixel_mae": 101.815
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      },
+      "poster2": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0202,
+            "frame_s": [
+              0.3478,
+              0.3135,
+              0.3219,
+              0.4297
+            ],
+            "frame_s_median": 0.3348,
+            "init_s": 1.08,
+            "rss_peak_mb": 890.0
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.2906,
+              0.2519,
+              0.1664,
+              0.4392
+            ],
+            "frame_s_median": 0.2712,
+            "init_s": 0.652,
+            "rss_peak_mb": 683.7
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 4.597,
+            "hist_emd_rgb": [
+              3.607,
+              5.477,
+              4.706
+            ],
+            "mean_grey": {
+              "isaac": 190.93,
+              "mujoco": 190.15
+            },
+            "mean_grey_diff": -0.78,
+            "mean_rgb": {
+              "isaac": [
+                191.53,
+                187.58,
+                193.69
+              ],
+              "mujoco": [
+                190.45,
+                186.85,
+                193.14
+              ]
+            },
+            "pixel_mae": 7.167
+          },
+          "isaac_md5": "9fda9fc02b45f5a4308d93f838515010",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_goal.png",
+          "raw": {
+            "hist_emd_mean": 93.88,
+            "hist_emd_rgb": [
+              94.231,
+              94.652,
+              92.756
+            ],
+            "mean_grey": {
+              "isaac": 190.93,
+              "mujoco": 97.26
+            },
+            "mean_grey_diff": -93.67,
+            "mean_rgb": {
+              "isaac": [
+                191.53,
+                187.58,
+                193.69
+              ],
+              "mujoco": [
+                97.43,
+                93.12,
+                101.23
+              ]
+            },
+            "pixel_mae": 93.88
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "314abe29371a38072356f4be616279ae",
+          "raw": "3e8a8fc6c6706159b055f5b99cd40661"
+        },
+        "look_record": {
+          "ambient": 0.15,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.3097591468158105,
+              3.3635109429641386,
+              3.3111939280817664
+            ],
+            [
+              0.43161974078407345,
+              3.61175151403142,
+              3.8689835166127744
+            ],
+            [
+              0.47366863590314495,
+              3.4758480668257015,
+              3.780234059525954
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.0,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/poster2",
+          "look_curve_md5": "acf274fc6bdb1af851b6ea7417d624ad",
+          "shadowclip_m": 2.786691823720255,
+          "shadowsize": 8192,
+          "sun_intensity": 0.981495458
+        },
+        "near": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 4.784,
+            "hist_emd_rgb": [
+              3.717,
+              5.635,
+              4.999
+            ],
+            "mean_grey": {
+              "isaac": 191.33,
+              "mujoco": 189.78
+            },
+            "mean_grey_diff": -1.55,
+            "mean_rgb": {
+              "isaac": [
+                191.07,
+                188.24,
+                194.69
+              ],
+              "mujoco": [
+                189.47,
+                186.61,
+                193.26
+              ]
+            },
+            "pixel_mae": 7.016
+          },
+          "isaac_md5": "24c8549e0dbfe7f55c88c6bca5196b7a",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/poster2_sift_ransac_near_first.png",
+          "raw": {
+            "hist_emd_mean": 94.872,
+            "hist_emd_rgb": [
+              95.189,
+              95.604,
+              93.824
+            ],
+            "mean_grey": {
+              "isaac": 191.33,
+              "mujoco": 96.62
+            },
+            "mean_grey_diff": -94.71,
+            "mean_rgb": {
+              "isaac": [
+                191.07,
+                188.24,
+                194.69
+              ],
+              "mujoco": [
+                95.98,
+                92.78,
+                101.11
+              ]
+            },
+            "pixel_mae": 94.873
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      },
+      "poster3": {
+        "cost": {
+          "isaac_fit_v1": {
+            "curve_s_median": 0.0184,
+            "frame_s": [
+              0.3828,
+              0.464,
+              0.536,
+              0.5734
+            ],
+            "frame_s_median": 0.5,
+            "init_s": 1.527,
+            "rss_peak_mb": 1054.5
+          },
+          "raw": {
+            "curve_s_median": 0.0,
+            "frame_s": [
+              0.2622,
+              0.2871,
+              0.2165,
+              0.1424
+            ],
+            "frame_s_median": 0.2393,
+            "init_s": 1.352,
+            "rss_peak_mb": 855.0
+          }
+        },
+        "depth_identical_raw_vs_look": {
+          "goal": true,
+          "near": true
+        },
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.656,
+            "hist_emd_rgb": [
+              1.472,
+              2.071,
+              4.426
+            ],
+            "mean_grey": {
+              "isaac": 182.27,
+              "mujoco": 180.68
+            },
+            "mean_grey_diff": -1.59,
+            "mean_rgb": {
+              "isaac": [
+                200.7,
+                187.94,
+                158.18
+              ],
+              "mujoco": [
+                199.58,
+                186.49,
+                155.99
+              ]
+            },
+            "pixel_mae": 7.447
+          },
+          "isaac_md5": "1e6ad90b95f31c752b74361f4e928c6b",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_goal.png",
+          "raw": {
+            "hist_emd_mean": 98.137,
+            "hist_emd_rgb": [
+              95.029,
+              99.085,
+              100.297
+            ],
+            "mean_grey": {
+              "isaac": 182.27,
+              "mujoco": 84.14
+            },
+            "mean_grey_diff": -98.13,
+            "mean_rgb": {
+              "isaac": [
+                200.7,
+                187.94,
+                158.18
+              ],
+              "mujoco": [
+                105.67,
+                88.85,
+                57.89
+              ]
+            },
+            "pixel_mae": 98.137
+          },
+          "role": "fitted (the curve was fitted on this picture)"
+        },
+        "goal_frame_md5": {
+          "isaac_fit_v1": "2760218cbed158a9fb8f0abd14bb2524",
+          "raw": "6a9cc71c69b97307a64855a705cfa109"
+        },
+        "look_record": {
+          "ambient": 0.17625,
+          "ambient_share": 0.15,
+          "curve_params_rgb": [
+            [
+              0.16654601337019792,
+              2.369666689576966,
+              2.5946020976230817
+            ],
+            [
+              0.16691859251521587,
+              2.3859041523216407,
+              2.6008308740106543
+            ],
+            [
+              0.145843430550327,
+              2.4399488927983857,
+              2.498312046618238
+            ]
+          ],
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "light_gain": 1.175,
+          "look": "isaac_fit_v1",
+          "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+          "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+          "look_curve_id": "isaac_fit_v1/poster3",
+          "look_curve_md5": "8a7e5a6a4e1094b9c1f4bf54737498af",
+          "shadowclip_m": 2.786691823720255,
+          "shadowsize": 8192,
+          "sun_intensity": 1.153257163
+        },
+        "near": {
+          "isaac_fit_v1": {
+            "hist_emd_mean": 2.531,
+            "hist_emd_rgb": [
+              1.765,
+              2.086,
+              3.741
+            ],
+            "mean_grey": {
+              "isaac": 181.07,
+              "mujoco": 179.64
+            },
+            "mean_grey_diff": -1.43,
+            "mean_rgb": {
+              "isaac": [
+                200.09,
+                187.28,
+                155.85
+              ],
+              "mujoco": [
+                198.75,
+                185.85,
+                154.32
+              ]
+            },
+            "pixel_mae": 7.738
+          },
+          "isaac_md5": "86c54e90f013ed0ef82b59fc559266fe",
+          "isaac_png": "/home/alessandro/genvs_ws/vssim_out/check1/poster3_sift_ransac_near_first.png",
+          "raw": {
+            "hist_emd_mean": 98.406,
+            "hist_emd_rgb": [
+              95.684,
+              99.605,
+              99.93
+            ],
+            "mean_grey": {
+              "isaac": 181.07,
+              "mujoco": 82.67
+            },
+            "mean_grey_diff": -98.4,
+            "mean_rgb": {
+              "isaac": [
+                200.09,
+                187.28,
+                155.85
+              ],
+              "mujoco": [
+                104.4,
+                87.68,
+                55.92
+              ]
+            },
+            "pixel_mae": 98.406
+          },
+          "role": "held out (never seen by the fit): check_baselines' first live frame at the near start n_000"
+        },
+        "near_start": "n_000",
+        "render_mode": "mujoco-llvmpipe"
+      }
+    },
+    "shadow_crop": "results/bridge/u4b_drill_shadow_crop.png (industrial1_drill goal, full resolution, rows 300-620, columns 940-1360: raw | look | Isaac)",
+    "sheet": "results/bridge/u4b_look_vs_isaac.jpg",
+    "vsbench_commit": "7076ead002fdfcb47a029e4dac93b28b6fc41581"
+  },
+  "shadows": {
+    "how": "goal pictures; shadow = the sun's term below 0.3 of the texture (the components of tools/u4b_look.py components), eroded 4 px; lit ring = flat lit ground 8-24 px around it; mean grey of the three channels",
+    "rooms": {
+      "cluttered2": {
+        "isaac": {
+          "in_shadow": 43.9,
+          "lit_ring": 156.0,
+          "ratio": 0.281
+        },
+        "isaac_fit_v1": {
+          "in_shadow": 66.1,
+          "lit_ring": 137.4,
+          "ratio": 0.481
+        },
+        "raw": {
+          "in_shadow": 11.1,
+          "lit_ring": 51.2,
+          "ratio": 0.217
+        },
+        "shadow_share": 0.0228
+      },
+      "cluttered3": {
+        "isaac": {
+          "in_shadow": 97.7,
+          "lit_ring": 215.8,
+          "ratio": 0.453
+        },
+        "isaac_fit_v1": {
+          "in_shadow": 98.6,
+          "lit_ring": 209.7,
+          "ratio": 0.47
+        },
+        "raw": {
+          "in_shadow": 24.2,
+          "lit_ring": 123.4,
+          "ratio": 0.196
+        },
+        "shadow_share": 0.0205
+      },
+      "industrial1_drill": {
+        "isaac": {
+          "in_shadow": 54.3,
+          "lit_ring": 184.7,
+          "ratio": 0.294
+        },
+        "isaac_fit_v1": {
+          "in_shadow": 61.4,
+          "lit_ring": 185.9,
+          "ratio": 0.33
+        },
+        "raw": {
+          "in_shadow": 17.4,
+          "lit_ring": 85.8,
+          "ratio": 0.203
+        },
+        "shadow_share": 0.0282
+      }
+    }
+  },
+  "smoke_isaac_fit_v1": {
+    "cluttered2_sift_ransac": {
+      "final_rotation_deg": 0.09948137419548436,
+      "final_translation_mm": 1.201690768335798,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+      "goal_mask_share": null,
+      "look": "isaac_fit_v1",
+      "look_curve_id": "isaac_fit_v1/cluttered2",
+      "look_curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 23.95,
+      "outcome": "converged",
+      "records": "results/bridge/u4b/isaac_fit_v1/cluttered2_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.7563173146103508,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.75936872787686,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": true
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 175.7
+    },
+    "cluttered3_sift_ransac": {
+      "final_rotation_deg": 0.0913338572324335,
+      "final_translation_mm": 0.5118390941328176,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "be3ec19bbc5c7d7d8ac76e1c131888f3",
+      "goal_mask_share": null,
+      "look": "isaac_fit_v1",
+      "look_curve_id": "isaac_fit_v1/cluttered3",
+      "look_curve_md5": "48aa0abb9559f2bdd5d98e5b07014c1c",
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 23.99,
+      "outcome": "converged",
+      "records": "results/bridge/u4b/isaac_fit_v1/cluttered3_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.6814712735509965,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.759368727876856,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": true
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 168.4
+    },
+    "industrial1_drill_sift_ransac": {
+      "final_rotation_deg": 0.13573688203714937,
+      "final_translation_mm": 0.5622280870603252,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "df7b04e95d8d9b8daf9ace35e7c762d3",
+      "goal_mask_share": null,
+      "look": "isaac_fit_v1",
+      "look_curve_id": "isaac_fit_v1/industrial1_drill",
+      "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 23.97,
+      "outcome": "converged",
+      "records": "results/bridge/u4b/isaac_fit_v1/industrial1_drill_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.5509579268994276,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.759368727876952,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": true
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 155.2
+    }
+  },
+  "smoke_raw": {
+    "cluttered2_sift_ransac": {
+      "final_rotation_deg": 0.09879583116991908,
+      "final_translation_mm": 0.31258512020029416,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "471fe7bd52701a49d61e27a7d3d9669c",
+      "goal_mask_share": null,
+      "look": "raw",
+      "look_curve_id": null,
+      "look_curve_md5": null,
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 24.0,
+      "outcome": "converged",
+      "records": "results/bridge/u4b/raw/cluttered2_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.6075279830908402,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.75936872787686,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": true
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 160.9
+    },
+    "cluttered3_sift_ransac": {
+      "final_rotation_deg": 0.10387442905382865,
+      "final_translation_mm": 0.5707407412876078,
+      "first_frame_n_matches": 24,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "af1f61b7d2d3c2f58e1f324061b97f8d",
+      "goal_mask_share": null,
+      "look": "raw",
+      "look_curve_id": null,
+      "look_curve_md5": null,
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 24.0,
+      "outcome": "converged",
+      "records": "results/bridge/u4b/raw/cluttered3_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.568537103550043,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.759368727876856,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": true
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 157.0
+    },
+    "industrial1_drill_sift_ransac": {
+      "final_rotation_deg": 1.9613970607233706,
+      "final_translation_mm": 16.391561287105667,
+      "first_frame_n_matches": 23,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "goal_frame_md5": "c350e2218d9920b9b3faf94cd5df5fde",
+      "goal_mask_share": null,
+      "look": "raw",
+      "look_curve_id": null,
+      "look_curve_md5": null,
+      "max_iter": 100,
+      "max_iter_flown": 100,
+      "mean_n_matches": 23.43,
+      "outcome": "converged_wrong_pose",
+      "records": "results/bridge/u4b/raw/industrial1_drill_sift_ransac.jsonl",
+      "render_mode": "mujoco-llvmpipe",
+      "sec_per_step": 1.4796163630799857,
+      "start_id": "n_000",
+      "start_rotation_deg": 2.6881788804203115,
+      "start_translation_mm": 7.759368727876952,
+      "steps": 100,
+      "stop_rotation_deg": null,
+      "stop_step": null,
+      "stop_translation_mm": null,
+      "success": {
+        "abs_100mm_10deg": true,
+        "abs_10mm_1deg": false,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "cns_code_0p1d_10deg": true,
+        "paper_3cm_3deg": true,
+        "predicate_a": false
+      },
+      "terminated_reason": "max_iter",
+      "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34",
+      "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+      "wall_s": 148.1
+    }
+  },
+  "smoke_table": {
+    "isaac_check": "/home/alessandro/genvs_ws/vssim_out/check1/check.json",
+    "note": "The U4 smoke (``tools/u4_rooms.py smoke``: sift_ransac, 100 steps, n_000) in both looks beside Isaac's own flight of the same arm from the same start (check1, 200 steps): context only - different renderers, never pooled (PORT_PLAN D-9).",
+    "rows": {
+      "cluttered2_sift_ransac": {
+        "isaac_check1": {
+          "final_deg": 0.025821020573779215,
+          "final_mm": 0.6617550628137486,
+          "mean_n_matches": 23.99,
+          "predicate_a": true,
+          "render_mode": "rtx (Isaac, 2026-09-17)",
+          "start_id": "n_000",
+          "start_mm": 7.75936872787686,
+          "steps": 200,
+          "stop_step": null
+        },
+        "isaac_fit_v1": {
+          "final_rotation_deg": 0.09948137419548436,
+          "final_translation_mm": 1.201690768335798,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "isaac_fit_v1",
+          "look_curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
+          "mean_n_matches": 23.95,
+          "predicate_a": true,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.7563173146103508,
+          "start_id": "n_000",
+          "start_translation_mm": 7.75936872787686,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e"
+        },
+        "raw": {
+          "final_rotation_deg": 0.09879583116991908,
+          "final_translation_mm": 0.31258512020029416,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "raw",
+          "look_curve_md5": null,
+          "mean_n_matches": 24.0,
+          "predicate_a": true,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.6075279830908402,
+          "start_id": "n_000",
+          "start_translation_mm": 7.75936872787686,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34"
+        }
+      },
+      "cluttered3_sift_ransac": {
+        "isaac_check1": {
+          "final_deg": 0.08158810149737032,
+          "final_mm": 2.1856061488736294,
+          "mean_n_matches": 24.0,
+          "predicate_a": true,
+          "render_mode": "rtx (Isaac, 2026-09-17)",
+          "start_id": "n_000",
+          "start_mm": 7.759368727876856,
+          "steps": 200,
+          "stop_step": null
+        },
+        "isaac_fit_v1": {
+          "final_rotation_deg": 0.0913338572324335,
+          "final_translation_mm": 0.5118390941328176,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "isaac_fit_v1",
+          "look_curve_md5": "48aa0abb9559f2bdd5d98e5b07014c1c",
+          "mean_n_matches": 23.99,
+          "predicate_a": true,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.6814712735509965,
+          "start_id": "n_000",
+          "start_translation_mm": 7.759368727876856,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e"
+        },
+        "raw": {
+          "final_rotation_deg": 0.10387442905382865,
+          "final_translation_mm": 0.5707407412876078,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "raw",
+          "look_curve_md5": null,
+          "mean_n_matches": 24.0,
+          "predicate_a": true,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.568537103550043,
+          "start_id": "n_000",
+          "start_translation_mm": 7.759368727876856,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34"
+        }
+      },
+      "industrial1_drill_sift_ransac": {
+        "isaac_check1": {
+          "final_deg": 0.01943259056923235,
+          "final_mm": 0.1745843295572268,
+          "mean_n_matches": 24.0,
+          "predicate_a": true,
+          "render_mode": "rtx (Isaac, 2026-09-17)",
+          "start_id": "n_000",
+          "start_mm": 7.759368727876952,
+          "steps": 200,
+          "stop_step": null
+        },
+        "isaac_fit_v1": {
+          "final_rotation_deg": 0.13573688203714937,
+          "final_translation_mm": 0.5622280870603252,
+          "first_frame_n_matches": 24,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "isaac_fit_v1",
+          "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+          "mean_n_matches": 23.97,
+          "predicate_a": true,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.5509579268994276,
+          "start_id": "n_000",
+          "start_translation_mm": 7.759368727876952,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e"
+        },
+        "raw": {
+          "final_rotation_deg": 1.9613970607233706,
+          "final_translation_mm": 16.391561287105667,
+          "first_frame_n_matches": 23,
+          "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+          "look": "raw",
+          "look_curve_md5": null,
+          "mean_n_matches": 23.43,
+          "predicate_a": false,
+          "render_mode": "mujoco-llvmpipe",
+          "sec_per_step": 1.4796163630799857,
+          "start_id": "n_000",
+          "start_translation_mm": 7.759368727876952,
+          "steps": 100,
+          "stop_step": null,
+          "vsbench_commit": "818027de86e1374e3e13c19143512aa48197ce34"
+        }
+      }
+    }
+  },
+  "unit": "U4b - match Isaac's look (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 17:59:36 +0200"
+}

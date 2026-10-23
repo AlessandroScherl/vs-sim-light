@@ -6,8 +6,8 @@ time and the per-call time of each run, checks that every run gives the same tab
 writes ``results/episodes_parallel_<variant>_<label>.json``. ``tools/step3_report.py``
 shows these records when present.
 
-    python tools/bench_episodes.py --backend mujoco-egl --method sift_ibvs           # GPU if there is one
-    VSBENCH_SOFTWARE_GL=1 python tools/bench_episodes.py --backend mujoco-egl --label cpu
+    python tools/bench_episodes.py --backend mujoco-egl --method sift_ibvs           # software GL (the default)
+    VSBENCH_ALLOW_GPU=1 python tools/bench_episodes.py --backend mujoco-egl --label gpu   # only when the GPU is free
 """
 
 from __future__ import annotations
@@ -30,6 +30,9 @@ COMPARE = ("start", "status", "steps", "final_error_mm", "final_error_deg")
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", default="mujoco-egl")
     ap.add_argument("--method", default="sift_ibvs")

@@ -1,0 +1,91 @@
+{
+  "unit": "U0 - environment and pins (docs/PORT_PLAN.md section 7)",
+  "date": "2026-10-22",
+  "host": "4090 station, shared; live T1 Stage 2 eval in the isaac container; load ~25 on 16 threads",
+  "owner_decision_applied": "2026-10-22: D-1 copy the vs-sim code into this repo (it stands alone), D-2 it stays separate for good; external/vs-sim is the pinned SOURCE for the copy and a drift check, not a runtime dependency; vssim is NOT pip-installed in the venv",
+  "vssim_pin": {
+    "source": "~/runpod_dev/vs-sim (read only; local git clone)",
+    "clone": "external/vs-sim (git-ignored)",
+    "commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+    "pin_file": "external/VSSIM_COMMIT",
+    "installed_in_venv": false
+  },
+  "venv": {
+    "python": "3.12.3",
+    "torch": "2.14.1+cpu (CPU index https://download.pytorch.org/whl/cpu; torch.version.cuda None)",
+    "torchvision": "0.29.1+cpu",
+    "transformers": "5.20.2",
+    "huggingface_hub": "2.2.0",
+    "tokenizers": "0.23.3",
+    "safetensors": "0.8.0",
+    "scikit-learn": "1.9.1",
+    "usd-core": "26.11 (cp312 wheel; pxr imports)",
+    "PyYAML": "6.0.3",
+    "pytest": "9.1.1",
+    "unchanged": {
+      "numpy": "2.5.3",
+      "opencv-python-headless": "5.0.0.93",
+      "mujoco": "3.13.0",
+      "pillow": "12.3.0",
+      "scipy": "1.18.1"
+    },
+    "pip_check": "No broken requirements found"
+  },
+  "weights": {
+    "root": "~/genvs_ws/vsbench_assets/weights (copied with cp; sources only read)",
+    "HF_HOME": "weights/hf: hub/models--facebook--dinov3-vits16-pretrain-lvd1689m (snapshot 114c1379950215c8b35dfcd4e90a5c251dde0d32; model.safetensors md5 f347b30536015ef08a920aaf476c283a, equal to the source)",
+    "TORCH_HOME": "weights/torch: hub/checkpoints/dinov2_vits14_pretrain.pth (md5 2e405cee1bad14912278296d4f42e993, equal to the source), hub/facebookresearch_dinov2_main/, hub/trusted_list",
+    "load_on_cpu": {
+      "dinov3_vits16": "FrozenBackbone, 21596544 params, device cpu, input (1,3,512,512), load + 1 forward 3.2 s",
+      "dinov2_vits14": "PublishedDinoV2Backbone (torch.hub from the copied cache, no download), 22056576 params, device cpu, input (1,3,518,518), load + 1 forward 2.0 s"
+    }
+  },
+  "gpu": "torch.cuda.is_available() == False; nvidia-smi compute apps before/after: no new PID from this unit (the PIDs seen belong to the isaac eval and another user)",
+  "gates": {
+    "import": "python -c 'import vssim, torch, transformers, mujoco' -> cuda available False (vssim importable from the clone directory / PYTHONPATH)",
+    "vssim_fast_tier": {
+      "command": "PYTHONPATH=external/vs-sim env -u VSSIM_ASSET_ROOT -u VSSIM_YCB_ROOT nice -n 19 .venv/bin/python -m pytest external/vs-sim/tests/fast -q (repo root, tools/cpu_env.sh sourced, 2 threads)",
+      "result": "774 passed, 6 failed, 22 skipped (802) in 178-179 s; the same split from inside the clone directory (228 s) and with vssim pip-installed -e (181 s, before it was removed)",
+      "failed": [
+        "test_arms.py::test_the_classical_arm_needs_the_scene_for_its_ransac_model",
+        "test_classical.py::test_the_pixel_lattice_round_trip_is_exact[akaze]",
+        "test_classical.py::test_ransac_none_is_the_pre_ransac_match_set[akaze]",
+        "test_classical.py::test_the_registry_builds_every_classical_variant[akaze]",
+        "test_match.py::test_the_u3_variants_build_their_own_class[classical_akaze-ClassicalMatcher]",
+        "test_protocol.py::test_every_arm_of_the_protocol_builds_and_derives_a_distinct_label"
+      ],
+      "failed_reason": "all six: vssim/baselines/classical.py:348 RuntimeError 'cv2.AKAZE_create is unavailable in OpenCV 5.0.0' - OpenCV 5 dropped AKAZE from the default build (vs-sim's own message). Version drift, not patched.",
+      "skipped": {
+        "9 test_classical.py:105": "cv2 5.0.0: the classical fixture is pinned to OpenCV 4.10 / 4.11",
+        "11 legacy parity tests (test_control 1, test_features_dinov2 3, test_isaac_scene 1, test_prealign 4, test_scenes 1, test_objroi_sim 1)": "they look for ../genvs-sim and ../ART-VS beside the clone",
+        "1 test_dinobot.py:314": "DINO v1 ViT-S/8 not copied (DINOBot is not in U0's scope)",
+        "1 test_lightglue.py:87": "lightglue package not installed (later arm)"
+      },
+      "per_test_record": "results/bridge/u0_clone_fast_tier.txt (the split U-copy must match, skip-for-skip)",
+      "env_var_finding": "with VSSIM_ASSET_ROOT / VSSIM_YCB_ROOT set (tools/cpu_env.sh sets them for U3), 3 more failures in test_assets.py (test_the_ycb_root_is_an_environment_setting, test_the_three_resolution_branches, test_relative_paths_resolve_against_the_asset_root_not_this_repo): they assert the built-in defaults and do not clear the variables; run the tier with both unset",
+      "note_on_classical_parity": "the 9 fixture skips include SIFT and ORB (test_parity_with_the_old_classical_matcher[none|homography|fundamental-sift|orb|akaze]): under OpenCV 5.0 the classical arms' parity is not proven in this venv, only under 4.11 (probe)"
+    },
+    "probe_legacy_parity": "one-off: external/genvs-sim -> ~/runpod_dev/genvs-sim and external/ART-VS -> ~/runpod_dev/ART-VS as symlinks, PYTHONDONTWRITEBYTECODE=1: the six files with the 11 skipped parity tests -> 200 passed, 0 skipped, 56 s; nothing written in either tree (find -newer); symlinks removed afterwards",
+    "probe_opencv_4_11": "one-off: opencv-python-headless 4.11.0.86 in /tmp on PYTHONPATH (the flight interpreter's version), test_classical + test_arms + test_match + test_protocol -> 112 passed, 0 failed, 0 skipped, 30 s; the six AKAZE failures and the nine fixture skips are all the OpenCV 5.0 drift; removed afterwards",
+    "vsbench_own_tests": {
+      "command": "nice -n 19 .venv/bin/python -m pytest --backends mujoco-egl (README's documented gate command)",
+      "result": "98 passed in 718 s",
+      "all_variant_run": "default variants (mujoco-egl, pybullet-tiny, open3d-cpu; osmesa/glfw skip) hit the 2400 s timeout at 24 % with 2 failures, both outside MuJoCo: test_determinism::test_fresh_processes[open3d-cpu] (the bake-off's known Open3D CPU artefact) and test_episode_log::test_round_trip[pybullet-tiny] (asserts SIFT gives > 500 matches per step; TinyRenderer gives 261-310). Neither touches anything U0 installed."
+    }
+  },
+  "disk_added": {
+    "venv": "+1.34 GB (2.02 -> 3.36 GB; torch 769 MB, pxr 157 MB, transformers 118 MB, sklearn 49 MB)",
+    "external/vs-sim": "30 MB",
+    "weights": "255 MB",
+    "pip_cache": "+293 MB under ~/.cache/pip (downloaded wheels)",
+    "total": "about 1.9 GB"
+  },
+  "opencv_pin": {
+    "date": "2026-10-22",
+    "decision": "parent decision during U-copy: pin opencv-python-headless==4.11.0.86 (the Isaac flight interpreter's version) so AKAZE exists and the classical parity fixtures run; numpy 2.5.3 and mujoco 3.13.0 kept",
+    "how": "pip install --only-binary=:all: --no-deps opencv-python-headless==4.11.0.86 (replaced 5.0.0.93); pins in tools/constraints.txt and pyproject.toml; pip check: no broken requirements; cv2 4.11.0 has AKAZE_create and SIFT_create",
+    "clone_fast_tier": "789 passed, 13 skipped, 0 failed (802) in 201 s - the 6 AKAZE failures and the 9 OpenCV-pinned fixture skips of the first record all pass; same 802 test ids; results/bridge/u0_clone_fast_tier.txt rewritten to this split",
+    "vsbench_own_tests": "pytest tests --backends mujoco-egl --ignore=tests/vs: 98 passed in 775 s (unchanged from 98 under OpenCV 5.0)",
+    "supersedes": "venv.unchanged.opencv-python-headless (5.0.0.93) and gates.vssim_fast_tier.result/failed/skipped above, which record the first, OpenCV-5.0 run"
+  }
+}

@@ -1,0 +1,201 @@
+{
+ "unit": "U3 - object converter (docs/PORT_PLAN.md section 5)",
+ "cache": "/home/alessandro/genvs_ws/vsbench_assets/objects",
+ "vs_modules": "vsbench.vs (the copy)",
+ "converter": "vsbench-objects-1",
+ "usd_core": "26.11",
+ "n_ok": 12,
+ "n_requested": 12,
+ "seconds_total": 40.2,
+ "cache_total_bytes": 79428518,
+ "cap_bytes": 10737418240,
+ "objects": [
+  {
+   "instance_id": "handal_drill_25",
+   "status": "ok",
+   "kind": "usd",
+   "source_kind": "handal_bop",
+   "vertices": 29946,
+   "faces": 29100,
+   "texture": {
+    "height": 2048,
+    "width": 2048
+   },
+   "bytes": 2257960,
+   "seconds": 1.06,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/003_cracker_box",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8411,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 9878645,
+   "seconds": 5.05,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/004_sugar_box",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8393,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 11130894,
+   "seconds": 4.97,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/005_tomato_soup_can",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8560,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 9054289,
+   "seconds": 3.89,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/008_pudding_box",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8442,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8605680,
+   "seconds": 4.76,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/010_potted_meat_can",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8516,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 8049369,
+   "seconds": 3.95,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/011_banana",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8368,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 4200084,
+   "seconds": 3.05,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/019_pitcher_base",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8565,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5507610,
+   "seconds": 3.61,
+   "lost": []
+  },
+  {
+   "instance_id": "ycb/024_bowl",
+   "status": "ok",
+   "kind": "obj",
+   "source_kind": null,
+   "vertices": 8412,
+   "faces": 16384,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5694868,
+   "seconds": 3.48,
+   "lost": []
+  },
+  {
+   "instance_id": "Black and Decker Cordless Drill",
+   "status": "ok",
+   "kind": "usd",
+   "source_kind": "gso",
+   "vertices": 8916,
+   "faces": 2972,
+   "texture": {
+    "height": 1024,
+    "width": 1024
+   },
+   "bytes": 1328023,
+   "seconds": 0.54,
+   "lost": [
+    "repeat uvs wrapped per face into [0, 1] (1486 faces shifted)"
+   ]
+  },
+  {
+   "instance_id": "023c84c399814304b3f876103faccb98",
+   "status": "ok",
+   "kind": "usd",
+   "source_kind": "objaverse",
+   "vertices": 171339,
+   "faces": 315204,
+   "texture": {
+    "height": 4096,
+    "width": 4096
+   },
+   "bytes": 5074124,
+   "seconds": 2.78,
+   "lost": [
+    "10 materials packed into one 4x4 atlas of 1024 px tiles",
+    "metallic texture ignored",
+    "normal texture ignored",
+    "roughness texture ignored"
+   ]
+  },
+  {
+   "instance_id": "teapot-blue_floral",
+   "status": "ok",
+   "kind": "usd",
+   "source_kind": "housecat6d",
+   "vertices": 68021,
+   "faces": 100000,
+   "texture": {
+    "height": 2450,
+    "width": 2496
+   },
+   "bytes": 8646972,
+   "seconds": 3.08,
+   "lost": []
+  }
+ ]
+}

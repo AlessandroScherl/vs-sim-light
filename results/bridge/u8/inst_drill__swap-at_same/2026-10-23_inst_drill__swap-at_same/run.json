@@ -1,0 +1,268 @@
+{
+  "allow_dirty": true,
+  "allow_no_git": false,
+  "bridge_driver": "tools/u8_perturb.py smoke",
+  "bridge_env": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "LP_NUM_THREADS": "2",
+    "VSBENCH_SOFTWARE_GL": "1",
+    "allow_gpu": false,
+    "cuda_available": false,
+    "nvidia_smi": "hidden",
+    "torch": "2.14.1+cpu",
+    "torch_interop_threads": 2,
+    "torch_threads": 2
+  },
+  "cuda_matmul_allow_tf32": false,
+  "cuda_version": null,
+  "cudnn_allow_tf32": true,
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": false,
+  "cudnn_version": null,
+  "finished_utc": "2026-10-23T09:21:41Z",
+  "git_available": true,
+  "git_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+  "git_dirty": true,
+  "git_dirty_paths": [
+    "../results/bridge/u8/"
+  ],
+  "goal_capture_keep": "last",
+  "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+  "goal_render_warmup": 1,
+  "goal_render_warmup_protocol": 8,
+  "goal_render_warmup_reason": "1 capture, not the protocol's 8: the 8 settle RTX render history; MuJoCo frames are deterministic (two draws of one pose are the same bytes)",
+  "goal_settle_series": {
+    "capture_retries": [
+      0
+    ],
+    "depth_md5": [
+      "5e2fa40428782ce5624bc8cdb7742373"
+    ],
+    "diff_prev": [
+      null
+    ],
+    "keep": "last",
+    "kept_index": 0,
+    "look": "raw",
+    "n_captures": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "rgb_md5": [
+      "c596de21fabc1a9e79b8a457fe0ee5cf"
+    ],
+    "rgb_mean": [
+      35.46143
+    ]
+  },
+  "gpu": null,
+  "gpu_driver": null,
+  "hostname": "4090",
+  "look": "raw",
+  "look_curve_id": null,
+  "look_curve_md5": null,
+  "look_record": {
+    "ambient": 0.2,
+    "ambient_share": null,
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "light_gain": null,
+    "look": "raw",
+    "look_config": null,
+    "look_config_md5": null,
+    "look_curve_id": null,
+    "look_curve_md5": null,
+    "note": "the U1/U4 picture: ambient 0.2, a lit white texel white, MuJoCo's default shadow clip, no curve",
+    "shadowclip_m": null,
+    "shadowsize": 4096,
+    "sun_intensity": 0.923760431
+  },
+  "matcher_tie_order": "stable (module default; the config does not state it)",
+  "name": "inst_drill__swap-at_same",
+  "perturb_light_rule": "light: the dome and the sun scaled by s with colour temperature T change every pixel's linear radiance by f_c = s * blackbody_c(T) (UsdLux.BlackbodyTemperatureAsRgb, luminance 1); applied inside the scene's tone curve, y = 255 srgb(w/(1+w)), w = f_c (floor + e^k x^gamma) (raw look: y = clip(f_c x)); MuJoCo's own light terms clamp at 1, so the model's lights are not edited; depth untouched",
+  "perturb_look_rule": "the scene's look (fill share, light gain, shadow map and its fitted square, tone curve) is fitted once on the unperturbed goal and stays fixed under every perturbation: an edited world is drawn through the same renderer response, as in Isaac; the goal picture is the unperturbed one, captured before the first begin and served from the cache at the goal pose (vs-sim's rule)",
+  "perturb_mode": "swap:@same",
+  "perturb_seed": 20260918,
+  "python_version": "3.12.3",
+  "render_mode": "mujoco-llvmpipe",
+  "run_dir": "/home/alessandro/genvs_ws/vs_sim_light-u8/results/bridge/u8/inst_drill__swap-at_same/2026-10-23_inst_drill__swap-at_same",
+  "scene_meta": {
+    "bbox_usd_rule": {
+      "max": [
+        0.11859998588572891,
+        0.1200000011024935,
+        0.06109376845812383
+      ],
+      "min": [
+        -0.1185999858857289,
+        -0.12000000110249347,
+        0.0
+      ]
+    },
+    "build_s": 0.747,
+    "compile_s": 1.712,
+    "goal_check": {
+      "all_pass": true,
+      "d4": "D-4 (a) default: the frozen goal wins on a miss, the residual is recorded",
+      "derived": {
+        "bbox_max": [
+          0.11859998588572891,
+          0.1200000011024935,
+          0.06109376845812383
+        ],
+        "bbox_min": [
+          -0.1185999858857289,
+          -0.12000000110249347,
+          0.0
+        ],
+        "cam_R_opt": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ],
+        "cam_pos": [
+          6.938893903907228e-18,
+          1.3877787807814457e-17,
+          0.42887105155853544
+        ],
+        "distance_m": 0.36777728310041163,
+        "rule": "scene_view_goal_pose(cam, scene_bbox(placed, 'usd'), goal block)"
+      },
+      "files": [
+        {
+          "ddist_mm": 0.0,
+          "distance_m": 0.36777728310041163,
+          "dpos_mm": 1.1464934308770757e-13,
+          "drot_deg": 0.0,
+          "file": "simple",
+          "pass": true,
+          "refusal": null
+        },
+        {
+          "ddist_mm": 0.0,
+          "distance_m": 0.36777728310041163,
+          "dpos_mm": 1.1464934308770757e-13,
+          "drot_deg": 0.0,
+          "file": "t1near",
+          "pass": true,
+          "refusal": null
+        }
+      ],
+      "goal_rule": "frozen_on_miss",
+      "tolerance": {
+        "dist_m": 0.001,
+        "pos_m": 0.0005,
+        "rot_deg": 0.05
+      },
+      "used": "derived"
+    },
+    "goal_distance_m": 0.36777728310041163,
+    "ground": {
+      "build": "one Plane, the texture shown once (row 0 at world +Y)",
+      "size_m": 2.4,
+      "texture": "/workspace/assets/cluttered2/ground.png",
+      "texture_host_path": "/home/alessandro/genvs_ws/assets/cluttered2/ground.png",
+      "texture_wh": [
+        4096,
+        4096
+      ],
+      "tile_period_m": 2.4,
+      "uv_tiles": 1.0,
+      "z_m": 0.0
+    },
+    "kind": "multi_object",
+    "layout_file": null,
+    "lighting": {
+      "ambient": 0.2,
+      "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+      "sun_cast_shadow": true,
+      "sun_direction": [
+        0.25,
+        -0.433012702,
+        -0.866025404
+      ],
+      "sun_intensity": 0.923760431
+    },
+    "look": {
+      "ambient": 0.2,
+      "ambient_share": null,
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "light_gain": null,
+      "look": "raw",
+      "look_config": null,
+      "look_config_md5": null,
+      "look_curve_id": null,
+      "look_curve_md5": null,
+      "note": "the U1/U4 picture: ambient 0.2, a lit white texel white, MuJoCo's default shadow clip, no curve",
+      "shadowclip_m": null,
+      "shadowsize": 4096,
+      "sun_intensity": 0.923760431
+    },
+    "lost": "PBR (roughness 0.6 ground, object materials), normal maps, MDL; diffuse texture + MuJoCo's own shading only (PORT_PLAN section 5)",
+    "object_cache": "/home/alessandro/genvs_ws/vsbench_assets/objects",
+    "objects": [
+      {
+        "faces": 9186,
+        "instance_id": "a2de48529b1549488940fa98a3a3bac6",
+        "pos": [
+          0.03964915565926001,
+          0.06754265061647324,
+          0.030546857343575772
+        ],
+        "quat_wxyz": [
+          -0.7071067690849304,
+          -0.7071067690849304,
+          -8.659560603426554e-17,
+          8.659560603426554e-17
+        ],
+        "scale": 0.0758700743317604,
+        "source": "analytic",
+        "texture_wh": [
+          2048,
+          2048
+        ],
+        "vertices": 8328
+      }
+    ],
+    "render_camera": {
+      "convention": "isaac_half_pixel",
+      "cx": 959.5,
+      "cy": 539.5,
+      "depth": "optical z (distance_to_image_plane)",
+      "depth_noise": null,
+      "far_m": 10.0,
+      "fx": 1406.748094934653,
+      "fy": 1406.748094934653,
+      "height": 1080,
+      "near_m": 0.05,
+      "width": 1920
+    },
+    "render_mode": "mujoco-llvmpipe",
+    "renderer": {
+      "MUJOCO_EGL_DEVICE_ID": "1",
+      "MUJOCO_GL": "egl",
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "mujoco": "3.13.0",
+      "variant": "mujoco-egl"
+    },
+    "samples": 4
+  },
+  "seed": 20260902,
+  "timestamp_utc": "2026-10-23T09:18:45Z",
+  "torch_num_interop_threads": 2,
+  "torch_num_threads": 2,
+  "torch_version": "2.14.1+cpu",
+  "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vssim_version": "0.1.0"
+}

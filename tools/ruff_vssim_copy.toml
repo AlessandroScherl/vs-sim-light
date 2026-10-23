@@ -1,0 +1,29 @@
+# Ruff for the vs-sim copy (vsbench/vs, vsbench/tests, vsbench/scripts): vs-sim's own rule set
+# (its pyproject.toml at the pin: E, F, I, UP, B, SIM; line 100; py310; fixtures/reference
+# excluded), run as
+#   .venv/bin/ruff check --config tools/ruff_vssim_copy.toml vsbench/vs vsbench/tests vsbench/scripts
+# from the repository root (the exclude is relative to the working directory).
+# The copied code is never reordered or rewrapped (it must stay byte-identical to the pin
+# through the rules - tools/vssim_drift.py). The per-file ignores below are exactly the lines
+# the mechanical rewrite (vssim -> vsbench.vs, 5 characters longer) pushed past 100 columns,
+# plus one line that is already 131 columns in vs-sim (test_instance_suite.py:109 at the pin);
+# I001 in match.py / tiling.py is that same lengthening: the import is one line at the pin and
+# isort would now wrap it. pyproject.toml excludes these trees from vsbench's own ruff run.
+# A pin move that lengthens another line adds it here, in the same commit.
+line-length = 100
+target-version = "py310"
+extend-exclude = ["vsbench/tests/fixtures/reference"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[lint.per-file-ignores]
+"**/vsbench/vs/baselines/match.py" = ["I001"]
+"**/vsbench/vs/baselines/tiling.py" = ["I001"]
+"**/vsbench/vs/baselines/features.py" = ["E501"]
+"**/vsbench/vs/bench/arms.py" = ["E501"]
+"**/vsbench/vs/bench/config.py" = ["E501"]
+"**/vsbench/vs/benchmark.py" = ["E501"]
+"**/vsbench/tests/fast/test_cns.py" = ["E501"]
+"**/vsbench/tests/fast/test_instance_suite.py" = ["E501"]
+"**/vsbench/tests/fast/test_runner.py" = ["E501"]

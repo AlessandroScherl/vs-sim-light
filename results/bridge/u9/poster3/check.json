@@ -1,0 +1,631 @@
+{
+ "scenes": {
+  "poster3": {
+   "goal_distance_m": 0.4341815107823003,
+   "goal_md5": "2760218cbed158a9fb8f0abd14bb2524",
+   "goal_settle_diffs": [
+    null
+   ],
+   "goal": {
+    "cam_pos": [
+     0.0,
+     0.0,
+     0.4341815107823003
+    ],
+    "cam_R_opt": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -1.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      -1.0
+     ]
+    ]
+   },
+   "arms": {
+    "sift_ransac": {
+     "label": "classical_sift/k24/ur/uniform/ransac-scene_default/cns_plateau",
+     "identity": {
+      "n_matches": 24,
+      "n_matched": 24,
+      "feature_error_norm": 0.0,
+      "v_norm_m_s": 0.0,
+      "w_norm_deg_s": 0.0,
+      "match_ms": 687.019671080634,
+      "step_ms": 0.33175304997712374,
+      "zero_displacement_share": 1.0,
+      "max_displacement_px": 0.0,
+      "ok": true
+     },
+     "near": {
+      "start_id": "n_000",
+      "max_iter": 200,
+      "start_mm": 7.759368727876952,
+      "start_deg": 2.6881788804203115,
+      "final_mm": 0.15870505538430907,
+      "final_deg": 0.021639387513562803,
+      "stop_step": null,
+      "stop_mm": null,
+      "stop_deg": null,
+      "stops": {},
+      "own_stop_rule": null,
+      "own_stop_step": null,
+      "own_stop_mm": null,
+      "own_stop_deg": null,
+      "steps": 200,
+      "terminated": "max_iter",
+      "outcome": "converged",
+      "success": {
+       "predicate_a": true,
+       "paper_3cm_3deg": true,
+       "cns_code_0p1d_10deg": true,
+       "abs_10mm_1deg": true,
+       "abs_20mm_2deg": true,
+       "abs_50mm_5deg": true,
+       "abs_100mm_10deg": true
+      },
+      "sec_per_step": 0.9858327123499475,
+      "mean_n_matches": 23.92,
+      "prealign_deg": null,
+      "start_deg_after_prealign": null,
+      "goal_mask_share": null,
+      "perturbation": {
+       "mode": "none",
+       "seed": 159506312
+      },
+      "fps": 1.0143708840988668,
+      "match_fps": 1.321,
+      "match_ms_med": 761.1538,
+      "control_ms_med": 0.2596,
+      "gpu_util_mean_pct": null,
+      "gpu_util_max_pct": null,
+      "peak_vram_alloc_mb": null,
+      "vram_used_mb": null
+     },
+     "far": [
+      {
+       "start_id": "w1_076",
+       "max_iter": 600,
+       "start_mm": 292.92774803055016,
+       "start_deg": 54.66873381198772,
+       "final_mm": 0.018579935378470913,
+       "final_deg": 0.0023754514564795597,
+       "stop_step": 383,
+       "stop_mm": 0.020112908518784504,
+       "stop_deg": 0.0025503452141453402,
+       "stops": {
+        "velocity_quiet": {
+         "step": 330,
+         "translation_mm": 0.009709139609847312,
+         "rotation_deg": 0.0012353216634187895
+        },
+        "dec_plateau": {
+         "step": 330,
+         "translation_mm": 0.009709139609847312,
+         "rotation_deg": 0.0012353216634187895
+        },
+        "cns_plateau": {
+         "step": 383,
+         "translation_mm": 0.020112908518784504,
+         "rotation_deg": 0.0025503452141453402
+        }
+       },
+       "own_stop_rule": null,
+       "own_stop_step": null,
+       "own_stop_mm": null,
+       "own_stop_deg": null,
+       "steps": 600,
+       "terminated": "max_iter",
+       "outcome": "converged",
+       "success": {
+        "predicate_a": true,
+        "paper_3cm_3deg": true,
+        "cns_code_0p1d_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "abs_100mm_10deg": true
+       },
+       "sec_per_step": 1.0491782127248976,
+       "mean_n_matches": 23.96,
+       "prealign_deg": null,
+       "start_deg_after_prealign": null,
+       "goal_mask_share": null,
+       "perturbation": {
+        "mode": "none",
+        "seed": 935335372
+       },
+       "fps": 0.9531269215006158,
+       "match_fps": 1.236,
+       "match_ms_med": 810.1123,
+       "control_ms_med": 0.2611,
+       "gpu_util_mean_pct": null,
+       "gpu_util_max_pct": null,
+       "peak_vram_alloc_mb": null,
+       "vram_used_mb": null
+      }
+     ],
+     "wall_s": 827.7870941162109,
+     "render_mode": "mujoco-llvmpipe",
+     "near_ok": true,
+     "final_over_start": 0.0205
+    },
+    "orb_ransac": {
+     "label": "classical_orb/k24/ur/uniform/ransac-scene_default/cns_plateau",
+     "identity": {
+      "n_matches": 24,
+      "n_matched": 24,
+      "feature_error_norm": 0.0,
+      "v_norm_m_s": 0.0,
+      "w_norm_deg_s": 0.0,
+      "match_ms": 88.33885996136814,
+      "step_ms": 0.29804196674376726,
+      "zero_displacement_share": 1.0,
+      "max_displacement_px": 0.0,
+      "ok": true
+     },
+     "near": {
+      "start_id": "n_000",
+      "max_iter": 200,
+      "start_mm": 7.759368727876952,
+      "start_deg": 2.6881788804203115,
+      "final_mm": 0.36265751877406144,
+      "final_deg": 0.03723133503755924,
+      "stop_step": 170,
+      "stop_mm": 0.36265751877406144,
+      "stop_deg": 0.03723133503755924,
+      "stops": {
+       "velocity_quiet": {
+        "step": 158,
+        "translation_mm": 0.36265751877406144,
+        "rotation_deg": 0.03723133503755924
+       },
+       "dec_plateau": {
+        "step": 158,
+        "translation_mm": 0.36265751877406144,
+        "rotation_deg": 0.03723133503755924
+       },
+       "cns_plateau": {
+        "step": 170,
+        "translation_mm": 0.36265751877406144,
+        "rotation_deg": 0.03723133503755924
+       }
+      },
+      "own_stop_rule": null,
+      "own_stop_step": null,
+      "own_stop_mm": null,
+      "own_stop_deg": null,
+      "steps": 200,
+      "terminated": "max_iter",
+      "outcome": "converged",
+      "success": {
+       "predicate_a": true,
+       "paper_3cm_3deg": true,
+       "cns_code_0p1d_10deg": true,
+       "abs_10mm_1deg": true,
+       "abs_20mm_2deg": true,
+       "abs_50mm_5deg": true,
+       "abs_100mm_10deg": true
+      },
+      "sec_per_step": 0.3073454941698583,
+      "mean_n_matches": 23.545,
+      "prealign_deg": null,
+      "start_deg_after_prealign": null,
+      "goal_mask_share": null,
+      "perturbation": {
+       "mode": "none",
+       "seed": 159506312
+      },
+      "fps": 3.2536673514638794,
+      "match_fps": 16.918,
+      "match_ms_med": 57.2574,
+      "control_ms_med": 0.2864,
+      "gpu_util_mean_pct": null,
+      "gpu_util_max_pct": null,
+      "peak_vram_alloc_mb": null,
+      "vram_used_mb": null
+     },
+     "far": [
+      {
+       "start_id": "w1_076",
+       "max_iter": 600,
+       "start_mm": 292.92774803055016,
+       "start_deg": 54.66873381198772,
+       "final_mm": 4.004282197414808,
+       "final_deg": 0.48379551206033855,
+       "stop_step": 220,
+       "stop_mm": 4.004282197414808,
+       "stop_deg": 0.48379551206485866,
+       "stops": {
+        "velocity_quiet": {
+         "step": 198,
+         "translation_mm": 4.004282197414808,
+         "rotation_deg": 0.48379551206485866
+        },
+        "dec_plateau": {
+         "step": 198,
+         "translation_mm": 4.004282197414808,
+         "rotation_deg": 0.48379551206485866
+        },
+        "cns_plateau": {
+         "step": 220,
+         "translation_mm": 4.004282197414808,
+         "rotation_deg": 0.48379551206485866
+        }
+       },
+       "own_stop_rule": null,
+       "own_stop_step": null,
+       "own_stop_mm": null,
+       "own_stop_deg": null,
+       "steps": 600,
+       "terminated": "max_iter",
+       "outcome": "converged",
+       "success": {
+        "predicate_a": true,
+        "paper_3cm_3deg": true,
+        "cns_code_0p1d_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "abs_100mm_10deg": true
+       },
+       "sec_per_step": 0.295857196895134,
+       "mean_n_matches": 23.09,
+       "prealign_deg": null,
+       "start_deg_after_prealign": null,
+       "goal_mask_share": null,
+       "perturbation": {
+        "mode": "none",
+        "seed": 935335372
+       },
+       "fps": 3.380009039815408,
+       "match_fps": 17.685,
+       "match_ms_med": 56.2552,
+       "control_ms_med": 0.2945,
+       "gpu_util_mean_pct": null,
+       "gpu_util_max_pct": null,
+       "peak_vram_alloc_mb": null,
+       "vram_used_mb": null
+      }
+     ],
+     "wall_s": 239.21948099136353,
+     "render_mode": "mujoco-llvmpipe",
+     "near_ok": true,
+     "final_over_start": 0.0467
+    },
+    "vitvs_dinov3": {
+     "label": "mutual_nn_seeded_subsample@dinov3_vits16/k24/ur/uniform/cns_plateau",
+     "identity": {
+      "n_matches": 24,
+      "n_matched": 24,
+      "feature_error_norm": 0.0,
+      "v_norm_m_s": 0.0,
+      "w_norm_deg_s": 0.0,
+      "match_ms": 429.8200811026618,
+      "step_ms": 0.26593299116939306,
+      "zero_displacement_share": 1.0,
+      "max_displacement_px": 0.0,
+      "ok": true
+     },
+     "near": {
+      "start_id": "n_000",
+      "max_iter": 200,
+      "start_mm": 7.759368727876952,
+      "start_deg": 2.6881788804203115,
+      "final_mm": 8.970655625506119,
+      "final_deg": 0.727267923134189,
+      "stop_step": 101,
+      "stop_mm": 7.080992869442306,
+      "stop_deg": 0.41547213103345493,
+      "stops": {
+       "cns_plateau": {
+        "step": 101,
+        "translation_mm": 7.080992869442306,
+        "rotation_deg": 0.41547213103345493
+       },
+       "velocity_quiet": {
+        "step": 195,
+        "translation_mm": 8.988158507855662,
+        "rotation_deg": 0.7295967365826593
+       },
+       "dec_plateau": {
+        "step": 195,
+        "translation_mm": 8.988158507855662,
+        "rotation_deg": 0.7295967365826593
+       }
+      },
+      "own_stop_rule": null,
+      "own_stop_step": null,
+      "own_stop_mm": null,
+      "own_stop_deg": null,
+      "steps": 200,
+      "terminated": "max_iter",
+      "outcome": "converged",
+      "success": {
+       "predicate_a": true,
+       "paper_3cm_3deg": true,
+       "cns_code_0p1d_10deg": true,
+       "abs_10mm_1deg": true,
+       "abs_20mm_2deg": true,
+       "abs_50mm_5deg": true,
+       "abs_100mm_10deg": true
+      },
+      "sec_per_step": 0.6869316914252704,
+      "mean_n_matches": 24.0,
+      "prealign_deg": null,
+      "start_deg_after_prealign": null,
+      "goal_mask_share": null,
+      "perturbation": {
+       "mode": "none",
+       "seed": 159506312
+      },
+      "fps": 1.4557488211457594,
+      "match_fps": 2.228,
+      "match_ms_med": 447.3898,
+      "control_ms_med": 0.2939,
+      "gpu_util_mean_pct": null,
+      "gpu_util_max_pct": null,
+      "peak_vram_alloc_mb": null,
+      "vram_used_mb": null
+     },
+     "far": [
+      {
+       "start_id": "w1_076",
+       "max_iter": 600,
+       "start_mm": 292.92774803055016,
+       "start_deg": 54.66873381198772,
+       "final_mm": 15.506022559018696,
+       "final_deg": 1.8121679571978386,
+       "stop_step": 174,
+       "stop_mm": 13.206818404050791,
+       "stop_deg": 1.4759478968233857,
+       "stops": {
+        "cns_plateau": {
+         "step": 174,
+         "translation_mm": 13.206818404050791,
+         "rotation_deg": 1.4759478968233857
+        },
+        "velocity_quiet": {
+         "step": 212,
+         "translation_mm": 14.124352683323599,
+         "rotation_deg": 1.6245889821157407
+        },
+        "dec_plateau": {
+         "step": 212,
+         "translation_mm": 14.124352683323599,
+         "rotation_deg": 1.6245889821157407
+        }
+       },
+       "own_stop_rule": null,
+       "own_stop_step": null,
+       "own_stop_mm": null,
+       "own_stop_deg": null,
+       "steps": 600,
+       "terminated": "max_iter",
+       "outcome": "converged",
+       "success": {
+        "predicate_a": true,
+        "paper_3cm_3deg": true,
+        "cns_code_0p1d_10deg": true,
+        "abs_10mm_1deg": false,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "abs_100mm_10deg": true
+       },
+       "sec_per_step": 0.6834786533500301,
+       "mean_n_matches": 24.0,
+       "prealign_deg": null,
+       "start_deg_after_prealign": null,
+       "goal_mask_share": null,
+       "perturbation": {
+        "mode": "none",
+        "seed": 935335372
+       },
+       "fps": 1.4631034855273963,
+       "match_fps": 2.237,
+       "match_ms_med": 446.1616,
+       "control_ms_med": 0.296,
+       "gpu_util_mean_pct": null,
+       "gpu_util_max_pct": null,
+       "peak_vram_alloc_mb": null,
+       "vram_used_mb": null
+      }
+     ],
+     "wall_s": 553.3269464969635,
+     "render_mode": "mujoco-llvmpipe",
+     "near_ok": false,
+     "final_over_start": 1.1561
+    },
+    "artvs": {
+     "label": "artvs@dinov2_vits14/k24/ur/uniform/cns_plateau",
+     "identity": {
+      "n_matches": 24,
+      "n_matched": 24,
+      "feature_error_norm": 0.0,
+      "v_norm_m_s": 0.0,
+      "w_norm_deg_s": 0.0,
+      "match_ms": 108.06070896796882,
+      "step_ms": 0.23073307238519192,
+      "zero_displacement_share": 1.0,
+      "max_displacement_px": 0.0,
+      "ok": true
+     },
+     "near": {
+      "start_id": "n_000",
+      "max_iter": 200,
+      "start_mm": 7.759368727876952,
+      "start_deg": 2.6881788804203115,
+      "final_mm": 2.1580801070337383,
+      "final_deg": 0.20401020852910026,
+      "stop_step": 139,
+      "stop_mm": 2.3709553667063474,
+      "stop_deg": 0.3106650776495177,
+      "stops": {
+       "cns_plateau": {
+        "step": 139,
+        "translation_mm": 2.3709553667063474,
+        "rotation_deg": 0.3106650776495177
+       }
+      },
+      "own_stop_rule": null,
+      "own_stop_step": null,
+      "own_stop_mm": null,
+      "own_stop_deg": null,
+      "steps": 200,
+      "terminated": "max_iter",
+      "outcome": "converged",
+      "success": {
+       "predicate_a": true,
+       "paper_3cm_3deg": true,
+       "cns_code_0p1d_10deg": true,
+       "abs_10mm_1deg": true,
+       "abs_20mm_2deg": true,
+       "abs_50mm_5deg": true,
+       "abs_100mm_10deg": true
+      },
+      "sec_per_step": 3.579382968125283,
+      "mean_n_matches": 35.76,
+      "prealign_deg": null,
+      "start_deg_after_prealign": null,
+      "goal_mask_share": null,
+      "perturbation": {
+       "mode": "none",
+       "seed": 159506312
+      },
+      "fps": 0.27937776116863916,
+      "match_fps": 0.299,
+      "match_ms_med": 3413.8645,
+      "control_ms_med": 0.2719,
+      "gpu_util_mean_pct": null,
+      "gpu_util_max_pct": null,
+      "peak_vram_alloc_mb": null,
+      "vram_used_mb": null
+     },
+     "far": [
+      {
+       "start_id": "w1_076",
+       "max_iter": 600,
+       "start_mm": 292.92774803055016,
+       "start_deg": 54.66873381198772,
+       "final_mm": 2.268069291302621,
+       "final_deg": 0.2687913758936388,
+       "stop_step": 214,
+       "stop_mm": 2.936250986907072,
+       "stop_deg": 0.34565507039241533,
+       "stops": {
+        "cns_plateau": {
+         "step": 214,
+         "translation_mm": 2.936250986907072,
+         "rotation_deg": 0.34565507039241533
+        },
+        "velocity_quiet": {
+         "step": 393,
+         "translation_mm": 2.3147669545809992,
+         "rotation_deg": 0.27298485252004023
+        },
+        "dec_plateau": {
+         "step": 393,
+         "translation_mm": 2.3147669545809992,
+         "rotation_deg": 0.27298485252004023
+        }
+       },
+       "own_stop_rule": null,
+       "own_stop_step": null,
+       "own_stop_mm": null,
+       "own_stop_deg": null,
+       "steps": 600,
+       "terminated": "max_iter",
+       "outcome": "converged",
+       "success": {
+        "predicate_a": true,
+        "paper_3cm_3deg": true,
+        "cns_code_0p1d_10deg": true,
+        "abs_10mm_1deg": true,
+        "abs_20mm_2deg": true,
+        "abs_50mm_5deg": true,
+        "abs_100mm_10deg": true
+       },
+       "sec_per_step": 3.287035726264973,
+       "mean_n_matches": 35.08,
+       "prealign_deg": null,
+       "start_deg_after_prealign": null,
+       "goal_mask_share": null,
+       "perturbation": {
+        "mode": "none",
+        "seed": 935335372
+       },
+       "fps": 0.3042254734286963,
+       "match_fps": 0.327,
+       "match_ms_med": 3417.8184,
+       "control_ms_med": 0.2658,
+       "gpu_util_mean_pct": null,
+       "gpu_util_max_pct": null,
+       "peak_vram_alloc_mb": null,
+       "vram_used_mb": null
+      }
+     ],
+     "wall_s": 2698.4629378318787,
+     "render_mode": "mujoco-llvmpipe",
+     "near_ok": true,
+     "final_over_start": 0.2781
+    }
+   },
+   "render_mode": "mujoco-llvmpipe",
+   "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+   "goal_depth_md5": "d23d54774c4ae6962c2fddf574a6177a",
+   "look": "isaac_fit_v1",
+   "look_curve_id": "isaac_fit_v1/poster3",
+   "look_curve_md5": "8a7e5a6a4e1094b9c1f4bf54737498af",
+   "goal_check": null
+  }
+ },
+ "arms": [
+  "sift_ransac",
+  "orb_ransac",
+  "vitvs_dinov3",
+  "artvs"
+ ],
+ "near_steps": 200,
+ "far": 1,
+ "far_set": "capped30",
+ "perturb": "none",
+ "perturb_seed": 20260918,
+ "budgets": {},
+ "outline_iou": false,
+ "started_utc": "2026-10-23T11:48:10Z",
+ "bridge": {
+  "driver": "vsbench.world.check_baselines",
+  "reference": "vsbench/scripts/check_baselines.py (the copied vs-sim driver, loaded as a library: identity_check, episode_check, near_start, write_table, the plugin hook)",
+  "vsbench_commit": "e4b2f0c858200890e76663fdd0797a91fcf53335+dirty",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "bridge_env": {
+   "torch": "2.14.1+cpu",
+   "torch_threads": 2,
+   "torch_interop_threads": 2,
+   "cuda_available": false,
+   "nvidia_smi": "hidden",
+   "allow_gpu": false,
+   "CUDA_VISIBLE_DEVICES": "",
+   "VSBENCH_SOFTWARE_GL": "1",
+   "LP_NUM_THREADS": "2"
+  },
+  "look": "isaac_fit_v1",
+  "device": "cpu",
+  "samples": 4,
+  "frames": "preview",
+  "near_rule": "near_ok = final_mm < start_mm after --near-steps steps, no error (vs-sim check_baselines docstring: 'it must land closer than it started'; vs-sim's script computes no near verdict, the twin reads that sentence literally; 'by a lot' is not quantified there and is reported here as final_over_start, not thresholded)",
+  "identity_v_max_m_s": 0.0001,
+  "identity_w_max_deg_s": 0.01,
+  "cpu_s": 8507.7,
+  "wall_s": 4320.3
+ }
+}

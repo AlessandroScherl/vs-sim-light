@@ -12,9 +12,17 @@ license = { text = "MIT" }
 authors = [{ name = "Alessandro Scherl" }]
 dependencies = [
   "numpy>=1.26",
-  "opencv-python-headless>=4.10",   # projectPoints, warpPerspective, ORB, SIFT for the gates
+  # projectPoints, warpPerspective, ORB, SIFT for the gates; pinned (2026-10-22) to the Isaac
+  # flight interpreter's 4.11: AKAZE exists and the copied classical parity fixtures run
+  "opencv-python-headless==4.11.0.86",
   "Pillow>=10",                     # reading the poster, writing contact sheets
-  "imageio-ffmpeg>=0.5",            # H.264 debug videos (OpenCV mp4v is the fallback)
+  "PyYAML>=6",                      # the copied benchmark's configs (camera, scenes, protocol)
+  # every flight: the copied runner imports vsbench/vs/baselines/prealign.py, which imports torch
+  # at load (frozen copy); install the CPU wheel first (README) or pip pulls the CUDA one
+  "torch>=2.1",
+  # H.264 films (vsbench/vs/bench/films.py) and debug videos (vsbench/video.py); without it
+  # OpenCV's mp4v writer is the fallback
+  "imageio-ffmpeg>=0.5",
 ]
 
 [project.optional-dependencies]
@@ -22,10 +30,25 @@ mujoco = ["mujoco>=3.3"]
 pybullet = ["pybullet>=3.2.6"]
 open3d = ["open3d>=0.19"]
 all = ["mujoco>=3.3", "pybullet>=3.2.6", "open3d>=0.19"]
+# the learned baselines: vitvs_dinov3 loads DINOv3 through transformers (torch is a core
+# dependency above); vitvs_dinov2 and artvs load DINOv2 through torch.hub (no torchvision needed)
+baselines = ["transformers>=4.57"]
+# converting the room objects (tools/convert_objects.py) and the light perturbation's colour
+# temperature (vsbench/world/perturb_world.py)
+usd = ["usd-core>=24.11"]
 dev = ["pytest>=8", "ruff>=0.6", "psutil>=5", "scipy>=1.10"]   # scipy: expm/logm oracle in tests only
 
 [tool.setuptools.packages.find]
 include = ["vsbench*"]
+# the vs-sim copy's tests and Isaac drivers are reference trees, not runtime modules
+exclude = ["vsbench.tests*", "vsbench.scripts*", "vsbench.experiments*"]
+
+[tool.setuptools.package-data]
+# the vs-sim copy's data root is vsbench/ (layout B, docs/PORT_PLAN.md section 2): the camera,
+# scenes, protocol, arm configs, layouts, the frozen starts (+ md5 sidecars) and the library
+vsbench = ["configs/**/*", "benchmark/**/*", "assets/asset_library_v2.json",
+           "world/configs/*.yaml"]   # the external-method template (U6a), hand-written
+"vsbench.vs" = ["COPY_MANIFEST.json", "PROVENANCE.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -34,6 +57,8 @@ addopts = "-ra"
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+# the vs-sim copy is linted with vs-sim's own rules: tools/ruff_vssim_copy.toml
+extend-exclude = ["vsbench/vs", "vsbench/tests", "vsbench/scripts"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]

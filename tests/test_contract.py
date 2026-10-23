@@ -19,6 +19,7 @@ from vsbench.methods import (
     available_methods,
     check_method,
     make_method,
+    method_class,
     normalise_output,
     register,
 )
@@ -38,6 +39,11 @@ def start_pose(T_wc_target: np.ndarray) -> np.ndarray:
 
 @pytest.mark.parametrize("name", available_methods())
 def test_contract(backend, renderer_factory, name):
+    # a method whose dependencies are absent here says why (the copied vs-sim arms need torch
+    # and offline weights); present, the method returns None and the gate runs in full
+    why = getattr(method_class(name), "unavailable", lambda: None)()
+    if why:
+        pytest.skip(f"{name}: {why}")
     cam = gate_camera()
     r = renderer_factory(backend, "poster", (640, 480))
     m = make_method(name, **CONTRACT_PARAMS.get(name, {}))

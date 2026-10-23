@@ -1,8 +1,14 @@
 """Gate tests are parametrised over backend variants.
 
 Selection: ``VSBENCH_BACKENDS=mujoco-egl,pybullet-tiny pytest`` or ``pytest --backends ...``.
-With neither, every variant whose package is installed is tried, and a variant that
-cannot open a context in a fresh process is skipped with the reason. Run one variant per
+With neither, every CPU variant whose package is installed is tried, and a variant that
+cannot open a context in a fresh process is skipped with the reason.
+
+Software GL is the default (``vsbench.glenv``; ``tools/cpu_env.sh`` sets it explicitly): the
+default set holds only the software variants (``vsbench.render.base.SOFTWARE_VARIANTS``),
+naming a GPU-capable one is a usage error unless ``VSBENCH_ALLOW_GPU=1``, and
+``force_software_gl`` runs at import, so even a test
+that imports a GL or Vulkan library itself gets Mesa (llvmpipe / lavapipe), never the GPU. Run one variant per
 pytest process when comparing MuJoCo and Open3D: both own a GL context.
 """
 
@@ -14,14 +20,18 @@ import numpy as np
 import pytest
 
 from vsbench.camera import gate_camera
+from vsbench.glenv import force_software_gl, software_gl_requested
 from vsbench.render.base import (
     BACKENDS,
-    default_order,
     make_renderer,
     package_installed,
     probe_backend,
+    select_backends,
 )
 from vsbench.stdscenes import STD_SCENES
+
+if software_gl_requested():
+    force_software_gl()
 
 
 def pytest_addoption(parser):
@@ -29,15 +39,10 @@ def pytest_addoption(parser):
 
 
 def _selected(config) -> list[str]:
-    raw = config.getoption("--backends")
-    if raw.strip():
-        names = [n.strip() for n in raw.split(",") if n.strip()]
-        unknown = [n for n in names if n not in BACKENDS]
-        if unknown:
-            raise pytest.UsageError(f"unknown backends {unknown}; known {sorted(BACKENDS)}")
-        return names
-    # CPU variants for this platform, plus nothing that needs a GPU
-    return [n for n in default_order() if package_installed(n)]
+    try:
+        return select_backends(config.getoption("--backends"))
+    except (KeyError, PermissionError) as exc:
+        raise pytest.UsageError(str(exc)) from None
 
 
 def pytest_generate_tests(metafunc):

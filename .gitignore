@@ -11,3 +11,33 @@ results/_tmp/
 results/friction/venv_*/
 smoke.png
 *.npz
+# the vs-sim clone (docs/PORT_PLAN.md section 2): ignored; the pin is committed
+external/*
+!external/VSSIM_COMMIT
+# the vs-sim copy (docs/PORT_PLAN.md section 2, layout B): its size-capped parity fixtures are
+# committed despite *.npz above
+!vsbench/tests/fixtures/**
+# ... but never their bytecode (the negation above would re-include it)
+vsbench/tests/fixtures/**/__pycache__/
+vsbench/tests/fixtures/**/*.pyc
+# vs-sim's run directory, mirrored: run payloads stay out of git, provenance files and the
+# tracked README.md/.gitkeep stay visible (vs-sim's own rules; `!.../**/` is load-bearing:
+# without it git never descends and the negations below cannot match)
+vsbench/experiments/**
+!vsbench/experiments/**/
+!vsbench/experiments/.gitkeep
+!vsbench/experiments/README.md
+!vsbench/experiments/**/README.md
+!vsbench/experiments/**/MD5SUMS
+!vsbench/experiments/**/run.json
+!vsbench/experiments/**/resolved_config.yaml
+# the bridge's flights (results/bridge): records, run sidecars and short films are committed;
+# telemetry and loose film frames are payload
+results/bridge/**/telemetry.jsonl.gz
+# ... except the M1 truth-seam gate's two small telemetry files (tests/world/test_fly_smoke.py reads them)
+!results/bridge/m1_telemetry/**/telemetry.jsonl.gz
+results/bridge/**/film/**/*.jpg
+# the default output of `python -m vsbench fly` (README)
+runs/
+# measurement chain logs (tools/step_chains/*.sh write them at the root)
+/*.log

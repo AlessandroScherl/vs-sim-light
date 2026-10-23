@@ -67,7 +67,14 @@ def make_method(name: str, **params) -> VSMethod:
 
 
 # built-in methods register themselves on import (after ``register`` exists)
-from vsbench.methods import feature_ibvs, oracle_pbvs, true_point_ibvs  # noqa: E402,F401
+# (vssim_arms: the copied vs-sim arms as methods, PORT_PLAN U6b; their bench and weights
+# load at configure, so this import stays light)
+from vsbench.methods import (  # noqa: E402,F401
+    feature_ibvs,
+    oracle_pbvs,
+    true_point_ibvs,
+    vssim_arms,
+)
 
 __all__ = [
     "DEPTH_MODES",

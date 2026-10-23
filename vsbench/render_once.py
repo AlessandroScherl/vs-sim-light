@@ -19,6 +19,9 @@ from vsbench.stdscenes import STD_SCENES
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", required=True)
     ap.add_argument("--scene", default="poster", choices=sorted(STD_SCENES))

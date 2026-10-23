@@ -53,6 +53,9 @@ def run(backend: str, n: int, frames: int, warmup: int) -> dict:
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser()
     ap.add_argument("--backend", required=True)
     ap.add_argument("--procs", nargs="+", type=int, default=[1, 2, 4, 8])

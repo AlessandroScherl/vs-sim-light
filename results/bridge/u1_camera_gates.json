@@ -1,0 +1,436 @@
+{
+  "contract": {
+    "check_scene_goal": [
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "v2",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "hollywood"
+      },
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "near",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "hollywood"
+      },
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "v2",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "poster2"
+      },
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "near",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "poster2"
+      },
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "v2",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "poster3"
+      },
+      {
+        "d_distance_mm": 0.0,
+        "d_position_mm": 0.0,
+        "distance_m": 0.4341815107823003,
+        "file": "near",
+        "file_distance_m": 0.4341815107823003,
+        "pass": true,
+        "scene": "poster3"
+      }
+    ],
+    "gate": "isinstance(scene, vsbench.vs.scene.Scene); check_scene_goal on both pinned start files of all three posters",
+    "render_mode": "mujoco-llvmpipe"
+  },
+  "convention": {
+    "ecc_calibration": {
+      "gate": "|ecc_bias| <= 0.1 px per axis",
+      "image": "the copied mock's goal picture of the hollywood texture (grey, 1920 x 1080), moved by cv2.warpAffine INTER_CUBIC",
+      "rows": [
+        {
+          "ecc_bias_px": [
+            -0.0069,
+            -0.01
+          ],
+          "ecc_px": [
+            -0.5069,
+            -0.51
+          ],
+          "phase_bias_px": [
+            0.326,
+            0.3257
+          ],
+          "phase_px": [
+            -0.174,
+            -0.1743
+          ],
+          "true_px": [
+            -0.5,
+            -0.5
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0561,
+            -0.0521
+          ],
+          "ecc_px": [
+            -0.3561,
+            -0.3521
+          ],
+          "phase_bias_px": [
+            0.0388,
+            0.0389
+          ],
+          "phase_px": [
+            -0.2612,
+            -0.2611
+          ],
+          "true_px": [
+            -0.3,
+            -0.3
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0149,
+            -0.001
+          ],
+          "ecc_px": [
+            -0.5149,
+            -0.001
+          ],
+          "phase_bias_px": [
+            0.3259,
+            -0.0001
+          ],
+          "phase_px": [
+            -0.1741,
+            -0.0001
+          ],
+          "true_px": [
+            -0.5,
+            0.0
+          ]
+        },
+        {
+          "ecc_bias_px": [
+            -0.0154,
+            0.0155
+          ],
+          "ecc_px": [
+            -1.5154,
+            -1.4845
+          ],
+          "phase_bias_px": [
+            0.3259,
+            0.3258
+          ],
+          "phase_px": [
+            -1.1741,
+            -1.1742
+          ],
+          "true_px": [
+            -1.5,
+            -1.5
+          ]
+        }
+      ]
+    },
+    "gate": "per view and axis: |ecc - (-0.5)| <= 0.1, |residual| <= 0.1, |control_960| <= 0.1, raw < -0.25 (told apart from 0); green gradient corr >= 0.8",
+    "note": "an exact half-pixel shift is cv2.phaseCorrelate's degenerate case (the peak splits between two bins; a synthetic exact -0.5 shift of the mock reads -0.17 or -0.83), so the plan's literal 'raw within 0.1 of -0.5' is reported per view and the shift is gated by ECC plus the two phaseCorrelate null tests",
+    "predicted_shift_px": [
+      -0.5,
+      -0.5
+    ],
+    "views": [
+      {
+        "calibration_px": [
+          -0.174,
+          -0.1743
+        ],
+        "control_960_px": [
+          0.0132,
+          0.0116
+        ],
+        "ecc_px": [
+          -0.5106,
+          -0.5328
+        ],
+        "grad_corr_green": 0.9373,
+        "mean_grey_mock": 90.532,
+        "mean_grey_mujoco": 90.994,
+        "plan_literal_raw_within_0.1_of_-0.5": false,
+        "raw_minus_calibration_px": [
+          -0.2137,
+          -0.2151
+        ],
+        "raw_px": [
+          -0.3878,
+          -0.3894
+        ],
+        "residual_after_half_pixel_px": [
+          0.0047,
+          0.0216
+        ],
+        "view": "goal"
+      },
+      {
+        "calibration_px": [
+          -0.1741,
+          -0.1743
+        ],
+        "control_960_px": [
+          0.0697,
+          0.0272
+        ],
+        "ecc_px": [
+          -0.4543,
+          -0.5307
+        ],
+        "grad_corr_green": 0.9413,
+        "mean_grey_mock": 87.862,
+        "mean_grey_mujoco": 88.356,
+        "plan_literal_raw_within_0.1_of_-0.5": false,
+        "raw_minus_calibration_px": [
+          -0.1553,
+          -0.2125
+        ],
+        "raw_px": [
+          -0.3294,
+          -0.3868
+        ],
+        "residual_after_half_pixel_px": [
+          0.0582,
+          0.0245
+        ],
+        "view": "n_000"
+      },
+      {
+        "calibration_px": [
+          -0.174,
+          -0.1744
+        ],
+        "control_960_px": [
+          0.0613,
+          0.0052
+        ],
+        "ecc_px": [
+          -0.4639,
+          -0.5561
+        ],
+        "grad_corr_green": 0.9384,
+        "mean_grey_mock": 87.182,
+        "mean_grey_mujoco": 87.657,
+        "plan_literal_raw_within_0.1_of_-0.5": false,
+        "raw_minus_calibration_px": [
+          -0.1524,
+          -0.2182
+        ],
+        "raw_px": [
+          -0.3264,
+          -0.3926
+        ],
+        "residual_after_half_pixel_px": [
+          0.0618,
+          0.0179
+        ],
+        "view": "n_001"
+      },
+      {
+        "calibration_px": [
+          -0.174,
+          -0.8256
+        ],
+        "control_960_px": [
+          0.0077,
+          -0.0037
+        ],
+        "ecc_px": [
+          -0.4792,
+          -0.5432
+        ],
+        "grad_corr_green": 0.936,
+        "mean_grey_mock": 90.405,
+        "mean_grey_mujoco": 90.873,
+        "plan_literal_raw_within_0.1_of_-0.5": false,
+        "raw_minus_calibration_px": [
+          -0.2003,
+          0.2414
+        ],
+        "raw_px": [
+          -0.3743,
+          -0.5843
+        ],
+        "residual_after_half_pixel_px": [
+          0.0123,
+          0.008
+        ],
+        "view": "n_002"
+      }
+    ]
+  },
+  "depth": {
+    "gate": "median <= 1 mm, p99 <= 3 mm (all views pooled and each view)",
+    "median_mm": 3.233821965764605e-05,
+    "n_px": 20736000,
+    "p99_mm": 0.00011319858500280504,
+    "views": [
+      {
+        "distance_m": 0.4341815107823003,
+        "max_mm": 6.19829854109355e-07,
+        "median_mm": 6.19829854109355e-07,
+        "missed_px": 0,
+        "p99_mm": 6.19829854109355e-07,
+        "scene": "hollywood",
+        "valid_share": 1.0,
+        "view": "goal"
+      },
+      {
+        "distance_m": 0.49171062165141455,
+        "max_mm": 0.00015320744928271068,
+        "median_mm": 4.674458067843723e-05,
+        "missed_px": 0,
+        "p99_mm": 0.0001106711685250339,
+        "scene": "hollywood",
+        "valid_share": 1.0,
+        "view": "start_00"
+      },
+      {
+        "distance_m": 0.47850040708358377,
+        "max_mm": 0.00016671270641754887,
+        "median_mm": 6.639613484016316e-05,
+        "missed_px": 0,
+        "p99_mm": 0.00012120004138027607,
+        "scene": "hollywood",
+        "valid_share": 1.0,
+        "view": "start_01"
+      },
+      {
+        "distance_m": 1.3053190575513067,
+        "max_mm": 3.233821965764605e-05,
+        "median_mm": 1.3264733311757482e-05,
+        "missed_px": 0,
+        "p99_mm": 3.233821965764605e-05,
+        "scene": "hollywood",
+        "valid_share": 1.0,
+        "view": "far_1.2853m"
+      },
+      {
+        "distance_m": 0.4341815107823003,
+        "max_mm": 6.19829854109355e-07,
+        "median_mm": 6.19829854109355e-07,
+        "missed_px": 0,
+        "p99_mm": 6.19829854109355e-07,
+        "scene": "poster2",
+        "valid_share": 1.0,
+        "view": "goal"
+      },
+      {
+        "distance_m": 0.49171062165141455,
+        "max_mm": 0.00015320744928271068,
+        "median_mm": 4.674458067843723e-05,
+        "missed_px": 0,
+        "p99_mm": 0.0001106711685250339,
+        "scene": "poster2",
+        "valid_share": 1.0,
+        "view": "start_00"
+      },
+      {
+        "distance_m": 0.47850040708358377,
+        "max_mm": 0.00016671270641754887,
+        "median_mm": 6.639613484016316e-05,
+        "missed_px": 0,
+        "p99_mm": 0.00012120004138027607,
+        "scene": "poster2",
+        "valid_share": 1.0,
+        "view": "start_01"
+      },
+      {
+        "distance_m": 0.4341815107823003,
+        "max_mm": 6.19829854109355e-07,
+        "median_mm": 6.19829854109355e-07,
+        "missed_px": 0,
+        "p99_mm": 6.19829854109355e-07,
+        "scene": "poster3",
+        "valid_share": 1.0,
+        "view": "goal"
+      },
+      {
+        "distance_m": 0.49171062165141455,
+        "max_mm": 0.00015320744928271068,
+        "median_mm": 4.674458067843723e-05,
+        "missed_px": 0,
+        "p99_mm": 0.0001106711685250339,
+        "scene": "poster3",
+        "valid_share": 1.0,
+        "view": "start_00"
+      },
+      {
+        "distance_m": 0.47850040708358377,
+        "max_mm": 0.00016671270641754887,
+        "median_mm": 6.639613484016316e-05,
+        "missed_px": 0,
+        "p99_mm": 0.00012120004138027607,
+        "scene": "poster3",
+        "valid_share": 1.0,
+        "view": "start_01"
+      }
+    ]
+  },
+  "goal_cache": {
+    "deterministic_redraw": true,
+    "goal_frame_md5": "6f892b0b3bc0c06fd52b4dd31ec03402",
+    "n_renders_for_two_goal_calls": 1
+  },
+  "projection": {
+    "camera": {
+      "cx": 959.5,
+      "cy": 539.5,
+      "fx": 1406.748094934653,
+      "wh": [
+        1920,
+        1080
+      ]
+    },
+    "gate": "median <= 0.15 px, max <= 0.5 px against vsbench.reference.project of the marker centres (the plan's reference) and against the exact centroid of each sphere's image",
+    "mean_signed_uv_if_principal_point_were_960_540": [
+      -0.5017,
+      -0.497
+    ],
+    "n_markers": 78,
+    "n_poses": 6,
+    "vs_centre_projection_px": {
+      "max": 0.16260045077141835,
+      "median": 0.05748958121178912
+    },
+    "vs_exact_sphere_centroid_px": {
+      "max": 0.04016201617226561,
+      "mean_signed_uv": [
+        -0.0017,
+        0.003
+      ],
+      "median": 0.016283817599269893
+    }
+  },
+  "truth_seam_vs_mock_px": 2.3480197341996245e-08,
+  "unit": "U1 - MujocoScene for the posters + the D435i gates (docs/PORT_PLAN.md section 4)",
+  "written": "2026-10-23 09:35:14 +0200"
+}

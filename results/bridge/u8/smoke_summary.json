@@ -1,0 +1,1128 @@
+{
+  "smoke": {
+    "arm": "sift_ransac",
+    "episodes": {
+      "cluttered2__combined": {
+        "final_rotation_deg": 0.08959401052517078,
+        "final_translation_mm": 0.43951961744404333,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.99,
+        "outcome": "converged",
+        "perturbation": {
+          "distractors": {
+            "items": [
+              {
+                "instance_id": "ycb/072-b_toy_airplane",
+                "pixel": [
+                  963.7186606862775,
+                  868.1723963342903
+                ],
+                "x": 0.0506364101770765,
+                "y": -0.1777263274064521,
+                "yaw_deg": 59.223000705640835
+              },
+              {
+                "instance_id": "ycb/073-f_lego_duplo",
+                "pixel": [
+                  1530.9018221799747,
+                  493.27097035783373
+                ],
+                "x": 0.6196792048958002,
+                "y": 0.1984042943487007,
+                "yaw_deg": 155.60492870791418
+              }
+            ],
+            "mode": "distractors",
+            "n": 2,
+            "prim_paths": [
+              "/World/Distractor_0",
+              "/World/Distractor_1"
+            ],
+            "seed": 2046166178
+          },
+          "light": {
+            "light_intensity_scale": 0.8363779680525396,
+            "light_temperature_k": 5142.86439265847,
+            "mode": "light",
+            "seed": 2046166178
+          },
+          "mode": "combined",
+          "noise": {
+            "brightness": 0.07843801398273456,
+            "contrast": 0.9565580162624558,
+            "lambda_read": 2.2952043133493843e-05,
+            "lambda_shot": 0.0035317716519303343,
+            "mode": "noise",
+            "seed": 2046166178,
+            "wb_gain": [
+              1.0201250655468868,
+              0.9254090783996218,
+              0.9462876512807428
+            ]
+          },
+          "occluder": {
+            "centre": [
+              0.0024775430212289687,
+              0.00690598661659142,
+              0.792393556083352
+            ],
+            "distance_m": 0.6189668681201984,
+            "image_width_frac": 0.16114131324172926,
+            "mode": "occluder",
+            "pixel": [
+              859.0268666692043,
+              868.6740970559679
+            ],
+            "prim_path": "/World/Occluder",
+            "seed": 2046166178,
+            "size_m": 0.13613167697543824
+          },
+          "seed": 2046166178
+        },
+        "records": "results/bridge/u8/cluttered2__combined.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 3.3587311712198424,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 337.0,
+        "world_compiles": [
+          {
+            "compile_s": 10.171,
+            "n_objects": 12,
+            "peak_rss_mb": 5553.4,
+            "rss_mb_after": 5027.3,
+            "total_s": 10.847,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__distractors": {
+        "final_rotation_deg": 0.10060619121917694,
+        "final_translation_mm": 0.7270062041840657,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.99,
+        "outcome": "converged",
+        "perturbation": {
+          "items": [
+            {
+              "instance_id": "ycb/072-b_toy_airplane",
+              "pixel": [
+                963.7186606862775,
+                868.1723963342903
+              ],
+              "x": 0.0506364101770765,
+              "y": -0.1777263274064521,
+              "yaw_deg": 59.223000705640835
+            },
+            {
+              "instance_id": "ycb/073-f_lego_duplo",
+              "pixel": [
+                1530.9018221799747,
+                493.27097035783373
+              ],
+              "x": 0.6196792048958002,
+              "y": 0.1984042943487007,
+              "yaw_deg": 155.60492870791418
+            }
+          ],
+          "mode": "distractors",
+          "n": 2,
+          "prim_paths": [
+            "/World/Distractor_0",
+            "/World/Distractor_1"
+          ],
+          "seed": 2046166178
+        },
+        "records": "results/bridge/u8/cluttered2__distractors.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.5744916109601035,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 259.0,
+        "world_compiles": [
+          {
+            "compile_s": 10.161,
+            "n_objects": 11,
+            "peak_rss_mb": 5425.4,
+            "rss_mb_after": 4898.8,
+            "total_s": 10.787,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__ground-concrete": {
+        "final_rotation_deg": 0.1918032303538156,
+        "final_translation_mm": 4.128264212265829,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.98,
+        "outcome": "converged",
+        "perturbation": {
+          "goal_texture": "/workspace/assets/cluttered2/ground.png",
+          "ground": "concrete",
+          "mode": "ground_swap",
+          "seed": 2046166178,
+          "texture": "/workspace/assets/industrial1/ground.png"
+        },
+        "records": "results/bridge/u8/cluttered2__ground-concrete.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.3059296683606227,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 230.7,
+        "world_compiles": [
+          {
+            "compile_s": 7.072,
+            "n_objects": 9,
+            "peak_rss_mb": 5425.4,
+            "rss_mb_after": 4183.7,
+            "total_s": 7.803,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__ground-laminate": {
+        "final_rotation_deg": 0.7276319494779385,
+        "final_translation_mm": 2.9789255540161212,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.974358974358974,
+        "outcome": "converged",
+        "perturbation": {
+          "goal_texture": "/workspace/assets/cluttered2/ground.png",
+          "ground": "laminate",
+          "mode": "ground_swap",
+          "seed": 2046166178,
+          "texture": "/workspace/assets/polyhaven/laminate_floor_02.jpg"
+        },
+        "records": "results/bridge/u8/cluttered2__ground-laminate.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.596380578410716,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 39,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "diverged_feature",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 102.1,
+        "world_compiles": [
+          {
+            "compile_s": 8.339,
+            "n_objects": 9,
+            "peak_rss_mb": 5425.4,
+            "rss_mb_after": 4438.2,
+            "total_s": 9.072,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__light": {
+        "final_rotation_deg": 0.10034103073894415,
+        "final_translation_mm": 0.5204186040778128,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.99,
+        "outcome": "converged",
+        "perturbation": {
+          "light_intensity_scale": 0.8363779680525396,
+          "light_temperature_k": 5142.86439265847,
+          "mode": "light",
+          "seed": 2046166178
+        },
+        "records": "results/bridge/u8/cluttered2__light.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.2885459054098463,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 229.2,
+        "world_compiles": []
+      },
+      "cluttered2__noise": {
+        "final_rotation_deg": 0.8292290687673859,
+        "final_translation_mm": 18.412167722679147,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.94,
+        "outcome": "converged_wrong_pose",
+        "perturbation": {
+          "brightness": 0.07843801398273456,
+          "contrast": 0.9565580162624558,
+          "lambda_read": 2.2952043133493843e-05,
+          "lambda_shot": 0.0035317716519303343,
+          "mode": "noise",
+          "seed": 2046166178,
+          "wb_gain": [
+            1.0201250655468868,
+            0.9254090783996218,
+            0.9462876512807428
+          ]
+        },
+        "records": "results/bridge/u8/cluttered2__noise.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 3.0849535398103765,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": false
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 308.7,
+        "world_compiles": [
+          {
+            "compile_s": 8.169,
+            "n_objects": 9,
+            "peak_rss_mb": 5425.4,
+            "rss_mb_after": 4511.9,
+            "total_s": 8.906,
+            "unedited": true
+          }
+        ]
+      },
+      "cluttered2__none": {
+        "final_rotation_deg": 0.09948137419548436,
+        "final_translation_mm": 1.201690768335798,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.95,
+        "outcome": "converged",
+        "perturbation": {
+          "mode": "none",
+          "seed": 2046166178
+        },
+        "records": "results/bridge/u8/cluttered2__none.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.1773651866801083,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 217.9,
+        "world_compiles": []
+      },
+      "cluttered2__occluder": {
+        "final_rotation_deg": 0.09596194529804182,
+        "final_translation_mm": 0.17234801544004563,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 24.0,
+        "outcome": "converged",
+        "perturbation": {
+          "centre": [
+            0.0024775430212289687,
+            0.00690598661659142,
+            0.792393556083352
+          ],
+          "distance_m": 0.6189668681201984,
+          "image_width_frac": 0.16114131324172926,
+          "mode": "occluder",
+          "pixel": [
+            859.0268666692043,
+            868.6740970559679
+          ],
+          "prim_path": "/World/Occluder",
+          "seed": 2046166178,
+          "size_m": 0.13613167697543824
+        },
+        "records": "results/bridge/u8/cluttered2__occluder.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.591115633379668,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 259.2,
+        "world_compiles": [
+          {
+            "compile_s": 8.377,
+            "n_objects": 10,
+            "peak_rss_mb": 4739.6,
+            "rss_mb_after": 4309.1,
+            "total_s": 8.947,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__swap-ycb_006_mustard_bottle": {
+        "final_rotation_deg": 0.11504711782755335,
+        "final_translation_mm": 1.8295320106666868,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.98,
+        "outcome": "converged",
+        "perturbation": {
+          "goal_instance": "ycb/003_cracker_box",
+          "live_instance": "ycb/006_mustard_bottle",
+          "mode": "swap_instance",
+          "prim_paths": [
+            "/World/Swap_0"
+          ],
+          "seed": 2046166178,
+          "swapped": true,
+          "xy": [
+            -0.47903233766555786,
+            0.3188343644142151
+          ]
+        },
+        "records": "results/bridge/u8/cluttered2__swap-ycb_006_mustard_bottle.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.381272810860537,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 238.9,
+        "world_compiles": [
+          {
+            "compile_s": 9.64,
+            "n_objects": 9,
+            "peak_rss_mb": 5553.4,
+            "rss_mb_after": 4531.7,
+            "total_s": 10.402,
+            "unedited": false
+          }
+        ]
+      },
+      "cluttered2__swap-ycb_006_mustard_bottle__ground-concrete": {
+        "final_rotation_deg": 0.38255517418213086,
+        "final_translation_mm": 8.635201261192178,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
+        "look": "isaac_fit_v1",
+        "look_curve_id": "isaac_fit_v1/cluttered2",
+        "max_iter": 100,
+        "mean_n_matches": 23.848101265822784,
+        "outcome": "converged",
+        "perturbation": {
+          "ground_swap": {
+            "goal_texture": "/workspace/assets/cluttered2/ground.png",
+            "ground": "concrete",
+            "mode": "ground_swap",
+            "seed": 2046166178,
+            "texture": "/workspace/assets/industrial1/ground.png"
+          },
+          "mode": "chain",
+          "parts": [
+            "swap_instance",
+            "ground_swap"
+          ],
+          "seed": 2046166178,
+          "swap_instance": {
+            "goal_instance": "ycb/003_cracker_box",
+            "live_instance": "ycb/006_mustard_bottle",
+            "mode": "swap_instance",
+            "prim_paths": [
+              "/World/Swap_0"
+            ],
+            "seed": 2046166178,
+            "swapped": true,
+            "xy": [
+              -0.47903233766555786,
+              0.3188343644142151
+            ]
+          }
+        },
+        "records": "results/bridge/u8/cluttered2__swap-ycb_006_mustard_bottle__ground-concrete.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.1847950711012287,
+        "start_id": "n_000",
+        "start_rotation_deg": 2.6881788804203115,
+        "start_translation_mm": 7.75936872787686,
+        "steps": 79,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "diverged_feature",
+        "vsbench_commit": "90bc336cc66ff6d598c2e698c729ddd3e02b9b38",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 173.6,
+        "world_compiles": [
+          {
+            "compile_s": 6.74,
+            "n_objects": 9,
+            "peak_rss_mb": 5553.4,
+            "rss_mb_after": 4269.4,
+            "total_s": 7.278,
+            "unedited": false
+          }
+        ]
+      },
+      "inst_drill__none": {
+        "final_rotation_deg": 0.029616219185593335,
+        "final_translation_mm": 0.2323686824407532,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+        "look": "raw",
+        "look_curve_id": null,
+        "max_iter": 100,
+        "mean_n_matches": 24.0,
+        "outcome": "converged",
+        "perturbation": {
+          "mode": "none",
+          "seed": 68660192
+        },
+        "records": "results/bridge/u8/inst_drill__none.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 1.7416040177003014,
+        "start_id": "t1n_000",
+        "start_rotation_deg": 0.5379696049836575,
+        "start_translation_mm": 6.453841963793314,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 174.5,
+        "world_compiles": []
+      },
+      "inst_drill__swap-at_other_small": {
+        "final_rotation_deg": 103.15396563086232,
+        "final_translation_mm": 737.8786580544197,
+        "final_translation_mm_matched": 705.0419367964985,
+        "first_frame_n_matches": 0,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+        "look": "raw",
+        "look_curve_id": null,
+        "max_iter": 100,
+        "mean_n_matches": 0.08,
+        "outcome": "diverged",
+        "perturbation": {
+          "floor_centre_xy": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17
+          ],
+          "goal_bbox": [
+            [
+              -0.1185999858857289,
+              -0.12000000110249347,
+              0.0
+            ],
+            [
+              0.11859998588572891,
+              0.1200000011024935,
+              0.06109376845812383
+            ]
+          ],
+          "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "goal_size_m": 0.24,
+          "live_bbox": [
+            [
+              -0.05361199475829357,
+              -0.07999999826696379,
+              -6.938893903907228e-18
+            ],
+            [
+              0.05361199475829357,
+              0.07999999826696381,
+              0.05898327292614419
+            ]
+          ],
+          "live_instance": "objv_0de890446936",
+          "live_name": "other_small",
+          "live_placement": {
+            "canonical": "library",
+            "native_extent_m": [
+              150.84085083007807,
+              225.08522317436865,
+              82.97664648586829
+            ],
+            "pre_rot_x_deg": 90.0,
+            "size_m": 0.16,
+            "upright_yaw_add_deg": 90.0,
+            "yaw_deg": 0.0,
+            "yaw_rule": "0"
+          },
+          "live_size_m": 0.16,
+          "mode": "swap_instance",
+          "prim_paths": [
+            "/World/Swap_0"
+          ],
+          "reference_position": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17,
+            0.28591402555179524
+          ],
+          "seed": 68660192,
+          "size_ratio": 0.6666666460997347,
+          "swapped": true
+        },
+        "records": "results/bridge/u8/inst_drill__swap-at_other_small.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.4297401878400704,
+        "start_id": "t1n_000",
+        "start_rotation_deg": 0.5379696049836575,
+        "start_translation_mm": 6.453841963793314,
+        "start_translation_mm_matched": 148.94337788936772,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "stop_translation_mm_matched": null,
+        "success": {
+          "abs_100mm_10deg": false,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": false,
+          "abs_50mm_5deg": false,
+          "cns_code_0p1d_10deg": false,
+          "paper_3cm_3deg": false,
+          "predicate_a": false
+        },
+        "success_matched": {
+          "abs_100mm_10deg": false,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": false,
+          "abs_50mm_5deg": false,
+          "cns_code_0p1d_10deg": false,
+          "paper_3cm_3deg": false,
+          "predicate_a": false
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 243.3,
+        "world_compiles": [
+          {
+            "compile_s": 4.271,
+            "n_objects": 2,
+            "peak_rss_mb": 2594.4,
+            "rss_mb_after": 2180.8,
+            "total_s": 4.586,
+            "unedited": false
+          }
+        ]
+      },
+      "inst_drill__swap-at_other_small__ground-concrete": {
+        "final_rotation_deg": 49.50621486582616,
+        "final_translation_mm": 345.13415342207645,
+        "final_translation_mm_matched": 356.62442946064425,
+        "first_frame_n_matches": 5,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+        "look": "raw",
+        "look_curve_id": null,
+        "max_iter": 100,
+        "mean_n_matches": 0.1,
+        "outcome": "diverged",
+        "perturbation": {
+          "ground_swap": {
+            "goal_texture": "/workspace/assets/cluttered2/ground.png",
+            "ground": "concrete",
+            "mode": "ground_swap",
+            "seed": 68660192,
+            "texture": "/workspace/assets/industrial1/ground.png"
+          },
+          "mode": "chain",
+          "parts": [
+            "swap_instance",
+            "ground_swap"
+          ],
+          "seed": 68660192,
+          "swap_instance": {
+            "floor_centre_xy": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17
+            ],
+            "goal_bbox": [
+              [
+                -0.1185999858857289,
+                -0.12000000110249347,
+                0.0
+              ],
+              [
+                0.11859998588572891,
+                0.1200000011024935,
+                0.06109376845812383
+              ]
+            ],
+            "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+            "goal_size_m": 0.24,
+            "live_bbox": [
+              [
+                -0.05361199475829357,
+                -0.07999999826696379,
+                -6.938893903907228e-18
+              ],
+              [
+                0.05361199475829357,
+                0.07999999826696381,
+                0.05898327292614419
+              ]
+            ],
+            "live_instance": "objv_0de890446936",
+            "live_name": "other_small",
+            "live_placement": {
+              "canonical": "library",
+              "native_extent_m": [
+                150.84085083007807,
+                225.08522317436865,
+                82.97664648586829
+              ],
+              "pre_rot_x_deg": 90.0,
+              "size_m": 0.16,
+              "upright_yaw_add_deg": 90.0,
+              "yaw_deg": 0.0,
+              "yaw_rule": "0"
+            },
+            "live_size_m": 0.16,
+            "mode": "swap_instance",
+            "prim_paths": [
+              "/World/Swap_0"
+            ],
+            "reference_position": [
+              6.938893903907228e-18,
+              1.3877787807814457e-17,
+              0.28591402555179524
+            ],
+            "seed": 68660192,
+            "size_ratio": 0.6666666460997347,
+            "swapped": true
+          }
+        },
+        "records": "results/bridge/u8/inst_drill__swap-at_other_small__ground-concrete.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 2.425017158460105,
+        "start_id": "t1n_000",
+        "start_rotation_deg": 0.5379696049836575,
+        "start_translation_mm": 6.453841963793314,
+        "start_translation_mm_matched": 148.94337788936772,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "stop_translation_mm_matched": null,
+        "success": {
+          "abs_100mm_10deg": false,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": false,
+          "abs_50mm_5deg": false,
+          "cns_code_0p1d_10deg": false,
+          "paper_3cm_3deg": false,
+          "predicate_a": false
+        },
+        "success_matched": {
+          "abs_100mm_10deg": false,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": false,
+          "abs_50mm_5deg": false,
+          "cns_code_0p1d_10deg": false,
+          "paper_3cm_3deg": false,
+          "predicate_a": false
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 242.8,
+        "world_compiles": [
+          {
+            "compile_s": 3.602,
+            "n_objects": 2,
+            "peak_rss_mb": 2700.6,
+            "rss_mb_after": 2069.2,
+            "total_s": 3.865,
+            "unedited": false
+          }
+        ]
+      },
+      "inst_drill__swap-at_same": {
+        "final_rotation_deg": 0.029616219185593335,
+        "final_translation_mm": 0.2323686824407532,
+        "final_translation_mm_matched": 0.2323686824407532,
+        "first_frame_n_matches": 24,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+        "look": "raw",
+        "look_curve_id": null,
+        "max_iter": 100,
+        "mean_n_matches": 24.0,
+        "outcome": "converged",
+        "perturbation": {
+          "floor_centre_xy": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17
+          ],
+          "goal_bbox": [
+            [
+              -0.1185999858857289,
+              -0.12000000110249347,
+              0.0
+            ],
+            [
+              0.11859998588572891,
+              0.1200000011024935,
+              0.06109376845812383
+            ]
+          ],
+          "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "goal_size_m": 0.24,
+          "live_bbox": [
+            [
+              -0.1185999858857289,
+              -0.12000000110249347,
+              0.0
+            ],
+            [
+              0.11859998588572891,
+              0.1200000011024935,
+              0.06109376845812383
+            ]
+          ],
+          "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "live_name": "same",
+          "live_placement": null,
+          "live_size_m": 0.24,
+          "mode": "swap_instance",
+          "prim_paths": [],
+          "reference_position": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17,
+            0.42887105155853544
+          ],
+          "seed": 68660192,
+          "size_ratio": 1.0,
+          "swapped": false
+        },
+        "records": "results/bridge/u8/inst_drill__swap-at_same.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 1.7606202460790519,
+        "start_id": "t1n_000",
+        "start_rotation_deg": 0.5379696049836575,
+        "start_translation_mm": 6.453841963793314,
+        "start_translation_mm_matched": 6.453841963793314,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "stop_translation_mm_matched": null,
+        "success": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "success_matched": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 176.2,
+        "world_compiles": []
+      },
+      "inst_drill__swap-at_same_small": {
+        "final_rotation_deg": 0.4005679506086503,
+        "final_translation_mm": 139.63566621544336,
+        "final_translation_mm_matched": 3.7741691184054993,
+        "first_frame_n_matches": 23,
+        "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "goal_frame_md5": "c596de21fabc1a9e79b8a457fe0ee5cf",
+        "look": "raw",
+        "look_curve_id": null,
+        "max_iter": 100,
+        "mean_n_matches": 23.86,
+        "outcome": "converged_wrong_pose",
+        "perturbation": {
+          "floor_centre_xy": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17
+          ],
+          "goal_bbox": [
+            [
+              -0.1185999858857289,
+              -0.12000000110249347,
+              0.0
+            ],
+            [
+              0.11859998588572891,
+              0.1200000011024935,
+              0.06109376845812383
+            ]
+          ],
+          "goal_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "goal_size_m": 0.24,
+          "live_bbox": [
+            [
+              -0.07906665919827532,
+              -0.08000000269903239,
+              0.0
+            ],
+            [
+              0.07906665919827534,
+              0.0800000026990324,
+              0.0407291799720026
+            ]
+          ],
+          "live_instance": "a2de48529b1549488940fa98a3a3bac6",
+          "live_name": "same_small",
+          "live_placement": {
+            "canonical": "library",
+            "native_extent_m": [
+              3.12639698669917,
+              3.163302584303904,
+              0.8052419744704142
+            ],
+            "pre_rot_x_deg": 90.0,
+            "size_m": 0.16,
+            "upright_yaw_add_deg": 90.0,
+            "yaw_deg": 0.0,
+            "yaw_rule": "0"
+          },
+          "live_size_m": 0.16,
+          "mode": "swap_instance",
+          "prim_paths": [
+            "/World/Swap_0"
+          ],
+          "reference_position": [
+            6.938893903907228e-18,
+            1.3877787807814457e-17,
+            0.28591404139167775
+          ],
+          "seed": 68660192,
+          "size_ratio": 0.6666666830336394,
+          "swapped": true
+        },
+        "records": "results/bridge/u8/inst_drill__swap-at_same_small.jsonl",
+        "render_mode": "mujoco-llvmpipe",
+        "sec_per_step": 1.7887530629895627,
+        "start_id": "t1n_000",
+        "start_rotation_deg": 0.5379696049836575,
+        "start_translation_mm": 6.453841963793314,
+        "start_translation_mm_matched": 148.9433620516484,
+        "steps": 100,
+        "stop_step": null,
+        "stop_translation_mm": null,
+        "stop_translation_mm_matched": null,
+        "success": {
+          "abs_100mm_10deg": false,
+          "abs_10mm_1deg": false,
+          "abs_20mm_2deg": false,
+          "abs_50mm_5deg": false,
+          "cns_code_0p1d_10deg": false,
+          "paper_3cm_3deg": false,
+          "predicate_a": false
+        },
+        "success_matched": {
+          "abs_100mm_10deg": true,
+          "abs_10mm_1deg": true,
+          "abs_20mm_2deg": true,
+          "abs_50mm_5deg": true,
+          "cns_code_0p1d_10deg": true,
+          "paper_3cm_3deg": true,
+          "predicate_a": true
+        },
+        "terminated_reason": "max_iter",
+        "vsbench_commit": "8eea92b50cddb46eb3fd0ad1f2735d2bbe469686",
+        "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+        "wall_s": 179.3,
+        "world_compiles": [
+          {
+            "compile_s": 1.174,
+            "n_objects": 2,
+            "peak_rss_mb": 2059.0,
+            "rss_mb_after": 1774.8,
+            "total_s": 1.382,
+            "unedited": false
+          }
+        ]
+      }
+    },
+    "max_iter": 100,
+    "note": "recorded, not thresholded; context only, never pooled with Isaac numbers (D-9)",
+    "seed": 20260918
+  },
+  "unit": "U8 - the perturbation world verbs in MuJoCo (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 11:33:11 +0200"
+}

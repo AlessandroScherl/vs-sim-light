@@ -28,7 +28,7 @@ def default_backend() -> str:
     for name in MUJOCO_VARIANTS:
         if package_installed(name) and probe_backend(name)[0]:
             return name
-    raise SystemExit("no MuJoCo variant starts here; pip install vsbench[mujoco] and see the README for OSMesa/EGL")
+    raise SystemExit("no MuJoCo variant starts here; pip install vsbench[mujoco] and see docs/PORT_NOTES.md section 1 for OSMesa/EGL")
 
 
 def parse_params(items: list[str]) -> dict:
@@ -46,11 +46,17 @@ def parse_params(items: list[str]) -> dict:
 
 
 def main(argv=None) -> int:
+    from vsbench.glenv import ensure_software_gl
+
+    ensure_software_gl()   # software GL by default; a GPU context only with VSBENCH_ALLOW_GPU=1
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--method", required=True, choices=available_methods())
     ap.add_argument("--param", action="append", default=[], help="constructor argument key=value, repeatable")
     ap.add_argument("--backend", default=None, help="renderer variant (default: the first MuJoCo variant that starts)")
     ap.add_argument("--scene", default=None, help="scene name (default poster; marker for true_point_ibvs)")
+    ap.add_argument("--max-steps", type=int, default=EpisodeConfig().max_steps,
+                    help="step budget of each restoring-direction episode (default 3000; a smaller "
+                         "budget can only fail more starts)")
     a = ap.parse_args(argv)
     params = parse_params(a.param)
     scene = a.scene or ("marker" if a.method == "true_point_ibvs" else "poster")
@@ -59,13 +65,14 @@ def main(argv=None) -> int:
     backend = a.backend or default_backend()
     cam = gate_camera()
     r = make_renderer(backend, make_scene(scene), cam)
+    gl = (r.info().get("gl_renderer", "") if hasattr(r, "info") else "") or ""
     try:
         method = make_method(a.method, **params)
-        results = run_checks(r, method, target_pose(scene, cam), EpisodeConfig(), scene)
+        results = run_checks(r, method, target_pose(scene, cam), EpisodeConfig(max_steps=a.max_steps), scene)
     finally:
         r.close()
     shown = {k: v for k, v in (getattr(method, "params", None) or {}).items() if k != "points_w"}
-    print(f"backend {backend}, scene {scene}, method {a.method} {shown if shown else ''}")
+    print(f"backend {backend}{f' ({gl})' if gl else ''}, scene {scene}, method {a.method} {shown if shown else ''}, restoring budget {a.max_steps} steps")
     print(format_report(results, a.method))
     return 0 if all(x.passed for x in results) else 1
 

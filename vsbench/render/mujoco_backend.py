@@ -27,15 +27,41 @@ _CV_TO_GL = np.diag([1.0, -1.0, -1.0])  # optical (y down, z forward) -> MuJoCo 
 # MuJoCo user-mesh texcoords already put v = 0 at the top row of the picture, like ours:
 # no flip (checked by the homography gate; OBJ files are flipped by MuJoCo itself).
 _FLIP_V = False
+#: the depth context's shadow map side (never drawn; MuJoCo allocates one per context)
+_DEPTH_CTX_SHADOWSIZE = 64
 
 
 class MujocoRenderer:
-    def __init__(self, scene: SceneSpec, cam: CameraModel, gl: str = "egl", samples: int = 4):
+    def __init__(self, scene: SceneSpec, cam: CameraModel, gl: str = "egl", samples: int = 4,
+                 shadowsize: int = 4096, shadowclip_m: float | None = None,
+                 stat_extent: float | None = None, stat_center=None):
+        """``shadowsize``: the shadow map's side in texels. ``shadowclip_m``: half the side,
+        in metres, of the square a directional light's shadow map covers (centred on the
+        light's line through the world origin); ``None`` keeps MuJoCo's default
+        (``vis.map.shadowclip = 1``, i.e. one ``stat.extent``). ``stat_extent`` /
+        ``stat_center``: pin MuJoCo's model statistics (``<statistic extent= center=>``)
+        instead of letting the compiler derive them from the geometry - the clipping planes
+        and the shadow clip are stored relative to ``stat.extent``, so a scene edited by the
+        perturbation verbs (``vsbench.world.perturb_world``) keeps its unedited scene's
+        values and draws its unchanged pixels exactly as before; ``None`` = MuJoCo's own."""
         want = gl.lower()
+        # software GL is the default (vsbench.glenv): a caller that builds this class directly,
+        # past make_renderer (tools/convert_objects.py's contact sheet does), gets the same
+        # refusal of the GPU-capable context and the same Mesa pinning
+        from vsbench.render.base import gpu_refusal
+
+        refusal = gpu_refusal(f"mujoco-{want}")
+        if refusal:
+            raise PermissionError(refusal)
         have = os.environ.get("MUJOCO_GL", "").lower()
         if "mujoco" in sys.modules and have and have != want:
             raise RuntimeError(f"mujoco already imported with MUJOCO_GL={have!r}; one GL backend per process")
         os.environ["MUJOCO_GL"] = want
+        # without the pinning glvnd would hand MuJoCo's EGL the first device, the GPU here
+        from vsbench.glenv import ensure_software_gl
+
+        if want == "egl":
+            ensure_software_gl()
         import mujoco
 
         self._mj = mujoco
@@ -50,7 +76,7 @@ class MujocoRenderer:
         g.offwidth = max(int(cam.width), 640)
         g.offheight = max(int(cam.height), 480)
         spec.visual.quality.offsamples = int(samples)
-        spec.visual.quality.shadowsize = 4096
+        spec.visual.quality.shadowsize = int(shadowsize)
         hl = spec.visual.headlight
         hl.active = 1
         hl.ambient = (scene.ambient,) * 3
@@ -86,10 +112,16 @@ class MujocoRenderer:
         # with integer indices at pixel centres.
         c.principal_pixel = (W / 2.0 - cam.cx - 0.5, H / 2.0 - cam.cy - 0.5)
 
+        if stat_extent is not None:
+            spec.stat.extent = float(stat_extent)
+        if stat_center is not None:
+            spec.stat.center = tuple(float(c) for c in stat_center)
         self.model = spec.compile()
         model = self.model
         model.vis.map.znear = cam.near / model.stat.extent
         model.vis.map.zfar = cam.far / model.stat.extent
+        if shadowclip_m is not None:
+            model.vis.map.shadowclip = float(shadowclip_m) / model.stat.extent
         self.data = mujoco.MjData(model)
         self._cam_id = model.camera("vsbench_cam").id
         self._mocap_id = model.body("vsbench_cam_body").mocapid[0]
@@ -107,8 +139,12 @@ class MujocoRenderer:
             # not multisampled: a multisampled depth buffer resolves to one sample off
             # the pixel centre (3.9 mm at the 99th percentile on a 60 degree plane), and
             # NVIDIA keeps sample positions even for MuJoCo's segmentation pass.
+            # (its shadow map is never drawn - the depth pass is a segmentation render - so
+            # it gets the smallest one instead of a second shadowsize^2 texture in RAM)
             model.vis.quality.offsamples = 0
+            model.vis.quality.shadowsize = _DEPTH_CTX_SHADOWSIZE
             self._ctx_depth = mujoco.MjrContext(model, mujoco.mjtFontScale.mjFONTSCALE_150)
+            model.vis.quality.shadowsize = int(shadowsize)
             self._ctx_depth.readDepthMap = mujoco.mjtDepthMap.mjDEPTH_ZEROFAR
             mujoco.mjr_setBuffer(mujoco.mjtFramebuffer.mjFB_OFFSCREEN, self._ctx_depth)
             model.vis.quality.offsamples = self._samples

@@ -1,0 +1,296 @@
+{
+ "kind": "step3_demo",
+ "method": "sift_ransac",
+ "params": {
+  "arm": "sift_ransac",
+  "device": "cpu",
+  "scene_ransac": "homography",
+  "episode": "vsbench",
+  "start_id": 0
+ },
+ "scene": "poster",
+ "backend": "mujoco-egl",
+ "renderer": {
+  "variant": "mujoco-egl",
+  "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+  "mujoco": "3.13.0",
+  "MUJOCO_GL": "egl",
+  "MUJOCO_EGL_DEVICE_ID": "1"
+ },
+ "config": {
+  "dt": 0.04,
+  "max_steps": 300,
+  "limits": {
+   "v_max": 2.0,
+   "w_max": 4.0
+  },
+  "stop_tol": [
+   0.002,
+   0.003490658503988659
+  ],
+  "hold_steps": 25
+ },
+ "video_start": 1,
+ "jobs": 1,
+ "total_wall_s": 224.05006411799695,
+ "rows": [
+  {
+   "start": 1,
+   "translation_cm": [
+    5,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 85,
+   "final_error_mm": 1.2604556224003802,
+   "final_error_deg": 0.06431044310391704,
+   "call_s_mean": 0.15596185682670158,
+   "call_s_max": 0.283268594997935,
+   "lost_steps": 0,
+   "wall_s": 16.899498798069544,
+   "error": null,
+   "video": "results/bridge/u6b/demo/sift_ransac/start_01.mp4",
+   "video_replay": "replay identical: 85 frames plus the desired view on mujoco-egl"
+  },
+  {
+   "start": 2,
+   "translation_cm": [
+    0,
+    5,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "timeout",
+   "steps": 300,
+   "final_error_mm": 7.605604438035741,
+   "final_error_deg": 0.4039839664098953,
+   "call_s_mean": 0.15991636594136557,
+   "call_s_max": 0.34094505792018026,
+   "lost_steps": 0,
+   "wall_s": 54.49008848599624,
+   "error": null
+  },
+  {
+   "start": 3,
+   "translation_cm": [
+    0,
+    0,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 91,
+   "final_error_mm": 1.3592273694997872,
+   "final_error_deg": 0.07110873761924728,
+   "call_s_mean": 0.14594656058617836,
+   "call_s_max": 0.27361153496894985,
+   "lost_steps": 0,
+   "wall_s": 15.337510847952217,
+   "error": null
+  },
+  {
+   "start": 4,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    15
+   ],
+   "status": "converged",
+   "steps": 101,
+   "final_error_mm": 0.969533052431869,
+   "final_error_deg": 0.05204997636963875,
+   "call_s_mean": 0.16189287434733188,
+   "call_s_max": 0.2640276689780876,
+   "lost_steps": 0,
+   "wall_s": 18.57080942497123,
+   "error": null
+  },
+  {
+   "start": 5,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    0,
+    8,
+    0
+   ],
+   "status": "converged",
+   "steps": 72,
+   "final_error_mm": 0.7392511092593222,
+   "final_error_deg": 0.03587861746236583,
+   "call_s_mean": 0.15623916316447625,
+   "call_s_max": 0.24641823198180646,
+   "lost_steps": 0,
+   "wall_s": 12.770211827009916,
+   "error": null
+  },
+  {
+   "start": 6,
+   "translation_cm": [
+    0,
+    0,
+    0
+   ],
+   "rotation_deg": [
+    -8,
+    0,
+    0
+   ],
+   "status": "converged",
+   "steps": 73,
+   "final_error_mm": 0.30330235402531647,
+   "final_error_deg": 0.02464045288035497,
+   "call_s_mean": 0.15522254964381405,
+   "call_s_max": 0.32752415200229734,
+   "lost_steps": 0,
+   "wall_s": 12.797338908072561,
+   "error": null
+  },
+  {
+   "start": 7,
+   "translation_cm": [
+    8,
+    -5,
+    -10
+   ],
+   "rotation_deg": [
+    0,
+    0,
+    20
+   ],
+   "status": "converged",
+   "steps": 212,
+   "final_error_mm": 1.1971086748332092,
+   "final_error_deg": 0.060752191585783225,
+   "call_s_mean": 0.1587506406863642,
+   "call_s_max": 0.3461587359197438,
+   "lost_steps": 0,
+   "wall_s": 37.984841180965304,
+   "error": null
+  },
+  {
+   "start": 8,
+   "translation_cm": [
+    -10,
+    6,
+    8
+   ],
+   "rotation_deg": [
+    5,
+    5,
+    -25
+   ],
+   "status": "converged",
+   "steps": 84,
+   "final_error_mm": 0.4284973163328466,
+   "final_error_deg": 0.03919170563360181,
+   "call_s_mean": 0.15937030216584736,
+   "call_s_max": 0.27532066497951746,
+   "lost_steps": 0,
+   "wall_s": 15.051142994081602,
+   "error": null
+  },
+  {
+   "start": 9,
+   "translation_cm": [
+    12,
+    8,
+    -15
+   ],
+   "rotation_deg": [
+    6,
+    -8,
+    40
+   ],
+   "status": "converged",
+   "steps": 113,
+   "final_error_mm": 1.2759232037596278,
+   "final_error_deg": 0.06780385122038791,
+   "call_s_mean": 0.15282695873566302,
+   "call_s_max": 0.3001237940043211,
+   "lost_steps": 0,
+   "wall_s": 19.45437315304298,
+   "error": null
+  },
+  {
+   "start": 10,
+   "translation_cm": [
+    -15,
+    -10,
+    -20
+   ],
+   "rotation_deg": [
+    -6,
+    8,
+    -60
+   ],
+   "status": "converged",
+   "steps": 97,
+   "final_error_mm": 1.306424337051171,
+   "final_error_deg": 0.06706229460677515,
+   "call_s_mean": 0.1635808450645124,
+   "call_s_max": 0.2681670089950785,
+   "lost_steps": 0,
+   "wall_s": 17.767532574012876,
+   "error": null
+  }
+ ],
+ "converged": 9,
+ "call_s_mean": 0.15697081171622546,
+ "system": {
+  "timestamp": "2026-10-23T02:24:12+02:00",
+  "hostname": "4090",
+  "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+  "cores": 16,
+  "os": "Linux-6.14.0-37-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "packages": {
+   "numpy": "2.5.3",
+   "opencv-python-headless": "4.11.0.86",
+   "opencv-python": null,
+   "Pillow": "12.3.0",
+   "mujoco": "3.13.0",
+   "pybullet": "3.2.7",
+   "open3d": "0.20.0",
+   "PyOpenGL": "3.1.10",
+   "glfw": "2.10.2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "load_average": [
+   31.12109375,
+   29.322265625,
+   29.21044921875
+  ],
+  "env": {
+   "VSBENCH_SOFTWARE_GL": "1",
+   "MUJOCO_GL": "egl",
+   "MUJOCO_EGL_DEVICE_ID": "1",
+   "EGL_PLATFORM": "surfaceless",
+   "LIBGL_ALWAYS_SOFTWARE": "1",
+   "__EGL_VENDOR_LIBRARY_FILENAMES": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+   "LD_LIBRARY_PATH": "/home/alessandro/genvs_ws/vs_sim_light/.venv/lib/python3.12/site-packages/cv2/../../lib64:"
+  }
+ }
+}

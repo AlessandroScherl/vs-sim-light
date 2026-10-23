@@ -1,238 +1,165 @@
-# vsbench
+# vs-sim-light
 
-VS-Bench, a lightweight visual-servoing simulator and benchmark. Step 1: one `Renderer`
-interface with three backends (MuJoCo, PyBullet, Open3D), the gates that check each one
-against analytic reference math, the measurements behind the choice, and
-`bakeoff_report.md`; MuJoCo won. Step 2: the motion layer, a free-flying camera that
-integrates a clamped 6-DoF velocity command on SE(3), the point interaction matrix, a
-trajectory log, and the gates that prove the image moves exactly as the twist predicts.
-Step 3: the servo loop, one method interface with a registry, three basic controllers,
-the setup checks, an episode log that replays into a debug video, and a demo.
-Metrics beyond the true pose error and perturbations come later.
+A lightweight simulator for **image-based visual servoing (IBVS)**: a free-flying camera
+(an Intel RealSense D435i model, colour + depth, 1920 x 1080) over textured scenes, rendered by
+[MuJoCo](https://mujoco.org) on the CPU - no GPU, no Isaac Sim. Plug in your own servoing
+method, fly it from fixed start poses, and compare it with published baselines (ViT-VS,
+ART-VS, SIFT / ORB / AKAZE).
 
-## Install and first render
+![A flight: the goal view (left) and the live camera (right), with the matched points and an arrow from each to where it should be](docs/media/demo.gif)
 
+*`sift_ransac` on `cluttered2`, starting 110 mm and 15 degrees away from the goal view; 1 mm away after 160 steps.*
+
+## Quick start
+
+**Install** (Linux, Python 3.10+; MuJoCo draws with Mesa's software renderer, from the
+`libegl1` and `libgl1-mesa-dri` packages, which are usually present):
+
+```bash
+git clone https://github.com/AlessandroScherl/vs-sim-light.git && cd vs-sim-light
+python -m venv .venv && source .venv/bin/activate
+pip install torch --index-url https://download.pytorch.org/whl/cpu   # the CPU wheel, before the next line
+pip install -e ".[mujoco,baselines]"     # baselines: transformers, for vitvs_dinov3
 ```
-pip install -e ".[all,dev]"          # or one of [mujoco] [pybullet] [open3d]
-python -m vsbench.smoke              # first backend that works here; writes smoke.png
-python -m vsbench.smoke --backend mujoco-glfw     # a laptop with a display
+
+**Get the assets.** The pictures and objects are not in the repository (third-party
+artwork and scans). The simulator looks for them under `$VSBENCH_WORKSPACE_ROOT/assets/`
+(default `~/genvs_ws/assets/`). The three posters need one picture each:
+
+```bash
+export VSBENCH_WORKSPACE_ROOT=~/vsbench_data
+# $VSBENCH_WORKSPACE_ROOT/assets/hollywood/resized.png  ART-VS's poster (its catkin_ws/ibvs/models/viso/materials/textures/resized.png)
+# $VSBENCH_WORKSPACE_ROOT/assets/poster2/poster2.png    the COCO val2017 image 000000000724, saved as PNG
+# $VSBENCH_WORKSPACE_ROOT/assets/poster3/poster3.jpg    Bruegel, "The Tower of Babel" (Vienna), Wikimedia Commons, 3840 x 2810
 ```
 
-On a Linux machine without a display or GPU, MuJoCo needs one of: the `libosmesa6`
-package (`MUJOCO_GL=osmesa`, `--backend mujoco-osmesa`) or Mesa's EGL (`libegl1` and
-`libgl1-mesa-dri`, usually present) with `VSBENCH_SOFTWARE_GL=1 --backend mujoco-egl`.
-PyBullet's TinyRenderer and Open3D's CPU mode need nothing else. `VSBENCH_SOFTWARE_GL=1`
-forces Mesa's llvmpipe for every backend, so a machine with a GPU never touches it.
+The three rooms also need their floor textures and their objects converted into a MuJoCo
+cache (`tools/convert_objects.py`, from our USD files and the YCB scans). That USD library
+is not public yet: **without it you can fly the three posters**; the rooms need our files.
 
-## Result of the bake-off (station, 2026-09-18)
+**Fly a baseline** (one start 3-8 mm from the goal, 100 steps, with a film):
 
-`results/bakeoff_report.md`: MuJoCo is the pick. MuJoCo (EGL/llvmpipe, OSMesa, and on the
-RTX 4090) and PyBullet's TinyRenderer pass all four gates; Open3D fails cross-process
-determinism on the CPU (an intermittent artefact on one mesh under llvmpipe) and returns
-an unusable depth image on the GPU. PyBullet has no wheels for Python 3.12, macOS or
-Windows and renders the clutter scene at 11 fps; MuJoCo renders it at about 100 fps at
-640 x 480 in one CPU process (380 fps without anti-aliasing, 1140 fps on the GPU). Open3D
-has the sharpest slanted poster but 11 fps on the clutter scene on the CPU. GPU and CPU
-MuJoCo renders agree to 44.6 dB; EGL and OSMesa are bit-identical.
+```bash
+python -m vsbench fly --scene poster2 --method sift_ransac --start-set near60 --limit 1 --max-iter 100 --film
+```
 
-## The interface
+It prints the distance to the goal at the start and at the end and writes everything under
+`runs/`; `python -m vsbench list` shows every name you can fly. Flights run on the CPU with two
+threads, at roughly 0.5 to 2 seconds per step depending on the method and the machine.
+
+**Weights.** SIFT, ORB and AKAZE need none. `vitvs_dinov3` never downloads: accept the licence of
+[facebook/dinov3-vits16-pretrain-lvd1689m](https://huggingface.co/facebook/dinov3-vits16-pretrain-lvd1689m)
+and run `hf download facebook/dinov3-vits16-pretrain-lvd1689m` once. `vitvs_dinov2` and `artvs`
+load DINOv2 through `torch.hub`, which downloads it on first use (read from the code, untested off our machine).
+
+## Plug in your method
+
+A method is one class (two attributes, four methods) with a `@register` line. It sees the goal
+picture, the live picture, depth if it asks for it, and the camera intrinsics - never the true
+pose - and returns a camera velocity. [`examples/my_method.py`](examples/my_method.py) is a
+complete one (ORB matches and the classic point IBVS law, about 70 lines). Its skeleton:
 
 ```python
-import numpy as np
-from vsbench import CameraModel, SceneSpec, Plane, Material, Light
-from vsbench.render import make_renderer
-from vsbench.stdscenes import load_poster, POSTER_SIZE
-from vsbench.poses import look_at
-
-cam = CameraModel.from_focal(640, 480, fx=600.0)            # K in pixels, OpenCV convention
-scene = SceneSpec((Plane(np.eye(4), POSTER_SIZE, Material(texture=load_poster())),),
-                  lights=(Light(direction=(0.2, 0.1, -1.0)),), ambient=0.3)
-r = make_renderer("mujoco-egl", scene, cam)                 # or mujoco-osmesa, mujoco-glfw,
-                                                            # pybullet-tiny, open3d-cpu, ...
-T_wc = look_at(eye=(0.3, -0.5, 0.9), target=(0.0, 0.0, 0.0))  # camera-to-world, optical frame
-rgb, depth = r.render(T_wc)                                 # uint8 (H, W, 3); float32 (H, W) metres
-r.set_light((0.0, 0.5, -1.0), intensity=0.7)
-r.close()
-```
-
-Conventions: `T_wc` is camera-to-world with x right, y down, z forward; integer pixel
-`(u, v)` is the pixel centre; depth is z-depth in metres, 0 where nothing was hit; one
-renderer per process. Every backend converts to its own frame internally.
-
-## Moving the camera (step 2)
-
-```python
-from vsbench import FreeCamera, Trajectory
-from vsbench.interaction import predicted_flow
-
-cam_free = FreeCamera(T_wc, dt=0.04)                        # 25 Hz, limits 2 m/s and 4 rad/s
-log = Trajectory(cam_free.dt, cam_free.limits)
-for k in range(25):                                         # one second: pan right at 10 deg/s
-    twist = [0.0, 0.0, 0.0, 0.0, 0.1745, 0.0]               # [vx, vy, vz, wx, wy, wz], optical frame
-    t, pose = cam_free.t, cam_free.T_wc
-    applied = cam_free.step(twist)                          # T_wc <- T_wc @ exp_se3(twist * dt), clamped
-    log.append(t, pose, twist, applied)
-    rgb, depth = r.render(cam_free.T_wc)                    # the image content moves left
-flow = predicted_flow(cam, [[320.0, 240.0]], depth[240, 320], applied, cam_free.dt)  # px per step
-log.save("flight.npz")                                      # Trajectory.load(...).replay() is bit-identical
-```
-
-The twist is the camera's body velocity in its own optical frame, linear part first, in
-m/s and rad/s. Positive `vx` slides the camera right (the image moves left), `vy` down,
-`vz` forward (the image expands); positive `wx` tilts up, `wy` pans right, `wz` rolls
-clockwise seen from behind. `results/step2_axes.png` shows each axis for one second with
-the predicted and the tracked flow, and `results/STEP2_REPORT.md` lists the nine motion
-gates with their numbers.
-
-## Closing the loop (step 3)
-
-A method sees images, gets depth only in the form it asked for and the intrinsics, and
-returns a camera-frame twist; `run_episode` renders, moves the camera with `FreeCamera`
-and logs everything into one `.npz` that replays into a video.
-
-```
-VSBENCH_SOFTWARE_GL=1 python -m vsbench.demo --method sift_ibvs       # the ten demo starts, logs, one video
-python -m vsbench.demo --method orb_ibvs --param gain=0.8              # constructor arguments as key=value
-python -m vsbench.demo --method true_point_ibvs                        # marker scene, the privileged instrument
-python -m vsbench.demo --method sift_ibvs --jobs 4                     # ten starts over 4 processes (same logs, bit for bit)
-VSBENCH_SOFTWARE_GL=1 python -m vsbench.check --method sift_ibvs      # the three setup checks, pass/fail per axis
-python -m vsbench.replay results/demo/sift_ibvs/start_10.npz --video out.mp4   # re-render, compare hashes, video
-```
-
-The demo prints status, steps and final error per start, saves `results/demo/<method>/start_NN.npz`,
-and writes `start_10.mp4` and `start_10_matches.png` for the largest offset. The video
-shows the current and desired image with the matches (inliers green, outliers red), a 3D
-view with the target and current frustum, the path and the velocity arrows, and the error
-and twist curves; the match sheet is the same matching at four steps in full resolution.
-Built-in methods: `oracle_pbvs` and `true_point_ibvs` (privileged test instruments that see
-the true poses), `sift_ibvs` and `orb_ibvs` (SIFT or ORB, ratio test, RANSAC on a
-homography, depth at the inlier keypoints, the point IBVS law with `interaction_matrix`).
-
-```python
-from vsbench.camera import gate_camera
-from vsbench.episode import EpisodeConfig, EpisodeLog, run_episode
-from vsbench.methods import make_method
-from vsbench.render import make_renderer
-from vsbench.scenes import make_scene, poster_target_pose
-from vsbench.se3 import exp_se3
-
-cam = gate_camera()
-r = make_renderer("mujoco-egl", make_scene("poster"), cam)
-T_target = poster_target_pose(cam)                              # straight at the poster, 70 % of the width
-T_start = T_target @ exp_se3([0.05, 0.0, -0.1, 0.0, 0.0, 0.26])   # 5 cm right, 10 cm back, 15 deg roll
-log = run_episode(r, make_method("sift_ibvs"), T_start, T_target, EpisodeConfig(max_steps=500), "poster")
-print(log.meta["status"], len(log), "steps", log.err_t[-1] * 1e3, "mm")   # converged 128 steps 0.82 mm
-log.save("episode.npz")                                          # EpisodeLog.load(...) gives it back
-```
-
-### Write your own method
-
-One class with `name`, `wants_depth` (`none`, `scalar` or `dense`), `privileged = False`
-and the four calls, plus one `@register` line. This one servos two axes from the global
-image shift and passes the zero-at-target and hold-at-target checks; put it in any module
-you import before `make_method("shift_ibvs")`:
-
-```python
-import cv2
 import numpy as np
 from vsbench.methods import register
 
-@register("shift_ibvs")
-class ShiftIBVS:
-    wants_depth = "scalar"          # one number: the distance to the target view
-    privileged = False
+@register("my_ibvs")                       # the name you pass to --method
+class MyIBVS:
+    wants_depth = "dense"                  # "none", "scalar" (one distance) or "dense" (a depth image)
+    privileged = False                     # must stay False: the benchmark refuses methods that read the pose
 
-    def __init__(self, gain=1.0):
-        self.gain = gain
-        self.params = {"gain": gain}                  # recorded in the episode meta
+    def configure(self, K, width, height, dt):        # once per episode: 3x3 intrinsics (px), size, period (s)
+        self.K = K
 
-    def configure(self, K, width, height, dt):
-        self.fx, self.fy = K[0, 0], K[1, 1]
-
-    def reset(self):
-        self.desired = None
+    def reset(self):                                   # forget the previous episode
+        self.goal = None
 
     def set_target(self, desired_rgb, desired_depth=None, distance_prior=None):
-        self.desired = cv2.cvtColor(np.asarray(desired_rgb), cv2.COLOR_RGB2GRAY).astype(np.float32)
-        self.Z = distance_prior
+        self.goal = desired_rgb                        # uint8 (H, W, 3); depth is float32 metres, 0 = nothing hit
 
     def get_control_rate(self, current_rgb, current_depth=None):
-        gray = cv2.cvtColor(np.asarray(current_rgb), cv2.COLOR_RGB2GRAY).astype(np.float32)
-        (dx, dy), response = cv2.phaseCorrelate(gray, self.desired)   # px shift current -> desired
-        twist = np.zeros(6)
-        twist[0] = -self.gain * dx / self.fx * self.Z   # content must move by -dx, so slide the other way
-        twist[1] = -self.gain * dy / self.fy * self.Z
-        return twist, {"error_norm": float(np.hypot(dx, dy)), "lost": response < 0.05}
+        twist = np.zeros(6)                            # [vx, vy, vz, wx, wy, wz] in m/s and rad/s
+        return twist, {"error_norm": 0.0}              # the info dict is optional
 ```
 
-The twist is `[vx, vy, vz, wx, wy, wz]` in the optical frame (m/s, rad/s), the images are
-read-only `uint8 (H, W, 3)`, depth is `float32 (H, W)` metres with 0 where nothing was hit.
-The optional info dict may carry `kp_cur`, `kp_des`, `inliers`, `error_norm`, `observer_s`,
-`controller_s` and `lost`; the video and the log use them. For a full feature pipeline,
-subclass `FeatureIBVS` in `vsbench/methods/feature_ibvs.py` and override one of `_describe`,
-`_match`, `_ransac`, `_depths` or `_law`. Code under `vsbench/methods/` must not import the
-episode loop, a renderer or a scene (a test checks the import graph), and only the two
-privileged instruments ever see a pose.
+The twist is the camera's velocity in its own frame (x right, y down, z forward): positive
+`vz` moves towards the scene, positive `wz` rolls clockwise as seen from behind the camera.
+The info dict may carry `kp_cur` and `kp_des` (the matched pixels in the live and the goal
+picture, (N, 2) each), `inliers` (N booleans), `error_norm` and `lost` (gave up this step);
+with `kp_cur` / `kp_des` the film draws your matches and the benchmark's stopping rule can
+run. Constructor arguments come from `--param key=value`. Fly it:
 
-## Gates and measurements
-
-```
-VSBENCH_SOFTWARE_GL=1 pytest --backends mujoco-egl        # every gate (steps 1 to 3), one variant, about 8 min
-VSBENCH_SOFTWARE_GL=1 tools/run_all.sh                    # step 1: gates, measurements, bake-off report
-VSBENCH_SOFTWARE_GL=1 tools/run_step2.sh                  # step 2: axis sheet, nine gates, report
-VSBENCH_SOFTWARE_GL=1 tools/run_step3.sh                  # step 3: demo per method, thirteen gates, report
+```bash
+python -m vsbench fly --scene poster2 --method my_ibvs --plugin examples/my_method.py \
+    --start-set near60 --limit 1 --max-iter 150 --film
 ```
 
-Step 1: `tools/run_gates.py` runs each gate file in its own pytest process per variant
-and writes `results/gates_<variant>.json`; `tools/bench_speed.py`, `bench_parallel.py`,
-`quality_sheet.py`, `cross_variant.py`, `lighting_check.py` and `install_friction.sh`
-write the other `results/*.json`; `tools/bakeoff_report.py` turns them into
-`results/bakeoff_report.md`. The brief is in `docs/STEP1_RENDERER_BAKEOFF.md`.
+`--plugin` imports your file so that its `@register` line runs; this flight goes from 5.6 mm
+to 0.45 mm in 150 steps. Several names fly side by side: `--method my_ibvs sift_ransac`.
 
-Step 2: `tools/fly_axes.py` writes `results/step2_axes.png` and `step2_axes.json`;
-`tools/step2_report.py` runs the nine motion gates (six need no renderer, the rendered
-flow gate needs MuJoCo), times `FreeCamera.step` and writes `results/STEP2_REPORT.md`.
-The brief is in `docs/STEP2_CAMERA_MOTION.md`.
+## Scenes
 
-Step 3: `python -m vsbench.demo` for each built-in method writes `results/demo/<method>/`
-(ten logs, `demo.json`, one video, one match sheet; `--jobs N` spreads the starts over N
-processes, which pays off with a GPU renderer, not on a CPU-only laptop where one episode
-already uses every core; `tools/bench_episodes.py` measures it); `tools/step3_report.py` runs the
-thirteen servo-loop gates (contract, leak, oracle decay and convergence, the three setup
-checks, negative control, IBVS decay, feature convergence, log round trip, replay, video)
-and writes `results/STEP3_REPORT.md` with every measured number, the demo tables and the
-time per `get_control_rate` call. The brief is in `docs/STEP3_SERVO_LOOP.md`.
+![The six scenes, seen from their goal pose](docs/media/scenes.png)
 
-## Layout
+| scene | what | start sets |
+| --- | --- | --- |
+| `hollywood`, `poster2`, `poster3` | a 0.8 x 0.6 m poster seen straight on (ART-VS's poster, a COCO photo, a Bruegel painting) | `near60` (3-8 mm away), `narrow20`, `capped30`, `wide100` |
+| `industrial1_drill` | one drill lying on a concrete floor | `capped30`, `wide100` |
+| `cluttered2`, `cluttered3` | eight or seven YCB objects on a wooden table or a laminate floor | `capped30`, `wide100` |
 
-```
-vsbench/camera.py       CameraModel (K, size, near, far) and its OpenGL projection
-vsbench/scene.py        SceneSpec: Plane, Box, Sphere, Mesh, Light, Material (plain data)
-vsbench/reference.py    analytic projection, plane z-depth, poster homography (NumPy only)
-vsbench/render/         base.py (Renderer protocol, make_renderer), one module per backend
-vsbench/stdscenes.py    marker board, plane, poster, clutter and lighting scenes
-vsbench/se3.py          hat, vee, exp/log on SO(3) and SE(3), pose_error, orthonormalise (NumPy only)
-vsbench/motion.py       MotionLimits, clamp_twist, FreeCamera (NumPy only)
-vsbench/interaction.py  interaction_matrix, predicted_flow, exact_flow (NumPy only)
-vsbench/trajectory.py   Trajectory: append, save, load, replay, path_length (NumPy only)
-vsbench/gates.py        marker detection, ORB matching, corner tracking shared by tests and tools
-vsbench/smoke.py        python -m vsbench.smoke
-vsbench/scenes.py       make_scene(name), the poster and marker target poses, the marker points
-vsbench/methods/        base.py (VSMethod protocol, info keys, normalise_output), the registry,
-                        oracle_pbvs.py, true_point_ibvs.py (privileged), feature_ibvs.py (sift_ibvs, orb_ibvs)
-vsbench/episode.py      EpisodeConfig, run_episode, EpisodeLog (a Trajectory with errors, hashes, matches), the ten demo starts
-vsbench/checks.py       zero_at_target, hold_at_target, restoring_direction; vsbench/check.py: python -m vsbench.check
-vsbench/replay.py       python -m vsbench.replay <log> [--video out.mp4]
-vsbench/video.py        the four-panel debug video and the match sheet (imageio-ffmpeg, OpenCV fallback)
-vsbench/demo.py         python -m vsbench.demo
-tests/                  step 1: test_reference, test_projection, test_depth, test_homography, test_determinism
-                        step 2: test_se3, test_motion, test_interaction, test_flow_rendered, test_trajectory
-                        step 3: test_contract, test_leak, test_oracle, test_checks, test_true_point_ibvs,
-                        test_feature_ibvs, test_episode_log, test_replay, test_video
-tools/                  measurements and the reports (run_all.sh, run_step2.sh, run_step3.sh)
-assets/poster.png       CC0 photograph (see assets/README.md)
-results/                JSON records, contact sheets, bakeoff_report.md, step2_axes.png, STEP2_REPORT.md,
-                        STEP3_REPORT.md, demo/<method>/ (one video and one match sheet per method; logs are not committed)
-```
+The STOP sign in `poster2` is upside down in the COCO photo itself, and that portrait photo
+is stretched onto the 0.8 x 0.6 m poster, as in the Isaac Sim benchmark.
 
-MIT licence. Dependencies come through pip; nothing is vendored.
+The start poses are frozen files (`vsbench/benchmark/starts/`), so every method flies from the
+same places. The pictures are tone-mapped to look like the Isaac Sim renders of the same scenes
+(`--look raw`: MuJoCo's plain picture).
+
+**Perturbations** (`--perturb`): `light`, `occluder`, `distractors`, `noise`, `combined`,
+`ground:<floor>` and `swap:<object>` (replace an object with one of the 317 converted library
+objects: shoes, bottles, mugs, drills, ...), chained with `+`, e.g.
+`--perturb swap:ycb/006_mustard_bottle+ground:concrete`. The goal view stays the unperturbed one.
+
+## Debug visualizations
+
+- **The film** (`--film`): goal | live camera, the matched points with an arrow from each to
+  its target, the step, the number of matches and the true distance to the goal (the GIF above).
+- **The debug view** (below): one step drawn from the flight's log - each goal point joined to
+  its live match and checked against the true correspondence (the header counts the matches
+  within 20 px of the truth), the timeline of the whole flight (distance, angle, matches, where
+  each stop fired) and the error split into sideways, height, tilt and roll
+  (`vsbench/vs/bench/debugview.py`; `tools/readme_media.py demo` records and draws one).
+
+![The debug view of one step](docs/media/debug_view.jpg)
+
+## What you get from a run
+
+`runs/<scene>_<name>.jsonl` holds one JSON record per episode (your own methods carry an
+`external_` tag: `poster2_external_my_ibvs.jsonl`). Read `final_translation_mm`
+and `final_rotation_deg` (the true distance to the goal pose when the episode ended), next to
+`start_translation_mm`, `steps` and `terminated_reason`; `success` says yes or no per rule
+(e.g. `abs_10mm_1deg`: within 10 mm and 1 degree). Beside it, a dated run directory under
+`runs/<scene>_<name>/` holds the run's settings, machine and commit (`run.json`,
+`resolved_config.yaml`) and, with `--film`, one `episode.mp4` per episode (the record's `film`
+field gives its path). `--telemetry` adds a per-step log, and
+`python -m vsbench.world.fly summary --out runs` prints a table of a whole directory.
+
+## Baselines included
+
+Copied unchanged from our Isaac Sim benchmark and run as published. Here they run on the CPU
+with a software renderer and the Isaac look, so their numbers are not the same as Isaac Sim
+numbers and should not be pooled with them.
+
+- **ViT-VS** (`vitvs_dinov3`, `vitvs_dinov2`): Scherl et al., [arXiv 2503.04545](https://arxiv.org/abs/2503.04545)
+- **ART-VS** (`artvs`): [art-vs.github.io](https://art-vs.github.io/), [arXiv 2606.19089](https://arxiv.org/abs/2606.19089)
+- **SIFT / ORB / AKAZE** (`sift_ransac`, `orb_ransac`, `akaze_ransac`): [OpenCV](https://opencv.org) features, RANSAC and the point IBVS law
+- **CNS v1** ([hhcaz/CNS](https://github.com/hhcaz/CNS)): the code is copied but not wired up yet
+
+## Further reading
+
+- [`docs/PORT_NOTES.md`](docs/PORT_NOTES.md): developer notes (the renderer, the camera
+  motion, the test loop, the gates, how the Isaac Sim benchmark was copied, the look)
+- [`docs/PORT_PLAN.md`](docs/PORT_PLAN.md): the plan of the port from Isaac Sim
+- [`vsbench/vs/PROVENANCE.md`](vsbench/vs/PROVENANCE.md): what was copied, from which commit
+- [`docs/`](docs/): the three step briefs (`STEP1_RENDERER_BAKEOFF.md`, `STEP2_CAMERA_MOTION.md`, `STEP3_SERVO_LOOP.md`); their reports are in `results/`
+
+MIT licence.

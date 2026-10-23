@@ -1,0 +1,287 @@
+{
+  "allow_dirty": true,
+  "allow_no_git": false,
+  "arm_build_s": 0.016,
+  "bridge_driver": "tools/u4_rooms.py smoke",
+  "bridge_env": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "LP_NUM_THREADS": "2",
+    "VSBENCH_SOFTWARE_GL": "1",
+    "allow_gpu": false,
+    "cuda_available": false,
+    "nvidia_smi": "hidden",
+    "torch": "2.14.1+cpu",
+    "torch_interop_threads": 2,
+    "torch_threads": 2
+  },
+  "cuda_matmul_allow_tf32": false,
+  "cuda_version": null,
+  "cudnn_allow_tf32": true,
+  "cudnn_benchmark": false,
+  "cudnn_deterministic": false,
+  "cudnn_version": null,
+  "finished_utc": "2026-10-23T07:24:53Z",
+  "git_available": true,
+  "git_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e",
+  "git_dirty": false,
+  "git_dirty_paths": [],
+  "goal_capture_keep": "last",
+  "goal_frame_md5": "df7b04e95d8d9b8daf9ace35e7c762d3",
+  "goal_render_warmup": 1,
+  "goal_render_warmup_protocol": 8,
+  "goal_render_warmup_reason": "1 capture, not the protocol's 8: the 8 settle RTX render history; MuJoCo frames are deterministic (two draws of one pose are the same bytes)",
+  "goal_settle_series": {
+    "capture_retries": [
+      0
+    ],
+    "depth_md5": [
+      "7c6f56d6772d49b87e58c0ef8f25168c"
+    ],
+    "diff_prev": [
+      null
+    ],
+    "keep": "last",
+    "kept_index": 0,
+    "look": "isaac_fit_v1",
+    "n_captures": 1,
+    "render_mode": "mujoco-llvmpipe",
+    "rgb_md5": [
+      "df7b04e95d8d9b8daf9ace35e7c762d3"
+    ],
+    "rgb_mean": [
+      184.594943
+    ]
+  },
+  "gpu": null,
+  "gpu_driver": null,
+  "hostname": "4090",
+  "look": "isaac_fit_v1",
+  "look_curve_id": "isaac_fit_v1/industrial1_drill",
+  "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+  "look_record": {
+    "ambient": 0.17625,
+    "ambient_share": 0.15,
+    "curve_params_rgb": [
+      [
+        0.021903500263680035,
+        2.0239057327140366,
+        2.0804042005677186
+      ],
+      [
+        2.5815596856190595e-22,
+        1.726801921214454,
+        1.7102429650146125
+      ],
+      [
+        8.284618248489928e-18,
+        1.544840063396872,
+        1.5289301327514835
+      ]
+    ],
+    "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "light_gain": 1.175,
+    "look": "isaac_fit_v1",
+    "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+    "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+    "look_curve_id": "isaac_fit_v1/industrial1_drill",
+    "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+    "shadowclip_m": 1.672015094232153,
+    "shadowsize": 8192,
+    "sun_intensity": 1.153257163
+  },
+  "matcher_tie_order": "stable (module default; the config does not state it)",
+  "name": "industrial1_drill_sift_ransac",
+  "python_version": "3.12.3",
+  "render_mode": "mujoco-llvmpipe",
+  "run_dir": "/home/alessandro/genvs_ws/vs_sim_light/results/bridge/u4b/isaac_fit_v1/industrial1_drill_sift_ransac/2026-10-23_industrial1_drill_sift_ransac",
+  "scene_meta": {
+    "bbox_usd_rule": {
+      "max": [
+        0.12211053259587726,
+        0.17898943406997603,
+        0.08943245623451285
+      ],
+      "min": [
+        -0.1306623757349827,
+        -0.1096300485894203,
+        -0.015303227165115112
+      ]
+    },
+    "build_s": 0.119,
+    "compile_s": 0.941,
+    "goal_check": {
+      "all_pass": true,
+      "d4": "D-4 (a) default: the frozen goal wins on a miss, the residual is recorded",
+      "derived": {
+        "bbox_max": [
+          0.12211053259587726,
+          0.17898943406997603,
+          0.08943245623451285
+        ],
+        "bbox_min": [
+          -0.1306623757349827,
+          -0.1096300485894203,
+          -0.015303227165115112
+        ],
+        "cam_R_opt": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ],
+        "cam_pos": [
+          -0.004275921569552726,
+          0.034679692740277865,
+          0.5317144904307338
+        ],
+        "distance_m": 0.4422820341962209,
+        "rule": "scene_view_goal_pose(cam, scene_bbox(placed, 'usd'), goal block)"
+      },
+      "files": [
+        {
+          "ddist_mm": 2.2370993946196904e-11,
+          "distance_m": 0.4422820341962433,
+          "dpos_mm": 3.086422270461639e-11,
+          "drot_deg": 0.0,
+          "file": "v2",
+          "pass": true,
+          "refusal": null
+        }
+      ],
+      "goal_rule": "frozen_on_miss",
+      "tolerance": {
+        "dist_m": 0.001,
+        "pos_m": 0.0005,
+        "rot_deg": 0.05
+      },
+      "used": "derived"
+    },
+    "goal_distance_m": 0.4422820341962209,
+    "ground": {
+      "build": "one Plane, the texture shown once (row 0 at world +Y)",
+      "size_m": 2.4,
+      "texture": "/workspace/assets/industrial1/ground.png",
+      "texture_host_path": "/home/alessandro/genvs_ws/assets/industrial1/ground.png",
+      "texture_wh": [
+        1024,
+        1024
+      ],
+      "tile_period_m": 2.4,
+      "uv_tiles": 1.0,
+      "z_m": 0.0
+    },
+    "kind": "multi_object",
+    "layout_file": "configs/layouts/industrial1_drill.json",
+    "lighting": {
+      "ambient": 0.2,
+      "from": "Isaac dome 3000 x 0.2 -> ambient 0.2; distant light rotateXYZ(-30, 0, 30) -> direction; intensity so a white texel renders white (the mock's tone); a stand-in, not photometric parity",
+      "sun_cast_shadow": true,
+      "sun_direction": [
+        0.25,
+        -0.433012702,
+        -0.866025404
+      ],
+      "sun_intensity": 0.923760431
+    },
+    "look": {
+      "ambient": 0.17625,
+      "ambient_share": 0.15,
+      "curve_params_rgb": [
+        [
+          0.021903500263680035,
+          2.0239057327140366,
+          2.0804042005677186
+        ],
+        [
+          2.5815596856190595e-22,
+          1.726801921214454,
+          1.7102429650146125
+        ],
+        [
+          8.284618248489928e-18,
+          1.544840063396872,
+          1.5289301327514835
+        ]
+      ],
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "light_gain": 1.175,
+      "look": "isaac_fit_v1",
+      "look_config": "vsbench/world/configs/look_isaac_fit_v1.json",
+      "look_config_md5": "8d010bcddc6936d192fa6c699c671dd9",
+      "look_curve_id": "isaac_fit_v1/industrial1_drill",
+      "look_curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+      "shadowclip_m": 1.672015094232153,
+      "shadowsize": 8192,
+      "sun_intensity": 1.153257163
+    },
+    "lost": "PBR (roughness 0.6 ground, object materials), normal maps, MDL; diffuse texture + MuJoCo's own shading only (PORT_PLAN section 5)",
+    "object_cache": "/home/alessandro/genvs_ws/vsbench_assets/objects",
+    "objects": [
+      {
+        "faces": 29100,
+        "instance_id": "handal_drill_25",
+        "pos": [
+          -0.004322174936532974,
+          0.03472788259387016,
+          0.036953989416360855
+        ],
+        "quat_wxyz": [
+          -0.05175703763961792,
+          0.7126770615577698,
+          0.08355712890625,
+          0.6945723295211792
+        ],
+        "scale": 0.0011035546194761992,
+        "source": "layout",
+        "texture_wh": [
+          2048,
+          2048
+        ],
+        "vertices": 29946
+      }
+    ],
+    "render_camera": {
+      "convention": "isaac_half_pixel",
+      "cx": 959.5,
+      "cy": 539.5,
+      "depth": "optical z (distance_to_image_plane)",
+      "depth_noise": null,
+      "far_m": 10.0,
+      "fx": 1406.748094934653,
+      "fy": 1406.748094934653,
+      "height": 1080,
+      "near_m": 0.05,
+      "width": 1920
+    },
+    "render_mode": "mujoco-llvmpipe",
+    "renderer": {
+      "MUJOCO_EGL_DEVICE_ID": "1",
+      "MUJOCO_GL": "egl",
+      "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "mujoco": "3.13.0",
+      "variant": "mujoco-egl"
+    },
+    "samples": 4
+  },
+  "seed": 20260902,
+  "start_source": "check_baselines near_start: starts.sample_near(goal, n=1)[0], seed 20260902 (no protocol near set for the rooms)",
+  "timestamp_utc": "2026-10-23T07:22:17Z",
+  "torch_num_interop_threads": 2,
+  "torch_num_threads": 2,
+  "torch_version": "2.14.1+cpu",
+  "vsbench_commit": "16f1f13384baf2e899a89f504b06e4d20fa2e90e",
+  "vsbench_commit_rule": "HEAD + '+dirty' if tracked changes or untracked (not ignored) files exist outside --out (the copied dirty_paths rule minus the run's own output; run.json's git_dirty_paths cannot drop --out because it lies outside vsbench/)",
+  "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+  "vssim_version": "0.1.0"
+}

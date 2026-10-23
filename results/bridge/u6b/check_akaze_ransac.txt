@@ -1,0 +1,7 @@
+backend mujoco-egl (llvmpipe (LLVM 20.1.2, 256 bits)), scene poster, method akaze_ransac {'arm': 'akaze_ransac', 'device': 'cpu', 'scene_ransac': 'homography', 'episode': 'vsbench', 'start_id': 0}, restoring budget 3000 steps
+setup checks for akaze_ransac:
+  zero_at_target       pass  |v| 0.00e+00 m/s, |w| 0.00e+00 rad/s (limit 1e-06)
+  hold_at_target       pass  drift 0.00e+00 m, 0.00e+00 rad over 50 steps (limits 1e-06, 1e-06)
+  restoring_direction  FAIL  6 of 12 starts right and converged (converged in 51 to 70 steps); failed: vx+, vx-, vy+, vy-, vz-, wx+
+    per axis: vx FAIL  vy FAIL  vz FAIL  wx FAIL  wy pass  wz pass
+  all: FAIL

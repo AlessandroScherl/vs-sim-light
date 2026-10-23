@@ -1,0 +1,32 @@
+# ViSP's standard IBVS (`vpServo` on point features) on the classical SIFT + RANSAC
+# front end - the pairing of ViSP's own keypoint examples. Everything about the front
+# end is `classical.yaml`'s; only the `controller:` block differs, and it is the one
+# `visp_ibvs.yaml` explains (interaction: current | desired | mean; gain or
+# adaptive_gain; backend: auto | visp | numpy).
+
+seed: 20260902
+
+matcher:
+  variant: classical_sift
+  num_landmarks: 24                # the published `num_pairs`: the best 24 by distance
+  ransac: scene_default            # the with-RANSAC column; `none` is the other one
+  ransac_thresh_px: 3.0            # the published reprojection threshold
+
+controller:
+  law: visp
+  interaction: current
+  gain: 2.0
+  dt: 0.016666666666666666         # 1/60 s
+  backend: auto
+
+stop:
+  rule: cns_plateau                # CNS's plateau rule scores every arm
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]
