@@ -54,8 +54,8 @@
   },
   "rooms": {
     "cluttered2": {
-      "build_s": 4.829,
-      "compile_s": 6.307,
+      "build_s": 4.515,
+      "compile_s": 6.878,
       "depth": {
         "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
         "stride_px": 4,
@@ -164,10 +164,10 @@
       },
       "determinism": {
         "goal_depth_md5": "15c11a9ef3493714655659e57fe4c414",
-        "goal_frame_md5": "471fe7bd52701a49d61e27a7d3d9669c",
+        "goal_frame_md5": "83304bf28e9176240187fea52f52be38",
         "rebuild_same_goal": true,
         "redraw_same_bytes": true,
-        "same_goal_md5_as_tools_u4_rooms_measure": true
+        "same_goal_md5_as_the_measure_record": true
       },
       "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
       "goal": {
@@ -195,6 +195,11 @@
         ],
         "used": "derived"
       },
+      "look": {
+        "curve_id": "isaac_fit_v1/cluttered2",
+        "curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
+        "look": "isaac_fit_v1"
+      },
       "near_start": {
         "pos_err_mm": 7.75936872787686,
         "rot_err_deg": 2.6881788804203115,
@@ -205,8 +210,8 @@
       "render_mode": "mujoco-llvmpipe"
     },
     "cluttered3": {
-      "build_s": 4.178,
-      "compile_s": 4.796,
+      "build_s": 3.803,
+      "compile_s": 5.834,
       "depth": {
         "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
         "stride_px": 4,
@@ -315,10 +320,10 @@
       },
       "determinism": {
         "goal_depth_md5": "7fdcf41fc5f429e3fd71cdd4cfd9227a",
-        "goal_frame_md5": "af1f61b7d2d3c2f58e1f324061b97f8d",
+        "goal_frame_md5": "be3ec19bbc5c7d7d8ac76e1c131888f3",
         "rebuild_same_goal": true,
         "redraw_same_bytes": true,
-        "same_goal_md5_as_tools_u4_rooms_measure": true
+        "same_goal_md5_as_the_measure_record": true
       },
       "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
       "goal": {
@@ -346,6 +351,11 @@
         ],
         "used": "derived"
       },
+      "look": {
+        "curve_id": "isaac_fit_v1/cluttered3",
+        "curve_md5": "48aa0abb9559f2bdd5d98e5b07014c1c",
+        "look": "isaac_fit_v1"
+      },
       "near_start": {
         "pos_err_mm": 7.759368727876856,
         "rot_err_deg": 2.6881788804203115,
@@ -356,8 +366,8 @@
       "render_mode": "mujoco-llvmpipe"
     },
     "industrial1_drill": {
-      "build_s": 0.219,
-      "compile_s": 0.838,
+      "build_s": 0.091,
+      "compile_s": 0.633,
       "depth": {
         "gate": "per view: ground pixels vs the analytic z = 0 plane and object pixels vs mujoco.mj_multiRay, median <= 1 mm and p99 <= 3 mm; the full frame finite, >= 0, hits inside [near, far]; depth 0 where the ray caster misses",
         "stride_px": 4,
@@ -466,10 +476,10 @@
       },
       "determinism": {
         "goal_depth_md5": "7c6f56d6772d49b87e58c0ef8f25168c",
-        "goal_frame_md5": "c350e2218d9920b9b3faf94cd5df5fde",
+        "goal_frame_md5": "df7b04e95d8d9b8daf9ace35e7c762d3",
         "rebuild_same_goal": true,
         "redraw_same_bytes": true,
-        "same_goal_md5_as_tools_u4_rooms_measure": true
+        "same_goal_md5_as_the_measure_record": true
       },
       "gl_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
       "goal": {
@@ -497,6 +507,11 @@
         ],
         "used": "derived"
       },
+      "look": {
+        "curve_id": "isaac_fit_v1/industrial1_drill",
+        "curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+        "look": "isaac_fit_v1"
+      },
       "near_start": {
         "pos_err_mm": 7.759368727876952,
         "rot_err_deg": 2.6881788804203115,
@@ -508,5 +523,5 @@
     }
   },
   "unit": "U4 - the three rooms in MujocoScene (docs/PORT_PLAN.md section 7)",
-  "written": "2026-10-23 02:13:46 +0200"
+  "written": "2026-10-23 09:36:51 +0200"
 }

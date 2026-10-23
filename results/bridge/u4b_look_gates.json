@@ -1,0 +1,452 @@
+{
+  "config": {
+    "ambient_share": 0.15,
+    "file": "vsbench/world/configs/look_isaac_fit_v1.json",
+    "md5": "8d010bcddc6936d192fa6c699c671dd9",
+    "scenes": {
+      "cluttered2": {
+        "curve_md5": "9cb6c8f8269f63ca905a16136e7d71ae",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.175,
+        "lut_black": [
+          22,
+          0,
+          33
+        ],
+        "lut_white": [
+          234,
+          210,
+          204
+        ],
+        "params_rgb": [
+          [
+            0.0079929571055772,
+            1.557277638191238,
+            1.641297240223515
+          ],
+          [
+            2.205433514191888e-17,
+            0.5855257221605024,
+            0.9546887045997234
+          ],
+          [
+            0.015260805772838178,
+            0.4164986424222939,
+            0.7702675824096917
+          ]
+        ]
+      },
+      "cluttered3": {
+        "curve_md5": "48aa0abb9559f2bdd5d98e5b07014c1c",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.175,
+        "lut_black": [
+          117,
+          52,
+          43
+        ],
+        "lut_white": [
+          245,
+          240,
+          239
+        ],
+        "params_rgb": [
+          [
+            0.2150460251223036,
+            2.294180580013796,
+            2.363277740002733
+          ],
+          [
+            0.03494048212641573,
+            1.9150577580178767,
+            1.6610340769833314
+          ],
+          [
+            0.024361699421458268,
+            1.8521258945543062,
+            1.824936931877214
+          ]
+        ]
+      },
+      "hollywood": {
+        "curve_md5": "55fc9f90f44486674e21835b05e1fdb5",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.065,
+        "lut_black": [
+          109,
+          108,
+          108
+        ],
+        "lut_white": [
+          246,
+          246,
+          246
+        ],
+        "params_rgb": [
+          [
+            0.1785634672639508,
+            2.4818343777436063,
+            2.349577891258335
+          ],
+          [
+            0.17802251040519487,
+            2.4797043928982667,
+            2.3461995642832463
+          ],
+          [
+            0.17821667830962995,
+            2.4821518592614664,
+            2.346838748652408
+          ]
+        ]
+      },
+      "industrial1_drill": {
+        "curve_md5": "61b0c65d277ec8fdca816545cadfcda7",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.175,
+        "lut_black": [
+          40,
+          0,
+          0
+        ],
+        "lut_white": [
+          241,
+          237,
+          234
+        ],
+        "params_rgb": [
+          [
+            0.021903500263680035,
+            2.0239057327140366,
+            2.0804042005677186
+          ],
+          [
+            2.5815596856190595e-22,
+            1.726801921214454,
+            1.7102429650146125
+          ],
+          [
+            8.284618248489928e-18,
+            1.544840063396872,
+            1.5289301327514835
+          ]
+        ]
+      },
+      "poster2": {
+        "curve_md5": "acf274fc6bdb1af851b6ea7417d624ad",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.0,
+        "lut_black": [
+          134,
+          149,
+          154
+        ],
+        "lut_white": [
+          251,
+          252,
+          252
+        ],
+        "params_rgb": [
+          [
+            0.3097591468158105,
+            3.3635109429641386,
+            3.3111939280817664
+          ],
+          [
+            0.43161974078407345,
+            3.61175151403142,
+            3.8689835166127744
+          ],
+          [
+            0.47366863590314495,
+            3.4758480668257015,
+            3.780234059525954
+          ]
+        ]
+      },
+      "poster3": {
+        "curve_md5": "8a7e5a6a4e1094b9c1f4bf54737498af",
+        "isaac_goal_md5_matches": true,
+        "light_gain": 1.175,
+        "lut_black": [
+          106,
+          106,
+          100
+        ],
+        "lut_white": [
+          245,
+          245,
+          246
+        ],
+        "params_rgb": [
+          [
+            0.16654601337019792,
+            2.369666689576966,
+            2.5946020976230817
+          ],
+          [
+            0.16691859251521587,
+            2.3859041523216407,
+            2.6008308740106543
+          ],
+          [
+            0.145843430550327,
+            2.4399488927983857,
+            2.498312046618238
+          ]
+        ]
+      }
+    }
+  },
+  "picture": {
+    "gate": "goal (fitted) and near (held out): |mean grey - Isaac's| <= 6.0, histogram EMD <= 0.2 x raw's; depth identical raw vs look; llvmpipe",
+    "scenes": {
+      "cluttered2": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 8.907,
+            "raw": 97.61
+          },
+          "mean_grey": {
+            "isaac": 132.44,
+            "look": 127.1,
+            "raw": 34.83
+          },
+          "pixel_mae": {
+            "look": 19.249,
+            "raw": 97.611
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 8.779,
+            "raw": 96.839
+          },
+          "mean_grey": {
+            "isaac": 131.76,
+            "look": 127.17,
+            "raw": 34.93
+          },
+          "pixel_mae": {
+            "look": 19.406,
+            "raw": 96.84
+          },
+          "role": "held out"
+        }
+      },
+      "cluttered3": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 2.481,
+            "raw": 91.573
+          },
+          "mean_grey": {
+            "isaac": 217.09,
+            "look": 216.31,
+            "raw": 125.51
+          },
+          "pixel_mae": {
+            "look": 4.093,
+            "raw": 91.574
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 2.296,
+            "raw": 91.502
+          },
+          "mean_grey": {
+            "isaac": 216.8,
+            "look": 216.17,
+            "raw": 125.29
+          },
+          "pixel_mae": {
+            "look": 4.091,
+            "raw": 91.503
+          },
+          "role": "held out"
+        }
+      },
+      "hollywood": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 5.657,
+            "raw": 92.821
+          },
+          "mean_grey": {
+            "isaac": 183.81,
+            "look": 181.85,
+            "raw": 90.99
+          },
+          "pixel_mae": {
+            "look": 9.489,
+            "raw": 92.822
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 5.599,
+            "raw": 91.93
+          },
+          "mean_grey": {
+            "isaac": 180.93,
+            "look": 180.15,
+            "raw": 89.01
+          },
+          "pixel_mae": {
+            "look": 9.642,
+            "raw": 91.93
+          },
+          "role": "held out"
+        }
+      },
+      "industrial1_drill": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 2.708,
+            "raw": 102.284
+          },
+          "mean_grey": {
+            "isaac": 185.44,
+            "look": 184.59,
+            "raw": 83.15
+          },
+          "pixel_mae": {
+            "look": 7.956,
+            "raw": 102.309
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 2.541,
+            "raw": 101.791
+          },
+          "mean_grey": {
+            "isaac": 185.34,
+            "look": 184.96,
+            "raw": 83.55
+          },
+          "pixel_mae": {
+            "look": 7.718,
+            "raw": 101.815
+          },
+          "role": "held out"
+        }
+      },
+      "poster2": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 4.597,
+            "raw": 93.88
+          },
+          "mean_grey": {
+            "isaac": 190.93,
+            "look": 190.15,
+            "raw": 97.26
+          },
+          "pixel_mae": {
+            "look": 7.167,
+            "raw": 93.88
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 4.784,
+            "raw": 94.872
+          },
+          "mean_grey": {
+            "isaac": 191.33,
+            "look": 189.78,
+            "raw": 96.62
+          },
+          "pixel_mae": {
+            "look": 7.016,
+            "raw": 94.873
+          },
+          "role": "held out"
+        }
+      },
+      "poster3": {
+        "goal": {
+          "hist_emd_mean": {
+            "look": 2.656,
+            "raw": 98.137
+          },
+          "mean_grey": {
+            "isaac": 182.27,
+            "look": 180.68,
+            "raw": 84.14
+          },
+          "pixel_mae": {
+            "look": 7.447,
+            "raw": 98.137
+          },
+          "role": "fitted"
+        },
+        "near": {
+          "hist_emd_mean": {
+            "look": 2.531,
+            "raw": 98.406
+          },
+          "mean_grey": {
+            "isaac": 181.07,
+            "look": 179.64,
+            "raw": 82.67
+          },
+          "pixel_mae": {
+            "look": 7.738,
+            "raw": 98.406
+          },
+          "role": "held out"
+        }
+      }
+    }
+  },
+  "rgb_only": {
+    "hollywood": {
+      "goal_depth": {
+        "isaac_fit_v1": "d23d54774c4ae6962c2fddf574a6177a",
+        "raw": "d23d54774c4ae6962c2fddf574a6177a"
+      },
+      "goal_rgb": {
+        "isaac_fit_v1": "6f892b0b3bc0c06fd52b4dd31ec03402",
+        "raw": "04938e905ddffd06dd816a45b24804c7"
+      },
+      "near_depth": {
+        "isaac_fit_v1": "9837e7b310d5e2ff21a97b48d874b14f",
+        "raw": "9837e7b310d5e2ff21a97b48d874b14f"
+      },
+      "near_rgb": {
+        "isaac_fit_v1": "3d55dfb5e15d275804873a8051c175b4",
+        "raw": "5b9ec7008b20109dfa91836e2ea09582"
+      },
+      "raw_goal_is_u4": true
+    },
+    "industrial1_drill": {
+      "goal_depth": {
+        "isaac_fit_v1": "7c6f56d6772d49b87e58c0ef8f25168c",
+        "raw": "7c6f56d6772d49b87e58c0ef8f25168c"
+      },
+      "goal_rgb": {
+        "isaac_fit_v1": "df7b04e95d8d9b8daf9ace35e7c762d3",
+        "raw": "c350e2218d9920b9b3faf94cd5df5fde"
+      },
+      "near_depth": {
+        "isaac_fit_v1": "b79f85d0700de18d9112b83844bbab8e",
+        "raw": "b79f85d0700de18d9112b83844bbab8e"
+      },
+      "near_rgb": {
+        "isaac_fit_v1": "65cee66f4d236799b1c47dc5924a136e",
+        "raw": "3c6b06d03b7fdae3a3d577e46dca7850"
+      },
+      "raw_goal_is_u4": true
+    }
+  },
+  "unit": "U4b - match Isaac's look (docs/PORT_PLAN.md section 7)",
+  "written": "2026-10-23 09:34:28 +0200"
+}

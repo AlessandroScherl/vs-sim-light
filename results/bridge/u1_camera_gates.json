@@ -397,7 +397,7 @@
   },
   "goal_cache": {
     "deterministic_redraw": true,
-    "goal_frame_md5": "04938e905ddffd06dd816a45b24804c7",
+    "goal_frame_md5": "6f892b0b3bc0c06fd52b4dd31ec03402",
     "n_renders_for_two_goal_calls": 1
   },
   "projection": {
@@ -432,5 +432,5 @@
   },
   "truth_seam_vs_mock_px": 2.3480197341996245e-08,
   "unit": "U1 - MujocoScene for the posters + the D435i gates (docs/PORT_PLAN.md section 4)",
-  "written": "2026-10-23 00:43:33 +0200"
+  "written": "2026-10-23 09:35:14 +0200"
 }
