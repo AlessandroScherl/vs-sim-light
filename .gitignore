@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv*/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+# the default output of `python -m vsbench fly` and of the tools
+runs/
+# the copied run directory (vsbench/experiments/), vs-sim's own rules: run payloads stay out
+# of git, provenance files and README.md / .gitkeep stay visible (`!.../**/` is load-bearing:
+# without it git never descends; a copied test checks a README.md there is seen)
+vsbench/experiments/**
+!vsbench/experiments/**/
+!vsbench/experiments/.gitkeep
+!vsbench/experiments/README.md
+!vsbench/experiments/**/README.md
+!vsbench/experiments/**/MD5SUMS
+!vsbench/experiments/**/run.json
+!vsbench/experiments/**/resolved_config.yaml

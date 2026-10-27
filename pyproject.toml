@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vsbench"
+version = "0.2.0"
+description = "A lightweight visual-servoing simulator on MuJoCo: a free-flying RGB-D camera over textured scenes, the published baselines (ViT-VS, ART-VS, SIFT / ORB / AKAZE IBVS) and the benchmark loop that scores them."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Alessandro Scherl" }]
+dependencies = [
+  "numpy>=1.26",
+  "mujoco>=3.3",                    # the renderer (pulls PyOpenGL)
+  # SIFT / ORB / AKAZE and RANSAC; pinned: 4.11 has AKAZE in the default build and is the
+  # version the copied classical baselines' parity fixture was made with
+  "opencv-python-headless==4.11.0.86",
+  "Pillow>=10",
+  "PyYAML>=6",                      # the copied benchmark's configs (camera, scenes, protocol)
+  # the copied benchmark loop imports torch at load; install the CPU wheel first if you have
+  # no GPU (README), or pip pulls the CUDA one
+  "torch>=2.1",
+  "imageio-ffmpeg>=0.5",            # H.264 films; without it OpenCV's mp4v writer is used
+]
+
+[project.optional-dependencies]
+# vitvs_dinov3 loads DINOv3 through transformers; vitvs_dinov2 and artvs load DINOv2 through
+# torch.hub (no extra package)
+baselines = ["transformers>=4.57"]
+# converting USD objects (tools/convert_objects.py) and the `light` perturbation's colour
+# temperature (vsbench/world/perturb_world.py)
+usd = ["usd-core>=24.11"]
+dev = ["pytest>=8", "ruff>=0.6", "scipy>=1.10"]   # scipy: an expm/logm oracle in one test
+
+[tool.setuptools.packages.find]
+include = ["vsbench*"]
+# the copied vs-sim tests and drivers are reference trees, not runtime modules
+exclude = ["vsbench.tests*", "vsbench.scripts*", "vsbench.experiments*"]
+
+[tool.setuptools.package-data]
+# the copied data: the camera, scenes, protocol, arm configs, layouts, the frozen starts
+# (+ md5 sidecars) and the asset library; the look's fitted config
+vsbench = ["configs/**/*", "benchmark/**/*", "assets/asset_library_v2.json",
+           "world/configs/*"]
+"vsbench.vs" = ["COPY_MANIFEST.json", "PROVENANCE.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# the vs-sim copy is never edited, so never linted here (vsbench/vs/PROVENANCE.md)
+extend-exclude = ["vsbench/vs", "vsbench/tests", "vsbench/scripts"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

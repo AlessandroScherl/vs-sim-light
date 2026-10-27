@@ -1,0 +1,39 @@
+# The benchmark config of a vsbench method flown by the copied benchmark loop
+# (vsbench.world.method_arm.MethodArm).
+#
+# Hand-written, vsbench-owned (not a copied file). It states the same five required fields
+# every copied configs/arms/*.yaml states (vsbench.vs.bench.config.REQUIRED_FIELDS), with
+# the values an external method can honestly carry. `matcher.variant: external` is NOT in
+# the copied enum, so MethodArm validates this file itself (method_arm.validate_external)
+# and the copied config.validate is never edited or bypassed for a copied arm. The record
+# says `arm_kind: external` and the label starts with `external:`, so no table can read a
+# method cell as a published baseline.
+#
+# `python -m vsbench.world.fly run --method <name>` fills the `method:` block (name and
+# constructor params); --max-iter / --telemetry-extended override `episode:` as for an arm.
+
+seed: 20260902                     # the episode seed (subsample_seed on the record); a
+                                   # method that draws nothing ignores it
+arm:
+  kind: external                   # never `method`: a vsbench method is not a published baseline
+matcher:
+  variant: external                # the method is its own front end (MethodFrontEnd)
+  num_landmarks: 0                 # 0 = not fixed: the method reports its own points per step
+controller:
+  dt: 0.016666666666666666         # 1/60 s, the benchmark's period: the loop integrates at it
+                                   # and the method is configured with it
+stop:
+  rule: cns_plateau                # the protocol's scored stop, IF the method reports
+                                   # kp_cur/kp_des; a method that reports none falls back to
+                                   # cap_only on step 1 - loudly (stderr + `stop_fallback`
+                                   # on the record, `stop_mode: cap_only`, label .../cap_only)
+episode:
+  max_iter: 600                    # the protocol's cap
+  divergence_abort: true           # on the method's own error_norm (3x its first finite value)
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]
+method:
+  name: null                       # filled by the driver: a registered vsbench method
+  params: {}                       # its constructor arguments

@@ -1,0 +1,33 @@
+# Tests of the copied vs-sim tier (vsbench/tests/fast) that tools/test_copied.sh deselects.
+# The copied test files are kept byte-identical, so a test whose subject was left out of
+# this repository is deselected here instead of edited. One line per test id; the comment
+# above each group says what was left out.
+
+# the Isaac / instance-suite chain drivers (scripts/chains/, test_instance_suite.py)
+vsbench/tests/fast/test_arm_plugin.py::test_the_chain_passes_the_plugin_and_its_path_and_stamps_it
+vsbench/tests/fast/test_arm_plugin.py::test_the_chain_refuses_a_plugin_without_its_checkout
+vsbench/tests/fast/test_arm_plugin.py::test_the_chain_puts_refine_vs_on_the_path_only_with_a_plugin
+vsbench/tests/fast/test_arm_plugin.py::test_the_chain_refuses_a_colon_or_slash_in_an_arm_id
+vsbench/tests/fast/test_arm_plugin.py::test_the_chain_flies_the_checkout_it_lives_in
+
+# DINOBot (vsbench/vs/baselines/dinobot.py and its test)
+vsbench/tests/fast/test_control.py::test_every_stop_rule_survives_a_degenerate_step
+vsbench/tests/fast/test_control.py::test_the_registry_maps_the_config_enum_and_passes_its_constants
+vsbench/tests/fast/test_debuglog.py::test_debug_logging_is_additive
+vsbench/tests/fast/test_debuglog.py::test_the_dinobot_residual
+
+# the debug-view and debug-refly drivers (scripts/debug_view.py, scripts/chains/); the viewer
+# itself (vsbench/vs/bench/debugview.py) is flown by `--debug-gif` (tests/world/test_masks.py)
+vsbench/tests/fast/test_debuglog.py::test_the_renderer_writes_a_still_and_a_video
+vsbench/tests/fast/test_debuglog.py::test_the_viewer_writes_into_out_when_the_flight_directory_is_read_only
+vsbench/tests/fast/test_debuglog.py::test_the_debug_refly_plan_is_24_pairs
+vsbench/tests/fast/test_debuglog.py::test_the_debug_refly_chain_flies_each_pair_once_with_the_debug_flags
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_refuses_without_the_pinned_start_files
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_marks_done_only_the_clean_pairs
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_smoke_mode_is_one_pair_with_the_same_flags
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_stops_when_the_checkout_changes
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_stops_when_check_baselines_has_no_telemetry
+vsbench/tests/fast/test_debuglog.py::test_the_debug_chain_refuses_a_second_launch_on_the_same_output
+
+# imports vsbench.vs.bake (the Isaac layout baker)
+vsbench/tests/fast/test_package.py::test_the_core_imports_without_isaac_or_torch

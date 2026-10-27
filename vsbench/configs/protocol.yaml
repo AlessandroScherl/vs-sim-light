@@ -1,0 +1,370 @@
+# The campaign shape: which arms fly which start sets on which scenes, and how an
+# episode is scored. `scripts/fly.py plan` reads it and prints the shape; `fly.py run`
+# flies it. Nothing here is a parameter of a method - those live in `configs/arms/`.
+#
+# The scenes and the start files are `vssim.benchmark`'s (six scenes, md5-pinned
+# files, four start sets); this file names the start sets and the arms.
+#
+# Lineage: evaluation protocol v2 of the Refine-VS project (2026-09-02, sections 3-8),
+# with that project's own arms, instruments and parity cells removed.
+
+version: 1
+schema: vssim-protocol-1
+
+# How the GOAL view is captured (the same block as `configs/scenes.yaml`; a test
+# asserts the two agree): N whole goal captures, the last kept.
+scene:
+  render_warmup_steps: 8
+  goal_capture_keep: last
+
+# ----------------------------------------------------------------- start sets
+# Every one a frozen file with an md5 pin (`vssim.benchmark.STARTS`); the draw is
+# seeded per (scene, start) and identical across arms, so every contrast is paired.
+# The sets themselves are `vssim.benchmark.START_SETS`; this list says which the
+# campaign uses and for what.
+start_sets:
+  capped30:
+    use: method screening
+    note: the first 30 of the frozen wide-100 starts per scene with |roll| <= 90 deg
+  wide100:
+    use: the headline band; report in thirds by initial rotation (33 / 33 / 34)
+  narrow20:
+    use: precision band (posters only; ~78 mm / 5.8 deg)
+  near60:
+    use: terminal-phase probes (posters only; 3-8 mm)
+
+# ----------------------------------------------------------------------- arms
+# Each entry names the config file it is built from (under `configs/arms/`) and the
+# deltas that make it that cell; `fly.py` deep-merges the two and
+# `vssim.bench.arms.build_arm` does the rest. Nothing here parses a name.
+#
+#   needs     what the driver must hand `build_arm` for this cell to build at all
+#   repeats   how many times the cell is flown per session (median and spread)
+arms:
+  # --- classical, TWO columns. The label carries the SETTING, so one cell keeps
+  # one label across scenes while `ransac_model` on the record says what it resolved
+  # to. The two columns are two methods and must never be pooled.
+  - id: sift_ransac
+    base: classical.yaml
+    needs: [scene_spec]
+  - id: sift_noransac
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {ransac: none}}
+  - id: orb_ransac
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: classical_orb}}
+  - id: orb_noransac
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: classical_orb, ransac: none}}
+  - id: akaze_ransac
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: classical_akaze}}
+  - id: akaze_noransac
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: classical_akaze, ransac: none}}
+
+  # --- the published ViT methods, RANSAC-free ---
+  - id: vitvs_dinov3
+    base: vitvs_dinov3.yaml
+  - id: vitvs_dinov2
+    base: vitvs_dinov2.yaml
+    note: ViT-VS as ViT-VS ships it - torch.hub, block 11, log-binned 3456-d
+  - id: artvs
+    base: artvs.yaml
+    note: >
+      36 tiles latching at 0.20x. The published 4-way pre-servo roll is NOT on in this
+      cell; every record carries `rotation_mode: none` saying so.
+  - id: artvs_pre4way
+    base: artvs.yaml
+    overrides: {rotation: {mode: prealign_4way}}
+    note: >
+      The same arm with the published 4-way pre-servo roll search applied once before
+      the loop (a physical re-pose; `start_rotation_deg_after_prealign` on the record).
+      A DIFFERENT cell from `artvs`, labelled `pre4way`, never pooled with it.
+  - id: vitvs_dinov3_objmask
+    base: vitvs_dinov3.yaml
+    overrides:
+      matcher: {goal_mask: objects}
+    note: >
+      ViT-VS (DINOv3) with its landmarks drawn from the goal picture's OBJECTS only:
+      the floor is masked out from the goal depth against the ground plane
+      (`vssim.labels.object_mask_from_depth`), the way the original ViT-VS code
+      masked its goal from depth. The rooms only; label carries `objmask`.
+  - id: vitvs_dinov3_objmask_ema08
+    base: vitvs_dinov3.yaml
+    overrides:
+      matcher: {goal_mask: objects}
+      controller: {ema_alpha: 0.8}
+    note: >
+      `vitvs_dinov3_objmask` (the instance suite's ViT-VS cell) with the published
+      simulation smoothing - an exponential moving average of the twist, 0.8 on the new
+      value (ART-VS release configs/hollywood_500_evaluation/config_dinov2_308_no_tiling.yaml:39,
+      `ema_alpha: 0.8`; core/controller.py:58-73) - and nothing else changed. Owner ruling
+      of 2026-10-05 (PROJECT issue 29). The old cell stays as it is; label carries `ema0.8`.
+
+  - id: artvs_objmask
+    base: artvs.yaml
+    overrides:
+      matcher: {goal_mask: objects}
+    note: >
+      ART-VS with the same objects-only goal mask (forwarded to its coarse stage).
+      The rooms only; label carries `objmask`.
+
+  # ---------------------------------------------------------------- 2026-09-21: the
+  # objects-only mask on EVERY method (owner: "masking for all methods") and ART-VS in
+  # its published object mode. The mask cells take the goal mask from the goal depth
+  # against the ground plane (vssim.labels.object_mask_from_depth); each is a labelled
+  # cell beside its published twin.
+  - id: sift_ransac_objmask
+    base: classical.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {goal_mask: objects}}
+  - id: visp_ibvs_sift_objmask
+    base: visp_ibvs_sift.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {goal_mask: objects}}
+  - id: cns_v1_objmask
+    base: cns_v1.yaml
+    overrides: {matcher: {goal_mask: objects}}
+    note: >
+      CNS's own front end takes a detection mask (Classic.update_target_frame(image,
+      mask)); the target keypoints are detected inside the goal mask only.
+  - id: lightglue_ransac_objmask
+    base: lightglue.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {goal_mask: objects}}
+  - id: roma_ibvs_objmask
+    base: roma.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {goal_mask: objects}}
+  - id: romav2_ibvs_objmask
+    base: roma.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: romav2, goal_mask: objects}}
+  - id: artvs_roi
+    base: artvs_roi.yaml
+    note: >
+      ART-VS's published object pipeline (LangSAM + LightTrack + ROI tiling), prompt
+      "shoe"; no bench mask - the detector's SAM mask is its own. The 2026-09-21 port
+      (DINOv2, 518-px re-encode, SAM mask, median switch): the "as ported" column of the
+      2026-09-28 suite and the 2026-10-01 re-fly; superseded by `artvs_roi_sim`.
+  - id: artvs_roi_scene
+    base: artvs_roi.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {prompt: scene}}
+    note: >
+      The same pipeline prompted with the SCENE's own word (`prompt:` in
+      configs/scenes.yaml) - the instance suite (2026-09-23) flies one cell over six kinds
+      of object (shoe, bottle, teapot, drill, mug, hammer). The label carries
+      `prompt-scene`; the record's `roi_prompt` carries the word. A scene that states none
+      is refused. The 2026-09-21 port (DINOv2, 518-px re-encode, SAM mask, median switch):
+      the "as ported" column of the 2026-09-28 suite and the 2026-10-01 re-fly; superseded
+      by `artvs_roi_sim`.
+
+  # ---------------------------------------------------------------- 2026-09-21 evening:
+  # the owner asks for ART-VS and ViT-VS WITH their published rotation compensation on
+  # the masked shoe test - the 4-way pre-servo roll search applied once before the loop,
+  # on the objects-only mask cells and on ART-VS's published object mode.
+  - id: vitvs_dinov3_pre4way_objmask
+    base: vitvs_dinov3.yaml
+    overrides: {rotation: {mode: prealign_4way}, matcher: {goal_mask: objects}}
+  - id: artvs_pre4way_objmask
+    base: artvs.yaml
+    overrides: {rotation: {mode: prealign_4way}, matcher: {goal_mask: objects}}
+  - id: artvs_roi_pre4way
+    base: artvs_roi.yaml
+    overrides: {rotation: {mode: prealign_4way}}
+    note: >
+      The release's ROI mode runs its rotation phase before the tracker starts; here the
+      bench's 4-way pre-roll (the same published search) re-poses the camera once, then
+      LangSAM detects and LightTrack tracks from the re-posed frame. The 2026-09-21 port
+      (DINOv2, 518-px re-encode, SAM mask, median switch): the "as ported" column of the
+      2026-09-28 suite and the 2026-10-01 re-fly; superseded by `artvs_roi_sim`.
+
+  # ---------------------------------------------------------------- 2026-10-05: ART-VS as
+  # the release's SIMULATION program runs object mode (owner ruling; spec
+  # docs/results/2026-10-05_artvs_release_check/sim_spec.md, workspace root)
+  - id: artvs_roi_sim
+    base: artvs_roi_sim.yaml
+    needs: [scene_spec]
+    note: >
+      ART-VS as the release's simulation program runs object mode (spec 2026-10-05), with
+      the owner's rulings of 2026-10-05: LangSAM's goal mask through the release's own mask
+      branch (D-B (b)), the adaptive tile grid (D-A (a)), rotation compensation off; the
+      bench's gain, step cap and scored stop, the release's visual-only stop recorded. The
+      reference for every ART-VS column from here on.
+
+  # ---------------------------------------------------------------- 2026-10-10: the
+  # development evaluation (owner rulings; docs/dev_eval_plan_2026-10-10.md section 3,
+  # workspace root). A new cell beside the faithful one (rule 7); `artvs_roi_sim` and its
+  # records stay as they are.
+  - id: artvs_roi_sim_dev
+    base: artvs_roi_sim.yaml
+    needs: [scene_spec]
+    overrides:
+      matcher: {goal_mask: objects, roi_mask: objects, roi_sam_path: null, switch_max_steps: 100}
+    note: >
+      `artvs_roi_sim` with the owner's two rulings of 2026-10-10 and nothing else changed.
+      (1) "pixel perfect mask for all evaluation and development (!) no sam needed": the goal
+      mask is the simulator's outline of the goal object (the runner's mask from the goal
+      depth, the one the *_objmask cells of ViT-VS and DINOBot take) through the release's
+      own mask branch and cell rule (a cell counts when more than half of its pixels are
+      object) in place of LangSAM's; SAM is never run. The object's box is the faithful
+      cell's: GroundingDINO (via transformers, no lang_sam import) + LightTrack, the
+      release's state machine. (2) "ART-VS shall switch after a number of iteration or on
+      lower closer error to the tiling mode": the tiles at the release's rule (mean pixel
+      error at 0.2 of its first value, after 10 successful frames) or after 100 coarse bench
+      steps, whichever comes first (the median switch on other objects came at step 91, and
+      97 of 276 such flights never switched; docs/results/2026-10-10_artvs_why/). Label:
+      `objmask` for `lsmask/sam-langsam`, plus `switch-by-step100`.
+
+  - id: vitvs_dinov3_pre4way
+    base: vitvs_dinov3.yaml
+    overrides: {rotation: {mode: prealign_4way}}
+
+  # --- the learned matchers + IBVS: CNSv2's own baseline set (RoMa + IBVS) and the
+  # sparse learned standard (SuperPoint + LightGlue), each in the classical arms' two
+  # RANSAC columns, all on the unweighted law, 24 landmarks ---
+  - id: lightglue_ransac
+    base: lightglue.yaml
+    needs: [scene_spec]
+  - id: lightglue_noransac
+    base: lightglue.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {ransac: none}}
+  - id: roma_ibvs
+    base: roma.yaml
+    needs: [scene_spec]
+    note: RoMa (CVPR 2024) + IBVS - the baseline CNSv2 (arXiv 2503.00132) compares against
+  - id: roma_ibvs_noransac
+    base: roma.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {ransac: none}}
+  - id: romav2_ibvs
+    base: roma.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: romav2}}
+    note: RoMa v2 (arXiv 2511.15706) + IBVS
+  - id: romav2_ibvs_noransac
+    base: roma.yaml
+    needs: [scene_spec]
+    overrides: {matcher: {variant: romav2, ransac: none}}
+
+  # --- ViSP's standard IBVS (vpServo, point features) on two published front ends ---
+  - id: visp_ibvs_dinov3
+    base: visp_ibvs.yaml
+    note: >
+      ViSP's law (interaction matrix at the current points, constant gain 2.0) on the
+      ViT-VS front end; differs from `vitvs_dinov3` only in the law, so the pair reads
+      the controller's effect. `backend: auto` - the record says whether ViSP itself
+      or its numpy twin ran.
+  - id: visp_ibvs_dinov3_mean
+    base: visp_ibvs.yaml
+    overrides: {controller: {interaction: mean}}
+    note: the same with the mean interaction matrix (the tutorial's large-motion choice)
+  - id: visp_ibvs_sift
+    base: visp_ibvs_sift.yaml
+    needs: [scene_spec]
+    note: ViSP's law on SIFT + RANSAC - the classical pairing of ViSP's own examples
+
+  # ---------------------------------------------------------------- 2026-09-22: DINOBot
+  # (Di Palo & Johns, ICRA 2024), the ALIGNMENT PHASE as its final gist revision runs it
+  # (owner decisions D1-D7, ../docs/dinobot_baseline_spec_2026-09-22.md). An arm like
+  # CNS: its own front end and its own move rule (a fitted rigid transform per step, not
+  # a velocity law), scored by `cns_plateau`, its own stop `dinobot_err` recorded beside.
+  # No `pre4way` cell: DINOBot has no rotation search.
+  - id: dinobot
+    base: dinobot.yaml
+    note: >
+      Iterated look-then-move 3-D alignment - DINO v1 ViT-S/8 best buddies, K-means to 8
+      pairs, depth on BOTH sides, Kabsch, the whole transform per step. On a planar scene
+      (the posters) the published fit returns an improper matrix on about half of all
+      fits and the no-motion guard (D6) can then hold the camera still: see
+      `dinobot_reffix`.
+  - id: dinobot_objmask
+    base: dinobot.yaml
+    overrides: {matcher: {goal_mask: objects}}
+    note: >
+      The goal foreground is saliency AND the objects-only mask (from the goal depth),
+      ANDed at the 55 x 98 token lattice; the live side keeps its saliency alone (DINOBot
+      has no live mask). The rooms only; label carries `objmask`.
+  - id: dinobot_ibvs
+    base: dinobot_ibvs.yaml
+    note: >
+      DINOBot's eight pairs per frame behind the bench's unweighted IBVS law (gain 2.0,
+      sub-pixel, no RANSAC): the controlled comparison with `dinobot` - same
+      correspondences, velocity law instead of the jump. NOT DINOBot; a different method.
+  - id: dinobot_reffix
+    base: dinobot.yaml
+    overrides: {dinobot: {reflection: fix}}
+    note: >
+      NOT the published arm - a diagnostic added at build time (flag for the owner): the
+      Sorkine-Hornung reflection correction the gist omits (the paper's reference [32]).
+      On coplanar points the published formula leaves the sign of the third axis to
+      rounding and the no-motion guard freezes the camera there; this cell shows what the
+      arm does when the fit is always a rotation. Label carries `reffix`.
+
+  # --- CNS v1, run as published ---
+  - id: cns_v1
+    base: cns_v1.yaml
+    repeats: 3
+    note: >
+      Its x2 step gain and its own plateau stop. `rate_compensate: true` makes our
+      iteration i its iteration i (lambda*T = 24, its published budget).
+
+# ------------------------------------------------------------- episode rules
+# The step budget lives here and NOT under `stop`, whose block holds rule constants
+# only. `dt` must agree with `controller.dt` or the loader raises.
+episode:
+  max_iter: 600                      # 1500 for long-horizon cells
+  gain: 2.0
+  dt: 0.016666666666666666           # 1/60 s - decay budget 20; CNS's is 24, stated
+  divergence_abort: true             # controller-visible feature error > 3x initial
+  scored_stop: cns_plateau
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+  note: >
+    The loop always runs to the cap; the stop is RECORDED and the final error is read
+    at the stop (primary) and at the cap (beside it). The published velocity-quiet
+    stop is recorded for every arm whether or not a config asks for it.
+
+# ------------------------------------------------------------------- scoring
+# Seven success columns, every record carries all seven (`vssim.bench.scoring`); the two
+# absolute rungs (10 mm / 1 deg, 20 mm / 2 deg) were added 2026-09-22 beside the paper's
+# 30 mm / 3 deg (owner request), and two looser ones (50 mm / 5 deg, 100 mm / 10 deg) on
+# 2026-09-23 for the instance suite ("more convergence tiers ... since we are
+# generalizing here"):
+#   predicate_a        within 0.1 x working distance or 10 mm, and 1 deg
+#   paper_3cm_3deg     30 mm / 3 deg (the ViT-VS / ART-VS papers' gate)
+#   cns_code_0p1d_10deg 0.1 x working distance / 10 deg (CNS's code)
+scoring:
+  success_rules: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]
+
+# --------------------------------------------------------------- statistics
+# One paired bootstrap (`vssim.bench.stats`); paired contrasts only, never absolute
+# numbers across sessions or machines.
+statistics:
+  bootstrap_b: 10000
+  bootstrap_seed: 20260817
+  ci: 0.95
+  min_paired: 8
+  paired_only: true
+  never_mix_hardware: true           # renders are not bit-deterministic across GPUs
+  record_per_campaign: [machine, gpu, driver, code_hash]
+  note: >
+    A settled goal picture is still ONE DRAW of the renderer: between two processes it
+    moves a landmark park by up to 0.5 mm and can flip a paired arm contrast. `fly.py
+    run` renders the goal once per scene and serves every arm of the run from it;
+    `goal_frame_md5` on every record is the pairing key.
+
+# ------------------------------------------------------------------ compute
+# Reported per cell, with the GPU named. The record's own field names, and the table
+# headers a paper prints beside them.
+compute:
+  columns: [match_ms_med, control_ms_med, fps, peak_vram_alloc_mb]
+  headers: [front-end ms/step, controller ms/step, loop FPS, peak VRAM MB]

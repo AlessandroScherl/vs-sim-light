@@ -1,0 +1,1920 @@
+{
+ "schema": "vsbench-vssim-copy-2",
+ "what": "the files copied from vs-sim, each with its sha256 as written here; tests/test_copy_faithful.py checks them",
+ "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+ "rules": {
+  "R1": [
+   "\\bfrom vssim import\\b",
+   "from vsbench.vs import"
+  ],
+  "R2": [
+   "\\bfrom vssim\\.",
+   "from vsbench.vs."
+  ],
+  "R3a": [
+   "\\bimport vssim\\.",
+   "import vsbench.vs."
+  ],
+  "R3b": [
+   "\\bimport vssim\\b(?![.\\w-])",
+   "import vsbench.vs"
+  ],
+  "R4": [
+   "\\bvssim\\.(?=[A-Za-z_])",
+   "vsbench.vs."
+  ]
+ },
+ "rules_note": "the only edits to rewritten files: these regex rewrites of the import name vssim -> vsbench.vs, in order, plus a provenance comment on line 1 (line 2 after a shebang); .sh files get R1 and R2 only",
+ "patches": {
+  "P1": {
+   "file": "vsbench/tests/fast/test_package.py",
+   "why": "the hygiene test names the package by its import name vsbench.vs"
+  },
+  "P2": {
+   "file": "vsbench/vs/bench/run.py",
+   "why": "the version is read from vsbench.vs; git status paths are reported relative to vsbench/"
+  },
+  "P3": {
+   "file": "vsbench/tests/fast/test_debuglog.py",
+   "why": "the throwaway checkout the debug chain runs in symlinks vs, not vssim"
+  },
+  "P4": "P4 (2026-10-27): comment/documentation-only - the name of the source repository's internal rules file and local home-directory paths neutralised; no code line changed."
+ },
+ "hand_written": [
+  "vsbench/vs/COPY_MANIFEST.json",
+  "vsbench/vs/PROVENANCE.md"
+ ],
+ "files": {
+  "vsbench/assets/asset_library_v2.json": {
+   "src": "assets/asset_library_v2.json",
+   "src_blob": "ba6a79da142fbe3b907dce482ecef1cf8f678f6f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "4569ac345cb4039e93b9d7d89213891051687664c8ee4033de28feb4b4b5c6a1"
+  },
+  "vsbench/benchmark/README.md": {
+   "src": "benchmark/README.md",
+   "src_blob": "2de2f55d480ed72a3e861341eca8117198ced1f5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "4a10c2c85885b61c43926908e8f73e801e1eb54267eee9c911553b46440e09bc"
+  },
+  "vsbench/benchmark/starts/cluttered2_starts_v2.json": {
+   "src": "benchmark/starts/cluttered2_starts_v2.json",
+   "src_blob": "8a0bc818f7bab03619dd3967bd108261b790d31a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "420764f94f2ac85341040619fa855362f911d0fb3f2a7abc61c07568f583e882"
+  },
+  "vsbench/benchmark/starts/cluttered2_starts_v2.json.md5": {
+   "src": "benchmark/starts/cluttered2_starts_v2.json.md5",
+   "src_blob": "d28e4b348fe3485dc9deefdfc4c8c6d82c9cde4a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "dc918aa59e183b4bb76208499f7b3e1677b65ec389ba9a919ff00934d173bd15"
+  },
+  "vsbench/benchmark/starts/cluttered3_starts_v2.json": {
+   "src": "benchmark/starts/cluttered3_starts_v2.json",
+   "src_blob": "7ebf0174fb9f824796a7cb84de02985df52494c2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "175a0168220dd88e1766046151ed2f219672b3f6bcc8cc3d1d98c0a4c85d1f2b"
+  },
+  "vsbench/benchmark/starts/cluttered3_starts_v2.json.md5": {
+   "src": "benchmark/starts/cluttered3_starts_v2.json.md5",
+   "src_blob": "e4f32b7126e4a9e08f6f8cf160a0818705cec21b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "baf0ef0dc50455ee595eb862dbb0b88e4b863bc4e8c1db6369b13528f6b59fda"
+  },
+  "vsbench/benchmark/starts/hollywood_starts_near.json": {
+   "src": "benchmark/starts/hollywood_starts_near.json",
+   "src_blob": "c2767ac675b983ae52facf202edba21bd0e76c78",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1a007926a586d1490adae852e1bd521f5ce52d21169bbb577a0140b61c690445"
+  },
+  "vsbench/benchmark/starts/hollywood_starts_near.json.md5": {
+   "src": "benchmark/starts/hollywood_starts_near.json.md5",
+   "src_blob": "8434458e64ca2fc31da428c34859b2316ffe56cd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "2ebc0c72d740a3297b5be05cae0febff7bb51e057a6f3112137445ae4c2f33b5"
+  },
+  "vsbench/benchmark/starts/hollywood_starts_v2.json": {
+   "src": "benchmark/starts/hollywood_starts_v2.json",
+   "src_blob": "046db7a58cc647e62ae1a403df1b9db99f3a720b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "358f0947ba2daa0d2f2bc81585f81fb4bee0852d0f86fb80a6b350c6d6163e96"
+  },
+  "vsbench/benchmark/starts/hollywood_starts_v2.json.md5": {
+   "src": "benchmark/starts/hollywood_starts_v2.json.md5",
+   "src_blob": "8af2f8c0b0f178a1f1d3d464eaf3757592453dbe",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "52f5edde534bc28ed153f8cbf4a386acaf5ad8dc3d11687f7f54142c97fc9130"
+  },
+  "vsbench/benchmark/starts/industrial1_drill_starts_v2.json": {
+   "src": "benchmark/starts/industrial1_drill_starts_v2.json",
+   "src_blob": "6016cebed193ca039323d23bd073e7f05a6ff576",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "324485f0700bea0c15c4191323ff6e58bbef1eb922a7ab75a1a5871c5b3552d6"
+  },
+  "vsbench/benchmark/starts/industrial1_drill_starts_v2.json.md5": {
+   "src": "benchmark/starts/industrial1_drill_starts_v2.json.md5",
+   "src_blob": "608461cc05b7da2922ce1a29d7214540a02f6b1c",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "feeea5e87fcb679690731afe4bf87f22293172c91bd9747e7e64d6ab495e98ce"
+  },
+  "vsbench/benchmark/starts/inst_bottle_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_bottle_rev_starts_simple.json",
+   "src_blob": "a55e361e59685775b65f3360259e0e64d8a7e4e9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7afde5ee77801cb6759f5894e63f0d9a23da030a7e86e40ac266e58b1cd5b8ea"
+  },
+  "vsbench/benchmark/starts/inst_bottle_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_bottle_rev_starts_simple.json.md5",
+   "src_blob": "03feaf16dd1812fd6536c0918ceb63c4e525acba",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "5cd1c9e46dd3096542388a91043b404aa790fa648092a069d5abf809e050a930"
+  },
+  "vsbench/benchmark/starts/inst_bottle_starts_simple.json": {
+   "src": "benchmark/starts/inst_bottle_starts_simple.json",
+   "src_blob": "75aff35447765d45b359ccce4e86f68f846664f9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "5c181401303afefc8092f66cd5056ecf54805aa39881b72af02b53b15ccaf703"
+  },
+  "vsbench/benchmark/starts/inst_bottle_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_bottle_starts_simple.json.md5",
+   "src_blob": "5b916c094f7138c62c84196174dbd16446eb7c24",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "6b6e138e9fcf2653227016483ff2bb57d1595c81d3d1e4cb5122872e16199f40"
+  },
+  "vsbench/benchmark/starts/inst_bottle_starts_t1near.json": {
+   "src": "benchmark/starts/inst_bottle_starts_t1near.json",
+   "src_blob": "b72bf68c7ed0f00db493ec4c3ff38ba9899afcdf",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cafe7e83d647fbc7888654aeddcd9b7b82ac101b2dba0de2f8625517b9a54c78"
+  },
+  "vsbench/benchmark/starts/inst_bottle_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_bottle_starts_t1near.json.md5",
+   "src_blob": "a74b631ab645783884dc5c553314bc7414569871",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "c5a8320bea79cb6941d6b7c554daed80711555976fea4a38b7764683c9952959"
+  },
+  "vsbench/benchmark/starts/inst_drill_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_drill_rev_starts_simple.json",
+   "src_blob": "4f82434d63395b8a8406a93b41e60034601c5ea7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "108b4a7d1ea1b7d20072e567790d5fb139258779219b9de7e86fd257304f5c71"
+  },
+  "vsbench/benchmark/starts/inst_drill_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_drill_rev_starts_simple.json.md5",
+   "src_blob": "3b26878be836c67543dadf33aaf183d9821583e5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "82b1ba53db5361533e72f5108ad5b5c88fa06d8d4bbc9eed9b81d2dabc934a66"
+  },
+  "vsbench/benchmark/starts/inst_drill_starts_simple.json": {
+   "src": "benchmark/starts/inst_drill_starts_simple.json",
+   "src_blob": "7471719c11ca2a51e94192ceecbbb15be4c59eab",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1182106a9c079b4341848e16df14ae5039f16caaf463d1ad2ee1515cad77311b"
+  },
+  "vsbench/benchmark/starts/inst_drill_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_drill_starts_simple.json.md5",
+   "src_blob": "e2e0f478abd27f2e60e49cb7ebf159cfc1b397a5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "98f2b43fad67fc4e5a07da3b797e5d714bdce3ac63bf47b84876fdf59187eab6"
+  },
+  "vsbench/benchmark/starts/inst_drill_starts_t1near.json": {
+   "src": "benchmark/starts/inst_drill_starts_t1near.json",
+   "src_blob": "d00f3afe191e953c8ffbc958bf75da5424aaed73",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "ee76825b40cb99e0c19fc576c62155220e8064a160eef165051235741b7bc804"
+  },
+  "vsbench/benchmark/starts/inst_drill_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_drill_starts_t1near.json.md5",
+   "src_blob": "3c67f3b3e3070e8ce8dbec4970ca1c2cda691999",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "6f6d0d8172221515b21bc3a8ab1f8bb2a64324c43dfde48fd4bc04c093318ff1"
+  },
+  "vsbench/benchmark/starts/inst_hammer_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_hammer_rev_starts_simple.json",
+   "src_blob": "52341f798529fccd951c8e224bd88a4ed06ba362",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "67f4b147833df3acc6e06868c8dbceddd5b58abc89b7c5dc4aa2d14fdcfd610a"
+  },
+  "vsbench/benchmark/starts/inst_hammer_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_hammer_rev_starts_simple.json.md5",
+   "src_blob": "21344aed85d5ffbc25dffcc996cbf68ba37c78b4",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "edbe8a0cf924f2601a60706562f4baa2274b1b0b29d20b1e9d27e0f6830126f5"
+  },
+  "vsbench/benchmark/starts/inst_hammer_starts_simple.json": {
+   "src": "benchmark/starts/inst_hammer_starts_simple.json",
+   "src_blob": "e71b58865e76bdbafaae833ab1f37c107c6af048",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "8b28395a31637006573f0238c18f83ee71528f37afa59a3f6df3e7ae2b15a284"
+  },
+  "vsbench/benchmark/starts/inst_hammer_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_hammer_starts_simple.json.md5",
+   "src_blob": "ac0d54e0084061f0acccf6ef07fc4786fe68f8cd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "409bd3b779cbe3b241b16d2c92b97c7fa4e2efdb394232b02553fd7c62fccbd1"
+  },
+  "vsbench/benchmark/starts/inst_hammer_starts_t1near.json": {
+   "src": "benchmark/starts/inst_hammer_starts_t1near.json",
+   "src_blob": "7bcbae76b178a9df249809d6684b920b19dd99d2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "6940debab80b41f8dd2fc7a1ab3dc76c001f3f923744a26f390af0cfb06745d7"
+  },
+  "vsbench/benchmark/starts/inst_hammer_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_hammer_starts_t1near.json.md5",
+   "src_blob": "2968241d3e3a53f54bf10e71556a62262ae7cf9a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "00bf59ebdc004174ee4d3dda6a6dfd91372b0584a276caa09a803e3464421253"
+  },
+  "vsbench/benchmark/starts/inst_mug_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_mug_rev_starts_simple.json",
+   "src_blob": "e4b244b20e0b624be70d4cd3506ae309b92a1222",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "d6df06c2b481149f7f3237d3d73ed25c3d9e5cff072b42bfbe68016775a9511c"
+  },
+  "vsbench/benchmark/starts/inst_mug_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_mug_rev_starts_simple.json.md5",
+   "src_blob": "f4c8e366fc229d9ba851264038db87388fe5c221",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9878b089cbd25c7f1eb782e7b9c95ef8e342f786a6ac22117892768566983904"
+  },
+  "vsbench/benchmark/starts/inst_mug_starts_simple.json": {
+   "src": "benchmark/starts/inst_mug_starts_simple.json",
+   "src_blob": "eca76ed0aa2800a3012fcabe0fdbb0b989c723f8",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "a73a4aa172df540502bb06c8a630e028fe31797c90c40dbbab710c7ea2994174"
+  },
+  "vsbench/benchmark/starts/inst_mug_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_mug_starts_simple.json.md5",
+   "src_blob": "fc94d5789d438cd056c9cd3fdea9613b045bebc7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1107281af7ceaa8b01fc1441fb8941071e8320a7d9cebfa7a746a29460b4a158"
+  },
+  "vsbench/benchmark/starts/inst_mug_starts_t1near.json": {
+   "src": "benchmark/starts/inst_mug_starts_t1near.json",
+   "src_blob": "05a32727db82e776ed137852af3bea33f316f8a9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "ad65b5f786ceed0b9b7f5c80294e572b2276de30c4b138530c93a242607c4f89"
+  },
+  "vsbench/benchmark/starts/inst_mug_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_mug_starts_t1near.json.md5",
+   "src_blob": "493554f768a4b76a6d71e94139228e6ec2d52952",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "709f1f132629d5fcfa7e1bf7040f9f80ef5b0061460b701983699cc9ce40e0fd"
+  },
+  "vsbench/benchmark/starts/inst_shoe_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_shoe_rev_starts_simple.json",
+   "src_blob": "7fd9893b676315daf0aa096730d1c718ccb37acf",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "782b5c61918805213bb4e6552e3949c9d7941b08649e53eba14807c12704d675"
+  },
+  "vsbench/benchmark/starts/inst_shoe_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_shoe_rev_starts_simple.json.md5",
+   "src_blob": "eb5d93e91ff0fb7831c74faeffc52d368ff478e3",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "601bfbdc70a8bccf6a2dc0b71191d30f8673d47c5031886574b1fdf6196de98c"
+  },
+  "vsbench/benchmark/starts/inst_shoe_starts_simple.json": {
+   "src": "benchmark/starts/inst_shoe_starts_simple.json",
+   "src_blob": "4d607669a47bf8356d4e92c35a379c7b79ac4f30",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "a3def170bbb47c4b4d01182a373fac53d022f712d79690d821e422c42e815dab"
+  },
+  "vsbench/benchmark/starts/inst_shoe_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_shoe_starts_simple.json.md5",
+   "src_blob": "59acb981ac4fef5520232da47b4ac0e515f969f6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9f38198b30b40b4bb087727519375fb94fe664229b69137a44b3f7cc1dc3fb78"
+  },
+  "vsbench/benchmark/starts/inst_shoe_starts_t1near.json": {
+   "src": "benchmark/starts/inst_shoe_starts_t1near.json",
+   "src_blob": "14c9c2455cf46f925d3fc5098f074ddd851ad8c9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "875380f8e8d000ced47f1434a0b246e7231cb535c58718c55b00a27e5f958f6a"
+  },
+  "vsbench/benchmark/starts/inst_shoe_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_shoe_starts_t1near.json.md5",
+   "src_blob": "cd5c5b1dd79c142e3a6588006bdd9fc4061e81e6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7f384bb3b79f31baaed31b90b73dc8581d4188e51c6798dd830beab57850c511"
+  },
+  "vsbench/benchmark/starts/inst_teapot_rev_starts_simple.json": {
+   "src": "benchmark/starts/inst_teapot_rev_starts_simple.json",
+   "src_blob": "07c91b78cb3a54af811c96e79b315ae2f860a389",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "d1c61f80503b19784e20b2f40b39cdc48bb0287e7d0ebb2ed4c488f3f83ad390"
+  },
+  "vsbench/benchmark/starts/inst_teapot_rev_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_teapot_rev_starts_simple.json.md5",
+   "src_blob": "c8db5d4b4214a39224ab6541cc3a2fcaacc9d512",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "b53383f815adb76f4f40161901640f49782ee4d6c32a1f460090178d1c318779"
+  },
+  "vsbench/benchmark/starts/inst_teapot_starts_simple.json": {
+   "src": "benchmark/starts/inst_teapot_starts_simple.json",
+   "src_blob": "56297369588f5fdd90623f55d714da00810e82fd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "ad4e60229bd684fa062bea6e0f4e1de0be01fc75cec1bcdf56fe3c92a2a6925f"
+  },
+  "vsbench/benchmark/starts/inst_teapot_starts_simple.json.md5": {
+   "src": "benchmark/starts/inst_teapot_starts_simple.json.md5",
+   "src_blob": "fe023fd1dbae13c1d4e3251d75b52d3cc4195f28",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "8147b9da2371e7dfbdb2de18878c4bbb2def77e48c340bcae6c397d8c3f44439"
+  },
+  "vsbench/benchmark/starts/inst_teapot_starts_t1near.json": {
+   "src": "benchmark/starts/inst_teapot_starts_t1near.json",
+   "src_blob": "3dc9f749fa5ba4bafff8b70f7a06e5af20d0692d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9a1662e034194b549fe8692de8aaae95c140b0dc351653dfc9b4b8d40936e079"
+  },
+  "vsbench/benchmark/starts/inst_teapot_starts_t1near.json.md5": {
+   "src": "benchmark/starts/inst_teapot_starts_t1near.json.md5",
+   "src_blob": "ac772b220dbb2747f50460f7c6e7447ddb34ed70",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cb75463b11955c28ba79bd6a19aceabbbf473163338e4ea8f1740fa44677b47a"
+  },
+  "vsbench/benchmark/starts/poster2_starts_near.json": {
+   "src": "benchmark/starts/poster2_starts_near.json",
+   "src_blob": "aef1665494696e542cc0f8a8cc5a39261d8ab1f4",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "6731e687d95c12d9f6a8a8be6b8439d29f9184ba93e096e9bf95a512558af718"
+  },
+  "vsbench/benchmark/starts/poster2_starts_near.json.md5": {
+   "src": "benchmark/starts/poster2_starts_near.json.md5",
+   "src_blob": "1db67b73200afd8aa3d504f9420380c59da1f211",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "5e6a873bebd9582c806744dd8c25e620d1993d1310825a7cc2384253ca1ac849"
+  },
+  "vsbench/benchmark/starts/poster2_starts_v2.json": {
+   "src": "benchmark/starts/poster2_starts_v2.json",
+   "src_blob": "10d2beb97cc5fe4602356c5bdac7c432ad866064",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "edca80ea70403b40694b7b364fc73d73d8f0d9e7e50e38c41010f1290dbb5241"
+  },
+  "vsbench/benchmark/starts/poster2_starts_v2.json.md5": {
+   "src": "benchmark/starts/poster2_starts_v2.json.md5",
+   "src_blob": "f81824c4c30809e5c99ee1ce27f0aa4dd0c9d8b5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "21a74e9d327d6c16964c61b0cad541d23be5d8ff673ff8d0e587ab121e7821d0"
+  },
+  "vsbench/benchmark/starts/poster3_starts_near.json": {
+   "src": "benchmark/starts/poster3_starts_near.json",
+   "src_blob": "45d7a32513decec0734152e9281e975dd27ed28c",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "e6ce9379fab9c5627033a29574ffce94e5fd0f24d5c8a2f5deee88a428091d1a"
+  },
+  "vsbench/benchmark/starts/poster3_starts_near.json.md5": {
+   "src": "benchmark/starts/poster3_starts_near.json.md5",
+   "src_blob": "60020c477bfb3715bd7ea347e91d00548ed934b1",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1970fcf7f3c359be7d1cc1d4008b37307367f1ff8e65605f75f4091cc1132949"
+  },
+  "vsbench/benchmark/starts/poster3_starts_v2.json": {
+   "src": "benchmark/starts/poster3_starts_v2.json",
+   "src_blob": "c6d526c61a05e2360624e7d8c6e88f8d46e49204",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "f0e0a58edd993e6230231f721a6de91fdd2d15bd3afd7687731a349d79745303"
+  },
+  "vsbench/benchmark/starts/poster3_starts_v2.json.md5": {
+   "src": "benchmark/starts/poster3_starts_v2.json.md5",
+   "src_blob": "3cc1dc16347b58c9eff082adbb0f790b37af24cf",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "0e17954178fae2a7784d5d9fe977851b8097e83bad09e2a33c8d6918f6eb4cec"
+  },
+  "vsbench/benchmark/starts/shoe1_starts_v2.json": {
+   "src": "benchmark/starts/shoe1_starts_v2.json",
+   "src_blob": "61b2401c6284f2afef222b00db259d71df53233f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "62a4a2bd416305dc032d0aae7dc4362a1a08546a666b097fb9b1414285e9c4ca"
+  },
+  "vsbench/benchmark/starts/shoe1_starts_v2.json.md5": {
+   "src": "benchmark/starts/shoe1_starts_v2.json.md5",
+   "src_blob": "8399441c50fd6d6e55fcbff9582b0ae370ceb012",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cd0130227a566596386173b53298e53c057b943b0850779f56e717ddc32e76e1"
+  },
+  "vsbench/benchmark/starts/shoe2_starts_v2.json": {
+   "src": "benchmark/starts/shoe2_starts_v2.json",
+   "src_blob": "6cf9e7b49639135ffd5b5a1e3c1baca91b0d0972",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "3275196e9eddf3139a583c12812413340a58942a4a4117ff3ed4cba9f021514c"
+  },
+  "vsbench/benchmark/starts/shoe2_starts_v2.json.md5": {
+   "src": "benchmark/starts/shoe2_starts_v2.json.md5",
+   "src_blob": "d591c648472e7a32250fdb78bf5a1c65a06afad6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "e34a6a2ebaebcc913bcadae6f06ccbe346e6acac35b9c44a27e976864ad8fc41"
+  },
+  "vsbench/configs/arms/artvs.yaml": {
+   "src": "configs/arms/artvs.yaml",
+   "src_blob": "ce5a4fb9bf86534f7a9b89e17cd6c175db758c41",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "f45f53a213c98a3088fb20d2cd9644ff10d9c630bdd2e172d38b203d47a1a1f6"
+  },
+  "vsbench/configs/arms/classical.yaml": {
+   "src": "configs/arms/classical.yaml",
+   "src_blob": "e4ae284fcb17be111a0a30f4a70054f6a5a850a2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "d4949ee69d192b1e9ab1def5b150f1eafff320306b36bb1b104f10bc82c529e0"
+  },
+  "vsbench/configs/arms/vitvs_dinov2.yaml": {
+   "src": "configs/arms/vitvs_dinov2.yaml",
+   "src_blob": "1eae664627fa697b3167ab9daed4e3afe28b1484",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cee25b03e22f531d83a86ddb4e247c31e8da0100319ad5f5022e3a8ca8cf32bb"
+  },
+  "vsbench/configs/arms/vitvs_dinov3.yaml": {
+   "src": "configs/arms/vitvs_dinov3.yaml",
+   "src_blob": "e78822e69eb89113f22705bdb1f7311741b86c80",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "5a5494f4ae8ce39943a2de5a8dfe0fd17606e4849f6cbd343d1432de927bcb07"
+  },
+  "vsbench/configs/camera.yaml": {
+   "src": "configs/camera.yaml",
+   "src_blob": "15c18245d6e72c1d93f2a5a824031b8e7f9e9d31",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9856333b7d963ce374f8f27cf857466371098128ae168b072c7e0ff9240d88aa"
+  },
+  "vsbench/configs/layouts/cluttered2.json": {
+   "src": "configs/layouts/cluttered2.json",
+   "src_blob": "b44dc079c1872890ed5c1436bbed686f41295848",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "2d7edb1edcbc1d02432a72caafa651e16fa4be1dd1b39fafd2a8fbe000038da5"
+  },
+  "vsbench/configs/layouts/cluttered3.json": {
+   "src": "configs/layouts/cluttered3.json",
+   "src_blob": "ea9d2f8cd73288e723366cd625bc4eaea6faddba",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "4ed36e64eb288cffdc4d27bfce0a4c37cba2c4e77d3b185406b827c6553b16d8"
+  },
+  "vsbench/configs/layouts/industrial1_drill.json": {
+   "src": "configs/layouts/industrial1_drill.json",
+   "src_blob": "8b5e7125a03e94207ff8cbc375cddf5880bc960f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1aa28400a5b759f4c6e21045997eb4c6d5af047eca60c7be3c268be3fe485558"
+  },
+  "vsbench/configs/protocol.yaml": {
+   "src": "configs/protocol.yaml",
+   "src_blob": "8440b4efb880c0e5dec14479ab3b5790ea9374d3",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1daf20ee6b7d43620314108a53c2e46a1a7143423ee17e92f8c26014effd4ee8"
+  },
+  "vsbench/configs/scenes.yaml": {
+   "src": "configs/scenes.yaml",
+   "src_blob": "5cad4dfa1d5758b0f24d4125b72a30325170abd7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7572e4d25715254aa3411d26ce6b49c762a6f377e2c349bd33fadc934db44c16"
+  },
+  "vsbench/experiments/.gitkeep": {
+   "src": "experiments/.gitkeep",
+   "src_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "vsbench/experiments/README.md": {
+   "src": "experiments/README.md",
+   "src_blob": "912a559264fb1a3c3f3ec2c8ee5e25432bd598ec",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "f0a51de0664152b818184812fb4609a20ad078d44199939b853db9b06078be66"
+  },
+  "vsbench/scripts/check_baselines.py": {
+   "src": "scripts/check_baselines.py",
+   "src_blob": "ce8e3ed52133f84d7fcc86696789de723c41de1a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "3d4fdfa89d68e89c081a566fa093e19a2a95857d3c1c4f3abff0de82b81986d9"
+  },
+  "vsbench/scripts/fly.py": {
+   "src": "scripts/fly.py",
+   "src_blob": "62f5ffb7bc7a9d36272a0f5dc1301c5f25a80d48",
+   "src_mode": "100755",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "c1ce5289f6922ac620a026340880a2aad51a71efafe9f5d635190acce671f1f7"
+  },
+  "vsbench/tests/conftest.py": {
+   "src": "tests/conftest.py",
+   "src_blob": "88a416bd90515aacbd2a8f4af32748f0395d88cf",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "54fd270a60bc7ab8e7492e7b2db5c18b200bf7fd3cf3f33415e1cd8cdb397599"
+  },
+  "vsbench/tests/fast/test_arm_plugin.py": {
+   "src": "tests/fast/test_arm_plugin.py",
+   "src_blob": "82bb6bf7c8b7832ec5a3abe96c299cdd85d4521d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "9a572c690d47387e82dc7d566f0debf52e8147c5dee47992f5ad9617ef951b79"
+  },
+  "vsbench/tests/fast/test_assets.py": {
+   "src": "tests/fast/test_assets.py",
+   "src_blob": "42669382efa349cbc8a7af6fa0f8619a78a356b0",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "a20f2ac01a19ecd8687c5512b097122264ad78200af8600ab39e58c61f20cd3c"
+  },
+  "vsbench/tests/fast/test_benchmark.py": {
+   "src": "tests/fast/test_benchmark.py",
+   "src_blob": "a8fb20c58a051919015d28052a4d564caf8b6036",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "46348918b4099eab00cb8684205ffc0165c927ce03f905468a5eb4852ed09a74"
+  },
+  "vsbench/tests/fast/test_camera.py": {
+   "src": "tests/fast/test_camera.py",
+   "src_blob": "00f14fcb7cf26b689abf152a7a48536ae41c10a3",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "02c2956499c2d0a52b1c0788ca394fc27ca56f23e33822f67a75551fc89799e9"
+  },
+  "vsbench/tests/fast/test_classical.py": {
+   "src": "tests/fast/test_classical.py",
+   "src_blob": "a049e65552c516a5e7c8421798352a9803b35993",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "c01778dfdabd0140601cd6f21a8b2c3d834be63554fa9f9f49fba22b3a13d955"
+  },
+  "vsbench/tests/fast/test_config.py": {
+   "src": "tests/fast/test_config.py",
+   "src_blob": "c83e7c0f7b6502a830a87e9611f1bf9f1b314a7d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "17fdd170eb2b1bae4c804614262eab9787d73cb21ec6527ef91f91a4abcb136a"
+  },
+  "vsbench/tests/fast/test_control.py": {
+   "src": "tests/fast/test_control.py",
+   "src_blob": "260c56397a317e3c821fb25ce0d414a7f85a7787",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "5317e5cf8893b82737ebf7e73b300d9e0c5b310bbe4fff69586bd108cb83aa2c"
+  },
+  "vsbench/tests/fast/test_debuglog.py": {
+   "src": "tests/fast/test_debuglog.py",
+   "src_blob": "dd66a46a08712348a8eb0ae35b304680c96ff609",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": "P3",
+   "dest_sha256": "c5af818a4f107b8aa745cb725b7bc49871ac86ff1373c414508a6b40a25cac21"
+  },
+  "vsbench/tests/fast/test_features.py": {
+   "src": "tests/fast/test_features.py",
+   "src_blob": "86f257295aecd1dbabfd50e2e16d28145fd02800",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "bbfd803e0b4c0d10e5320d752fcfe04afc380cc3582122b17f1249c3c0f4eb3e"
+  },
+  "vsbench/tests/fast/test_features_dinov2.py": {
+   "src": "tests/fast/test_features_dinov2.py",
+   "src_blob": "eb50f560f0b2acd5c26388b2d0e9de4bcc809990",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "4fdb9b61ea43d5ac6c0335d391a51fae88055677f30db1116c4910bbfa249f76"
+  },
+  "vsbench/tests/fast/test_films.py": {
+   "src": "tests/fast/test_films.py",
+   "src_blob": "648143e8db0945c56c9f22be7ba2f0d89e9c380f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "018b9c9022274ab3cefeba5f0be1853cd6e50d1b2e4833c881e2a3a7e6d76773"
+  },
+  "vsbench/tests/fast/test_io.py": {
+   "src": "tests/fast/test_io.py",
+   "src_blob": "c726102a69b51f92c7868992964f853854bde98a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "59350763280fa1fd6d4db8630d17c75ca9542f5e5182c11e28b8cb157dc84790"
+  },
+  "vsbench/tests/fast/test_isaac_scene.py": {
+   "src": "tests/fast/test_isaac_scene.py",
+   "src_blob": "512603872e95bf580da357f7f3ca4d0c016f857d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "4a41c7850335ee8b9cab189d722ec6ea440506e88d0970b48ea2e196152e778a"
+  },
+  "vsbench/tests/fast/test_labels.py": {
+   "src": "tests/fast/test_labels.py",
+   "src_blob": "fc358f20b19dc21f38148420bb5588b30d790141",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "c12bd81e9cc8f4441f72b57dd760ed07bc0e5df17ee039dd6ba6a2fa869d3ec8"
+  },
+  "vsbench/tests/fast/test_match.py": {
+   "src": "tests/fast/test_match.py",
+   "src_blob": "2a5e72e48c1bd538c9162fdf48dc5dd1f8f6790f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "656a759d8571c355c9565b9c56bb5adebdf79e79297dc2e45bebdd026b8c860f"
+  },
+  "vsbench/tests/fast/test_package.py": {
+   "src": "tests/fast/test_package.py",
+   "src_blob": "18a42a1c376eea38a9688e254233729827b04261",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R3a",
+    "R3b",
+    "R4"
+   ],
+   "patch": "P1",
+   "dest_sha256": "782ac95eeedd1aca6b9e2e31b06472a6ced939c2ceabc56af0d3547f4425ad1a"
+  },
+  "vsbench/tests/fast/test_perturb.py": {
+   "src": "tests/fast/test_perturb.py",
+   "src_blob": "5e41b16e7a12cb5ef77b81733f3fe786b0d1b40e",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "97c69a31819ca74d713dfa9ba955e17d978113e2bfba746c57d9799bd1a008b5"
+  },
+  "vsbench/tests/fast/test_prealign.py": {
+   "src": "tests/fast/test_prealign.py",
+   "src_blob": "5d3c946c179f39863902f803a4ca862d66a48be7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "7b907ee2528eee5171ea19fc21431c779e5af81555aee4e963f67df719dd4930"
+  },
+  "vsbench/tests/fast/test_run.py": {
+   "src": "tests/fast/test_run.py",
+   "src_blob": "9930a9838963932251d44f2b3374e1ae3e6dacfc",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "1255476e28bffb7ddc1d0f7dba58b365b384d56a8d43b6821ccbc06d99657f9c"
+  },
+  "vsbench/tests/fast/test_runner.py": {
+   "src": "tests/fast/test_runner.py",
+   "src_blob": "bf4307be12b08b35cf5e8228866f95f7f2bc6f68",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "8992743591dc4721a6c0d5cbf77c66729156feb60c2b94014cd8176bd1bdf5fb"
+  },
+  "vsbench/tests/fast/test_scene.py": {
+   "src": "tests/fast/test_scene.py",
+   "src_blob": "d385689370b569b26b02dfc34f4ed5e64486d7a5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "0d5dc22f3ef534116f354bb81941765ff4dcfb7d6fdb123b29cadab51124951b"
+  },
+  "vsbench/tests/fast/test_scenes.py": {
+   "src": "tests/fast/test_scenes.py",
+   "src_blob": "d0631115681e060accc47be746060cfabe9e6a88",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "0906de8b942e5e4648546542fc0aba56b41b9d2c0dbab6d7acf9e2d9babad943"
+  },
+  "vsbench/tests/fast/test_starts.py": {
+   "src": "tests/fast/test_starts.py",
+   "src_blob": "39eea53ca4c5d87fadea0fb42da848118700e805",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "ff9fa450d279adf838d5e83673ee25ad3f97e7bc9d80da19aaf47d5b6ccbdd4d"
+  },
+  "vsbench/tests/fast/test_t1_near_starts.py": {
+   "src": "tests/fast/test_t1_near_starts.py",
+   "src_blob": "fdf430ed83c22a61efd1cda6589c5e50b07f84f9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1"
+   ],
+   "patch": null,
+   "dest_sha256": "837d3a634d4fe2c5d14636058596cd39b4a760a7dfdd5e370cbeb8a76407131e"
+  },
+  "vsbench/tests/fast/test_tiling.py": {
+   "src": "tests/fast/test_tiling.py",
+   "src_blob": "875b94b80b8267f6552439602c28b72307f405ec",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "4bf9012afd0c70e4f1d85e39e972111b4e9d5c5daf088f92976bf37a1284d5cd"
+  },
+  "vsbench/tests/fixtures/README.md": {
+   "src": "tests/fixtures/README.md",
+   "src_blob": "9fa9263ab79cb6fbaf6e6c66bc28b82af21b64f6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "0c5283d50da79fe51f1b9d43c28fa2d300053ba46be633144ac469fa34a4a279"
+  },
+  "vsbench/tests/fixtures/frozen_goals.json": {
+   "src": "tests/fixtures/frozen_goals.json",
+   "src_blob": "4780a3906cee328d60fbd3b0d243e6f043f60bf3",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "f2ddc21691887441035daf30095fc558fb2cdf987dec7bce737046b19a498b41"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/LICENSE": {
+   "src": "tests/fixtures/reference/artvs_release/LICENSE",
+   "src_blob": "c990d4500a03b28ef3d2ff83ea04c1a4a8d034f0",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "c3d1816f027eddebd51c413b0e944cab5485a66cb342c8876bc9cb1ffbbfd6be"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/PROVENANCE.md": {
+   "src": "tests/fixtures/reference/artvs_release/PROVENANCE.md",
+   "src_blob": "ec8cd382d721b1eee3c58c3c752019ed1e548e8b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "4ae7a12ea1e0632f29d40910bbf31e84c98a2746e199ec2e21bba47455c74213"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/controller.py": {
+   "src": "tests/fixtures/reference/artvs_release/controller.py",
+   "src_blob": "7935bad849861c62d1d776c24db562115028d55c",
+   "src_mode": "100755",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "e1b45ed58dc2a1b3ce991196ab8389032f8581f870ecb3fdcc2c7bf9416faf91"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/detector_state.py": {
+   "src": "tests/fixtures/reference/artvs_release/detector_state.py",
+   "src_blob": "d2554e3e2ccd5f193f23550271a7a797437ee51a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7bf01583fb0433a5829d9e8ff24d39f2e5ab22ac30114e14903e0678b573d56e"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/log_bin_release.py": {
+   "src": "tests/fixtures/reference/artvs_release/log_bin_release.py",
+   "src_blob": "41f6de0eb138e167d47d2cc12ab2513adad64b2b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9a5afab676867cabcfd84f15b8e0999bac8699cdc96c2d1c7d83e1948803a113"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/make_detector_state.py": {
+   "src": "tests/fixtures/reference/artvs_release/make_detector_state.py",
+   "src_blob": "0b7d2f906d65c8ab4b5927cc57b1f70fe0385610",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "bf5b38e8e5261e937189a98c15eb095b2a9a2dfdfe00c8f87d4001c8cdb9a269"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/make_roi_glue.py": {
+   "src": "tests/fixtures/reference/artvs_release/make_roi_glue.py",
+   "src_blob": "98585540ac58bb659c8b6c8af68f2e1c621b5dc6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9670c076e875b0a062da8655ea589cfaa89c311b73b2830f9482055b9efc348a"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/matcher.py": {
+   "src": "tests/fixtures/reference/artvs_release/matcher.py",
+   "src_blob": "84ad2dd88b79a6679450cca67faa269f7dcd4445",
+   "src_mode": "100755",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "950cdc717f9a045ddc965df98730e7e8f5f228a3ad821548c6ae7ba2008180d7"
+  },
+  "vsbench/tests/fixtures/reference/artvs_release/roi_glue.py": {
+   "src": "tests/fixtures/reference/artvs_release/roi_glue.py",
+   "src_blob": "3a8d423bbf058e015ee860836329f61980965d26",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "dbb3643c5d028b1e0e960a08510348e1a043c449cb068de191a9b2550e3ae12d"
+  },
+  "vsbench/tests/fixtures/reference/cns_stop_policy.py": {
+   "src": "tests/fixtures/reference/cns_stop_policy.py",
+   "src_blob": "f49162583031226b95e262651ba160ae981e1bed",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "ea7a96a3d737260d2ece072631bf952233248f8679e95ab7414f315755d71c71"
+  },
+  "vsbench/tests/fixtures/reference/dino_vit_features/LICENSE": {
+   "src": "tests/fixtures/reference/dino_vit_features/LICENSE",
+   "src_blob": "3ed3c9eb961b1c5905e85fe579c624897e1b105f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "0f3b8fa37213802d7426a2b50ce0a2988270802bee8c4f52b6ac9512b1b95deb"
+  },
+  "vsbench/tests/fixtures/reference/dino_vit_features/PROVENANCE.md": {
+   "src": "tests/fixtures/reference/dino_vit_features/PROVENANCE.md",
+   "src_blob": "e98f7c15cb2b4c78534db9ae2ae5e7671f7c80c2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cd6577d4c7785a85865a8c4332f041f88d6d2528f372542e3a98114bc1852df5"
+  },
+  "vsbench/tests/fixtures/reference/dino_vit_features/correspondences.py": {
+   "src": "tests/fixtures/reference/dino_vit_features/correspondences.py",
+   "src_blob": "e9c0d1ded1417b2fd5fca88d0b856b9ac1408819",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "b40e9b834de30c82bdf9f82852070e1e8848a105ce0197163088b8e5dfd28890"
+  },
+  "vsbench/tests/fixtures/reference/dino_vit_features/extractor.py": {
+   "src": "tests/fixtures/reference/dino_vit_features/extractor.py",
+   "src_blob": "1c81446668bc9082b53e3bbfcb8813e42ec46f0d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "a7bc109511e76dd0ddf6ed866bd12365ac6f8b64107565061bbc1e69887730a0"
+  },
+  "vsbench/tests/fixtures/u1_dinov3_tokens_mug1_goal.json": {
+   "src": "tests/fixtures/u1_dinov3_tokens_mug1_goal.json",
+   "src_blob": "a70e21e3e39febde1ba8795cf3d787cccc4ca672",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "f634cafaf8ba4cfc5af2f61a60cab67ae4962db2d00429c85954385801c5b1fa"
+  },
+  "vsbench/tests/fixtures/u1_dinov3_tokens_mug1_goal.npz": {
+   "src": "tests/fixtures/u1_dinov3_tokens_mug1_goal.npz",
+   "src_blob": "7b1c833a9dcbfaa5f62232c1bf55abf870243a6e",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "81d5e85c380c8932f149fdcdbd34a9cce988f2c6a596025ff82aa7a4204f8a00"
+  },
+  "vsbench/tests/fixtures/u1_fixture_provenance.md": {
+   "src": "tests/fixtures/u1_fixture_provenance.md",
+   "src_blob": "a87d0b49ffa69dfe7ef258315ded69f651f2c74b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "6889a792091be56c19ac31d727eaed3ef9212a2b70c8a43e884859e51bc9b854"
+  },
+  "vsbench/tests/fixtures/u1_frame_mug1_goal.jpg": {
+   "src": "tests/fixtures/u1_frame_mug1_goal.jpg",
+   "src_blob": "d18524a79f3a851bbb555d2e1a8340181b177ec0",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7ee4db029ebbf69e70e3ad64bdecc800f9f6c483ebbc5827ab6cd51d976ad9e9"
+  },
+  "vsbench/tests/fixtures/u1_make_dinov3_tokens.py": {
+   "src": "tests/fixtures/u1_make_dinov3_tokens.py",
+   "src_blob": "acdca8bf30727f0dbbb263df9439d1f36daad193",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "fe79a9bf1fe8da6388f267c5d4a1f245190beaeaec9c11b0f48b63cdb23aab3c"
+  },
+  "vsbench/tests/fixtures/u1_pattern_synthetic.png": {
+   "src": "tests/fixtures/u1_pattern_synthetic.png",
+   "src_blob": "816a8140fd0931140e43cfdc1b7af1a2ae7adec9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "6c0ed530b1498e08c62dfebf0b0df03bd0e8aae199400a3be29576d42b690993"
+  },
+  "vsbench/tests/fixtures/u2_fixture_provenance.md": {
+   "src": "tests/fixtures/u2_fixture_provenance.md",
+   "src_blob": "350347a07da3dd223d5b3fdede658202b62b3b94",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "bcb4ade238dc712f4e5222d2f886024c8d431b515fa6a41514aac997ccc2b661"
+  },
+  "vsbench/tests/fixtures/u2_frame_mug1_roll010.jpg": {
+   "src": "tests/fixtures/u2_frame_mug1_roll010.jpg",
+   "src_blob": "45f97bd55b013d0b14794c63c1a381132d3a2d76",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "408cbb1c9ba0817d6e59ea5a40a45cda22b1e7f83761b63a04a54240e2ac3ef0"
+  },
+  "vsbench/tests/fixtures/u2_make_match_fixture.py": {
+   "src": "tests/fixtures/u2_make_match_fixture.py",
+   "src_blob": "7f061de4b4b1c0f66a1e9d6668f7fc3222936846",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "51d0aa8e71b96c3085eacbf1f08280dc409216589f6ca7c18c0677ad98c774a1"
+  },
+  "vsbench/tests/fixtures/u2_matches_mug1.json": {
+   "src": "tests/fixtures/u2_matches_mug1.json",
+   "src_blob": "1405e4ea2d67ab2744583ec8b955aa570734732b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "02dea327676ac1574514778c388ddab614bc187ec476301108bc2926142afa80"
+  },
+  "vsbench/tests/fixtures/u2_matches_mug1.npz": {
+   "src": "tests/fixtures/u2_matches_mug1.npz",
+   "src_blob": "0fac797d92634a26f207d265c85e008091bd58d2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "f4ccbe0a8372ba3c306cdb0caef9f884b3bbc61e066045d5efc49ea74b616657"
+  },
+  "vsbench/tests/fixtures/u3_artvs_dinov3.json": {
+   "src": "tests/fixtures/u3_artvs_dinov3.json",
+   "src_blob": "024f562995fbca2989cce2361e846955a5113ec7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "c7ff1fc3755a1515bc44e2bdb79535634f6ce5139b68dfc4d18bdea522ff220c"
+  },
+  "vsbench/tests/fixtures/u3_classical_mug1.json": {
+   "src": "tests/fixtures/u3_classical_mug1.json",
+   "src_blob": "94f341fdd11941771a37dc0fc12b4be99dc20765",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "192c5ed1ee4a213489433a37b4eee7e313ec6b0338403ef8a5805ff5b0b34051"
+  },
+  "vsbench/tests/fixtures/u3_fixture_provenance.json": {
+   "src": "tests/fixtures/u3_fixture_provenance.json",
+   "src_blob": "7a2579bc9dc9bf2f0362e65f45f250a81ed6418c",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "89e90b20086da5a9d3334ffb4f5825ec094e9b68157ed7e97f1e5304e8644ac4"
+  },
+  "vsbench/tests/fixtures/u3_fixture_provenance.md": {
+   "src": "tests/fixtures/u3_fixture_provenance.md",
+   "src_blob": "2216147946aa27f36cbc52f6f4cc1b0d90ed139f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": "P4",
+   "dest_sha256": "6a197935ed0a9776a0ebee5090d67a370144e805963221129d04e627195b8c9d"
+  },
+  "vsbench/tests/fixtures/u3_make_baseline_fixtures.py": {
+   "src": "tests/fixtures/u3_make_baseline_fixtures.py",
+   "src_blob": "0aa7c7dfce8395c2eed62abccc9f64d6173ff8e2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "eedcb89a47cf380e8974938e4f429a020dbbd7686445ec4207427b3185354106"
+  },
+  "vsbench/tests/fixtures/u3_vitvs_dinov2.json": {
+   "src": "tests/fixtures/u3_vitvs_dinov2.json",
+   "src_blob": "a884b083d4729eb0b123f5113d18a166484c6ccb",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "478a4750ba782a8312ca465c67864f9685688189f46a0326d57e2b97b92e9d97"
+  },
+  "vsbench/tests/fixtures/u4_fixture_provenance.md": {
+   "src": "tests/fixtures/u4_fixture_provenance.md",
+   "src_blob": "7baaa52c117ca5bf8fd17cbe0df934f66fd2f1ea",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "dcad8bcb91ca8a07b63f743bf9e786cfa7dbde4e33d93ca60d5224b48287b0f3"
+  },
+  "vsbench/tests/fixtures/u4_make_control_fixture.py": {
+   "src": "tests/fixtures/u4_make_control_fixture.py",
+   "src_blob": "add847079fb4ca3ce7aa77e15fbb9999ce87e76c",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "fb0e6eb20a3216308cd3eaba3c53e40e32e2880252b152d2ff0f1c4806625873"
+  },
+  "vsbench/tests/fixtures/u4_telemetry_hollywood_w2_057.json": {
+   "src": "tests/fixtures/u4_telemetry_hollywood_w2_057.json",
+   "src_blob": "8ab93ffa81593e0271be95902f29614236fba22e",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "20652523c9cf425c33c1d51855a1db77a3c5a5a883b0c17e88187a9a9e4e3566"
+  },
+  "vsbench/tests/fixtures/u4_telemetry_hollywood_w2_057.npz": {
+   "src": "tests/fixtures/u4_telemetry_hollywood_w2_057.npz",
+   "src_blob": "39fe1bbcc5220e8a5e41df6ec726ee516854bfe7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "cb7cc83aac3d6592845538ec1fc169c89fde057278d208fbb4476ec422985045"
+  },
+  "vsbench/tests/fixtures/u7_n38_telemetry_step.json": {
+   "src": "tests/fixtures/u7_n38_telemetry_step.json",
+   "src_blob": "3bb9b83bc08f22fdecffddda0139c796575d74cc",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "00f451590bdec7b61fd9270b957b7bdce8096190219707d5b770c93e0d464c91"
+  },
+  "vsbench/tests/fixtures/u7_record_schema.json": {
+   "src": "tests/fixtures/u7_record_schema.json",
+   "src_blob": "41ca9fb225c39684eb64592970b2017ad89bfea1",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "7895e1d4258160e41b4302aa7f3ae6496d9f9856bb72394b0326e57832e82b79"
+  },
+  "vsbench/tests/fixtures/u8_fixture_provenance.md": {
+   "src": "tests/fixtures/u8_fixture_provenance.md",
+   "src_blob": "228088e2c358219b6aa963bd8787181a033445f5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "1c3bda64636d92d121cafc1f8bdac316ee5dc56495e170a02994491fd9e292f4"
+  },
+  "vsbench/tests/fixtures/u8_make_rotation_fixture.py": {
+   "src": "tests/fixtures/u8_make_rotation_fixture.py",
+   "src_blob": "a68ae136e35986cb8ba6f87d14f5631ab79c13f5",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "9ca897cc04c647e808d406f6ed8b99b0a5b6b951375606562882588a5248c2c1"
+  },
+  "vsbench/tests/fixtures/u8_rotation_parity.json": {
+   "src": "tests/fixtures/u8_rotation_parity.json",
+   "src_blob": "487f8290fa72f9eb480b8e6d247227eda0fcc6dd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": false,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "a9c9ce7ab07530db2360de64229c3163769d8f8ddc81c5f12bbb4c66de6f1d49"
+  },
+  "vsbench/vs/__init__.py": {
+   "src": "vssim/__init__.py",
+   "src_blob": "8780476cac84427795d3c26e454692f6fac2725d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "4731830c6788d783274a3d2961b8273399ce43f5d4492a0475646ce4f11fd92a"
+  },
+  "vsbench/vs/assets.py": {
+   "src": "vssim/assets.py",
+   "src_blob": "61a318d7ed40063de71cbcac8c1d243de090609f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "7acde353889afa7a65567f2e9fa50836a00a64a14421b11552cc183c1cfa2992"
+  },
+  "vsbench/vs/baselines/__init__.py": {
+   "src": "vssim/baselines/__init__.py",
+   "src_blob": "09a2db7a497775890286e25e7d319f1d171bd2d0",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R3b"
+   ],
+   "patch": null,
+   "dest_sha256": "2588078ea12925acce1118bb7ec6ec6b4d607cd7ecccf49aab1ed7e2a8a7084f"
+  },
+  "vsbench/vs/baselines/classical.py": {
+   "src": "vssim/baselines/classical.py",
+   "src_blob": "bc9de88204b113654338fcc8578ffa48b584435d",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": "P4",
+   "dest_sha256": "5a6dcd3ab4b971c3d39e297c096933d6a4d7c2aae01ab55335786eafa87c0bef"
+  },
+  "vsbench/vs/baselines/control.py": {
+   "src": "vssim/baselines/control.py",
+   "src_blob": "317d8361c1186aa1a23a9516a02282249e046b19",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "11d6adc357b4232082eb775fe5a1bbb56072d31bf82878cb9235b9f00cf6fc0b"
+  },
+  "vsbench/vs/baselines/features.py": {
+   "src": "vssim/baselines/features.py",
+   "src_blob": "bebd33f9562e8a06536236c7db2fc94d459c4412",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "fa19663bca1ea7092aa7d9bd0012c8fbc8d725e850fcb92fa8cd70fde163e3c7"
+  },
+  "vsbench/vs/baselines/match.py": {
+   "src": "vssim/baselines/match.py",
+   "src_blob": "836fc20b2f3004b2aeec93b1d6fe7e906bf30053",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": "P4",
+   "dest_sha256": "5276cbf83b3f78a95b3f4a8c21cacd0061683917eb8ceebfdb01aa5920a6bc41"
+  },
+  "vsbench/vs/baselines/prealign.py": {
+   "src": "vssim/baselines/prealign.py",
+   "src_blob": "16f1f2dca17123f9d782b9640ace2eab43bfbf9a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "31eb8401b7d38bc4cf65521666d0251fa8e65847e5217edf71c91e894a99be89"
+  },
+  "vsbench/vs/baselines/tiling.py": {
+   "src": "vssim/baselines/tiling.py",
+   "src_blob": "7e60d4e8f1f97d94a8b21d46655a191b72dd689a",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "0365284a88850634d67f1a632f148cdb328bea8ec5c5401a14ef316965bd62d1"
+  },
+  "vsbench/vs/bench/__init__.py": {
+   "src": "vssim/bench/__init__.py",
+   "src_blob": "5271941c548a417f652b6708e8c5db85bc49d23f",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [],
+   "patch": null,
+   "dest_sha256": "3b6e21c4cc302b31110694f134c4dcc985cd2a31b850fc4c444081aeeed46a2d"
+  },
+  "vsbench/vs/bench/arms.py": {
+   "src": "vssim/bench/arms.py",
+   "src_blob": "03acdbd51c59797dbb95bed82db267395c9b10fd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "184c3be4e57fbe3eef227ff369bce603efcbab19db475d534b12f9307b6649e4"
+  },
+  "vsbench/vs/bench/config.py": {
+   "src": "vssim/bench/config.py",
+   "src_blob": "3af0f36f61aafd1e19d7862e76b2c0ba7c1ddfc7",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "76d61cadb91cfeefbf60e08e3edb0ef918c7af229fd6edacbf91bf7d1d59a5ca"
+  },
+  "vsbench/vs/bench/debuglog.py": {
+   "src": "vssim/bench/debuglog.py",
+   "src_blob": "a51a0936fe10498ae8a6296a0ac3a091b9b98c80",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "d459bc8d69774d799d28971af4b757da0519daca2ef246129e08d879ba6e5861"
+  },
+  "vsbench/vs/bench/debugview.py": {
+   "src": "vssim/bench/debugview.py",
+   "src_blob": "ad242f67597683f587fc2906a575710ec42a4dd1",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "314cd634b92fb69bb15df85a71f606bb482979965964c950ef46db1079e0fcf6"
+  },
+  "vsbench/vs/bench/films.py": {
+   "src": "vssim/bench/films.py",
+   "src_blob": "ed11c2611dfaa3d21d046ebcd46a77e0389294f6",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "61b02d08e551e226e5bbe7f06a566ffb759067faea420295965fcbaf0ac1a3a2"
+  },
+  "vsbench/vs/bench/io.py": {
+   "src": "vssim/bench/io.py",
+   "src_blob": "b93f222d8c242c02013f8426eeb8546c297e170e",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "0092a90f73bba2a0668c68bea83e7f299282f9e925818eede15b4610515473ea"
+  },
+  "vsbench/vs/bench/perturb.py": {
+   "src": "vssim/bench/perturb.py",
+   "src_blob": "997a8c7660db7f422a88b242b071b5372ff3f7b8",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "04d69c394de767433806ac76123e5cd4e3709f5967a3b8e1ac663934af2c3ecd"
+  },
+  "vsbench/vs/bench/run.py": {
+   "src": "vssim/bench/run.py",
+   "src_blob": "8f780f8fad1e9de393ccf878ef59609a1bc72f89",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": "P2",
+   "dest_sha256": "bce75d3bcd7d35ed5ec79b62c690a9e43cd510746be4160150f941074a837044"
+  },
+  "vsbench/vs/bench/runner.py": {
+   "src": "vssim/bench/runner.py",
+   "src_blob": "32416096c8d7a62729acbbea5ef4f1242b5e5a7b",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "3ae567218ca36b2604ef3ec9adaeb84e220cd2bf95d21a542d64579a6c8c3b4c"
+  },
+  "vsbench/vs/bench/scoring.py": {
+   "src": "vssim/bench/scoring.py",
+   "src_blob": "0a366da87ed37b0adc84e2a96ec99937eb2dcd17",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": "P4",
+   "dest_sha256": "313234da8159f8bf18d18b903e7c1cef64d72060826da854ff0721bc3f44ab86"
+  },
+  "vsbench/vs/bench/stats.py": {
+   "src": "vssim/bench/stats.py",
+   "src_blob": "9fe648b2e7cfaf0d09f5bd5780b183e82bc14fbd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": "P4",
+   "dest_sha256": "21aea6953cbce1f288ec904a687dfb9835eec36f574facc03d668b3ac7c6c349"
+  },
+  "vsbench/vs/bench/truth.py": {
+   "src": "vssim/bench/truth.py",
+   "src_blob": "72b898feb2333b37bab9bf94a7779d815d0ee0d2",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "d37e6afadfd898314fe32e5142f208297aa3f26e657fa314e4cbd15ea2b1bb29"
+  },
+  "vsbench/vs/benchmark.py": {
+   "src": "vssim/benchmark.py",
+   "src_blob": "ec47398a9247ce48f274b7aa23de217bfd7fbbd3",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R1",
+    "R2",
+    "R4"
+   ],
+   "patch": "P4",
+   "dest_sha256": "8a97a54a182c366b97e5c394d06cfe7b59bd671d5474d14c06b49f4f677869a7"
+  },
+  "vsbench/vs/camera.py": {
+   "src": "vssim/camera.py",
+   "src_blob": "ca1deef0626b9501ff5628782a7a331abbbf8ce0",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "3bb5b630378a4479d407da107b5617c4fa4e072f07875d9a0d9b5eb6d807ab71"
+  },
+  "vsbench/vs/demo.py": {
+   "src": "vssim/demo.py",
+   "src_blob": "6ce6f2a9bfaa0754b04b41893bbee6d68b815439",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2"
+   ],
+   "patch": null,
+   "dest_sha256": "bf90d9c2e228487868a8db2acf59441391ab43f913436357ac25fd19114cfedf"
+  },
+  "vsbench/vs/isaac_scene.py": {
+   "src": "vssim/isaac_scene.py",
+   "src_blob": "673142ac3cb28ec8f79b31607cfe57a138403bbd",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "2d386cc7a2a65d5479499101760270e0c88b9b61c7915ec8066f637181b426ba"
+  },
+  "vsbench/vs/labels.py": {
+   "src": "vssim/labels.py",
+   "src_blob": "75e4e3b14606e83b826fef9ca41362a514b3a928",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "26d7c5710ee73ccf16c98e1bda6f037e1f7ca5518c7530d4fba3756c1fa0fef9"
+  },
+  "vsbench/vs/scene.py": {
+   "src": "vssim/scene.py",
+   "src_blob": "7c8540cee78095c7ff011190a3b6f225215dc0a9",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "599c5ad5af7410fc53bc16ab8c3952c026737d33c510bcb3814b2cd4c3a57b32"
+  },
+  "vsbench/vs/scenes.py": {
+   "src": "vssim/scenes.py",
+   "src_blob": "cc1c263a78c247282d38ceb775b66e37fee5fa78",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R2",
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "ea6f4516175907eca2da508ec7174c6155179ea6b66554b5e1601a1d66d6dc03"
+  },
+  "vsbench/vs/starts.py": {
+   "src": "vssim/starts.py",
+   "src_blob": "f55e6c76becf8f4a21694db2dd062a412f229ccb",
+   "src_mode": "100644",
+   "vssim_commit": "7ac261d7384861b1d1ad0cd645c6e51b5046b650",
+   "rewritten": true,
+   "rules": [
+    "R4"
+   ],
+   "patch": null,
+   "dest_sha256": "cef2a2ad2d33a93184798149d3abbbc349531cfe5691eda5bb907010aac7a9d7"
+  }
+ }
+}

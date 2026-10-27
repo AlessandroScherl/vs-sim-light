@@ -1,0 +1,29 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Mesa EGL (MuJoCo's software rasteriser, no GPU on the runner)
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1-mesa-dri
+      - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -e ".[dev,usd]"
+      - run: ruff check .
+      # station mode: software GL, CPU torch; the scenes' pictures are not on the runner, so
+      # the tests that render a benchmark scene skip
+      - run: pytest tests -q
+        env:
+          VSBENCH_STATION: "1"
+          VSBENCH_SOFTWARE_GL: "1"
+          CUDA_VISIBLE_DEVICES: ""
+      - run: tools/test_copied.sh
+        env:
+          VSBENCH_STATION: "1"

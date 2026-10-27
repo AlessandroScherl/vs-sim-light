@@ -1,0 +1,53 @@
+{
+  "fixture": "u1_dinov3_tokens_mug1_goal.npz",
+  "unit": "U1 (refinevs/features.py)",
+  "created_utc": "2026-09-02T20:03:05Z",
+  "md5": "73f1fdbe3e60a11313b6ff356d09df8d",
+  "bytes": 1466207,
+  "array": {
+    "tokens": {
+      "shape": [
+        32,
+        32,
+        384
+      ],
+      "dtype": "float32",
+      "meaning": "L2-normalised DINOv3 patch tokens, CLS + 4 registers stripped"
+    }
+  },
+  "command": "HF_HUB_OFFLINE=1 PYTHONPATH=~/Desktop/runpod_dev/genvs-sim python tests/fixtures/u1_make_dinov3_tokens.py --device cpu   (conda env refinevs)",
+  "source_repo_commit": "genvs-sim 2b11ab8 (tag legacy-pre-cleanup = 905d42b; the two differ only in the repository rules/README.md)",
+  "companion_files": {
+    "u1_frame_mug1_goal.jpg": "0ce3c308f2323b85a6e8ee5724783ed3",
+    "u1_pattern_synthetic.png": "1af75cf0cb02b8f3e2c8da26b36845fe"
+  },
+  "tolerance": {
+    "cpu_bar": "max abs diff <= 1e-5",
+    "cpu_measured_2026_09_02": "8.8e-07 in both refinevs (transformers 4.57.1) and bot (5.8.0); per-token cosine >= 0.9999998. Model side bit-exact (0.0 on the old chain's own pixel_values); the gap is the old deploy chain's fused rescale+normalize vs (x/255 - mean)/std. New encode == old src/refine/encoder.py training encoder at 0.0.",
+    "other_device_or_dtype": "max abs diff <= 1e-2 and per-token cosine >= 0.999",
+    "gpu_preprocess_twin": "preprocess_torch tokens sit 5.7e-04 from this fixture; not the fielded path"
+  },
+  "read_by": [
+    "tests/fast/test_features.py",
+    "tests/slow/test_features_parity.py"
+  ],
+  "provenance_note": "tests/fixtures/u1_fixture_provenance.md",
+  "npz_metadata": {
+    "image_file": "u1_frame_mug1_goal.jpg",
+    "image_md5": "0ce3c308f2323b85a6e8ee5724783ed3",
+    "image_pixels_md5": "161879133226b37fcef558814b5ae424",
+    "image_source": "docs/results/2026-08-16_rotsym_wpc_preview/bench_frames/mug1/goal.jpg",
+    "old_repo": "genvs-sim @ tag legacy-pre-cleanup",
+    "old_commit": "2b11ab8",
+    "chain": "src/control/matchers/vit_dense.py:391-395 -> vit_vs_dinov3._DinoV3ExtractorAdapter -> _vitvs_vendor/.../multi_backbone_extractor.MultiBackboneViTExtractor",
+    "model_id": "facebook/dinov3-vits16-pretrain-lvd1689m",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_version": "2.14.0+cpu",
+    "transformers_version": "4.57.1",
+    "numpy_version": "1.26.4",
+    "pillow_version": "12.3.0",
+    "python_version": "3.11.16",
+    "created_utc": "2026-09-02T20:03:05Z"
+  }
+}

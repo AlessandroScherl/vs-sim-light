@@ -1,0 +1,58 @@
+# ART-VS — ViT-VS plus the adaptive coarse -> tiled resolution switch (IROS 2026).
+#
+# The published benchmark configuration, from ART-VS's own
+# `config_dinov2_224_6x6_tiling.yaml`: 36 tiles over a 1344-pixel square, each read
+# at the backbone's native 224, switching once the error proxy falls below 0.20 of
+# its first value. The switch LATCHES, and it is what makes tile-to-tile matching
+# correct rather than merely faster (`vssim/baselines/tiling.py`).
+#
+# RANSAC-free, like every ViT arm. The published 4-way pre-servo roll is OFF in this
+# cell (`rotation_mode: none` on every record); a pre-aligned baseline is a DIFFERENT
+# cell - add `rotation: {mode: prealign_4way}` and it is labelled `pre4way` - never
+# this one edited.
+#
+# The DINOv2 torch.hub weights must be in the machine's cache
+# (`~/.cache/torch/hub/checkpoints/dinov2_vits14_pretrain.pth`) and are never
+# downloaded; the parity test skips with the reason where the cache is absent.
+#
+# A tiled frame carries `n_tiles · max(1, round(K / n_tiles))` landmarks, not K: at 36
+# tiles, 24 → 36, 48 → 36, 96 → 108. Published behaviour; the record's `num_landmarks`
+# still says K, so read `n_matches` for what a frame steered on.
+
+seed: 20260902
+
+matcher:
+  variant: artvs
+  device: cuda                     # stated, no default (cpu in the fast tier)
+  backbone_name: dinov2_vits14     # ART-VS's own backbone
+  num_landmarks: 24                # spread over the tiles: 24 / 36 -> 1 pair per tile
+  tie_order: stable
+  threshold: 1.0
+  use_tiling: true                 # false is the paper's own `*_no_tiling` ablation
+  tile_number: 36                  # 6x6; must be a perfect square
+  tile_input_resolution: 1344      # 6 * 224, so every tile is read at native resolution
+  vit_input_size: 224              # the backbone runs here, not at its own 518
+  switch_threshold: 0.20           # tau
+  switch_iteration: 0              # > 0 switches on that iteration instead (diagnostic)
+
+controller:
+  gain: 2.0
+  dt: 0.016666666666666666
+  solve_unrounded: true
+  ema_alpha: 0.0
+  weighting:                       # unweighted, and the tiled margin is tile-local
+    use_trust: false
+    use_margin: false
+    per_axis: false
+
+stop:
+  rule: cns_plateau
+
+episode:
+  max_iter: 600
+  divergence_abort: true
+  record_stops: [velocity_quiet, dec_plateau]
+  telemetry_extended: false
+
+scoring:
+  success_rule: [predicate_a, paper_3cm_3deg, cns_code_0p1d_10deg, abs_10mm_1deg, abs_20mm_2deg, abs_50mm_5deg, abs_100mm_10deg]
